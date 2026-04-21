@@ -675,8 +675,8 @@
     font-weight: 500;
     font-size: 18px;
     color: var(--near-black);
-    border-bottom: 1px solid var(--brand);
-    padding-bottom: 2px;
+    border-bottom: 0.5px solid var(--brand);
+    padding-bottom: 6px;
     display: inline-block;
   }
 
