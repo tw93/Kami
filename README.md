@@ -71,7 +71,7 @@ The skill auto-triggers when you describe what you need, no slash command requir
 
 Warm parchment canvas, ink blue as the sole accent, serif carries authority, no hard shadows or flashy palettes. This is not a UI framework; it is an aesthetic constraint system for printed matter. Quality documents read like literature, not dashboards.
 
-Six document types (One-Pager, Long Doc, Letter, Portfolio, Resume, Slides), each with Chinese and English variants. Three inline SVG diagram primitives (architecture, flowchart, quadrant) also ship. Kami picks the right variant based on the language you write in.
+Six document types (One-Pager, Long Doc, Letter, Portfolio, Resume, Slides), each with Chinese and English variants. Three inline SVG diagram types (architecture, flowchart, quadrant) are included. Kami picks the right variant based on the language you write in.
 
 | Element | Rule |
 |---|---|
