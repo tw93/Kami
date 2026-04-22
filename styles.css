@@ -280,11 +280,11 @@
   }
   .rules li {
     display: grid;
-    grid-template-columns: 36px 1fr;
-    gap: 14px;
+    grid-template-columns: 32px 1fr;
+    gap: 4px;
     padding: 18px 24px 18px 0;
     border-bottom: 1px solid var(--border-soft);
-    align-items: baseline;
+    align-items: start;
   }
   .rules li:nth-child(odd) { padding-right: 32px; border-right: 1px solid var(--border-soft); padding-left: 0; }
   .rules li:nth-child(even) { padding-left: 32px; }
@@ -294,6 +294,7 @@
     font-size: 20px;
     color: var(--brand);
     line-height: 1;
+    padding-top: 0;
   }
   .rules p {
     margin: 0;
@@ -322,6 +323,10 @@
     border-radius: 8px;
     background: var(--ivory);
     overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .swatch:hover {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.05);
   }
   .swatch .chip {
     height: 96px;
@@ -422,16 +427,15 @@
   .type-row > * {
     padding: 22px 0;
     border-bottom: 1px solid var(--border-soft);
-    align-self: baseline;
+    align-self: start;
   }
   .type-label {
-    font-family: var(--sans);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
+    font-family: var(--serif);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0;
     color: var(--stone);
-    padding-top: 30px !important;
+    padding-top: 22px;
   }
   .type-specs {
     font-family: var(--mono);
@@ -439,7 +443,7 @@
     color: var(--olive);
     line-height: 1.6;
     text-align: right;
-    padding-top: 30px !important;
+    padding-top: 22px;
   }
   .type-specs b { color: var(--charcoal); font-weight: 500; }
   .type-sample.display {
@@ -497,6 +501,10 @@
     border: 1px solid var(--border-cream);
     border-radius: 12px;
     padding: 28px 24px 22px;
+    transition: box-shadow 0.2s;
+  }
+  .family:hover {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.05);
   }
   .family .glyph {
     font-weight: 500;
@@ -543,11 +551,10 @@
     vertical-align: middle;
   }
   .space-table th {
-    font-family: var(--sans);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
+    font-family: var(--serif);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0;
     color: var(--stone);
     padding-top: 0;
   }
@@ -603,6 +610,10 @@
     border: 1px solid var(--border-cream);
     border-radius: 12px;
     padding: 28px 28px 24px;
+    transition: box-shadow 0.2s;
+  }
+  .comp:hover {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.05);
   }
   .comp h4 {
     font-family: var(--serif);
@@ -765,6 +776,10 @@
     border-radius: 12px;
     padding: 24px 20px;
     min-height: 110px;
+    transition: box-shadow 0.2s;
+  }
+  .shadow-demo:hover {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.05);
   }
   .shadow-demo .t {
     font-family: var(--serif);
