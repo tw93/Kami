@@ -221,26 +221,32 @@ EN_PRIMARY_FONTS = {"Newsreader", "Inter"}
 
 
 def _pdf_font_names(pdf_path: Path) -> set[str]:
+    def _resolve_pdf_obj(obj):
+        if obj is None:
+            return None
+        try:
+            return obj.get_object() if hasattr(obj, "get_object") else obj
+        except Exception:
+            return obj
+
     try:
         from pypdf import PdfReader
         reader = PdfReader(str(pdf_path))
         fonts: set[str] = set()
         for page in reader.pages:
-            resources = page.get("/Resources")
-            if resources is None:
+            resources = _resolve_pdf_obj(page.get("/Resources"))
+            if resources is None or not hasattr(resources, "get"):
                 continue
-            font_dict = resources.get("/Font")
-            if not isinstance(font_dict, dict):
+            font_dict = _resolve_pdf_obj(resources.get("/Font"))
+            if font_dict is None or not hasattr(font_dict, "values"):
                 continue
             for obj in font_dict.values():
-                try:
-                    resolved = obj.get_object() if hasattr(obj, "get_object") else obj
-                except Exception:
-                    resolved = obj
-                if isinstance(resolved, dict):
-                    base = resolved.get("/BaseFont")
-                    if base:
-                        fonts.add(str(base).lstrip("/"))
+                resolved = _resolve_pdf_obj(obj)
+                if resolved is None or not hasattr(resolved, "get"):
+                    continue
+                base = resolved.get("/BaseFont")
+                if base:
+                    fonts.add(str(base).lstrip("/"))
         return fonts
     except Exception:
         return set()
@@ -278,14 +284,23 @@ def verify_target(name: str, source: str, max_pages: int, src_dir: Path) -> list
 
     # font check
     embedded = _pdf_font_names(out)
+    fallback_present = any(
+        kw in font for font in embedded
+        for kw in ("Newsreader", "Inter", "TsangerJinKai", "SourceHan", "Noto", "Georgia", "Charter", "Songti")
+    )
+
+    # Diagram templates are language-neutral and often rely on fallback stacks,
+    # so only enforce that at least one recognizable serif/sans fallback exists.
+    is_diagram = src_dir == DIAGRAMS
+    if is_diagram:
+        if not fallback_present:
+            issues.append(f"no recognizable font embedded in {out.name}")
+        return issues
+
     is_en = name.endswith("-en")
     expected = EN_PRIMARY_FONTS if is_en else CN_PRIMARY_FONTS
     if not any(exp in font_name for exp in expected for font_name in embedded):
         primary = next(iter(expected))
-        fallback_present = any(
-            kw in font for font in embedded
-            for kw in ("Newsreader", "Inter", "TsangerJinKai", "SourceHan", "Noto", "Georgia", "Charter", "Songti")
-        )
         if not fallback_present:
             issues.append(f"no recognizable font embedded in {out.name}")
         else:
