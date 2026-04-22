@@ -111,7 +111,9 @@ Visual anomalies (tag double rectangle, font fallback, page break issues) -> `pr
 ## Fonts
 
 **Chinese**
-- Main serif: TsangerJinKai02-W04.ttf (commercial, included in repo)
+- Main serif: TsangerJinKai02-W04.ttf (400 weight) + TsangerJinKai02-W05.ttf (500 weight, real bold)
+- Both files are commercial fonts, included in repo
+- Templates use dual @font-face declarations: W04 for body text, W05 for headings
 - Fallback chain baked into templates: Source Han Serif SC -> Noto Serif CJK SC -> Songti SC -> Georgia
 
 **English**

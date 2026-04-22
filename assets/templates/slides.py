@@ -181,7 +181,7 @@ def content_slide(prs, eyebrow, title, body, page_num=None):
              font=SANS, size=18, color=DARK_WARM)
     # page number
     if page_num is not None:
-        add_text(s, f"— {page_num:02d}",
+        add_text(s, f" - {page_num:02d}",
                  Inches(11.5), Inches(6.9), Inches(1.5), Inches(0.3),
                  font=SANS, size=11, color=STONE,
                  align=PP_ALIGN.RIGHT)
@@ -230,7 +230,7 @@ def quote_slide(prs, quote, source):
              font=SERIF, size=28, color=NEAR_BLACK,
              align=PP_ALIGN.CENTER,
              vanchor=MSO_ANCHOR.MIDDLE)
-    add_text(s, f"— {source}",
+    add_text(s, f" - {source}",
              Inches(1.5), Inches(5.2), Inches(10.33), Inches(0.4),
              font=SANS, size=14, color=OLIVE,
              align=PP_ALIGN.CENTER)

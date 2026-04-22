@@ -196,8 +196,8 @@ def blank_slide():
 2. **No default PowerPoint template** - it's cool-blue-gray, clashes with parchment
 3. **Animations**: don't. Parchment is a print aesthetic, not a SaaS demo. At most `fade`
 4. **Export to PDF** for sharing - cross-machine consistency is better than .pptx
-   - macOS: Keynote -> Export to PDF
-   - Linux: `libreoffice --headless --convert-to pdf output.pptx`
+ - macOS: Keynote -> Export to PDF
+ - Linux: `libreoffice --headless --convert-to pdf output.pptx`
 
 ---
 

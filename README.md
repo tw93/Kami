@@ -12,11 +12,11 @@
 
 ## Why
 
-Kami (紙, かみ) is the Japanese word for paper: the quiet surface on which a finished idea finally lands. Most document design drifts into two failure modes: generic corporate gray, or SaaS hype gradients. Neither reads like something a person actually made with care.
+Kami (紙, かみ) means paper: the surface where a finished idea lands. Most document design drifts into two failure modes: generic corporate gray, or gradient-heavy SaaS styling. Neither reads like something made with care.
 
 Kami holds one design idea across every format: warm parchment canvas, a single ink-blue accent, serif for authority, sans for utility, editorial whitespace tuned for print. 
 
-Part of a trilogy: [Kaku](https://github.com/tw93/Kaku) (書く) writes code, [Waza](https://github.com/tw93/Waza) (技) drills habits, [Kami](https://github.com/tw93/Kami) (紙) ships documents. Think of them as a family: Kaku is the dad, Waza the big sister, Kami the little sister.
+Part of a trilogy: [Kaku](https://github.com/tw93/Kaku) (書く) writes code, [Waza](https://github.com/tw93/Waza) (技) drills habits, [Kami](https://github.com/tw93/Kami) (紙) delivers documents.
 
 ## See it
 
@@ -75,7 +75,7 @@ The skill auto-triggers when you describe what you need, no slash command requir
 
 ## Design
 
-Warm parchment canvas, ink blue as the sole accent, serif carries authority, no hard shadows or flashy palettes. This is not a UI framework; it is an aesthetic constraint system for printed matter. Quality documents read like literature, not dashboards.
+Warm parchment canvas, ink blue as the sole accent, serif carries hierarchy, no hard shadows or flashy palettes. This is not a UI framework; it is a constraint system for printed matter. Quality documents should read as composed pages, not dashboards.
 
 Six document types (One-Pager, Long Doc, Letter, Portfolio, Resume, Slides), each with Chinese and English variants. Three inline SVG diagram types (architecture, flowchart, quadrant) are included. Kami picks the right variant based on the language you write in.
 
@@ -84,7 +84,7 @@ Six document types (One-Pager, Long Doc, Letter, Portfolio, Resume, Slides), eac
 | Canvas | `#f5f4ed` parchment, never pure white |
 | Accent | Ink blue `#1B365D` only, no second chromatic hue |
 | Neutrals | All warm-toned (yellow-brown undertone), no cool blue-grays |
-| Serif | Weight locked at 500, never bold. Single weight is the signature |
+| Serif | Body at 400, headings at 500. Avoid synthetic bold |
 | Line-height | Tight titles 1.1-1.3, dense body 1.4-1.45, reading body 1.5-1.55. Never 1.6+ |
 | Shadows | Ring or whisper only, no hard drop shadows |
 | Tags | Solid hex backgrounds only. `rgba()` triggers a WeasyPrint double-rectangle bug |

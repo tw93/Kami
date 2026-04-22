@@ -121,7 +121,7 @@ npx skills add tw93/kami -a codex -g -y</pre>
 
     <h3 class="subhead">主调 · Brand</h3>
     <div class="swatches">
-      <div class="swatch brand"><div class="chip" style="background:#1B365D"></div><div class="info"><p class="name">Ink Blue</p><p class="role">主色 · CTA · section 竖线</p><span class="hex">#1B365D</span></div></div>
+      <div class="swatch brand"><div class="chip" style="background:#1B365D"></div><div class="info"><p class="name">Ink Blue</p><p class="role">主色 · CTA · quote 竖线 · 章节标题字色</p><span class="hex">#1B365D</span></div></div>
       <div class="swatch"><div class="chip" style="background:#2D5A8A"></div><div class="info"><p class="name">Ink Light</p><p class="role">深色底上的链接 · 亮变体</p><span class="hex">#2D5A8A</span></div></div>
       <div class="swatch"><div class="chip" style="background:#30302e"></div><div class="info"><p class="name" style="color:var(--deep-dark)">Dark Surface</p><p class="role">深色主题容器 · 暖炭灰</p><span class="hex">#30302E</span></div></div>
       <div class="swatch"><div class="chip" style="background:#b53333"></div><div class="info"><p class="name">Error</p><p class="role">错误，深暖红，不刺眼</p><span class="hex">#B53333</span></div></div>
@@ -327,7 +327,7 @@ npx skills add tw93/kami -a codex -g -y</pre>
 
       <div class="comp">
         <h4>Section Title</h4>
-        <p class="hint">serif 500 + 2.5pt 品牌色左侧竖线，留足呼吸间距</p>
+        <p class="hint">serif 500 · 15pt · 纯字号层级，无装饰</p>
         <div class="demo">
           <span class="sample-section-title">核心项目 · Selected Works</span>
         </div>
@@ -345,15 +345,12 @@ npx skills add tw93/kami -a codex -g -y</pre>
 
       <div class="comp">
         <h4>Code Block</h4>
-        <p class="hint">ivory 底 + 0.5pt border + 6pt 圆角</p>
-<pre class="code"><span class="c">/* section title */</span>
-.section-title {
-  font-family: <span class="k">serif</span>;
-  font-weight: <span class="k">500</span>;
-  border-left: <span class="k">2.5pt</span> solid
-    var(--brand);
-  padding-left: <span class="k">8pt</span>;
-}</pre>
+        <p class="hint">ivory 底 + 0.5pt border + 6pt 圆角 + mono 字体</p>
+<pre class="code"><span class="c">// 暖米纸 · 一种克制的温度</span>
+canvas   = parchment; accent = <span class="k">ink_blue</span>
+palette  = <span class="k">warm_neutrals</span> − cool_grays
+document = <span class="k">serif</span> × hierarchy + generous_space
+beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
       </div>
 
       <div class="comp">
@@ -390,7 +387,7 @@ npx skills add tw93/kami -a codex -g -y</pre>
       <tr><td class="task">展示代码</td><td class="how">ivory 底 + <code>0.5pt</code> border + <code>6pt</code> 圆角 + mono 字体</td></tr>
       <tr><td class="task">区分主次按钮</td><td class="how">Primary 品牌色填充 + ivory 字；Secondary warm-sand + charcoal</td></tr>
       <tr><td class="task">标注某张特殊卡片</td><td class="how"><code>border: 0.5pt solid var(--brand)</code> 或 <code>border-left: 3pt</code></td></tr>
-      <tr><td class="task">章节开始</td><td class="how">serif 标题 + 左侧 <code>2.5pt</code> 品牌色竖线</td></tr>
+      <tr><td class="task">章节开始</td><td class="how">serif <code>500</code> · <code>15pt</code> · 纯字号层级，无额外装饰</td></tr>
       <tr><td class="task">文档封面</td><td class="how">单页 Display 字号 + 右对齐作者/日期 + 大量留白</td></tr>
       <tr><td class="task">数据卡</td><td class="how">ivory 底 + <code>8pt</code> 圆角 + serif 大数字（油墨蓝） + sans 小标签</td></tr>
     </table>

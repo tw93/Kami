@@ -121,7 +121,7 @@ npx skills add tw93/kami -a codex -g -y</pre>
 
     <h3 class="subhead">Brand</h3>
     <div class="swatches">
-      <div class="swatch brand"><div class="chip" style="background:#1B365D"></div><div class="info"><p class="name">Ink Blue</p><p class="role">Primary color · CTA · section left bar</p><span class="hex">#1B365D</span></div></div>
+      <div class="swatch brand"><div class="chip" style="background:#1B365D"></div><div class="info"><p class="name">Ink Blue</p><p class="role">Primary color · CTA · quote bar · section overline</p><span class="hex">#1B365D</span></div></div>
       <div class="swatch"><div class="chip" style="background:#2D5A8A"></div><div class="info"><p class="name">Ink Light</p><p class="role">Links on dark surfaces · lighter variant</p><span class="hex">#2D5A8A</span></div></div>
       <div class="swatch"><div class="chip" style="background:#30302e"></div><div class="info"><p class="name" style="color:var(--deep-dark)">Dark Surface</p><p class="role">Dark theme container · warm charcoal</p><span class="hex">#30302E</span></div></div>
       <div class="swatch"><div class="chip" style="background:#b53333"></div><div class="info"><p class="name">Error</p><p class="role">Error state, deep warm red</p><span class="hex">#B53333</span></div></div>
@@ -308,7 +308,7 @@ npx skills add tw93/kami -a codex -g -y</pre>
       </div>
       <div class="comp">
         <h4>Section Title</h4>
-        <p class="hint">serif 500 + 2.5pt brand left bar with breathing room</p>
+        <p class="hint">serif 500 · 15pt · size-led hierarchy, no decoration</p>
         <div class="demo">
           <span class="sample-section-title">Selected Works · Projects</span>
         </div>
@@ -325,14 +325,11 @@ npx skills add tw93/kami -a codex -g -y</pre>
       <div class="comp">
         <h4>Code Block</h4>
         <p class="hint">ivory bg + 0.5pt border + 6pt radius</p>
-<pre class="code"><span class="c">/* section title */</span>
-.section-title {
-  font-family: <span class="k">serif</span>;
-  font-weight: <span class="k">500</span>;
-  border-left: <span class="k">2.5pt</span> solid
-    var(--brand);
-  padding-left: <span class="k">8pt</span>;
-}</pre>
+<pre class="code"><span class="c">// warmth from restraint, not from color</span>
+canvas   = parchment; accent = <span class="k">ink_blue</span>
+palette  = <span class="k">warm_neutrals</span> − cool_grays
+document = <span class="k">serif</span> × hierarchy + generous_space
+beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
       </div>
       <div class="comp">
         <h4>Featured Card</h4>
@@ -367,7 +364,7 @@ npx skills add tw93/kami -a codex -g -y</pre>
       <tr><td class="task">Show code</td><td class="how">Ivory bg + <code>0.5pt</code> border + <code>6pt</code> radius + mono font</td></tr>
       <tr><td class="task">Primary vs secondary</td><td class="how">Primary: brand fill + ivory text; Secondary: warm-sand + charcoal</td></tr>
       <tr><td class="task">Mark a special card</td><td class="how"><code>border: 0.5pt solid var(--brand)</code> or <code>border-left: 3pt</code></td></tr>
-      <tr><td class="task">Begin a section</td><td class="how">Serif title + <code>2.5pt</code> brand left bar</td></tr>
+      <tr><td class="task">Begin a section</td><td class="how">Serif <code>500</code> · <code>15pt</code> · size-led hierarchy, no decoration needed</td></tr>
       <tr><td class="task">Document cover</td><td class="how">Single page, Display size + right-aligned author/date + generous whitespace</td></tr>
       <tr><td class="task">Data card</td><td class="how">Ivory bg + <code>8pt</code> radius + serif large number, ink blue + sans small label</td></tr>
     </table>

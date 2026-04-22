@@ -40,8 +40,15 @@ python3 -c "from weasyprint import HTML; HTML('doc.html').write_pdf('out.pdf')"
 @font-face {
   font-family: "TsangerJinKai02";
   src: url("TsangerJinKai02-W04.ttf");
+  font-weight: 400;
 }
-body { font-family: "TsangerJinKai02", serif; }
+@font-face {
+  font-family: "TsangerJinKai02";
+  src: url("TsangerJinKai02-W05.ttf");
+  font-weight: 500;
+}
+body { font-family: "TsangerJinKai02", serif; font-weight: 400; }
+h1, h2, h3 { font-weight: 500; }
 </style>
 ```
 
@@ -222,8 +229,8 @@ prs.save('output.pptx')
 2. **不用自带 Template**：PowerPoint default 是冷蓝灰，和 parchment 冲突
 3. **动画**：不加。Parchment 风格是印刷品，不是 SaaS 演示。最多允许 fade
 4. **导出 PDF**：分享时推荐导出 PDF，跨机器一致性比 .pptx 高
-   - macOS：Keynote 打开 -> Export to PDF
-   - Linux：`libreoffice --headless --convert-to pdf output.pptx`
+ - macOS：Keynote 打开 -> Export to PDF
+ - Linux：`libreoffice --headless --convert-to pdf output.pptx`
 
 ---
 

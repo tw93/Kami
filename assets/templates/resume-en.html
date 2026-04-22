@@ -132,9 +132,8 @@
     font-size: 13pt;
     font-weight: 500;
     color: var(--near-black);
-    border-left: 2.5pt solid var(--brand);
-    border-radius: 1.5pt;
-    padding: 0 0 0 8pt;
+    border-bottom: 0.5pt solid var(--border);
+    padding: 0 0 3pt 0;
     margin: 5mm 0 2mm 0;
     display: flex;
     align-items: baseline;
@@ -395,12 +394,12 @@
 
 <!-- =====================================================================
      Usage:
-     - Replace all {{VAR}} placeholders with real content
-     - Drop sections that don't apply (e.g. no open source -> remove that block)
-     - Each project strictly three-part: ROLE / ACTIONS / IMPACT
-     - Must verify: 2 pages exactly (strict)
+ - Replace all {{VAR}} placeholders with real content
+ - Drop sections that don't apply (e.g. no open source -> remove that block)
+ - Each project strictly three-part: ROLE / ACTIONS / IMPACT
+ - Must verify: 2 pages exactly (strict)
        python3 scripts/build.py resume-en
-     - Content strategy: references/writing.en.md
+ - Content strategy: references/writing.en.md
      ===================================================================== -->
 
 
@@ -411,7 +410,7 @@
     <div class="name serif">{{NAME}}<span class="alias">{{ALIAS_OR_PREFERRED_NAME}}</span></div>
   </div>
   <div class="contact">
-    <span class="role">{{ROLE_TITLE — e.g. AI / Agent Engineer}}</span>
+    <span class="role">{{ROLE_TITLE - e.g. AI / Agent Engineer}}</span>
     <br>
     <a href="{{GITHUB_URL}}">github.com/{{GITHUB_ID}}</a>
     <span class="sep">·</span>
@@ -439,7 +438,7 @@
 </section>
 
 <section>
-  <div class="section-title">Experience<span class="sub">{{START_DATE}} — Present · {{KEY_MILESTONE}}</span></div>
+  <div class="section-title">Experience<span class="sub">{{START_DATE}} - Present · {{KEY_MILESTONE}}</span></div>
 
   <!-- Timeline: three-step long-range arc -->
   <div class="timeline">
@@ -457,12 +456,12 @@
     </div>
   </div>
 
-  <!-- Project block — repeat 3–5 times -->
+  <!-- Project block - repeat 3–5 times -->
   <div class="project">
     <div class="proj-head">
       <span class="proj-name serif">{{PROJECT_NAME}}</span>
       <span class="proj-kind">· {{PROJECT_TYPE}}</span>
-      <span class="proj-role">{{ROLE — e.g. tech lead}}</span>
+      <span class="proj-role">{{ROLE - e.g. tech lead}}</span>
     </div>
     <div class="proj-lines">
       <div class="proj-row">

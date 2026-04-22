@@ -4,9 +4,20 @@
 <meta charset="UTF-8">
 <title>{{姓名}} · 简历</title>
 <style>
+  /* Regular weight */
   @font-face {
     font-family: "TsangerJinKai02";
-    src: url("../fonts/TsangerJinKai02-W04.ttf") format("truetype");
+    src: url("../fonts/TsangerJinKai02-W04.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W04.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* Bold weight - W05 for all bold variants */
+  @font-face {
+    font-family: "TsangerJinKai02";
+    src: url("../fonts/TsangerJinKai02-W05.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W05.ttf") format("truetype");
     font-weight: 500;
     font-style: normal;
   }
@@ -207,7 +218,7 @@
   .proj-label {
     display: table-cell; width: 11mm;
     font-size: 9pt; color: var(--brand);
-    font-weight: 600; letter-spacing: 0.2pt;
+    font-weight: 500; letter-spacing: 0.2pt;
     padding: 0.2mm 0 0.4mm 0; vertical-align: top;
   }
   .proj-text {
@@ -230,7 +241,7 @@
   /* PAGE 2 FORCE BREAK */
   .page-break { break-before: page; }
 
-  /* OPEN SOURCE — NEW ENHANCED LAYOUT */
+  /* OPEN SOURCE - NEW ENHANCED LAYOUT */
   .os-intro {
     font-size: 9.2pt; line-height: 1.40; letter-spacing: 0;
     color: var(--near-black);
@@ -261,7 +272,7 @@
   .os-desc { font-size: 9pt; color: var(--olive); line-height: 1.40; flex: 1; }
   .os-star {
     font-size: 8.7pt; color: var(--dark-warm);
-    font-weight: 600; white-space: nowrap; flex-shrink: 0; min-width: 7.5mm; text-align: right;
+    font-weight: 500; white-space: nowrap; flex-shrink: 0; min-width: 7.5mm; text-align: right;
   }
   .os-star.big { color: var(--brand); font-size: 9.2pt; }
 
@@ -280,13 +291,13 @@
   .os-highlight .tag {
     display: inline-block;
     background: var(--brand); color: var(--ivory);
-    font-size: 7.8pt; font-weight: 600;
+    font-size: 7.8pt; font-weight: 500;
     padding: 0.2mm 1.5mm; border-radius: 2pt;
     margin-right: 1.2mm; letter-spacing: 0.2pt;
     transform: translateY(-0.2mm);
   }
 
-  /* AI CONVICTION — NEW SECTION */
+  /* AI CONVICTION - NEW SECTION */
   .ai-conviction {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -307,7 +318,7 @@
     display: flex; align-items: baseline; gap: 1.5mm;
   }
   .ai-card-head .year {
-    color: var(--brand); font-weight: 600;
+    color: var(--brand); font-weight: 500;
     font-size: 9pt;
   }
   .ai-card-body {
@@ -382,7 +393,7 @@
   }
   .art-stats .lang-cn, .art-stats .lang-en {
     display: inline-block;
-    font-size: 8.5pt; font-weight: 600;
+    font-size: 8.5pt; font-weight: 500;
     margin-right: 0.5mm;
     letter-spacing: 0.2pt;
     color: var(--stone);
@@ -401,7 +412,7 @@
   }
   .skill-row:last-of-type { border-bottom: none; }
   .skill-label {
-    font-size: 9pt; font-weight: 600;
+    font-size: 9pt; font-weight: 500;
     color: var(--brand); letter-spacing: 0.3pt;
     width: 22mm; flex-shrink: 0;
     line-height: 1.36;
@@ -426,12 +437,12 @@
 
 <!-- =====================================================================
      使用说明：
-     - 所有 {{变量}} 替换为实际内容
-     - 删除不适用的 section（如无开源/AI判断/对外影响力）
-     - 项目可加减，每个严格遵守 角色/动作/结果 三段式
-     - 改完验证：必须 2 页
+ - 所有 {{变量}} 替换为实际内容
+ - 删除不适用的 section（如无开源/AI判断/对外影响力）
+ - 项目可加减，每个严格遵守 角色/动作/结果 三段式
+ - 改完验证：必须 2 页
        python3 -c "from weasyprint import HTML; HTML('resume.html').write_pdf('out.pdf')"
-     - 内容策略详见 references/writing.md
+ - 内容策略详见 references/writing.md
      ===================================================================== -->
 
 
@@ -462,7 +473,7 @@
 </section>
 
 <section>
-  <div class="section-title">工作经历<span class="sub">{{起始时间}} — 至今（{{关键里程碑}}）</span></div>
+  <div class="section-title">工作经历<span class="sub">{{起始时间}} - 至今（{{关键里程碑}}）</span></div>
 
   <!-- Timeline 3 步：长期演进信号 -->
   <div class="timeline">

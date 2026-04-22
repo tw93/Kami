@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-slides-en.py — parchment design system, English slide deck generator.
+slides-en.py - parchment design system, English slide deck generator.
 
 Usage:
   pip install python-pptx --break-system-packages
@@ -164,7 +164,7 @@ def content_slide(prs, eyebrow, title, body, page_num=None):
              Inches(1.2), Inches(3), Inches(11), Inches(3.5),
              font=SANS, size=18, color=DARK_WARM)
     if page_num is not None:
-        add_text(s, f"— {page_num:02d}",
+        add_text(s, f" - {page_num:02d}",
                  Inches(11.5), Inches(6.9), Inches(1.5), Inches(0.3),
                  font=SANS, size=11, color=STONE,
                  align=PP_ALIGN.RIGHT)
@@ -206,7 +206,7 @@ def quote_slide(prs, quote, source):
              font=SERIF, size=30, color=NEAR_BLACK,
              align=PP_ALIGN.CENTER,
              vanchor=MSO_ANCHOR.MIDDLE)
-    add_text(s, f"— {source}",
+    add_text(s, f" - {source}",
              Inches(1.5), Inches(5.2), Inches(10.33), Inches(0.4),
              font=SANS, size=14, color=OLIVE,
              align=PP_ALIGN.CENTER)
@@ -228,7 +228,7 @@ def ending_slide(prs, message, contact):
 
 
 # ═══════════════════════════════════════════════════════════
-# Main — example deck, replace with your content
+# Main - example deck, replace with your content
 # ═══════════════════════════════════════════════════════════
 
 def main():

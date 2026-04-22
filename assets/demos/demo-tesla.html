@@ -12,8 +12,22 @@
 <style>
   @font-face {
     font-family: "TsangerJinKai02";
-    src: url("../fonts/TsangerJinKai02-W04.ttf") format("truetype");
+    src: url("../fonts/TsangerJinKai02-W04.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W04.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "TsangerJinKai02";
+    src: url("../fonts/TsangerJinKai02-W05.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W05.ttf") format("truetype");
     font-weight: 500;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "JetBrains Mono";
+    src: url("../fonts/JetBrainsMono.woff2") format("woff2");
+    font-weight: 400;
     font-style: normal;
   }
 
@@ -59,7 +73,7 @@
     border-left: 2.5pt solid var(--brand);
     border-radius: 1.5pt;
     padding-left: 8pt;
-    margin-bottom: 14pt;
+    margin-bottom: 10pt;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
@@ -98,12 +112,12 @@
   }
 
   /* ========== METRICS ========== */
-  /* 横向 baseline 布局 —— 和 resume.html 一致的 kami native 姿态。
+  /* 横向 baseline 布局 - -  和 resume.html 一致的 kami native 姿态。
      背景透明、无边框，用 typography 本身承担层次，不加容器。 */
   .metrics {
     display: flex;
     gap: 14pt;
-    margin-bottom: 22pt;
+    margin-bottom: 16pt;
     padding: 6pt 0 8pt 0;
     border-bottom: 0.3pt dotted var(--border);
   }
@@ -132,18 +146,15 @@
   }
 
   /* ========== SECTIONS ========== */
-  section { margin-bottom: 22pt; break-inside: avoid; }
+  section { margin-bottom: 12pt; break-inside: avoid; }
   section:last-of-type { margin-bottom: 0; }
 
   h2 {
     font-family: "TsangerJinKai02", "Source Han Serif SC", Georgia, serif;
-    font-size: 13pt;
+    font-size: 15pt;
     font-weight: 500;
     color: var(--near-black);
-    margin-bottom: 6pt;
-    border-left: 2.5pt solid var(--brand);
-    border-radius: 1.5pt;
-    padding-left: 8pt;
+    margin-bottom: 4pt;
   }
   h2 .sub {
     font-size: 8.5pt;
@@ -159,7 +170,7 @@
     font-size: 13pt;
     line-height: 1.55;
     color: var(--dark-warm);
-    margin-bottom: 18pt;
+    margin-bottom: 14pt;
   }
 
   .hl { color: var(--brand); font-weight: 500; }
@@ -168,7 +179,7 @@
   .two-col {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 18pt;
+    gap: 14pt;
   }
 
   /* ========== 短横线 list（代替默认 bullet） ========== */
@@ -178,15 +189,15 @@
     padding: 0;
   }
   ul.dash li {
-    margin-bottom: 4pt;
+    margin-bottom: 3pt;
     line-height: 1.45;
   }
 
   /* ========== Timeline (横向进度点) ========== */
   .timeline {
     display: flex;
-    gap: 12pt;
-    margin-top: 6pt;
+    gap: 8pt;
+    margin-top: 4pt;
   }
   .tl-step {
     flex: 1;
@@ -224,6 +235,40 @@
     margin-right: 3pt;
   }
 
+  /* ========== CODE BLOCK ========== */
+  .code-block {
+    background: var(--ivory);
+    border: 0.5pt solid var(--border);
+    border-radius: 6pt;
+    padding: 10pt 14pt 12pt 14pt;
+    font-family: "JetBrains Mono", "Fira Code", "SF Mono", Consolas, monospace;
+    font-size: 8.5pt;
+    line-height: 1.55;
+    color: var(--near-black);
+    break-inside: avoid;
+  }
+  .code-block .code-label {
+    font-family: "TsangerJinKai02", sans-serif;
+    font-size: 7.5pt;
+    font-weight: 500;
+    letter-spacing: 0.4pt;
+    color: var(--stone);
+    margin-bottom: 8pt;
+    padding-bottom: 6pt;
+    border-bottom: 0.5pt solid var(--border-soft);
+  }
+  .code-block pre {
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+    white-space: pre-wrap;
+  }
+  .code-block .c { color: var(--stone); }    /* comment */
+  .code-block .k { color: var(--brand); }    /* keyword / value */
+
   /* ========== Callout / 高亮块 ========== */
   /* 参考 resume.html .team-culture：透明底 + 单左侧 brand 竖条。
      不做容器也不做圆角，气质是"一条旁注"而不是"一个卡片"。 */
@@ -231,7 +276,7 @@
     background: transparent;
     border-left: 1.8pt solid var(--brand);
     padding: 4pt 0 4pt 14pt;
-    margin: 10pt 0;
+    margin: 8pt 0;
     font-size: 10pt;
     line-height: 1.5;
     color: var(--olive);
@@ -241,7 +286,7 @@
 
   /* ========== FOOTER ========== */
   .footer {
-    margin-top: 18pt;
+    margin-top: 12pt;
     padding-top: 6pt;
     border-top: 0.3pt dotted var(--border);
     font-size: 8pt;
@@ -263,7 +308,7 @@
   </div>
   <div class="meta">
     公开资料整理<br>
-    2026.04.18<br>
+    2026.04.22<br>
     公开版
   </div>
 </div>
@@ -339,22 +384,45 @@
 </section>
 
 
-<!-- ========== 关键里程碑（横向时间点） ========== -->
-<section>
-  <h2>关键里程碑<span class="sub">从跑车到万亿市值</span></h2>
-  <ul class="dash" style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 18pt; row-gap: 2pt;">
-    <li><span class="hl">2008</span>：Roadster 交付，第一款量产电动跑车</li>
-    <li><span class="hl">2012</span>：Model S 发布，重新定义豪华 EV</li>
-    <li><span class="hl">2017</span>：Model 3 量产，EV 进入主流价位</li>
-    <li><span class="hl">2020</span>：市值超过丰田，成为全球最贵车企</li>
-    <li><span class="hl">2021</span>：首家市值破万亿美元的汽车公司</li>
-    <li><span class="hl">2023</span>：上海工厂年产 95 万辆，全球领先</li>
-  </ul>
-</section>
+<!-- ========== 关键里程碑 + 代码视角 ========== -->
+<div class="two-col">
+  <section>
+    <h2>关键里程碑<span class="sub">从跑车到万亿市值</span></h2>
+    <ul class="dash">
+      <li><span class="hl">2008</span>：Roadster 交付，第一款量产电动跑车</li>
+      <li><span class="hl">2012</span>：Model S 发布，重新定义豪华 EV</li>
+      <li><span class="hl">2017</span>：Model 3 量产，EV 进入主流价位</li>
+      <li><span class="hl">2023</span>：上海工厂年产 95 万辆，全球领先</li>
+    </ul>
+  </section>
+  <div class="code-block">
+    <div class="code-label">第一性原理 · First Principles</div>
+    <pre><span class="c">// 不继承传统，从原子开始推导</span>
+price  = Σ(<span class="k">raw_material</span>) + ingenuity
+future = electric × <span class="k">autonomous</span> × scale</pre>
+  </div>
+</div>
 
-<!-- ========== CALLOUT（可选）========== -->
-<div class="callout">
-  「我们不是在做一辆车，我们是在做制造这辆车的机器。」Tesla 团队多次提到的内部共识。理解这句话，就理解为什么它的估值长期按科技公司、而非车企给。
+<!-- ========== 竞争格局 + 2025 关键变量 ========== -->
+<div class="two-col" style="margin-top: 6pt;">
+  <section>
+    <h2>竞争格局</h2>
+    <ul class="dash">
+      <li><span class="hl">BYD</span>：全球销量第一，价格极具攻击性，但软件与品牌国际化滞后</li>
+      <li><span class="hl">小鹏 / 理想 / 蔚来</span>：端侧 AI 快速迭代，中高端市场直接竞争</li>
+      <li><span class="hl">大众 / GM</span>：传统体量大，软件能力差距明显，转型节奏慢</li>
+      <li><span class="hl">Tesla 优势</span>：全球 5 万+ 超充桩、FSD 领先 2–3 年、垂直整合成本最低</li>
+    </ul>
+  </section>
+  <section>
+    <h2>2025 关键变量</h2>
+    <ul class="dash">
+      <li><span class="hl">FSD 商业化</span>：无监督版本向全球扩展，订阅毛利率远高于整车</li>
+      <li><span class="hl">Optimus 节点</span>：2025 年工厂自用规模化，目标 2026 年起对外出售</li>
+      <li><span class="hl">$25k 新车型</span>：打开最大增量市场，预计 2025 年内启动交付</li>
+      <li><span class="hl">主要风险</span>：中国竞争加剧 · FSD 监管不确定 · Musk 精力分散</li>
+    </ul>
+  </section>
 </div>
 
 <!-- ========== FOOTER ========== -->

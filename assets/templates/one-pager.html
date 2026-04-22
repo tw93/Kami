@@ -10,9 +10,20 @@
 <meta charset="UTF-8">
 <title>{{文档标题}}</title>
 <style>
+  /* Regular weight */
   @font-face {
     font-family: "TsangerJinKai02";
-    src: url("../fonts/TsangerJinKai02-W04.ttf") format("truetype");
+    src: url("../fonts/TsangerJinKai02-W04.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W04.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* Bold weight - W05 for all bold variants */
+  @font-face {
+    font-family: "TsangerJinKai02";
+    src: url("../fonts/TsangerJinKai02-W05.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W05.ttf") format("truetype");
     font-weight: 500;
     font-style: normal;
   }
@@ -98,7 +109,7 @@
   }
 
   /* ========== METRICS ========== */
-  /* 横向 baseline 布局 —— 和 resume.html 一致的 kami native 姿态。
+  /* 横向 baseline 布局 - -  和 resume.html 一致的 kami native 姿态。
      背景透明、无边框，用 typography 本身承担层次，不加容器。 */
   .metrics {
     display: flex;
@@ -137,13 +148,10 @@
 
   h2 {
     font-family: "TsangerJinKai02", "Source Han Serif SC", Georgia, serif;
-    font-size: 13pt;
+    font-size: 15pt;
     font-weight: 500;
     color: var(--near-black);
     margin-bottom: 6pt;
-    border-left: 2.5pt solid var(--brand);
-    border-radius: 1.5pt;
-    padding-left: 8pt;
   }
   h2 .sub {
     font-size: 8.5pt;

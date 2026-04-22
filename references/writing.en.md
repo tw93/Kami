@@ -98,10 +98,10 @@ Junior writes "what they did". Mid writes "how they did it". **Senior writes "wh
 1. **Cover** (name + one-line positioning + contact)
 2. **About** (half-page introduction)
 3. **Per-project 1-2 pages**:
-   - Project title + type tag + date range
-   - One-line description
-   - 2-3 hero images (if applicable)
-   - Role + challenge + outcome
+ - Project title + type tag + date range
+ - One-line description
+ - 2-3 hero images (if applicable)
+ - Role + challenge + outcome
 4. **Selected works list** (additional projects as a short list)
 5. **Contact** (return to contact details)
 

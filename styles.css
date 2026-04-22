@@ -243,7 +243,7 @@
     line-height: 1.2;
     color: var(--near-black);
     margin: 0;
-    display: inline-block;
+    display: block;
     letter-spacing: 0.5px;
   }
   .section-lede {
@@ -617,6 +617,7 @@
     transition: box-shadow 0.2s;
     display: flex;
     flex-direction: column;
+    min-width: 0;
   }
   .comp:hover {
     box-shadow: 0 4px 24px rgba(0,0,0,0.05);
@@ -715,25 +716,13 @@
     color: var(--olive);
   }
 
-  /* Section title inline sample */
+  /* Section title inline sample — size-led hierarchy, no decoration */
   .sample-section-title {
     font-family: var(--serif);
     font-weight: 500;
-    font-size: 18px;
+    font-size: 20px;
     color: var(--near-black);
-    display: inline-block;
-    position: relative;
-    padding-left: 12px;
-  }
-  .sample-section-title::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 1px;
-    bottom: 1px;
-    width: 3px;
-    background: var(--brand);
-    border-radius: 2px;
+    display: block;
   }
 
   /* Code block */

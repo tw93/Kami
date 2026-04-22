@@ -358,15 +358,17 @@ ul.dash li::before {
 ```css
 .section-title {
   font-family: serif;           /* 用 serif 承担所有标题 */
-  font-size: 14pt;
+  font-size: 15pt;              /* 比正文 10pt 高 1.5×，无需额外装饰 */
   font-weight: 500;
   color: var(--near-black);
   margin: 24pt 0 10pt 0;
-  border-left: 2.5pt solid var(--brand);
-  border-radius: 1.5pt;
-  padding-left: 8pt;
 }
 ```
+
+**设计逻辑**：Section Title 依靠字号层级区分，不加任何装饰线。
+- 正文 9-10pt，Section Title 15pt，形成清晰的 1.5× 跳跃，阅读节奏自然
+- Quote / Callout 保留左竖线（引用的视觉惯例）；Section Title 无装饰，两者角色泾渭分明
+- 越简单越稳——多余的线条只会在多个章节标题并列时制造噪音
 
 ### Metric Card（数据卡）
 
@@ -585,7 +587,7 @@ figure,
 | 展示代码 | ivory 底 + 0.5pt border + 6pt 圆角 + mono 字体 |
 | 区分主次按钮 | Primary 用品牌色填充 + 白字，Secondary 用 warm-sand + charcoal |
 | 在卡片列表里区分某张特殊的 | `border: 0.5pt solid var(--brand)` 或 `border-left: 3pt solid var(--brand)` |
-| 章节开始 | serif 标题 + 左侧 2.5pt 品牌色竖线 |
+| 章节开始 | serif <code>500</code> · 15pt · 纯字号层级，比正文高 1.5×，无额外装饰 |
 | 文档封面 | 单页 Display 字号标题 + 作者/日期 right align，中间大量留白 |
 | 一张数据卡 | ivory 底 + 8 pt 圆角 + serif 大数字 + sans 小标签 |
 

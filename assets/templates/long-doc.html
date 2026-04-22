@@ -9,9 +9,20 @@
 <meta charset="UTF-8">
 <title>{{文档标题}}</title>
 <style>
+  /* Regular weight */
   @font-face {
     font-family: "TsangerJinKai02";
-    src: url("../fonts/TsangerJinKai02-W04.ttf") format("truetype");
+    src: url("../fonts/TsangerJinKai02-W04.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W04.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* Bold weight - W05 for all bold variants */
+  @font-face {
+    font-family: "TsangerJinKai02";
+    src: url("../fonts/TsangerJinKai02-W05.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W05.ttf") format("truetype");
     font-weight: 500;
     font-style: normal;
   }
@@ -260,7 +271,7 @@
     color: var(--charcoal);
     padding: 6pt 8pt;
     border-bottom: 1pt solid var(--brand);
-    background: var(--ivory);
+    background: transparent;
   }
   table td {
     padding: 5pt 8pt;
@@ -483,7 +494,7 @@ def analyze(data):
 
   <blockquote>
     {{一段引用，可以是用户访谈、专家观点、文献引用}}
-    <span class="cite">— {{来源 / 人物}}，{{日期}}</span>
+    <span class="cite"> - {{来源 / 人物}}，{{日期}}</span>
   </blockquote>
 </section>
 
