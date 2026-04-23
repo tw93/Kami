@@ -72,13 +72,21 @@ The ZIP is intentionally lightweight: Chinese TsangerJinKai font files are loade
 
 To update: download the same ZIP URL again, click "..." on the kami skill card, choose Replace, and upload the new ZIP.
 
-The skill auto-triggers from natural requests, no slash command required. It supports one-pagers, long docs, formal letters, portfolios, resumes, and slides in English and Chinese, with Japanese available through a best-effort CJK path plus a final visual QA pass before delivery.
+The skill auto-triggers from natural requests, no slash command required. It is optimized for English and Chinese across one-pagers, long docs, formal letters, portfolios, resumes, and slides. Japanese is also supported via a best-effort CJK path, with a final visual QA pass before delivery.
 
-> make a one-pager for my startup / turn this research into a long doc / write a formal letter / make a portfolio showcasing my projects / build me a resume / design a slide deck for my talk / 帮我做一份一页纸 / 帮我排版一份长文档 / 帮我写一封正式信件 / 帮我做一份作品集 / 帮我做一份简历 / 帮我做一套演讲幻灯片
+Example prompts by language:
+
+- English: `make a one-pager for my startup` / `turn this research into a long doc` / `write a formal letter` / `make a portfolio showcasing my projects` / `build me a resume` / `design a slide deck for my talk`
+- 中文: `帮我做一份一页纸` / `帮我排版一份长文档` / `帮我写一封正式信件` / `帮我做一份作品集` / `帮我做一份简历` / `帮我做一套演讲幻灯片`
+- 日本語: `スタートアップ向けの一枚資料を作って` / `この調査を長文レポートに整えて` / `正式な依頼文を作って` / `プロジェクト作品集を作って` / `履歴書を作って` / `登壇用スライドを作って`
 
 To include inline charts, mention the data and chart type in your prompt. Kami embeds bar charts, line charts, and donut charts directly into the document as SVG, no external tools needed.
 
-> add a revenue breakdown donut chart / show the quarterly delivery trend as a bar chart / draw a line chart of user growth / 加一个营收结构环形图 / 用柱状图展示季度交付量 / 画一条用户增长折线
+Chart prompts by language:
+
+- English: `add a revenue breakdown donut chart` / `show the quarterly delivery trend as a bar chart` / `draw a line chart of user growth`
+- 中文: `加一个营收结构环形图` / `用柱状图展示季度交付量` / `画一条用户增长折线`
+- 日本語: `売上構成のドーナツチャートを追加して` / `四半期の出荷推移を棒グラフで示して` / `ユーザー成長の折れ線グラフを入れて`
 
 ## Design
 
