@@ -85,7 +85,7 @@ To include inline charts, mention the data and chart type in your prompt. Kami e
 
 Warm parchment canvas, ink blue as the sole accent, serif carries hierarchy, no hard shadows or flashy palettes. This is not a UI framework; it is a constraint system for printed matter. Quality documents should read as composed pages, not dashboards.
 
-Six document types (One-Pager, Long Doc, Letter, Portfolio, Resume, Slides), each with Chinese and English variants. Six inline SVG diagram types (architecture, flowchart, quadrant, bar chart, line chart, donut chart) are included. Kami picks the right variant based on the language you write in.
+Six document types (One-Pager, Long Doc, Letter, Portfolio, Resume, Slides), each with Chinese and English variants. Twelve inline SVG diagram types are included: architecture, flowchart, quadrant, bar chart, line chart, donut chart, state machine, timeline, swimlane, tree, layer stack, and Venn. Kami picks the right variant based on the language you write in.
 
 | Element | Rule |
 |---|---|
