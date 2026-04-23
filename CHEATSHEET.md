@@ -2,7 +2,7 @@
 
 一页纸速查。填模板 / 调细节前扫一眼。完整规范在 `references/design.md`。
 
-## 八条规则
+## 九条规则
 
 1. 页面背景 `#f5f4ed`（parchment），不用纯白
 2. 强调色只有油墨蓝 `#1B365D`
@@ -12,6 +12,7 @@
 6. 行距：标题 1.1-1.3 / 密排 1.4-1.45 / 阅读 1.5-1.55
 7. Tag 背景实色 hex，禁 rgba（WeasyPrint 双层矩形 bug）
 8. 阴影用 ring 或 whisper，不用硬 drop shadow
+9. **含中文的 font-family 必须加 CJK 回退**：页脚、`pre`、`code`、SVG label。纯 mono 链会让中文 glyph 渲染为 `?` / `☐`。正确写法：`"JetBrains Mono", "SF Mono", Consolas, "TsangerJinKai02", "Source Han Serif SC", monospace`
 
 ## 信源与素材
 
