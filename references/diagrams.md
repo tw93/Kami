@@ -1,212 +1,208 @@
 # Diagrams
 
-kami 的绘图能力。**12 种常用图表**，覆盖结构图、流程图、数据图三大场景，皮肤 100% 沿用 kami 设计语言（parchment + 油墨蓝 + 暖灰），不引入第二种设计系统。
+kami's drawing capability. **12 diagram types** covering structural, process, and data chart scenarios. All wear kami's skin (parchment + ink-blue + warm grays). No second design system.
 
-所有图都是**自包含的 HTML + inline SVG**。没有 Mermaid、没有 JS、没有构建步骤。要么作为独立页面浏览，要么把 `<svg>...</svg>` 块整段复制进 long-doc 的 `<figure>` 里。
+Every diagram is a **self-contained HTML + inline SVG**. No Mermaid, no JS, no build step. Browse them as standalone pages, or copy the `<svg>...</svg>` block into a long-doc `<figure>` to embed.
 
 ---
 
-## 1. 选择表
+## 1. Selection
 
-| 你要表达的是… | 选这个 | 模板 |
+| Showing… | Use | Template |
 |---|---|---|
-| 系统组件 + 它们之间的连接 | **架构图** | `assets/diagrams/architecture.html` |
-| 决策分支 · "如果 A 则 B，否则 C" | **流程图** | `assets/diagrams/flowchart.html` |
-| 两个维度上的定位 / 优先级 | **象限图** | `assets/diagrams/quadrant.html` |
-| 分类对比（营收、市场份额、季度对比） | **柱状图** | `assets/diagrams/bar-chart.html` |
-| 趋势变化（股价、增长率、时序数据） | **折线图** | `assets/diagrams/line-chart.html` |
-| 占比分布（支出结构、用户画像、份额） | **环形图** | `assets/diagrams/donut-chart.html` |
-| 有限状态 + 有向转换（生命周期、状态机） | **状态机** | `assets/diagrams/state-machine.html` |
-| 时间轴 + 里程碑事件（路线图、项目进度） | **时间线** | `assets/diagrams/timeline.html` |
-| 跨责任方的流程（多角色协作、API 请求路径） | **泳道图** | `assets/diagrams/swimlane.html` |
-| 层级关系（组织架构、模块依赖、目录树） | **树状图** | `assets/diagrams/tree.html` |
-| 垂直堆叠的系统层（OSI / 应用分层架构） | **分层图** | `assets/diagrams/layer-stack.html` |
-| 集合交集（功能重叠、受众对比、能力交叉） | **维恩图** | `assets/diagrams/venn.html` |
+| System components + connections | **Architecture** | `assets/diagrams/architecture.html` |
+| Decision branches, "if A then B else C" | **Flowchart** | `assets/diagrams/flowchart.html` |
+| Two-axis positioning / prioritization | **Quadrant** | `assets/diagrams/quadrant.html` |
+| Category comparison (revenue, market share, quarterly) | **Bar Chart** | `assets/diagrams/bar-chart.html` |
+| Trend over time (stock price, growth rate, time series) | **Line Chart** | `assets/diagrams/line-chart.html` |
+| Proportional breakdown (spend, user segments, share) | **Donut Chart** | `assets/diagrams/donut-chart.html` |
+| Finite states + directed transitions (lifecycle, state machine) | **State Machine** | `assets/diagrams/state-machine.html` |
+| Time axis + milestone events (roadmap, project progress) | **Timeline** | `assets/diagrams/timeline.html` |
+| Cross-responsibility process (multi-role, API request path) | **Swimlane** | `assets/diagrams/swimlane.html` |
+| Hierarchical relationships (org chart, module deps, directory tree) | **Tree** | `assets/diagrams/tree.html` |
+| Vertically stacked system layers (OSI, application stack) | **Layer Stack** | `assets/diagrams/layer-stack.html` |
+| Set intersections (feature overlap, audience comparison, capability map) | **Venn** | `assets/diagrams/venn.html` |
 
-不在这 12 种里的情况：
-- **对比两件事**：用表格。三列就能说清的事不要画图。
-- **一个方框一个标签**：删掉方框，直接写一句话。
+Not on the list:
+- **Compare two things**: use a table. A three-column table beats any diagram of a binary contrast.
+- **One box with a label**: delete the box, write the sentence.
 
-### 绘图前的质问
+### The question before drawing
 
-> 如果把这张图换成一段好写的话，读者学到的会少吗？
+> Would a well-written paragraph teach the reader less than this diagram?
 
-答"不会"就别画。图是给"层次、方向、量级"加信号的，不是给文字加装饰的。
-
----
-
-## 2. 克制密度
-
-**目标密度 4/10**。够表达完整系统，但读者不需要图例指南就能看懂。
-
-- 节点数 > 9 -> 这不是一张图，是两张
-- 两个永远一起出现的节点 -> 合并成一个
-- 有线但层级从位置就能读出来 -> 去掉这条线
-- 5 个节点都是油墨蓝 -> 你没想清楚什么是焦点
-
-**焦点规则**：一张图 1-2 个焦点（`#1B365D` + `#EEF2F7` 填充）。其他全走中性色。焦点的意义来自对比，不是数量。
+If "no", don't draw. Diagrams add signal to hierarchy, direction, and magnitude. They don't decorate prose.
 
 ---
 
-## 3. 嵌入 long-doc / portfolio 的姿势
+## 2. Complexity budget
 
-### 独立浏览
+**Target density: 4/10**. Enough to be technically complete, not so dense the reader needs a guide.
 
-直接打开 `assets/diagrams/architecture.html`（或 flowchart / quadrant）。每份都是完整 HTML，包含标题 + SVG + caption。
+- Nodes > 9 -> this is two diagrams, not one
+- Two nodes that always travel together -> they're one node
+- A line whose meaning is obvious from layout -> remove the line
+- 5 nodes in ink-blue -> you haven't decided what's focal
 
-### 嵌入到 kami 文档里
+**Focal rule**: 1-2 focal elements per diagram (`#1B365D` stroke + `#EEF2F7` fill). Everything else goes neutral. Focal signal comes from contrast, not count.
 
-从模板 HTML 里**只抠 `<svg>...</svg>` 块**（不要带 frame / h1 / eyebrow），丢进 long-doc 的 `<figure>` 里：
+---
+
+## 3. Embedding in long-doc / portfolio
+
+### Standalone preview
+
+Open `assets/diagrams/architecture.html` (or `flowchart.html`, `quadrant.html`) directly. Each file is a complete HTML page with title, SVG, and caption.
+
+### Embed in a kami document
+
+Extract **only the `<svg>...</svg>` block** from the template (leave the frame / h1 / eyebrow behind). Drop it into a long-doc `<figure>`:
 
 ```html
 <figure>
   <svg viewBox="0 0 960 460" xmlns="http://www.w3.org/2000/svg">
-    <!-- 从 architecture.html 里复制的 svg 内容 -->
+    <!-- svg content copied from architecture.html -->
   </svg>
-  <figcaption>图 1 · {{简短描述，编辑风}}</figcaption>
+  <figcaption>Figure 1. {{Short editorial caption in serif.}}</figcaption>
 </figure>
 ```
 
-long-doc.html 的 `<style>` 已经定义好 figure / figcaption 样式，不需要额外 CSS。
+`long-doc.html` already styles `figure` and `figcaption`. No extra CSS required.
 
-### 改动节点 / 文字
+### Editing nodes / text
 
-直接改 SVG 里的 `<text>` 和 `<rect>` 坐标。规矩：
+Edit the `<text>` and `<rect>` values directly. Rules:
 
-- **所有坐标、宽度、间距都能被 4 整除**。这一条是防 AI-slop 的底线，违反之后图就会开始像"差不多就行"。
-- 节点宽度：128 / 144 / 160（三档够用，别再加）。小图（viewBox 宽 < 360）允许缩到 2 档，但仍限定 2 档，不要每个节点量体裁衣。
-- 节点高度：32（pill）/ 64（标准）
-- 字号：7（小标签 mono）/ 9（sublabel mono）/ 12（name sans）
-- **箭头端点落在节点边缘**：起点 `(box.x + box.w, box.y + box.h/2)`、终点 `(box.x, box.y + box.h/2)`，不能"大概靠近"。悬空 10px 人眼就看得出来。
-- **SVG 顶部文字留白**：SVG 的 `<text y="…">` 是 baseline 位置。y 必须 ≥ font-size × 1.2，否则字母顶部伸出 viewBox 被裁（典型是 "TOOLS" 变 "TOULS"）。要么放宽 viewBox 顶部、要么把 y 加到安全区。
-- **环形图的弧线控制点**：四节点闭环，每条弧用 Q-curve，控制点落在**两节点切线轴的外侧交点**，不是节点的角。例如 PLAN（上）→ ACT（右）这段弧：起点是 PLAN 右边缘中点、终点是 ACT 顶边缘中点，控制点是 `(ACT.x + ACT.w/2, PLAN.y + PLAN.h/2)`。这样出发切线是纯水平、到达切线是纯垂直，弧形读起来像标准四分之一圆。控制点落在节点角上会把弧挤扁。
-- **闭环图加一层 dashed 圆框**：四条有向弧单独存在时，读者要在脑里自己拼成环。加一个 dashed 圆圈（圆心在视觉中心，半径略大于中心到节点内缘的距离），瞬间说清"这是一个闭环"。圆画在节点下面，节点实色填充遮住圆穿过节点那一段，只在节点之间可见。
-- **chevron 箭头而非实心三角**：`<path d="M2 1 L8 5 L2 9" fill="none" stroke=... stroke-width="1.5" stroke-linecap="round"/>`。实心三角读起来像技术 UI，两笔 open chevron 是编辑感。kami 默认用 chevron。**注意 WeasyPrint 不支持 `<marker orient="auto">`**，marker 方向全部固定为 0°（朝右）。解法是不用 marker，每个箭头端点手动画一条 chevron `<path>`，方向写死（详见 production.md #15）。
+- **All coordinates, widths, and gaps must be divisible by 4.** This is the anti-AI-slop floor. Break it once and the diagram starts looking "close enough".
+- Node widths: 128 / 144 / 160 (three tiers, don't add more). Small diagrams (viewBox width < 360) may compress to 2 tiers, but still keep it 2 - don't tailor each node.
+- Node heights: 32 (pill) / 64 (standard)
+- Font sizes: 7 (small mono label) / 9 (sublabel mono) / 12 (name sans)
+- **Arrow endpoints land exactly on node edges**: start `(box.x + box.w, box.y + box.h/2)`, end `(box.x, box.y + box.h/2)`, not "close enough". A 10px gap is visible to the eye.
+- **SVG top padding**: the `y` in `<text y="…">` is the baseline. `y` must be ≥ font-size × 1.2, otherwise the tops of capital letters extend above the viewBox and get clipped (classic symptom: "TOOLS" renders as "TOULS"). Either pad the viewBox at the top or move `y` into the safe zone.
+- **Loop arc control points**: for a four-cardinal-node ring, each arc is a Q-curve whose control point sits at the **outer intersection of the two adjacent tangent axes**, not at a node corner. Example for PLAN (top) → ACT (right): start = PLAN's right-edge midpoint, end = ACT's top-edge midpoint, control = `(ACT.x + ACT.w/2, PLAN.y + PLAN.h/2)`. This gives a pure horizontal tangent at departure and pure vertical at arrival, reading as a clean quarter-circle. Control at the node corner produces a squashed arc.
+- **Closed loops need a dashed framing ring**: four directed arcs alone force the reader to mentally connect them into a loop. A dashed circle centered on the visual center (radius slightly larger than center-to-inner-edge distance) makes the loop immediately readable. Draw the ring below the nodes; solid node fills mask where the ring crosses each node; the ring shows only between nodes.
+- **Chevron arrows, not filled triangles**: use `<path d="M2 1 L8 5 L2 9" fill="none" stroke=... stroke-width="1.5" stroke-linecap="round"/>`. A filled triangle reads as technical UI; an open two-stroke chevron reads as editorial schematic. kami defaults to chevron. **WeasyPrint does not support `<marker orient="auto">`**: all markers render at 0° (pointing right). The fix is to skip `<marker>` and draw each arrowhead as a manual chevron `<path>` with hardcoded direction (see production.md #15).
 
-### 颜色 token 映射
+### Color token map
 
-三种图共用的 token 角色，直接对应 kami 设计系统：
+Shared tokens across the three diagrams, mapping directly to kami's design system:
 
-| SVG 角色 | kami token | 值 |
+| SVG role | kami token | Value |
 |---|---|---|
-| 画布 | `--parchment` | `#f5f4ed` |
-| 标准节点填充 | （白）| `#ffffff` |
-| 标准节点描边 | `--near-black` | `#141413` |
-| Store 节点填充 | near-black 5% | `rgba(20,20,19,0.05)` |
-| Store 节点描边 | `--olive` | `#5e5d59` |
-| Cloud 节点填充 | near-black 3% | `rgba(20,20,19,0.03)` |
-| Cloud 节点描边 | near-black 30% | `rgba(20,20,19,0.30)` |
-| External 节点填充 | olive 8% | `rgba(94,93,89,0.08)` |
-| External 节点描边 | `--stone` | `#87867f` |
-| **焦点填充** | `--brand-tint` | `#EEF2F7` |
-| **焦点描边** | `--brand` | `#1B365D` |
-| 标准箭头 | `--olive` | `#5e5d59` |
-| 焦点箭头 | `--brand` | `#1B365D` |
-| 文本主色 | `--near-black` | `#141413` |
-| 文本辅助色 | `--olive` | `#5e5d59` |
-| 文本三级色 / 小 mono 标签 | `--stone` | `#87867f` |
+| Canvas | `--parchment` | `#f5f4ed` |
+| Standard node fill | (white) | `#ffffff` |
+| Standard node stroke | `--near-black` | `#141413` |
+| Store node fill | near-black 5% | `rgba(20,20,19,0.05)` |
+| Store node stroke | `--olive` | `#5e5d59` |
+| Cloud node fill | near-black 3% | `rgba(20,20,19,0.03)` |
+| Cloud node stroke | near-black 30% | `rgba(20,20,19,0.30)` |
+| External node fill | olive 8% | `rgba(94,93,89,0.08)` |
+| External node stroke | `--stone` | `#87867f` |
+| **Focal fill** | `--brand-tint` | `#EEF2F7` |
+| **Focal stroke** | `--brand` | `#1B365D` |
+| Standard arrow | `--olive` | `#5e5d59` |
+| Focal arrow | `--brand` | `#1B365D` |
+| Primary text | `--near-black` | `#141413` |
+| Secondary text | `--olive` | `#5e5d59` |
+| Tertiary text / small mono label | `--stone` | `#87867f` |
 
-别加第四种状态（比如 "warning 橙" 或 "success 绿"）。kami 只有一种强调色。
+Don't add a fourth state ("warning amber", "success green"). kami has one accent.
 
 ---
 
-## 4. AI slop 反模式（看到这些就知道是 AI 默认输出）
+## 4. AI-slop anti-patterns
 
-写图 / review 图的时候扫一遍：
+Scan for these when drawing or reviewing:
 
-| 反模式 | 为什么失败 |
+| Anti-pattern | Why it fails |
 |---|---|
-| 深色底 + 青紫色辉光 | "科技感"的廉价符号，没有设计决策 |
-| 所有节点一样大小 | 消除层级 |
-| JetBrains Mono 当通用"开发"字体 | Mono 只给技术内容（端口、URL、字段类型）。名字用 sans |
-| 图例浮在图内部 | 和节点冲撞 |
-| 箭头文字没有遮罩矩形 | 文字被线穿过去 |
-| 箭头上竖排文字 | 读不懂 |
-| 默认 3 个等宽总结卡片 | 模板感，宽度需要有变化 |
-| 任何元素加 shadow | kami 只用 ring / whisper shadow |
-| `rounded-2xl` / `border-radius: 16px+` 给节点 | 最大 6-10 px 圆角，否则开始像 App Store UI |
-| 油墨蓝撒满每个"重要"节点 | 焦点规则是 1-2 个，不是信号系统 |
-| 表情符号 🚀 📊 💡 做图标 | 灾难 |
-| 渐变背景 | kami 禁用 |
-| 焦点与标题论点不一致 | 标题说 "Simple **core**"，图里却把 ACT 染成油墨蓝，两个 focal 打架。focal 的颜色必须和 caption 里用 `<span class="hl">` 强调的那个词对应 |
-| 循环图里既画虚线环、又画四段有向弧 | 同一条回路被画两遍，读者以为有两套流 |
-| SVG 文字顶部被 viewBox 裁切 | text 的 y 是 baseline，字母顶部伸到 y 负值区域。给顶部留 font-size × 1.2 的 padding，或改 viewBox |
-| 箭头起点/终点与节点边缘有 5-10px 缝隙 | 看起来像"箭头悬在半空"。endpoints 要锚到 `box.x / box.x+w / box.y / box.y+h` 的精确值 |
-| 同一张图里节点大小各自量体裁衣 | 四个步骤的宽度 60/76/80/100 给人"手工凑出来"的感觉。小图 2 档、大图 3 档，够了 |
-| 参考外部图表时把每类节点着一个 accent 色（紫/琥珀/绿/红） | kami 只有一种强调色。移植外部图时，把 focal 迁移到 caption 里 `<span class="hl">` 强调的那个词上，把颜色集中在那一个元素，不要铺给每个节点 |
-| 环形图所有节点都是单词、中心什么都没有 | 四个框轮流转，读者没有锚。要么节点带副标题，要么环心放一句话（"20 LOC"、exit condition 等），二选一 |
+| Dark mode + cyan / purple glow | Cheap "technical" signifier with no design decision |
+| All nodes identical size | Destroys hierarchy |
+| JetBrains Mono as the universal "dev" font | Mono is for technical content (ports, URLs, fields). Names go in sans. |
+| Legend floating inside the diagram area | Collides with nodes |
+| Arrow labels without a masking rect | Line bleeds through the text |
+| Vertical `writing-mode` text on arrows | Unreadable |
+| Three equal-width summary cards as a default | Template feel. Vary widths. |
+| `box-shadow` on anything | kami only permits ring / whisper |
+| `rounded-2xl` / border-radius above 10px | Max 6-10px. Beyond, it starts to look like App Store chrome. |
+| Ink Blue on every "important" node | Focal rule is 1-2, not a signaling system |
+| Decorative icons | Disaster |
+| Gradient backgrounds | kami forbids them |
+| Focal color contradicts the caption's claim | Caption says "Simple **core**", but the ACT node is painted ink-blue - two focals competing. Focal color must match the word emphasized (`<span class="hl">`) in the caption |
+| Cycle diagram with a dashed ring AND four directed arcs | Same loop drawn twice; reader thinks there are two flows |
+| SVG text clipped at the viewBox top | `text` y is the baseline; cap letters extend above y=0. Pad the top by font-size × 1.2 or adjust the viewBox |
+| 5-10px gap between arrow endpoint and node edge | Reads as "arrow floating in space". Anchor endpoints to exact `box.x / box.x+w / box.y / box.y+h` |
+| Per-node custom widths within one diagram | Four steps at widths 60 / 76 / 80 / 100 feel hand-patched. Small diagram: 2 tiers. Large: 3 tiers. That's the full budget |
+| Porting an external diagram with one accent color per node type (purple/amber/green/red) | kami has one accent. When adapting external diagrams, migrate the focal to whichever element the caption's `<span class="hl">` emphasizes; concentrate color there, keep all other nodes neutral |
+| Ring diagram: every node is a single word, center is empty | Four labeled boxes looping with no anchor. Either add a subtitle to each node or place one line of text at the center (exit condition, LOC count, etc.). Pick one. |
 
 ---
 
-## 5. 常见组合
+## 5. Common pairings
 
-### 技术白皮书
-- 架构图（系统全景）+ 时序组件（long-doc 自带的 timeline）
-- 每章最多 1 张架构图。超过 1 张说明这一章讲了两个东西，应该拆章
+### Technical white paper
+- Architecture (system overview) + built-in timeline (from long-doc)
+- One architecture diagram per chapter, maximum. If you want two, the chapter is covering two topics and should split.
 
-### 作品集项目页
-- 象限图（竞争定位）或架构图（你负责的那一层）
-- **不要**每个项目都画图。只在这张图能说清而文字说不清的时候才画
+### Portfolio project page
+- Quadrant (competitive positioning) or architecture (the layer you owned)
+- **Not every project needs a diagram.** Only when the diagram says something prose can't.
 
-### 一页纸方案
-- 象限图（优先级） 或 流程图（决策路径）
-- 只能有 1 张。如果想放 2 张，砍掉文字凑图的冲动，选最关键的那张
+### One-pager
+- Quadrant (priority) or flowchart (decision path)
+- One diagram only. If you're tempted to add a second, kill the weaker one.
 
-### 简历
-- **不画图**。简历空间比图值钱。极少数例外：展示系统架构能力时，附一个 URL 指到 portfolio
+### Resume
+- **No diagrams.** Resume real-estate costs more than diagrams. Rare exception: a URL to a portfolio diagram when showing system-level capability.
 
 ### Slides
-- 每页最多 1 张图。图占屏幕主体，文字是 caption，不是另外一栏
+- One diagram per slide, max. The diagram is the body. Text is caption, not a sidebar.
 
 ---
 
-## 6. 数据图表（柱状图 / 折线图 / 环形图）
+## 6. Data charts (bar / line / donut)
 
-三种数据驱动图表，专为投资报告、财务对比、市场份额等场景设计。和前三种图一样，全部是自包含 HTML + inline SVG，可嵌入任何 kami 文档。
+Three data-driven chart types for investment reports, financial comparisons, and market-share breakdowns. Like the first three diagram types, all are self-contained HTML + inline SVG, embeddable in any kami document.
 
-### 配色方案（从 kami 暖色 palette 派生）
+### Color palette (derived from kami warm palette)
 
-| 角色 | 色值 | 用途 |
+| Role | Value | Use |
 |---|---|---|
-| 主系列 | `#1B365D` ink-blue | 第一组 / 焦点数据 |
-| 辅系列 1 | `#5e5d59` olive | 第二组数据 |
-| 辅系列 2 | `#87867f` stone | 第三组数据 |
-| 辅系列 3 | `#b8b7b0` light-stone | 第四组 |
-| 辅系列 4 | `#d4d3cd` mist | 第五组 |
-| 辅系列 5 | `#EEF2F7` brand-tint | 第六组 |
-| 网格线 | `#e8e7e1` | 坐标轴 / 参考线 |
-| 数据标签 | `#141413` near-black | 数值文字 |
+| Primary series | `#1B365D` ink-blue | First group / focal data |
+| Series 2 | `#5e5d59` olive | Second group |
+| Series 3 | `#87867f` stone | Third group |
+| Series 4 | `#b8b7b0` light-stone | Fourth group |
+| Series 5 | `#d4d3cd` mist | Fifth group |
+| Series 6 | `#EEF2F7` brand-tint | Sixth group |
+| Grid lines | `#e8e7e1` | Axes / reference lines |
+| Data labels | `#141413` near-black | Numeric text |
 
-### 数据上限
+### Data limits
 
-| 图表 | 最大分类 | 最大系列 | 模板文件 |
+| Chart | Max categories | Max series | Template |
 |---|---|---|---|
-| 柱状图 | 8 组 | 3 系列 | `assets/diagrams/bar-chart.html` |
-| 折线图 | 12 点 | 3 线 | `assets/diagrams/line-chart.html` |
-| 环形图 | 6 段 | — | `assets/diagrams/donut-chart.html` |
+| Bar chart | 8 groups | 3 series | `assets/diagrams/bar-chart.html` |
+| Line chart | 12 points | 3 lines | `assets/diagrams/line-chart.html` |
+| Donut chart | 6 segments | n/a | `assets/diagrams/donut-chart.html` |
 
-### 修改数据的方法
+### Editing data
 
-每个图表文件标有 `<!-- DATA START -->` / `<!-- DATA END -->` 注释。只改这两行之间的 SVG 元素（`<rect>` 坐标、`<polyline>` 坐标、`<path>` 弧线、`<text>` 数值），不动外围结构和样式。
+Each file has `<!-- DATA START -->` / `<!-- DATA END -->` comments. Only change SVG elements between those markers (`<rect>` coordinates, `<polyline>` points, `<path>` arcs, `<text>` values). Leave surrounding structure and styles untouched.
 
-**坐标规则（和前三种图一致）**：
-- 所有坐标能被 4 整除
-- 柱状图圆角 `rx=2`（小值，区分于节点的 `rx=6-10`）
-- 折线图：`<polyline>` points 格式 `"x1,y1 x2,y2 ..."`，数据点用 `<circle>` 标记
-- 环形图：`<path>` 弧线用 `A R R 0 large-arc sweep_flag x y` 格式；`large-arc=1` 仅在段 > 180° 时用
+**Coordinate rules (same as the first three diagram types)**:
+- All coordinates divisible by 4
+- Bar chart corner radius `rx=2` (distinct from node radius 6-10)
+- Line chart: `<polyline>` points format `"x1,y1 x2,y2 ..."`, data points marked with `<circle>`
+- Donut chart: `<path>` arcs use `A R R 0 large-arc sweep_flag x y`; `large-arc=1` only when segment > 180°
 
-**柱状图 Y 轴换算**（默认比例 max=140 → chart-height=280，scale=2）：
+**Bar / line chart Y-axis formula** (default scale: max=140, chart-height=280, scale=2):
 ```
 bar_height = value × 2
-bar_top_y  = 320 − bar_height   (base y = 320)
+bar_top_y  = 320 - bar_height   (baseline y = 320)
+dot_y      = 320 - value × 2
 ```
 
-**折线图 Y 轴换算**（同上比例）：
-```
-dot_y = 320 − value × 2
-```
-
-**环形图弧线坐标**（cx=300 cy=200 R=136 r=76，从 -90° 开始顺时针）：
+**Donut arc coordinates** (cx=300 cy=200 R=136 r=76, clockwise from top at -90°):
 ```
 angle_start = -90 + sum_of_previous_percentages × 3.6
 angle_end   = angle_start + this_percentage × 3.6
@@ -216,22 +212,9 @@ inner_x = 300 + 76  × cos(angle_deg × π/180)
 inner_y = 200 + 76  × sin(angle_deg × π/180)
 ```
 
-### 嵌入文档
-
-和前三种图一样：从 HTML 里抠 `<svg>...</svg>` 块，放进 `<figure>` 容器：
-
-```html
-<figure>
-  <svg viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg">
-    <!-- 从 bar-chart.html 里复制的 svg 内容 -->
-  </svg>
-  <figcaption>图 N · {{简短描述，编辑风}}</figcaption>
-</figure>
-```
-
 ---
 
-## 7. 构建 / 预览
+## 7. Build / preview
 
 ```bash
 python3 scripts/build.py diagram-architecture
@@ -247,14 +230,14 @@ python3 scripts/build.py diagram-tree
 python3 scripts/build.py diagram-layer-stack
 python3 scripts/build.py diagram-venn
 
-# 或全部
+# or all
 python3 scripts/build.py
 ```
 
-浏览器里打开 `assets/diagrams/*.html` 也能直接看。
+Or just open `assets/diagrams/*.html` in a browser.
 
 ---
 
-## 8. 参考
+## 8. Credit
 
-这套能力的灵感来自 Cathryn Lavery 的 [diagram-design](https://github.com/cathrynlavery/diagram-design)（Claude Code skill，13 种编辑风 diagram）。kami 只吸收了它的**做法**（inline SVG、语义 token、复杂度预算、反 AI-slop 表），没有整体移植。
+This capability is inspired by Cathryn Lavery's [diagram-design](https://github.com/cathrynlavery/diagram-design) (a Claude Code skill with 13 editorial diagram types). kami borrowed the **approach** (inline SVG, semantic tokens, complexity budget, anti-slop table). Not the full catalog.

@@ -7,8 +7,9 @@ Usage:
     python3 scripts/build.py --check              # scan templates for CSS rule violations
     python3 scripts/build.py --check -v           # verbose (show each scanned file)
     python3 scripts/build.py --sync               # check CSS token drift across templates
-    python3 scripts/build.py --verify             # build all + page count + font + placeholder checks
+    python3 scripts/build.py --verify             # build all + page count + font checks
     python3 scripts/build.py --verify resume-en   # single target full verification
+    python3 scripts/build.py --check-placeholders path/to/doc.html
 """
 from __future__ import annotations
 
@@ -69,12 +70,12 @@ def build_html(name: str, source: str, max_pages: int,
         from weasyprint import HTML
         from pypdf import PdfReader
     except ImportError:
-        print("✗ missing deps: pip install weasyprint pypdf --break-system-packages")
+        print("ERROR: missing deps: pip install weasyprint pypdf --break-system-packages")
         return False
 
     src = src_dir / source
     if not src.exists():
-        print(f"✗ {name}: source not found ({src})")
+        print(f"ERROR: {name}: source not found ({src})")
         return False
 
     EXAMPLES.mkdir(parents=True, exist_ok=True)
@@ -84,9 +85,9 @@ def build_html(name: str, source: str, max_pages: int,
     # so fonts placed next to the HTML are found.
     HTML(str(src), base_url=str(src.parent)).write_pdf(str(out))
     n = len(PdfReader(str(out)).pages)
-    msg = f"✓ {name}: {n} pages"
+    msg = f"OK: {name}: {n} pages"
     if max_pages and n > max_pages:
-        msg = f"✗ {name}: {n} pages (limit {max_pages})"
+        msg = f"ERROR: {name}: {n} pages (limit {max_pages})"
         print(msg)
         return False
     print(msg)
@@ -96,11 +97,11 @@ def build_html(name: str, source: str, max_pages: int,
 def build_slides(name: str = "slides") -> bool:
     source = PPTX_TARGETS.get(name)
     if source is None:
-        print(f"✗ {name}: unknown slides target")
+        print(f"ERROR: {name}: unknown slides target")
         return False
     src = TEMPLATES / source
     if not src.exists():
-        print(f"✗ {name}: source not found ({src})")
+        print(f"ERROR: {name}: source not found ({src})")
         return False
 
     EXAMPLES.mkdir(parents=True, exist_ok=True)
@@ -112,15 +113,15 @@ def build_slides(name: str = "slides") -> bool:
         text=True,
     )
     if result.returncode != 0:
-        print(f"✗ {name}: {result.stderr.strip() or 'script failed'}")
+        print(f"ERROR: {name}: {result.stderr.strip() or 'script failed'}")
         return False
     # The script writes output.pptx in cwd; move to examples/ under our name.
     generated = src.parent / "output.pptx"
     if generated.exists():
         generated.replace(out)
-        print(f"✓ {name}: generated {out.name}")
+        print(f"OK: {name}: generated {out.name}")
         return True
-    print(f"✗ {name}: output.pptx not produced")
+    print(f"ERROR: {name}: output.pptx not produced")
     return False
 
 
@@ -152,7 +153,7 @@ def build_single(name: str) -> int:
     if name in PPTX_TARGETS:
         return 0 if build_slides(name) else 1
     known = list(HTML_TARGETS) + list(DIAGRAM_TARGETS) + list(PPTX_TARGETS)
-    print(f"✗ unknown target: {name}. Known: {', '.join(known)}")
+    print(f"ERROR: unknown target: {name}. Known: {', '.join(known)}")
     return 2
 
 
@@ -177,7 +178,7 @@ TOKENS_FILE = ROOT / "references" / "tokens.json"
 
 def sync_check(verbose: bool = False) -> int:
     if not TOKENS_FILE.exists():
-        print(f"✗ tokens.json not found at {TOKENS_FILE.relative_to(ROOT)}")
+        print(f"ERROR: tokens.json not found at {TOKENS_FILE.relative_to(ROOT)}")
         return 1
 
     canonical: dict[str, str] = json.loads(TOKENS_FILE.read_text())
@@ -210,7 +211,7 @@ def sync_check(verbose: bool = False) -> int:
                 drift.append((str(rel), token, expected, actual))
 
     if not drift:
-        print(f"✓ tokens in sync across {len(targets)} template(s)")
+        print(f"OK: tokens in sync across {len(targets)} template(s)")
         return 0
 
     print(f"\n[token-drift] {len(drift)}")
@@ -268,13 +269,6 @@ def verify_target(name: str, source: str, max_pages: int, src_dir: Path) -> list
         issues.append(f"source not found: {src}")
         return issues
 
-    # placeholder check (before build)
-    html = src.read_text(encoding="utf-8", errors="replace")
-    hits = PLACEHOLDER.findall(html)
-    if hits:
-        issues.append(f"unfilled placeholder(s): {', '.join(dict.fromkeys(hits))}")
-
-    # build
     try:
         from weasyprint import HTML
         from pypdf import PdfReader
@@ -318,35 +312,73 @@ def verify_target(name: str, source: str, max_pages: int, src_dir: Path) -> list
     return issues
 
 
+def verify_slides_target(name: str) -> list[str]:
+    return [] if build_slides(name) else ["slides build failed"]
+
+
 def verify_all(target: str | None = None) -> int:
-    targets_to_run: dict[str, tuple[str, int, Path]] = {}
+    targets_to_run: dict[str, tuple[str, int, Path] | None] = {}
     if target:
         if target in HTML_TARGETS:
             src, mp = HTML_TARGETS[target]
             targets_to_run[target] = (src, mp, TEMPLATES)
         elif target in DIAGRAM_TARGETS:
             targets_to_run[target] = (DIAGRAM_TARGETS[target], 0, DIAGRAMS)
+        elif target in PPTX_TARGETS:
+            targets_to_run[target] = None
         else:
-            print(f"✗ unknown target: {target}")
+            print(f"ERROR: unknown target: {target}")
             return 2
     else:
         for name, (src, mp) in HTML_TARGETS.items():
             targets_to_run[name] = (src, mp, TEMPLATES)
         for name, src in DIAGRAM_TARGETS.items():
             targets_to_run[name] = (src, 0, DIAGRAMS)
+        for name in PPTX_TARGETS:
+            targets_to_run[name] = None
 
     failures = 0
     rows: list[tuple[str, str]] = []
-    for name, (source, max_pages, src_dir) in targets_to_run.items():
-        issues = verify_target(name, source, max_pages, src_dir)
+    for name, config in targets_to_run.items():
+        if config is None:
+            issues = verify_slides_target(name)
+        else:
+            source, max_pages, src_dir = config
+            issues = verify_target(name, source, max_pages, src_dir)
         if issues:
-            rows.append((f"✗ {name}", "; ".join(issues)))
+            rows.append((f"ERROR: {name}", "; ".join(issues)))
             failures += 1
         else:
-            rows.append((f"✓ {name}", "ok"))
+            rows.append((f"OK: {name}", "ok"))
 
     for status, detail in rows:
         print(f"{status}: {detail}")
+
+    return 0 if failures == 0 else 1
+
+
+def check_placeholders(paths: list[str]) -> int:
+    if not paths:
+        print("ERROR: provide at least one HTML file to scan")
+        return 2
+
+    failures = 0
+    for raw in paths:
+        path = Path(raw)
+        if not path.is_absolute():
+            path = ROOT / path
+        if not path.exists():
+            print(f"ERROR: {raw}: file not found")
+            failures += 1
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        hits = list(dict.fromkeys(PLACEHOLDER.findall(text)))
+        rel = path.relative_to(ROOT) if path.is_relative_to(ROOT) else path
+        if hits:
+            print(f"ERROR: {rel}: unfilled placeholder(s): {', '.join(hits)}")
+            failures += 1
+        else:
+            print(f"OK: {rel}: no placeholders")
 
     return 0 if failures == 0 else 1
 
@@ -463,14 +495,14 @@ def check_all(verbose: bool) -> int:
             print(f"scanned {p.relative_to(ROOT)}: {len(file_findings)} finding(s)")
 
     if not findings:
-        print(f"✓ no violations across {len(targets)} templates")
+        print(f"OK: no violations across {len(targets)} templates")
         return 0
 
     by_rule: dict[str, list[Finding]] = {}
     for f in findings:
         by_rule.setdefault(f.rule, []).append(f)
 
-    print(f"✗ {len(findings)} violation(s) across {len({f.file for f in findings})} file(s)")
+    print(f"ERROR: {len(findings)} violation(s) across {len({f.file for f in findings})} file(s)")
     for rule, items in by_rule.items():
         print(f"\n[{rule}] {len(items)}")
         for f in items:
@@ -499,6 +531,8 @@ def main(argv: list[str]) -> int:
     if args[0] == "--verify":
         target = args[1] if len(args) > 1 and not args[1].startswith("-") else None
         return verify_all(target)
+    if args[0] in ("--check-placeholders", "--verify-filled"):
+        return check_placeholders(args[1:])
     return build_single(args[0])
 
 

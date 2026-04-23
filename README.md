@@ -67,11 +67,11 @@ npx skills add tw93/kami -a '*' -g -y
 
 **Claude Desktop**
 
-Download [kami.zip](https://github.com/tw93/kami/releases/latest/download/kami.zip), open Customize > Skills > "+" > Create skill, and upload the ZIP directly (no need to unzip).
+Download [kami.zip](https://cdn.jsdelivr.net/gh/tw93/kami@main/dist/kami.zip), open Customize > Skills > "+" > Create skill, and upload the ZIP directly (no need to unzip).
 
 The ZIP is intentionally lightweight: Chinese TsangerJinKai font files are loaded from local checkout first, then jsDelivr CDN, not bundled inside. If the font renders incorrectly, Claude will download it automatically on the next run.
 
-To update: click "..." on the kami skill card, choose Replace, and upload the new ZIP.
+To update: download the same ZIP URL again, click "..." on the kami skill card, choose Replace, and upload the new ZIP.
 
 The skill auto-triggers when you describe what you need, no slash command required. It supports one-pagers, long docs, formal letters, portfolios, resumes, and slides in both Chinese and English.
 
@@ -99,7 +99,7 @@ Six document types (One-Pager, Long Doc, Letter, Portfolio, Resume, Slides), eac
 
 **Fonts**: Chinese uses TsangerJinKai02 serif + Source Han Sans. TsangerJinKai is free for personal use, commercial use requires a license from [tsanger.cn](https://tsanger.cn). English uses Newsreader serif + Inter sans, both OFL open source.
 
-Full spec: [design.md](references/design.md) / [design.en.md](references/design.en.md). Cheatsheet: [CHEATSHEET.md](CHEATSHEET.md) / [CHEATSHEET.en.md](CHEATSHEET.en.md).
+Full spec: [design.md](references/design.md). Cheatsheet: [CHEATSHEET.md](CHEATSHEET.md).
 
 ## Background
 
@@ -111,7 +111,7 @@ Later, I was invited to give a talk on my article "The Agent You Don't Know: Pri
 
 - If kami helped you, [share it](https://twitter.com/intent/tweet?url=https://github.com/tw93/kami&text=Kami%20-%20A%20quiet%20design%20system%20for%20professional%20documents.) with friends or give it a star.
 - Got ideas or bugs? Open an issue or PR.
-- I have two cats, TangYuan and Coke. If you think kami delights your life, you can feed them <a href="https://miaoyan.app/cats.html?name=Kami" target="_blank">canned food 🥩</a>.
+- I have two cats, TangYuan and Coke. If you think kami delights your life, you can feed them <a href="https://miaoyan.app/cats.html?name=Kami" target="_blank">canned food</a>.
 
 ## License
 

@@ -1,259 +1,270 @@
 # Design System
 
-## 设计总则
+## Principles
 
-kami 的审美可以浓缩成一句话：**暖米纸底，油墨蓝点缀，serif 承担层级，拒绝冷蓝灰与硬阴影**。
+kami's aesthetic compresses into one sentence: **warm parchment canvas, ink-blue accent, serif carries hierarchy, avoid cool grays and hard shadows**.
 
-这不是一套 UI 框架，而是一套面向印刷文档的约束系统，目标是让页面稳定、清楚、可读。
+This is not a UI framework. It is a constraint system for print, designed to keep pages stable, clear, and readable.
 
-**九条规则**（每一条都有代价，破例前先想清楚）：
+**The nine invariants** (each has a real cost, think before overriding):
 
-1. 页面背景 parchment `#f5f4ed`，不用纯白
-2. 强调色只有油墨蓝 `#1B365D`，不引入第二种彩色
-3. 所有灰色暖调（yellow-brown undertone），禁止冷蓝灰
-4. 英文模板: serif 通吃标题和正文。中文模板: 标题 serif，正文 sans。UI 元素 (label, eyebrow, meta) 都用 sans
-5. Serif 字重固定 500，不用 bold
-6. 行距三档：紧凑标题 1.1-1.3 / 密排正文 1.4-1.45 / 阅读型 1.5-1.55
-7. Tag 背景必须实色 hex，禁止 rgba 半透明（WeasyPrint 会渲染出双层矩形）
-8. 阴影用 ring 或 whisper shadow，不用硬 drop shadow
-9. **禁止 italic**。所有模板和 demo 中不使用 `font-style: italic`，不需要 italic 字体文件
+1. Page background parchment `#f5f4ed`, never pure white
+2. Single accent: ink-blue `#1B365D`, no second chromatic color
+3. All grays warm-toned (yellow-brown undertone), no cool blue-grays
+4. English: serif for everything (headlines and body). Chinese: serif headlines, sans body. Sans only for UI elements (labels, eyebrows, meta) in both
+5. Serif weight locked at 500, no bold
+6. Line-heights: tight headlines 1.1-1.3, dense body 1.4-1.45, reading body 1.5-1.55
+7. Tag backgrounds must be solid hex, never rgba (WeasyPrint renders a double rectangle)
+8. Depth via ring shadow or whisper shadow, never hard drop shadows
+9. **No italic anywhere**. No `font-style: italic` in any template or demo. No italic @font-face declarations needed
 
-所有文档类型（One-Pager / Long Doc / Letter / Portfolio / Resume / Slides）都依据这份规范。这套系统脱胎于 Anthropic 视觉语言与中文简历设计的长期迭代，两条脉络合并而成。
+This system is a fusion of Anthropic's visual language and real Chinese / English resume iteration. Details below.
 
 ---
 
-## 1. 色彩系统
+## 1. Color
 
-**唯一强调色 + 纯暖调中性灰 + 零冷色**是这套设计的核心。
+**Single accent, warm neutrals only, zero cool tones** - this is the core.
 
-### 主调 · 品牌色
-
-```css
---brand:        #1B365D;   /* Ink Blue Brand - 唯一的彩色，用于 CTA、强调、section-title 左侧竖线 */
---brand-light:  #2D5A8A;   /* 更亮的变体，深色底上的链接偶尔用 */
-```
-
-**使用规则**：油墨蓝 `#1B365D` 全文档不超过 **5% 的面积**。超过就是堆砌，不是克制。
-
-### 画布 · 背景色
+### Brand
 
 ```css
---parchment:    #f5f4ed;   /* 主页面背景 - 温暖米色，整个设计的情感基础 */
---ivory:        #faf9f5;   /* 卡片/浮起容器 - 比 parchment 更亮的暖白 */
---warm-sand:    #e8e6dc;   /* 按钮默认背景 / 明显的交互表面 */
---dark-surface: #30302e;   /* 深色主题容器 - 暖炭灰 */
---deep-dark:    #141413;   /* 深色主题页面底色 - 不是纯黑，有橄榄绿底色 */
+--brand:       #1B365D;   /* Ink Blue - the only chromatic color. CTAs, accents, section-title left bar. */
+--brand-light: #2D5A8A;   /* Ink Light - brighter variant, for links on dark surfaces. */
 ```
 
-**绝对禁止**：`#ffffff` 纯白作页面底 · 任何 `#f8f9fa` / `#f3f4f6` 这类冷灰底。
+**Rule**: ink-blue covers ≤ **5% of document surface area**. More than that is ornament, not restraint.
 
-### 中性文字色
+### Surface
 
 ```css
---near-black:   #141413;   /* 主文本 - 最深但不是纯黑，有暖橄榄底色 */
---dark-warm:    #3d3d3a;   /* 次级深色文字 / 深色链接 */
---charcoal:     #4d4c48;   /* 按钮文字 / 高密度正文 */
---olive:        #5e5d59;   /* 副文本 - 描述、caption 等 */
---stone:        #87867f;   /* 三级文字 - 日期、元信息 */
---warm-silver:  #b0aea5;   /* 深色底上的浅色文字 */
+--parchment:    #f5f4ed;   /* Page background - warm cream, the emotional foundation */
+--ivory:        #faf9f5;   /* Card / lifted container - brighter than parchment */
+--warm-sand:    #e8e6dc;   /* Button default / interactive surface */
+--dark-surface: #30302e;   /* Dark-theme container - warm charcoal */
+--deep-dark:    #141413;   /* Dark-theme page background - not pure black, slight olive undertone */
 ```
 
-**记忆法**：每个灰都有 **yellow-brown undertone**。如果你在 `rgb()` 里看到 R ≈ G > B（或 R > G > B 且差距很小），基本就是暖灰。冷灰是 R < G < B（偏蓝）或 R = G = B（中性）。
+**Never**: `#ffffff` pure white as page background. `#f8f9fa` / `#f3f4f6` or any cool-gray surface.
 
-### 边框与分隔
+### Text
 
 ```css
---border-cream: #e8e5da;   /* 最柔的边框 - 卡片默认 */
---border-warm:  #e0ddd2;   /* 明显的边框 - section 分隔 */
---border-soft:  #e5e3d8;   /* 更淡的虚线分隔 - 列表项之间 */
---border-dark:  #30302e;   /* 深色主题下的边框 */
+--near-black:  #141413;   /* Primary text - deepest but not pure black, warm olive undertone */
+--dark-warm:   #3d3d3a;   /* Secondary dark / dark link color */
+--charcoal:    #4d4c48;   /* Button text / dense body */
+--olive:       #5e5d59;   /* Subtext - descriptions, captions */
+--stone:       #87867f;   /* Tertiary - dates, metadata */
+--warm-silver: #b0aea5;   /* Light text on dark surfaces */
 ```
 
-### Ring 阴影（不用传统 box-shadow）
+**Mnemonic**: every gray has a **yellow-brown undertone**. In `rgb()`, warm gray is R ≈ G > B (or R > G > B with small gaps). Cool gray is R < G < B or R = G = B (neutral).
+
+### Border
 
 ```css
---ring-warm:    #d1cfc5;   /* 按钮 hover/focus 环 */
---ring-deep:    #c2c0b6;   /* 按下状态 */
+--border-cream: #e8e5da;   /* Softest border - default cards */
+--border-warm:  #e0ddd2;   /* Prominent border - section dividers */
+--border-soft:  #e5e3d8;   /* Dotted divider - between list items */
+--border-dark:  #30302e;   /* Border on dark surfaces */
 ```
 
-### 功能色（尽量少用）
+### Ring shadow (not traditional box-shadow)
 
 ```css
---error:     #b53333;   /* 错误 - 深暖红，不刺眼 */
---focus:     #3898ec;   /* 聚焦蓝 - 唯一的冷色，只用于 input focus ring，无障碍必要 */
+--ring-warm: #d1cfc5;   /* Button hover / focus */
+--ring-deep: #c2c0b6;   /* Pressed state */
 ```
 
-### 半透明对应实色对照表（TAG / 标签必须实色）
+### Functional (use sparingly)
 
-**原因**：WeasyPrint 渲染 rgba 半透明时 padding 区域和字形区域透明度叠加不一致，放大后产生双层矩形。详见 `production.md Part 4`。
+```css
+--error: #b53333;   /* Deep warm red - serious without alarming */
+--focus: #3898ec;   /* Focus ring blue - the only cool color, strictly for accessibility */
+```
 
-油墨蓝 `#1B365D` 叠加在 parchment `#f5f4ed` 上的等效实色：
+### Translucent -> Solid conversion (TAGS MUST BE SOLID)
 
-| 想要的 rgba 透明度 | 等效实色 hex |
+**Why**: WeasyPrint's alpha compositing for padding vs glyph areas produces a visible double rectangle on zoom. See `production.md` Part 4 Pitfall #1.
+
+Ink Blue `#1B365D` over parchment `#f5f4ed`:
+
+| rgba alpha | Solid hex |
 |---|---|
 | 0.08 | `#EEF2F7` |
 | 0.14 | `#E4ECF5` |
-| **0.18** | **`#E4ECF5`** ← tag 推荐默认 |
+| **0.18** | **`#E4ECF5`** ← default tag |
 | 0.22 | `#D0DCE9` |
 | 0.30 | `#D6E1EE` |
 
 ---
 
-## 2. 字体系统
+## 2. Typography
 
-### 字体栈（按优先级 fallback）
+### Stacks
 
 ```css
-/* Serif 标题（中英文） */
-font-family: "TsangerJinKai02",       /* 仓耳今楷，需自备 .ttf */
-             "Source Han Serif SC",    /* 思源宋体（免费，Adobe/Google 联合出品）*/
-             "Noto Serif CJK SC",      /* 思源宋体的 Google 命名 */
-             "Songti SC",              /* macOS 系统宋体 */
-             "STSong",                 /* Windows 中文宋体 */
+/* English serif */
+font-family: "Newsreader",
+             "Source Serif 4", "Source Serif Pro",
+             "Charter",
+             Georgia, "Times New Roman", serif;
+
+/* Chinese serif */
+font-family: "TsangerJinKai02",
+             "Source Han Serif SC", "Noto Serif CJK SC",
+             "Songti SC", "STSong",
              Georgia, serif;
 
-/* Sans 正文/UI（中英文） */
+/* English sans / UI */
+font-family: "Inter",
+             -apple-system, BlinkMacSystemFont,
+             "Helvetica Neue", Arial, sans-serif;
+
+/* Chinese sans / UI */
 font-family: "Inter", "TsangerJinKai02",
              -apple-system, BlinkMacSystemFont,
              "Source Han Sans SC", "Noto Sans CJK SC",
              "PingFang SC", "Microsoft YaHei",
              Arial, sans-serif;
 
-/* Mono 代码 */
-font-family: "JetBrains Mono", "Fira Code",
-             "SF Mono", Consolas, Monaco,
-             "Source Han Mono", monospace;
+/* Mono, with CJK fallback for comments and labels */
+font-family: "JetBrains Mono", "SF Mono", "Fira Code",
+             Consolas, Monaco,
+             "TsangerJinKai02", "Source Han Serif SC",
+             monospace;
 ```
 
-### 字号层级（pt 用于 PDF，px 用于屏幕）
+Any font-family that may render Chinese must include a CJK fallback, including `@page` footer text, `pre`, `code`, and SVG labels. A pure mono stack can render missing glyph boxes in WeasyPrint.
 
-**印刷品（A4 PDF）用 pt**：
+### Size scale (pt for print A4, px for screen)
 
-| 角色 | 字号 | 字重 | line-height | 用途 |
+**Print:**
+
+| Role | Size | Weight | Line-height | Use |
 |---|---|---|---|---|
-| Display | 36-48 pt | 500 | 1.10 | 封面大标题、one-pager 主标题 |
-| H1 Section | 18-22 pt | 500 | 1.20 | 章节大标题 |
-| H2 | 14-16 pt | 500 | 1.25 | 子章节 |
-| H3 | 12-13 pt | 500 | 1.30 | 条目标题 |
-| Body Lead | 11 pt | 400 | 1.55 | 导语、intro |
-| Body | 9.5-10 pt | 400 | 1.55 | 正文 |
-| Body Dense | 9-9.2 pt | 400 | 1.40 | 密集排版（简历、one-pager 等） |
-| Caption | 8.5-9 pt | 400 | 1.45 | 说明文字、图注 |
-| Label | 7.5-8 pt | 600 | 1.35 | 小标签、角标 |
-| Tiny | 7 pt | 400 | 1.40 | 页脚、minor metadata |
+| Display | 36-48pt | 500 | 1.10 | Cover title, one-pager hero |
+| H1 Section | 18-22pt | 500 | 1.20 | Chapter titles |
+| H2 | 14-16pt | 500 | 1.25 | Subsection |
+| H3 | 12-13pt | 500 | 1.30 | Item titles |
+| Body Lead | 11pt | 400 | 1.55 | Intro paragraphs |
+| Body | 9.5-10pt | 400 | 1.55 | Reading body |
+| Body Dense | 9-9.2pt | 400 | 1.42 | Dense body (resume, one-pager) |
+| Caption | 8.5-9pt | 400 | 1.45 | Notes, figure captions |
+| Label | 7.5-8pt | 600 | 1.35 | Small labels, corner tags |
+| Tiny | 7pt | 400 | 1.40 | Footer, minor metadata |
 
-**屏幕（网页/PPT）用 px**：乘以约 1.33 得到等效 px（9 pt ≈ 12 px，18 pt ≈ 24 px）。
+**Screen (px)** ≈ pt × 1.33 (9pt ≈ 12px, 18pt ≈ 24px).
 
-### 字重规则
+### Weight
 
-- **Serif 正文**：400（W04 字体文件）
-- **Serif 标题**：500（W05 字体文件，真实粗体，非合成）
-- **Sans 正文**：400 默认
-- **Sans 标签/标题**：500 或 600
-- **禁止 900 black 或 100 thin**
+- **Serif body**: 400 (W04 font file)
+- **Serif headings**: 500 (W05 font file, real bold, not synthetic)
+- **Sans body**: 400 default
+- **Sans labels / small titles**: 500 or 600
+- **Forbidden**: 900 black, 100 thin
 
-**设计原则**：Serif 只用两档字重（400/500），不用合成 bold（600/700），保持版面克制。
+**Design principle**: Serif uses only two weights (400/500), no synthetic bold (600/700), maintaining restrained typography.
 
-### 行距（line-height）三档
+### Line-height
 
-中文印刷品比英文网页**更紧凑**。英文网页常见的 1.6-1.75 是针对英文字母和非 fixed-width 的 body 优化的，放在中文 pt 字号的印刷品里会显得松散。
+Print documents are **tighter** than English web body. English web typically runs 1.6-1.75; in print at pt sizes that feels loose and floats.
 
-| 档位 | 值 | 用于 |
+| Tier | Value | Use |
 |---|---|---|
-| 紧凑标题 | 1.10-1.30 | 大标题、Display、H1、H2 |
-| 密排正文 | 1.40-1.45 | Body Dense（简历、one-pager、名片、索引卡） |
-| 阅读型正文 | 1.50-1.55 | Body（long-doc 章节正文、letter 正文） |
-| 标签 / caption | 1.30-1.40 | 小字标签、多行 metadata |
+| Tight headline | 1.10-1.30 | Display, H1, H2 |
+| Dense body | 1.40-1.45 | Resume, one-pager, dense information |
+| Reading body | 1.50-1.55 | Long-doc chapters, letters |
+| Label / caption | 1.30-1.40 | Small labels, multi-line metadata |
 
-**禁用**：
-- 1.60+ - 英文网页的节奏，中文印刷会显得松散
-- 1.00-1.05 - 除非极致紧凑标题，否则上下文字会粘连
+**Forbidden**:
+- 1.60+ - loose feel, web rhythm, not print
+- 1.00-1.05 - lines collide except at extreme display sizes
 
-### 字距（letter-spacing）
+### Letter-spacing
 
-- body 默认 **0** 或极轻 +0.1 pt
-- 中文标题超过 20 pt 的，加 0.5-1 pt 字距
-- 小字 label (<10 pt) 可以加 0.15-0.3 pt 提高可读性
-- 全大写 overline 加 0.5 px（ALL CAPS 必须加字距）
+- Body text: **0** (or +0.05pt imperceptible)
+- English headings above 20pt: -0.3 to -0.5pt (tighten, English serifs handle it)
+- Small labels (< 10pt): +0.2 to +0.5pt for readability
+- All-caps overlines: +0.5 to +1pt mandatory
 
 ---
 
-## 3. 间距系统
+## 3. Spacing
 
-### 基础单位：4 pt（或 4 px 屏幕）
+### Base unit: 4pt (4px on screen)
 
-| 尺度 | 值 | 用途 |
+| Tier | Value | Use |
 |---|---|---|
-| xs | 2-3 pt | 同行内元素间距 |
-| sm | 4-5 pt | tag padding、紧凑布局 |
-| md | 8-10 pt | 组件内部 |
-| lg | 16-20 pt | 组件之间、卡片 padding |
-| xl | 24-32 pt | section 标题 margin |
-| 2xl | 40-60 pt | 大 section 之间 |
-| 3xl | 80-120 pt | 章节之间（长文档）|
+| xs | 2-3pt | Inline adjacent elements |
+| sm | 4-5pt | Tag padding, dense layout |
+| md | 8-10pt | Component interior |
+| lg | 16-20pt | Between components / card padding |
+| xl | 24-32pt | Section-title margins |
+| 2xl | 40-60pt | Between major sections |
+| 3xl | 80-120pt | Between chapters (long docs) |
 
-### 页面 margin（A4）
+### Page margins (A4)
 
-| 文档类型 | 上 | 右 | 下 | 左 |
+| Document | Top | Right | Bottom | Left |
 |---|---|---|---|---|
-| Resume（紧凑）| 9 mm | 13 mm | 9 mm | 13 mm |
-| One-Pager | 15 mm | 18 mm | 15 mm | 18 mm |
-| Long Doc | 20 mm | 22 mm | 22 mm | 22 mm |
-| Letter | 25 mm | 25 mm | 25 mm | 25 mm |
-| Portfolio | 12 mm | 15 mm | 12 mm | 15 mm |
+| Resume (dense) | 11mm | 13mm | 11mm | 13mm |
+| One-Pager | 15mm | 18mm | 15mm | 18mm |
+| Long Doc | 20mm | 22mm | 22mm | 22mm |
+| Letter | 25mm | 25mm | 25mm | 25mm |
+| Portfolio | 12mm | 15mm | 12mm | 15mm |
 
-**规律**：密度越高 margin 越小，越正式（letter）margin 越大。
+**Rule**: denser = smaller margins, more formal (letter) = larger margins.
 
-### Slide 尺度间距
+### Slide-scale spacing
 
-印刷品用 mm/pt，Slide（屏幕）用 px，尺度关系不同：
+Print uses mm/pt; slides (screen) use px. The scale relationships differ:
 
 ```css
---slide-pad: 80px;   /* slide 四边 padding baseline */
+--slide-pad: 80px;   /* slide four-side padding baseline */
 ```
 
-**关键规则**：
-- Slide padding-top 72-80px（印刷品是 96-120px，slide 的视觉呼吸感已足够）
-- Letter-spacing slide = 印刷值 / 2，8px tracking 照搬到屏幕会"散架"
-- 宏观尺度（字号、padding）相较印刷 pt 值乘以约 1.6
-- 微观尺度（letter-spacing、border、圆角）乘以约 0.6
+**Key rules**:
+- Slide padding-top: 72-80px (print is 96-120px; slides are more compact)
+- Slide letter-spacing = print value / 2 (8px tracking "falls apart" on screen; halve it)
+- Macro scale (font size, padding): multiply print pt values by ~1.6
+- Micro scale (letter-spacing, border, radius): multiply by ~0.6
 
 ---
 
-## 4. 组件样式
+## 4. Components
 
 ### Cards / Containers
 
 ```css
 .card {
-  background: var(--ivory);                /* 比 parchment 略浮起 */
+  background: var(--ivory);
   border: 0.5pt solid var(--border-cream);
-  border-radius: 8pt;                       /* 舒适圆角 */
+  border-radius: 8pt;
   padding: 16pt 20pt;
 }
 
-/* 特色卡片 */
 .card-featured {
-  border-radius: 16pt;                      /* 更大圆角 */
-  box-shadow: 0 4pt 24pt rgba(0,0,0,0.05); /* whisper shadow */
+  border-radius: 16pt;
+  box-shadow: 0 4pt 24pt rgba(0,0,0,0.05);   /* whisper shadow */
 }
 ```
 
-圆角尺度：4 pt -> 6 pt -> 8 pt（默认）-> 12 pt -> 16 pt -> 24 pt -> 32 pt（hero 容器）。
+Radius scale: 4pt -> 6pt -> 8pt (default) -> 12pt -> 16pt -> 24pt -> 32pt (hero containers).
 
-### Buttons (在 PPT / 作品集 / 图表里用)
+### Buttons
 
 ```css
-/* Primary（品牌色） */
+/* Primary - brand-colored */
 .btn-primary {
   background: var(--brand);
   color: var(--ivory);
   padding: 8pt 16pt;
   border-radius: 8pt;
-  box-shadow: 0 0 0 1pt var(--brand);    /* ring shadow，不是外阴影 */
+  box-shadow: 0 0 0 1pt var(--brand);   /* ring shadow */
 }
 
-/* Secondary（warm sand） */
+/* Secondary - warm-sand */
 .btn-secondary {
   background: var(--warm-sand);
   color: var(--charcoal);
@@ -263,34 +274,35 @@ font-family: "JetBrains Mono", "Fira Code",
 }
 ```
 
-### Tags / Badges
+### Tags
 
-三个档位的 tag 样式，按视觉冲击力从弱到强选：
+Three tiers from weak to strong visual weight:
 
-**极淡实色**（最克制、最灵动、推荐默认）：
+**Lightest solid** (default, most restrained):
 ```css
 .tag {
-  background: #EEF2F7;           /* rgba(201,100,66, 0.08) 等效色 */
+  background: #EEF2F7;      /* 0.08 solid equivalent */
   color: var(--brand);
   font-size: 8pt;
-  font-weight: 500;
+  font-weight: 600;
   padding: 1pt 5pt;
   border-radius: 2pt;
-  letter-spacing: 0.05pt;
+  letter-spacing: 0.4pt;
+  text-transform: uppercase;
 }
 ```
 
-**标准实色**（需要稍强区分度，如多种 tag 混排时）：
+**Standard solid** (when more contrast needed):
 ```css
 .tag {
-  background: #E4ECF5;           /* rgba(201,100,66, 0.18) 等效色 */
+  background: #E4ECF5;      /* 0.18 solid equivalent */
   color: var(--brand);
   padding: 1pt 6pt;
   border-radius: 4pt;
 }
 ```
 
-**笔刷渐变**（仅在需要强化"手感"时用，慎用）：
+**Gradient brush** (only when "hand-painted" feel is required - use sparingly):
 ```css
 .tag {
   background: linear-gradient(to right, #D6E1EE, #E4ECF5 70%, #EEF2F7);
@@ -300,23 +312,21 @@ font-family: "JetBrains Mono", "Fira Code",
 }
 ```
 
-**设计哲学**：tint 浓度要比装饰性需求**低一档**。宁可清淡，不可浓艳。"笔刷渐变"技术上可行，但实战中往往用力过猛，把读者的视线引向背景形状而非文字（详见 production.md Part 4 #1）。
+**Philosophy**: tint depth should be one step lighter than what decoration wants. Prefer pale over saturated. In iteration, "gradient brush" often steals focus - lightest solid wins most of the time.
 
-**禁止**：`background: rgba(201, 100, 66, 0.18)`，WeasyPrint 会渲染出双层矩形。用等效实色替代。
+**Never**: `background: rgba(201, 100, 66, 0.18)` - WeasyPrint double-rectangle bug.
 
-### 列表
+### Lists
 
 ```css
 ul, ol {
   padding-left: 16pt;
   line-height: 1.55;
 }
-ul li::marker {
-  color: var(--brand);   /* bullet 点用品牌色 */
-}
+ul li::marker { color: var(--brand); }
 ```
 
-或者更有书卷气的**短横线代替圆点**：
+Editorial bookish variant - **en-dash instead of bullet**:
 
 ```css
 ul.dash { list-style: none; padding-left: 0; }
@@ -327,7 +337,7 @@ ul.dash li::before {
 }
 ```
 
-### 引用块
+### Quote
 
 ```css
 .quote {
@@ -338,7 +348,7 @@ ul.dash li::before {
 }
 ```
 
-### 代码块
+### Code
 
 ```css
 .code-block {
@@ -346,10 +356,9 @@ ul.dash li::before {
   border: 0.5pt solid var(--border-cream);
   border-radius: 6pt;
   padding: 10pt 14pt;
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--mono);
   font-size: 8.5pt;
   line-height: 1.5;
-  color: var(--near-black);
 }
 ```
 
@@ -357,50 +366,37 @@ ul.dash li::before {
 
 ```css
 .section-title {
-  font-family: serif;           /* 用 serif 承担所有标题 */
-  font-size: 15pt;              /* 比正文 10pt 高 1.5×，无需额外装饰 */
+  font-family: var(--serif);
+  font-size: 14pt;
   font-weight: 500;
   color: var(--near-black);
   margin: 24pt 0 10pt 0;
+  border-left: 2.5pt solid var(--brand);
+  border-radius: 1.5pt;
+  padding-left: 8pt;
 }
 ```
 
-**设计逻辑**：Section Title 依靠字号层级区分，不加任何装饰线。
-- 正文 9-10pt，Section Title 15pt，形成清晰的 1.5× 跳跃，阅读节奏自然
-- Quote / Callout 保留左竖线（引用的视觉惯例）；Section Title 无装饰，两者角色泾渭分明
-- 越简单越稳——多余的线条只会在多个章节标题并列时制造噪音
+### Metric
 
-### Metric Card（数据卡）
-
-关键指标并排显示（用于 one-pager 顶部、简历顶部、portfolio 封面）：
+Key numbers side-by-side (one-pager header, resume top, portfolio cover):
 
 ```css
-.metrics {
-  display: flex;
-  gap: 24pt;
-}
-.metric {
-  flex: 1;
-  display: flex;
-  align-items: baseline;
-  gap: 6pt;
-}
+.metrics { display: flex; gap: 24pt; }
+.metric  { flex: 1; display: flex; align-items: baseline; gap: 6pt; }
 .metric-value {
-  font-family: serif;
+  font-family: var(--serif);
   font-size: 16pt;
   font-weight: 500;
   color: var(--brand);
-  font-variant-numeric: tabular-nums;   /* 数字等宽对齐 */
+  font-variant-numeric: tabular-nums;   /* align digits in columns */
 }
-.metric-label {
-  font-size: 9pt;
-  color: var(--olive);
-}
+.metric-label { font-size: 9pt; color: var(--olive); }
 ```
 
 ### Section Header (`.kami-section-header`)
 
-用于内容页的小节起始，比 Section Title 更轻量，带 eyebrow 和横线。
+Lightweight section opener for content slides. Has an eyebrow and a horizontal rule.
 
 ```css
 .kami-section-header {
@@ -408,7 +404,7 @@ ul.dash li::before {
 }
 .kami-section-header .eyebrow {
   display: flex;
-  align-items: center;             /* 圆点是几何图形，center 比 baseline 好 */
+  align-items: center;             /* dot is geometric, center beats baseline */
   gap: 8px;
   font-family: var(--sans);
   font-size: 12px;
@@ -429,7 +425,7 @@ ul.dash li::before {
 .kami-section-header .rule {
   height: 1px;
   background: var(--border-warm);
-  margin-bottom: 36px;             /* 横线下方 gap >= 36px（上方 14px 的 2 倍以上）*/
+  margin-bottom: 36px;             /* gap below rule >= 36px (>= 2x the gap above) */
 }
 .kami-section-header h1 {
   font-family: var(--serif);
@@ -440,11 +436,11 @@ ul.dash li::before {
 }
 ```
 
-**间距规则**：eyebrow → 横线 14px，横线 → H1 **≥ 36px**（下方 gap 是上方 gap 的 2 倍以上，形成视觉锚点）。
+**Spacing rule**: eyebrow to rule: 14px; rule to H1: **≥ 36px** (the gap below must be at least double the gap above, creating a visual anchor).
 
 ### Code Card (`.kami-code-card`)
 
-用于 Slide 中展示伪代码或代码片段，比普通 code-block 更有结构感。
+For displaying pseudocode or code snippets in slides. More structured than a plain code block.
 
 ```css
 .kami-code-card {
@@ -456,17 +452,17 @@ ul.dash li::before {
 }
 .kami-code-card pre {
   font-family: var(--mono);
-  font-size: 13px;                 /* 或 14px，slide 上更大 */
+  font-size: 13px;                 /* 14px for larger slides */
   line-height: 1.55;
   color: var(--near-black);
   margin: 0;
   white-space: pre;
 }
-/* 语法色：只用现有 token，不引入新颜色 */
+/* Syntax colors: existing tokens only, no new colors */
 .kami-code-card .k { color: var(--brand); }    /* keyword / string */
 .kami-code-card .c { color: var(--stone); }    /* comment */
 
-/* 可选行号：左侧 1px divider */
+/* Optional line numbers: 1px left divider */
 .kami-code-card.numbered {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -484,34 +480,34 @@ ul.dash li::before {
 }
 ```
 
-**内容哲学**：代码卡用**伪代码风格**，注释行数 > 代码行数。读者看到的是逻辑，不是语法。
+**Content philosophy**: use pseudocode style. Comments should outnumber code lines. The reader sees logic, not syntax.
 
 ---
 
-## 5. 阴影与深度
+## 5. Depth & Shadow
 
-**核心原则**：kami **不用传统硬阴影**。深度通过三种方式创造：
+**Core rule**: do not use traditional hard shadows. Depth comes from three sources:
 
-### 1. Ring Shadow（边框式阴影）
+### 1. Ring shadow (border-like)
 
-用于**按钮**的 hover/focus 状态。
+For **button** hover/focus states.
 
 ```css
-/* 按钮默认 */
+/* Button default */
 box-shadow: 0 0 0 1pt var(--ring-warm);
 
-/* 按钮 hover/active 时加深 */
+/* Button hover/active */
 box-shadow: 0 0 0 1pt var(--ring-deep);
 ```
 
-**不要用于卡片 hover**：ring shadow 本质是边框替代，叠加在已有 border 上会产生三层视觉堆叠（border + ring + offset），感觉数字化，不像纸质。
+**Do not use for card hover**: ring shadow is a border replacement. Layering it over an existing border creates three-layer visual stacking (border + ring + offset), which feels digital, not paper-like.
 
-### 2. Whisper Shadow（极软投影）
+### 2. Whisper shadow (barely visible lift)
 
-用于**卡片 hover** 和 **featured card** 的浮起效果。
+For **card hover** and **featured card** elevation.
 
 ```css
-/* 卡片 hover - 模拟纸张轻微抬起 */
+/* Card hover - mimics paper lifting slightly */
 .card {
   transition: box-shadow 0.2s;
 }
@@ -519,94 +515,85 @@ box-shadow: 0 0 0 1pt var(--ring-deep);
   box-shadow: 0 4pt 24pt rgba(0, 0, 0, 0.05);
 }
 
-/* Featured card 默认状态 */
+/* Featured card default state */
 .featured-card {
   box-shadow: 0 4pt 24pt rgba(0, 0, 0, 0.05);
 }
 ```
 
-**为什么用 whisper 而不是 ring**：纸张浮起是深度变化，不是轮廓变化。Whisper shadow 单一、柔和、无轮廓线，符合纸质感调性。
+**Why whisper, not ring**: paper elevation is depth change, not outline change. Whisper shadow is singular, soft, outline-free, matching the paper-like tone.
 
-### 3. 明暗交替（section 级别）
+### 3. Section-level light/dark alternation
 
-长文档里 parchment `#f5f4ed` 底 section 和 `#141413` 深色 section 交替，对比最明显。
+Long docs alternate parchment `#f5f4ed` and `#141413` dark sections. This section-level light change creates the strongest contrast.
 
-**禁止**：`box-shadow: 0 2px 8px rgba(0,0,0,0.3)` 这类传统硬阴影。
+**Forbidden**: `box-shadow: 0 2px 8px rgba(0,0,0,0.3)` and relatives.
 
 ---
 
-## 6. 打印与分页
+## 6. Print & Pagination
 
-### break-inside 保护
-
-以下元素不允许跨页断开：
+### break-inside protection
 
 ```css
-.card,
-.metric,
-.project-item,
-.quote,
-.code-block,
-figure,
-.callout {
+.card, .metric, .project-item, .quote, .code-block, figure, .callout {
   break-inside: avoid;
 }
 ```
 
-### 强制分页
+### Force break
 
 ```css
 .page-break { break-before: page; }
 ```
 
-用于封面与正文之间、章节之间。
-
-### 页边背景
+### Page background extending past margins
 
 ```css
 @page {
   size: A4;
   margin: 20mm 22mm;
-  background: #f5f4ed;   /* 背景延伸到 margin 外，避免打印时留白边 */
+  background: #f5f4ed;   /* extends past margin area, prevents printed white edges */
 }
 ```
 
 ---
 
-## 7. 决策速查
+## 7. Quick decisions
 
-遇到 "该用什么" 的时候查这张表：
+When you're not sure "what should I use":
 
-| 要做什么 | 怎么做 |
+| Need | Use |
 |---|---|
-| 大标题 | serif 500，字号根据层级，line-height 1.10-1.30 |
-| 正文阅读 | sans 400，9.5-10 pt，line-height 1.55 |
-| 强调一个数字 | `color: var(--brand)`，不要粗体 |
-| 分隔两段内容 | 2.5pt 品牌色左侧竖线，或 0.5pt 暖灰虚线 |
-| 引用某人的话 | 左 2pt 品牌色实线 + olive 色 |
-| 展示代码 | ivory 底 + 0.5pt border + 6pt 圆角 + mono 字体 |
-| 区分主次按钮 | Primary 用品牌色填充 + 白字，Secondary 用 warm-sand + charcoal |
-| 在卡片列表里区分某张特殊的 | `border: 0.5pt solid var(--brand)` 或 `border-left: 3pt solid var(--brand)` |
-| 章节开始 | serif <code>500</code> · 15pt · 纯字号层级，比正文高 1.5×，无额外装饰 |
-| 文档封面 | 单页 Display 字号标题 + 作者/日期 right align，中间大量留白 |
-| 一张数据卡 | ivory 底 + 8 pt 圆角 + serif 大数字 + sans 小标签 |
+| Big headline | serif 500, size by level, line-height 1.10-1.30 |
+| Reading body (EN) | serif 400, 9.5-10pt, line-height 1.55 |
+| Reading body (CN) | sans 400, 9.5-10pt, line-height 1.55 |
+| Emphasize a number | `color: var(--brand)`, no bold |
+| Divide two sections | 2.5pt brand left bar, or 0.5pt warm-gray dotted |
+| Quote someone | 2pt brand left border + olive color |
+| Show code | ivory background + 0.5pt border + 6pt radius + mono |
+| Primary vs secondary button | Primary = brand fill + ivory text; Secondary = warm-sand + charcoal |
+| Highlight one card in a list | `border: 0.5pt solid var(--brand)` or `border-left: 3pt solid var(--brand)` |
+| Start a chapter | serif heading + 2.5pt brand left bar |
+| Cover page | Display-size heading + right-aligned author/date + heavy whitespace |
+| Data card | ivory background + 8pt radius + serif big number + sans small label |
 
-不在这张表里的情况 -> 回到原则：**serif 承担权威，sans 承担功能，暖灰承担节奏，油墨蓝承担焦点**。
+Not on this table -> return to first principles: **serif carries authority, sans carries utility, warm gray carries rhythm, ink-blue carries focus**.
 
 ---
 
-## 8. Deck Recipe（长 Deck 规范）
+## 8. Deck Recipe (long deck rules)
 
-长 deck (> 20 slides) 必须遵循以下规则表。条目来自实战经验沉淀，违反前先想清楚原因。
+For decks longer than 20 slides, the following rules apply. Each came from real production work.
 
-| 规则 | 内容 |
-|------|------|
-| R1 | Slide 容器固定 1920×1080，外部 scale 适配。不用 vh/vw 动态单位 |
-| R2 | Slide 标题用 Display (64px)，不用 H1 (30px)。H1 是印刷品的层级 |
-| R4 | Slide letter-spacing = 印刷值 / 2。8px tracking 在屏幕上会"散架" |
-| R5 | Section header 横线下方 gap ≥ 36px（上方 gap 的 2 倍以上） |
-| R6 | Eyebrow 圆点用 `align-items: center`，不用 baseline（圆点是几何图形） |
-| R7 | Slide padding-top 72-80px（印刷品 96-120px，slide 更紧凑） |
-| R8 | 图片用 `object-fit: contain` + flex 居中，不拉伸不裁切 |
-| R9 | 统一用 `.kami-slide-footer` 放置页码和 deck 标识，绝对定位到 bottom |
-| R10 | 代码用伪代码风格：注释行数 > 代码行数，读者看逻辑不看语法 |
+| Rule | Content |
+|------|---------|
+| R1 | Slide container fixed at 1920×1080, scaled externally. No dynamic vh/vw units |
+| R2 | Slide titles use Display (64px), not H1 (30px). H1 is a print hierarchy level |
+| R4 | Slide letter-spacing = print value / 2. 8px tracking "falls apart" on screen |
+| R5 | Section header: gap below rule ≥ 36px (at least 2x the gap above) |
+| R6 | Eyebrow dot uses `align-items: center`, not baseline (dot is geometric, not text) |
+| R7 | Slide padding-top 72-80px (print is 96-120px; slides are more compact) |
+| R8 | Images use `object-fit: contain` + flex centering. Never stretch or crop |
+| R9 | Use `.kami-slide-footer` for page number and deck mark, absolutely positioned to bottom |
+| R10 | Code uses pseudocode style: more comment lines than code lines. Show logic, not syntax |

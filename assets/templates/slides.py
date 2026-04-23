@@ -307,7 +307,7 @@ def main():
         contact="{{邮箱}}　·　{{网站}}")
 
     prs.save('output.pptx')
-    print("✓ Saved output.pptx")
+    print("OK: Saved output.pptx")
 
 
 if __name__ == '__main__':

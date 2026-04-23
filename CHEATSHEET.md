@@ -1,62 +1,62 @@
 # kami · Cheatsheet
 
-一页纸速查。填模板 / 调细节前扫一眼。完整规范在 `references/design.md`。
+One-page quick reference. Scan before filling a template or tweaking a detail. Full spec in `references/design.md`.
 
-## 九条规则
+## Nine invariants
 
-1. 页面背景 `#f5f4ed`（parchment），不用纯白
-2. 强调色只有油墨蓝 `#1B365D`
-3. 所有灰**暖调**（yellow-brown undertone），禁冷蓝灰
-4. 英文: serif 通吃标题和正文。中文: 标题 serif，正文 sans。UI 元素都用 sans
-5. Serif 正文 400，标题 500，不用合成 bold
-6. 行距：标题 1.1-1.3 / 密排 1.4-1.45 / 阅读 1.5-1.55
-7. Tag 背景实色 hex，禁 rgba（WeasyPrint 双层矩形 bug）
-8. 阴影用 ring 或 whisper，不用硬 drop shadow
-9. **任何可能承载中文的 font-family 都必须带 CJK 回退**：页脚 `@page @bottom-center`、`pre`、`code`、SVG label。纯 mono 链（`JetBrains Mono / SF Mono / Consolas / monospace`）会让中文 glyph 缺失，WeasyPrint 渲染成 `?` / `☐`。正确姿势：`"JetBrains Mono", "SF Mono", Consolas, "TsangerJinKai02", "Source Han Serif SC", monospace` —— 英文走 mono、中文自动回退
+1. Page background `#f5f4ed` (parchment), never pure white
+2. Single accent: ink-blue `#1B365D`
+3. All grays **warm-toned** (yellow-brown undertone), no cool blue-gray
+4. English: serif for headlines and body. Chinese: serif headlines, sans body. Sans for UI only
+5. Serif weight locked at 500, no bold
+6. Line-height: headlines 1.1-1.3 / dense 1.4-1.45 / reading 1.5-1.55
+7. Tag backgrounds solid hex, no rgba (WeasyPrint double-rectangle bug)
+8. Depth via ring / whisper shadow, no hard drop shadows
+9. No italic in templates or demos
 
-## 信源与素材
+## Sources and Materials
 
-| 触发 | 先做 |
+| Trigger | Do first |
 |---|---|
-| 最新产品 / 版本 / 发布 / 融资 / 市场数据 | 先查可靠来源 |
-| 公司 / 产品 / 项目品牌文档 | 确认 logo、产品图或 UI 截图 |
-| 关键数字或结果 | 记录来源；无法确认就写量级或标注待补 |
-| 缺素材 | 标注待补或问用户，不用无关配图顶替 |
+| Latest product / version / launch / funding / market data | Check reliable sources first |
+| Company / product / project branded doc | Confirm logo, product image, or UI screenshot |
+| Key number or result | Record the source; if unverifiable, write magnitude or mark missing |
+| Missing material | Mark the gap or ask the user; do not use unrelated imagery |
 
-## 色板
+## Color
 
-| 角色 | Hex | 用途 |
+| Role | Hex | Use |
 |---|---|---|
-| Parchment | `#f5f4ed` | 页面底 |
-| Ivory | `#faf9f5` | 卡片 / 浮起容器 |
-| Warm Sand | `#e8e6dc` | 按钮背景 / 交互面 |
-| Dark Surface | `#30302e` | 深色容器 |
-| Deep Dark | `#141413` | 深色页面底 |
-| **Brand** | **`#1B365D`** | **强调 · CTA · 标题左侧竖线（全文 ≤ 5%）** |
-| Brand Light | `#2D5A8A` | 深底上的链接 |
-| Near Black | `#141413` | 主文字 |
-| Dark Warm | `#3d3d3a` | 次级深色 / 链接 |
-| Charcoal | `#4d4c48` | 按钮文字 / 高密度正文 |
-| Olive | `#5e5d59` | 副文本 · 描述 |
-| Stone | `#87867f` | 三级文字 · 元信息 |
-| Warm Silver | `#b0aea5` | 深底上的浅色文字 |
-| Border Cream | `#e8e5da` | 卡片默认边 |
-| Border Warm | `#e8e6dc` | section 分隔 |
-| Ring Warm | `#d1cfc5` | 按钮 hover / focus 环（不用于卡片） |
+| Parchment | `#f5f4ed` | Page background |
+| Ivory | `#faf9f5` | Card / lifted container |
+| Warm Sand | `#e8e6dc` | Button / interactive surface |
+| Dark Surface | `#30302e` | Dark container |
+| Deep Dark | `#141413` | Dark page background |
+| **Brand** | **`#1B365D`** | **Accent · CTA · title left bar (≤ 5% of surface)** |
+| Ink Light | `#2D5A8A` | Links on dark surfaces |
+| Near Black | `#141413` | Primary text |
+| Dark Warm | `#3d3d3a` | Secondary dark / link |
+| Charcoal | `#4d4c48` | Button text / dense body |
+| Olive | `#5e5d59` | Subtext · descriptions |
+| Stone | `#87867f` | Tertiary · metadata |
+| Warm Silver | `#b0aea5` | Light text on dark surfaces |
+| Border Cream | `#e8e5da` | Default card border |
+| Border Warm | `#e8e6dc` | Section divider |
+| Ring Warm | `#d1cfc5` | Button hover/focus ring (not for cards) |
 
-**rgba -> 实色对照**（底 parchment + 前景油墨蓝）：
+**rgba -> solid** (parchment base + ink-blue):
 
-| 透明度 | 实色 |
+| Alpha | Solid |
 |---|---|
 | 0.08 | `#EEF2F7` |
 | 0.14 | `#E4ECF5` |
-| **0.18** | **`#E4ECF5`** ← 默认 tag |
+| **0.18** | **`#E4ECF5`** ← default tag |
 | 0.22 | `#D0DCE9` |
 | 0.30 | `#D6E1EE` |
 
-## 字号（印刷品 pt）
+## Type (print pt)
 
-| 角色 | 字号 | 字重 | line-height |
+| Role | Size | Weight | Line-height |
 |---|---|---|---|
 | Display | 36-48 | 500 | 1.10 |
 | H1 | 18-22 | 500 | 1.20 |
@@ -64,40 +64,70 @@
 | H3 | 12-13 | 500 | 1.30 |
 | Body Lead | 11 | 400 | 1.55 |
 | Body | 9.5-10 | 400 | 1.55 |
-| Body Dense | 9-9.2 | 400 | 1.40 |
+| Body Dense | 9-9.2 | 400 | 1.42 |
 | Caption | 8.5-9 | 400 | 1.45 |
 | Label | 7.5-8 | 600 | 1.35 |
 | Tiny | 7 | 400 | 1.40 |
 
-屏幕（px）≈ pt × 1.33。
+Screen (px) ≈ pt × 1.33.
 
-## 间距（4pt 基）
+## Font stacks
 
-| 级 | 值 | 用途 |
+English:
+
+```css
+--serif: "Newsreader", "Source Serif 4", "Charter",
+         Georgia, "Times New Roman", serif;
+--sans:  "Inter", -apple-system, BlinkMacSystemFont,
+         "Helvetica Neue", Arial, sans-serif;
+--mono:  "JetBrains Mono", "SF Mono", "Fira Code",
+         Consolas, Monaco, monospace;
+```
+
+Chinese:
+
+```css
+--serif: "TsangerJinKai02", "Source Han Serif SC",
+         "Noto Serif CJK SC", "Songti SC", "STSong",
+         Georgia, serif;
+--sans:  "Inter", "TsangerJinKai02", -apple-system,
+         BlinkMacSystemFont, "Source Han Sans SC",
+         "Noto Sans CJK SC", "PingFang SC",
+         "Microsoft YaHei", Arial, sans-serif;
+--mono:  "JetBrains Mono", "SF Mono", Consolas,
+         "TsangerJinKai02", "Source Han Serif SC",
+         monospace;
+```
+
+Any font-family that may render Chinese must include a CJK fallback, including `@page` footer text, `pre`, `code`, and SVG labels. A pure mono stack can render missing glyph boxes in WeasyPrint.
+
+## Spacing (4pt base)
+
+| Tier | Value | Use |
 |---|---|---|
-| xs | 2-3 pt | 同行内 |
-| sm | 4-5 pt | tag padding |
-| md | 8-10 pt | 组件内部 |
-| lg | 16-20 pt | 组件之间 |
-| xl | 24-32 pt | section 标题 margin |
-| 2xl | 40-60 pt | 大 section 之间 |
-| 3xl | 80-120 pt | 长文档章节之间 |
+| xs | 2-3pt | Inline |
+| sm | 4-5pt | Tag padding |
+| md | 8-10pt | Component interior |
+| lg | 16-20pt | Between components |
+| xl | 24-32pt | Section-title margin |
+| 2xl | 40-60pt | Between major sections |
+| 3xl | 80-120pt | Between chapters |
 
-**页面 margin（A4）**
+**Page margins (A4)**
 
-| 文档 | 上右下左 |
+| Document | T · R · B · L |
 |---|---|
-| Resume | 9 mm 13 mm 9 mm 13 mm |
-| One-Pager | 15 / 18 / 15 / 18 mm |
-| Long Doc | 20 / 22 / 22 / 22 mm |
-| Letter | 25 mm 全周 |
-| Portfolio | 12 / 15 / 12 / 15 mm |
+| Resume | 11 · 13 · 11 · 13 mm |
+| One-Pager | 15 · 18 · 15 · 18 mm |
+| Long Doc | 20 · 22 · 22 · 22 mm |
+| Letter | 25 mm all sides |
+| Portfolio | 12 · 15 · 12 · 15 mm |
 
-## 圆角尺度
+## Radius scale
 
-`4 pt -> 6 pt -> 8 pt（默认）-> 12 pt -> 16 pt -> 24 pt -> 32 pt（hero）`
+`4pt -> 6pt -> 8pt (default) -> 12pt -> 16pt -> 24pt -> 32pt (hero)`
 
-## 常用 CSS 片段
+## Common CSS snippets
 
 ### Card
 
@@ -114,24 +144,25 @@
 }
 ```
 
-### Tag（默认极淡实色）
+### Tag (default lightest solid)
 
 ```css
 .tag {
-  background: #EEF2F7;          /* 0.08 等效 */
+  background: #EEF2F7;            /* 0.08 equivalent */
   color: var(--brand);
-  font-size: 8pt; font-weight: 500;
+  font-size: 8pt; font-weight: 600;
   padding: 1pt 5pt;
   border-radius: 2pt;
-  letter-spacing: 0.05pt;
+  letter-spacing: 0.4pt;
+  text-transform: uppercase;
 }
 ```
 
-### Section Title（品牌色左侧竖线，标准章节样式）
+### Section title (brand left bar is the signature move)
 
 ```css
 .section-title {
-  font-family: serif;
+  font-family: var(--serif);
   font-size: 14pt; font-weight: 500;
   color: var(--near-black);
   margin: 24pt 0 10pt 0;
@@ -141,12 +172,12 @@
 }
 ```
 
-### Metric（数据卡）
+### Metric (data card)
 
 ```css
 .metric { display: flex; align-items: baseline; gap: 6pt; }
 .metric-value {
-  font-family: serif; font-size: 16pt; font-weight: 500;
+  font-family: var(--serif); font-size: 16pt; font-weight: 500;
   color: var(--brand);
   font-variant-numeric: tabular-nums;
 }
@@ -164,65 +195,67 @@
 }
 ```
 
-## 图表组件
+## Diagram components
 
-十二种内置图表，嵌入 long-doc / portfolio 的 `<figure>` 中：
+Twelve built-in diagram types. Extract the `<svg>` block and embed in a `<figure>` in long-doc / portfolio:
 
-| 类型 | 文件 | 用途 |
+| Type | File | Use |
 |---|---|---|
-| Architecture | `assets/diagrams/architecture.html` | 系统组件和连接关系 |
-| Flowchart | `assets/diagrams/flowchart.html` | 决策分支流程 |
-| Quadrant | `assets/diagrams/quadrant.html` | 2×2 象限定位 |
-| Bar Chart | `assets/diagrams/bar-chart.html` | 分类对比（最多 8 组 × 3 系列） |
-| Line Chart | `assets/diagrams/line-chart.html` | 趋势时序（最多 12 点 × 3 线） |
-| Donut Chart | `assets/diagrams/donut-chart.html` | 占比分布（最多 6 段） |
-| State Machine | `assets/diagrams/state-machine.html` | 有限状态 + 有向转换 |
-| Timeline | `assets/diagrams/timeline.html` | 时间轴 + 里程碑 |
-| Swimlane | `assets/diagrams/swimlane.html` | 跨责任方的流程 |
-| Tree | `assets/diagrams/tree.html` | 层级关系 / 树状结构 |
-| Layer Stack | `assets/diagrams/layer-stack.html` | 垂直分层架构 |
-| Venn | `assets/diagrams/venn.html` | 集合交集 / 重叠关系 |
+| Architecture | `assets/diagrams/architecture.html` | System components and connections |
+| Flowchart | `assets/diagrams/flowchart.html` | Decision branches and flows |
+| Quadrant | `assets/diagrams/quadrant.html` | 2×2 positioning |
+| Bar Chart | `assets/diagrams/bar-chart.html` | Category comparison (up to 8 groups × 3 series) |
+| Line Chart | `assets/diagrams/line-chart.html` | Trends over time (up to 12 points × 3 lines) |
+| Donut Chart | `assets/diagrams/donut-chart.html` | Proportional breakdown (up to 6 segments) |
+| State Machine | `assets/diagrams/state-machine.html` | Finite states + directed transitions |
+| Timeline | `assets/diagrams/timeline.html` | Time axis + milestone events |
+| Swimlane | `assets/diagrams/swimlane.html` | Cross-responsibility process flow |
+| Tree | `assets/diagrams/tree.html` | Hierarchical relationships |
+| Layer Stack | `assets/diagrams/layer-stack.html` | Vertically stacked system layers |
+| Venn | `assets/diagrams/venn.html` | Set intersections and overlaps |
 
-用法：从 HTML 文件提取 `<svg>` 块，直接嵌入模板的 `<figure>` 容器。
+Usage: extract the `<svg>` block from the HTML file and paste into the template's `<figure>` container.
 
-**数据图表配色**：主系列 `#1B365D` · 辅系列 `#5e5d59` → `#87867f` → `#b8b7b0` → `#d4d3cd` → `#EEF2F7`。
+**Data chart colors**: primary series `#1B365D` · secondary `#5e5d59` → `#87867f` → `#b8b7b0` → `#d4d3cd` → `#EEF2F7`.
 
-**数据替换**：只改 `<!-- DATA START -->` / `<!-- DATA END -->` 之间的元素，CSS 不动。坐标必须被 4 整除。
+**Editing data**: only modify elements between `<!-- DATA START -->` / `<!-- DATA END -->`, leave CSS untouched. All coordinates must be divisible by 4.
 
-## Dark Section
+## Dark section
 
-明暗交替节奏：在容器上加 `.sd-alt`。
+Alternate light/dark rhythm: add `.sd-alt` to any section container.
 
-- 背景切 `--deep-dark`（`#141413`）
-- 正文切 `--warm-silver`（`#b0aea5`）
-- 标题切 `--ivory`
-- 适用：长文档 / portfolio 的 section 级明暗切换
-- 限制：仅 showcase 页面使用，打印模板不用 dark section
+- Background switches to `--deep-dark` (`#141413`)
+- Body text switches to `--warm-silver` (`#b0aea5`)
+- Headings switch to `--ivory`
+- Appropriate for: section-level light/dark alternation in long-doc / portfolio
+- Restriction: showcase pages only, never in print templates
 
-## --verify 验证内容
+## Verification checks
 
-`python3 scripts/build.py --verify <file>` 依次检查：
+`python3 scripts/build.py --verify [target]` checks source templates and slides in sequence:
 
-1. 源文件存在性
-2. `{{...}}` 占位符扫描（未替换内容报错）
-3. WeasyPrint 渲染 PDF
-4. 页数检查（超 max_pages 报溢出）
-5. 字体嵌入检查（中文期望 TsangerJinKai02，英文期望 Newsreader / Inter，缺失则警告 fallback）
+1. Source file exists
+2. WeasyPrint render to PDF for HTML / diagram targets
+3. Page count check for strict targets
+4. Font embedding check
+5. PPTX generation for `slides` / `slides-en`
 
-## 决策速查
+Source templates intentionally keep `{{...}}` fields. Run `python3 scripts/build.py --check-placeholders path/to/filled.html` on completed documents.
 
-| 想做 | 怎么做 |
+## Quick decisions
+
+| Need | Use |
 |---|---|
-| 大标题 | serif 500，line-height 1.10-1.30 |
-| 正文阅读（英文） | serif 400，9.5-10pt，1.55 |
-| 正文阅读（中文） | sans 400，9.5-10pt，1.55 |
-| 强调数字 | `color: var(--brand)`，不加粗 |
-| 分两段 | 2.5pt 品牌色左侧竖线，或 0.5pt 暖灰虚线 |
-| 引用 | 左 2pt 品牌实线 + olive 色 |
-| 代码 | ivory 底 + 0.5pt border + 6pt 圆角 + mono |
-| 主按钮 | 品牌色填充 + ivory 字 |
-| 次按钮 | warm-sand 底 + charcoal 字 |
-| 章节开始 | serif 标题 + 左侧 2.5pt 品牌色竖线 |
-| 封面 | 单页 Display 标题 + 右对齐作者/日期 + 大量留白 |
+| Headline | serif 500, line-height 1.10-1.30 |
+| Reading body (EN) | serif 400, 9.5-10pt, 1.55 |
+| Reading body (CN) | sans 400, 9.5-10pt, 1.55 |
+| Emphasize a number | `color: var(--brand)`, no bold |
+| Divide two sections | 2.5pt brand left bar, or 0.5pt warm dotted |
+| Quote | 2pt brand left border + olive color |
+| Code | ivory bg + 0.5pt border + 6pt radius + mono |
+| Primary button | brand fill + ivory text |
+| Secondary button | warm-sand + charcoal |
+| Chapter start | serif heading + 2.5pt brand left bar |
+| Cover | Display heading + right-aligned author/date + heavy whitespace |
 
-不在表里 -> 回原则：**serif 承担权威，sans 承担功能，暖灰承担节奏，油墨蓝承担焦点**。
+Not on the table -> first principles: **serif carries authority, sans carries utility, warm gray carries rhythm, ink-blue carries focus**.

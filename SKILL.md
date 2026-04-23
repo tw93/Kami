@@ -1,6 +1,6 @@
 ---
 name: kami
-description: 'Typeset any professional document: resumes, one-pagers, white papers, letters, portfolios, slide decks. Warm parchment design system with ink-blue accent, serif-led hierarchy, and tight editorial spacing. Full bilingual support: Chinese docs use TsangerJinKai02 + Source Han, English docs use Newsreader + Inter. Triggers on "做 PDF / 排版 / 生成报告 / 一页纸 / 白皮书 / 作品集 / 正式信件 / 简历 / PPT / slides / 高质量文档 / 好看的排版", or "build me a resume / make a one-pager / design a slide deck / turn this into a PDF / make this presentable / polish typography", and when raw content is handed over to be "typeset, designed, made presentable".'
+description: 'Typeset any professional document: resumes, one-pagers, white papers, letters, portfolios, slide decks. Warm parchment design system with ink-blue accent, serif-led hierarchy, and tight editorial spacing. Bilingual document output: Chinese docs use TsangerJinKai02 + Source Han, English docs use Newsreader + Inter, with one shared English reference set. Triggers on "做 PDF / 排版 / 生成报告 / 一页纸 / 白皮书 / 作品集 / 正式信件 / 简历 / PPT / slides / 高质量文档 / 好看的排版", or "build me a resume / make a one-pager / design a slide deck / turn this into a PDF / make this presentable / polish typography", and when raw content is handed over to be "typeset, designed, made presentable".'
 ---
 
 # kami · 紙
@@ -13,14 +13,16 @@ Part of `Kaku · Waza · Kami` - Kaku writes code, Waza drills habits, **Kami de
 
 ## Step 1 · Decide the language
 
-**Match the user's language**. If they write in Chinese -> use the Chinese templates (`.html`, Chinese references). If they write in English -> use the English templates (`-en.html`, `.en.md` references).
+**Match the user's language**. If they write in Chinese -> use the Chinese templates (`.html` / `slides.py`). If they write in English -> use the English templates (`-en.html` / `slides-en.py`). The reference docs are shared English specs for both output languages.
 
 When ambiguous (e.g. a one-word command like "resume"), ask a one-liner rather than guess.
 
-| User language | Templates | References | Cheatsheet |
-|---|---|---|---|
-| Chinese (primary) | `*.html` / `slides.py` | `references/*.md` | `CHEATSHEET.md` |
-| English | `*-en.html` / `slides-en.py` | `references/*.en.md` | `CHEATSHEET.en.md` |
+| User language | HTML templates | Slides template |
+|---|---|---|
+| Chinese (primary) | `*.html` | `slides.py` |
+| English | `*-en.html` | `slides-en.py` |
+
+Always use `CHEATSHEET.md` and `references/*.md` for design, writing, production, and diagram guidance.
 
 ## Step 2 · Pick the document type
 
@@ -56,7 +58,7 @@ When the user asks for **a diagram inside** a long-doc / portfolio / slide (not 
 | "分层图 / layer stack / 分层架构 / OSI / stack" | Layer Stack | `assets/diagrams/layer-stack.html` |
 | "维恩图 / venn / 交集 / overlap / 集合关系" | Venn | `assets/diagrams/venn.html` |
 
-Read `references/diagrams.md` / `diagrams.en.md` before drawing - it has the selection guide, kami token map, and the AI-slop anti-pattern table. Extract the `<svg>` block from the template and drop it into a `<figure>` inside long-doc / portfolio.
+Read `references/diagrams.md` before drawing - it has the selection guide, kami token map, and the AI-slop anti-pattern table. Extract the `<svg>` block from the template and drop it into a `<figure>` inside long-doc / portfolio.
 
 Before drawing, always ask: **would a well-written paragraph teach the reader less than this diagram?** If no, don't draw.
 
@@ -129,16 +131,16 @@ Pick the tier that matches the task. Default to the lowest tier that covers the 
 You can always escalate mid-task if the work turns out to need more than the initial tier.
 
 The full spec files for reference:
-- Design: `references/design.md` (CN) / `references/design.en.md` (EN)
-- Writing: `references/writing.md` / `writing.en.md`
-- Production: `references/production.md` / `production.en.md`
-- Diagrams: `references/diagrams.md` / `diagrams.en.md`
+- Design: `references/design.md`
+- Writing: `references/writing.md`
+- Production: `references/production.md`
+- Diagrams: `references/diagrams.md`
 
 ## Step 4 · Fill content into the template
 
 - Copy the template into your working directory; don't write HTML from scratch
 - **CSS stays untouched**, only edit the body
-- Content follows `writing.md` / `writing.en.md`: data over adjectives, distinctive phrasing over industry clichés
+- Content follows `writing.md`: data over adjectives, distinctive phrasing over industry clichés
 
 ### Fill PDF metadata (WeasyPrint reads these into the PDF)
 
@@ -156,12 +158,16 @@ Every template has meta placeholders in `<head>`. Fill all four before building:
 ## Step 5 · Build & verify
 
 ```bash
-python3 scripts/build.py --verify           # build all + page count + font check + placeholder check
+python3 scripts/build.py --verify           # build all templates + page count + font check + slides
 python3 scripts/build.py --verify resume-en # single target full verification
+python3 scripts/build.py --verify slides    # single slide deck verification
+python3 scripts/build.py --check-placeholders path/to/filled.html
 python3 scripts/build.py --check            # CSS rule violations only (fast, no build)
 ```
 
-Visual anomalies (tag double rectangle, font fallback, page break issues) -> `production.md` / `production.en.md` Part 4.
+Source templates intentionally keep `{{...}}` fields. Run placeholder checks on completed documents, not on the template library.
+
+Visual anomalies (tag double rectangle, font fallback, page break issues) -> `production.md` Part 4.
 
 ## Fonts
 

@@ -276,7 +276,7 @@ def main():
         contact="{{EMAIL}} · {{WEBSITE}}")
 
     prs.save('output.pptx')
-    print("✓ Saved output.pptx")
+    print("OK: Saved output.pptx")
 
 
 if __name__ == '__main__':

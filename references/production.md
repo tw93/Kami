@@ -1,79 +1,77 @@
-# Production（生成 · 验证 · 排错）
+# Production (Build · Verify · Troubleshoot)
 
-这份文档覆盖 kami 的工程执行：从 HTML/Python 模板到 PDF/PPTX 成品的完整流程。分四部分：**HTML -> PDF** · **Python -> PPTX** · **验证与调试** · **15 条踩坑**。
+The engineering runbook for kami: from HTML / Python templates to PDF / PPTX deliverables. Four parts: **HTML -> PDF** · **Python -> PPTX** · **Verify & Debug** · **15 known pitfalls**.
 
 ---
 
-## Part 1 · HTML -> PDF（WeasyPrint）
+## Part 1 · HTML -> PDF (WeasyPrint)
 
-### 安装
+### Install
 
 ```bash
 pip install weasyprint pypdf --break-system-packages --quiet
 ```
 
-Linux 初次使用可能需要：
+Linux first-time:
 ```bash
 apt install -y libpango-1.0-0 libpangoft2-1.0-0 fonts-noto-cjk
 ```
 
-### 生成
+### Generate
 
 ```python
 from weasyprint import HTML
 HTML('doc.html').write_pdf('output.pdf')
 ```
 
-**CWD 很重要**：HTML 里 `@font-face { src: url("xxx.ttf") }` 使用相对路径，必须在**字体文件所在目录**执行。
+**CWD matters**: `@font-face { src: url("xxx.ttf") }` uses relative paths, so run from the directory containing the font file.
 
 ```bash
 cd /path/to/html-and-font
 python3 -c "from weasyprint import HTML; HTML('doc.html').write_pdf('out.pdf')"
 ```
 
-### 字体处理
+### Fonts
 
-**最稳的方式**：字体文件和 HTML 同目录，`@font-face` 用相对路径。
+**Most stable setup**: font file alongside HTML, `@font-face` with relative path.
 
 ```html
 <style>
 @font-face {
-  font-family: "TsangerJinKai02";
-  src: url("TsangerJinKai02-W04.ttf");
-  font-weight: 400;
+  font-family: "Newsreader";
+  src: url("Newsreader-VariableFont.ttf");
 }
-@font-face {
-  font-family: "TsangerJinKai02";
-  src: url("TsangerJinKai02-W05.ttf");
-  font-weight: 500;
-}
-body { font-family: "TsangerJinKai02", serif; font-weight: 400; }
-h1, h2, h3 { font-weight: 500; }
+body { font-family: "Newsreader", serif; }
 </style>
 ```
 
-**商业字体不可得时**，fallback 链已内嵌在所有模板中：
+**No commercial font available**: fallback chains are embedded in every template.
+
 ```css
-font-family: "TsangerJinKai02",
-             "Source Han Serif SC", "Noto Serif CJK SC",
-             "Songti SC", Georgia, serif;
+/* English */
+font-family: "Newsreader", "Source Serif 4", "Charter",
+             Georgia, serif;
+
+/* Chinese */
+font-family: "TsangerJinKai02", "Source Han Serif SC",
+             "Noto Serif CJK SC", "Songti SC", Georgia, serif;
 ```
 
-**字体 fallback 影响页数**：换字体必须重新跑页数验证。溢出时优先调 `font-size`，再调 margin，最后砍内容。
+**Font fallback affects page count**. Any font swap requires re-running the page-count check. If it overflows: lower `font-size` first, then tighten margins, then cut content.
 
-**Claude Desktop skill ZIP 不打包大字体**：`TsangerJinKai02-W04.ttf` 和 `TsangerJinKai02-W05.ttf` 单文件接近 19MB，会让 Claude.ai / Desktop 的 skill 上传或执行超时。发布 ZIP 必须用 `scripts/package-skill.sh` 生成，它会排除这两个 TTF。模板仍保留本地优先、jsDelivr 兜底的 `@font-face` 路径。
+**Claude Desktop skill ZIPs do not bundle large Chinese font files**: `TsangerJinKai02-W04.ttf` and `TsangerJinKai02-W05.ttf` are close to 19MB each and can make Claude.ai / Desktop skill upload or execution time out. Release ZIPs must be generated with `scripts/package-skill.sh`, which excludes both TTF files. Templates still keep local-first and jsDelivr fallback `@font-face` paths.
 
-### 页面规格
+### Page spec
 
 ```css
 @page {
-  size: A4;                  /* 或 210mm 297mm / A4 landscape / 13in 10in */
+  size: A4;                     /* or 210mm 297mm / A4 landscape / 13in 10in */
   margin: 20mm 22mm;
-  background: #f5f4ed;       /* 背景延伸到 margin 外，避免打印白边 */
+  background: #f5f4ed;          /* extend past margins to avoid white printed edge */
 }
 ```
 
-### 页眉页脚
+### Headers & footers
 
 ```css
 @page {
@@ -82,7 +80,7 @@ font-family: "TsangerJinKai02",
     font-family: serif; font-size: 9pt; color: #87867f;
   }
   @bottom-center {
-    content: "{{文档名}} · {{作者}}";
+    content: "{{DOC_NAME}} · {{AUTHOR}}";
     font-size: 8.5pt; color: #87867f;
   }
 }
@@ -93,66 +91,66 @@ font-family: "TsangerJinKai02",
 }
 ```
 
-### WeasyPrint 支持矩阵
+### WeasyPrint support matrix
 
-| 支持良好 | 支持有限 | 不支持 |
+| Solid | Partial | Unsupported |
 |---|---|---|
-| CSS Grid / Flexbox | CSS filter / transform（部分） | JavaScript |
-| `@page` 规则 | inline SVG（部分属性） | `position: sticky` |
-| `@font-face` | gradient（性能差，少用） | CSS 动画 / transition |
+| CSS Grid / Flexbox | CSS filter / transform (partial) | JavaScript |
+| `@page` rules | inline SVG (some attrs) | `position: sticky` |
+| `@font-face` | gradients (slow, use sparingly) | CSS animations / transitions |
 | `break-before` / `break-inside: avoid` | | |
-| CSS 变量 `var(--name)` | | |
-| 伪元素 `::before` `::after` | | |
+| CSS variables `var(--name)` | | |
+| `::before` / `::after` | | |
 
-### PDF 元数据
+### PDF metadata
 
-WeasyPrint 从 HTML `<head>` 的标准 meta 标签自动写入 PDF 元数据（Title / Author / Subject / Keywords）。所有模板已预置占位符：
+WeasyPrint reads standard meta tags in `<head>` and writes them into the PDF (Title / Author / Subject / Keywords). All templates have pre-built placeholders:
 
 ```html
 <head>
-  <title>{{文档标题}}</title>
-  <meta name="author"      content="{{作者}}">
-  <meta name="description" content="{{摘要}}">
-  <meta name="keywords"    content="{{关键词}}">
+  <title>{{DOC_TITLE}}</title>
+  <meta name="author"      content="{{AUTHOR}}">
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta name="keywords"    content="{{KEYWORDS}}">
   <meta name="generator"   content="Kami">
 </head>
 ```
 
-**填写规则**（Claude 根据内容自动推断，不问用户）：
+**Auto-inference rules** (Claude fills these from the document content without asking):
 
-| 字段 | 推断来源 |
+| Field | Source |
 |---|---|
-| `<title>` | H1 标题或 `.header .title` 文本 |
-| `author` | 简历/信件/作品集：文档中的人名；其他：固定值 `"Kami"` |
-| `description` | 前两段提取一句话概要，≤150 字 |
-| `keywords` | 标题 + section headings 提取 3-5 个关键词，逗号分隔 |
-| `generator` | 固定 `"Kami"`，模板已写死，不改 |
+| `<title>` | H1 heading or `.header .title` text |
+| `author` | Resume / letter / portfolio: person's name from the document; everything else: `"Kami"` |
+| `description` | One sentence extracted from the first 2 paragraphs, ≤150 characters |
+| `keywords` | 3-5 keywords from title + section headings, comma-separated |
+| `generator` | Fixed `"Kami"`, already set in template, do not change |
 
-**验证**：
+**Verify**:
 
 ```bash
-pdfinfo assets/examples/one-pager.pdf   # 查看 Title / Author / Subject
+pdfinfo assets/examples/one-pager-en.pdf   # shows Title / Author / Subject
 ```
 
 ---
 
-## Part 2 · Python -> PPTX（python-pptx）
+## Part 2 · Python -> PPTX (python-pptx)
 
-PPT 审美和 PDF **共享同一套设计语言**，但因为载体是屏幕、16:9、一屏一信息，字号加大、版式固化。
+PPT shares the same design language but the medium (screen, 16:9, one-idea-per-slide) changes the details: fonts larger, layouts more rigid.
 
-### 安装
+### Install
 
 ```bash
 pip install python-pptx --break-system-packages --quiet
 ```
 
-### 尺寸
+### Dimensions
 
-- **16:9 宽屏**（推荐）：13.33 × 7.5 inch
-- **4:3 传统**：10 × 7.5 inch
-- **安全区**：四周 0.5 inch 不放内容，底部额外 0.3 inch 给页码
+- **16:9 widescreen** (preferred): 13.33 × 7.5 inch
+- **4:3 traditional**: 10 × 7.5 inch
+- **Safe zone**: 0.5 inch margin on all sides (projector crop), plus 0.3 inch at bottom for page number
 
-### 色板（1:1 对应 design.md）
+### Palette (1:1 with design.md)
 
 ```python
 from pptx.dml.color import RGBColor
@@ -168,34 +166,36 @@ BORDER_WARM = RGBColor(0xe8, 0xe6, 0xdc)
 TAG_BG      = RGBColor(0xee, 0xf2, 0xf7)
 ```
 
-### 字号（屏幕投影优先易读性，比 PDF 大）
+### Type (bigger than print, optimized for projection)
 
-| 角色 | 字号 | 字体 |
+| Role | Size | Font |
 |---|---|---|
-| Title | 44pt | Serif 500 |
+| Title | 48pt | Serif 500 |
 | Subtitle | 24pt | Sans 400 |
-| H2 章节 | 32pt | Serif 500 |
-| H3 小标题 | 20pt | Serif 500 |
+| H2 chapter | 32pt | Serif 500 |
+| H3 subtitle | 20pt | Serif 500 |
 | Body | 18pt | Sans 400 |
 | Caption | 14pt | Sans 400 |
 | Footer | 12pt | Sans 400 |
 
-中文字体栈：
-- Serif：`TsangerJinKai02` -> `Source Han Serif SC` -> `宋体`
-- Sans：`Source Han Sans SC` -> `PingFang SC` -> `微软雅黑`
+English stack on PowerPoint:
+- Serif: `Newsreader` -> `Charter` -> `Georgia`
+- Sans: `Inter` -> `Helvetica Neue` -> `Arial`
 
-### 8 种标准版式
+### Eight standard layouts
 
-1. **封面页**：Parchment 底，正中大标题 + 品牌色短线 + 副标题/作者/日期
-2. **目录页**：Parchment 底，左对齐 `01　章节标题`（数字 serif 品牌色）
-3. **章节首页**：油墨蓝 `#1B365D` 满屏，居中白色大字--deck 里唯一的彩色满屏
-4. **内容页**：小标题（sans stone）+ 核心论点（serif near-black）+ 品牌色短线 + 正文（sans dark-warm）
-5. **数据页**：顶部 takeaway + 下方 2-4 张 metric 卡（大数字 serif 品牌色 + 小标签 sans olive）
-6. **对比页**：左右两栏 + 中间 0.5pt 暖灰竖线
-7. **引用页**：Parchment 底极简，居中大号 serif 引文 + `- 来源`
-8. **结束页**：Parchment 底，居中"谢谢 / Q&A / 联系方式"
+1. **Cover**: parchment background, centered display title + brand-colored short line + subtitle / author / date
+2. **Contents**: parchment, left-aligned `01  Chapter title` (number serif brand-colored)
+3. **Chapter divider**: full brand ink-blue background, centered white title - the **only** fully chromatic slide in the deck
+4. **Content slide**: eyebrow (sans stone) + core claim (serif near-black) + brand line + body (sans dark-warm)
+5. **Data slide**: top takeaway + 2-4 metric cards (big number serif brand + small label sans olive)
+6. **Comparison**: two columns with a 0.5pt warm-gray divider
+7. **Quote**: parchment, minimal, centered serif quote + `- Source`
+8. **Closing**: parchment, centered "Thank you / Q&A / Contact"
 
-### 脚本骨架
+### Script skeleton
+
+Full working example in `assets/templates/slides-en.py`. Key bits:
 
 ```python
 from pptx import Presentation
@@ -205,242 +205,182 @@ from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import PP_ALIGN
 
 PARCHMENT = RGBColor(0xf5, 0xf4, 0xed)
-BRAND     = RGBColor(0x1B, 0x36, 0x5D)
-# ... 其他色见上表
-SERIF = "Source Han Serif SC"
-SANS  = "Source Han Sans SC"
+BRAND     = RGBColor(0xc9, 0x64, 0x42)
+SERIF = "Newsreader"
+SANS  = "Inter"
 
 prs = Presentation()
 prs.slide_width  = Inches(13.33)
 prs.slide_height = Inches(7.5)
 
 def blank_slide():
-    """空白页，parchment 底"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    bg = slide.shapes.add_shape(
-        MSO_SHAPE.RECTANGLE, 0, 0, prs.slide_width, prs.slide_height)
+    bg = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE,
+                                 0, 0, prs.slide_width, prs.slide_height)
     bg.fill.solid(); bg.fill.fore_color.rgb = PARCHMENT
     bg.line.fill.background(); bg.shadow.inherit = False
     return slide
-
-def add_text(slide, text, left, top, width, height,
-             font=SANS, size=18, bold=False, italic=False,
-             color=RGBColor(0x14,0x14,0x13), align=PP_ALIGN.LEFT):
-    tb = slide.shapes.add_textbox(left, top, width, height)
-    tf = tb.text_frame; tf.word_wrap = True
-    tf.margin_left = tf.margin_right = 0
-    tf.margin_top = tf.margin_bottom = 0
-    p = tf.paragraphs[0]; p.alignment = align
-    run = p.add_run(); run.text = text
-    run.font.name = font; run.font.size = Pt(size)
-    run.font.bold = bold; run.font.italic = italic
-    run.font.color.rgb = color
-    return tb
-
-def add_line(slide, left, top, width, color=BRAND, weight_pt=1):
-    line = slide.shapes.add_connector(1, left, top, left + width, top)
-    line.line.color.rgb = color; line.line.width = Pt(weight_pt)
-    return line
-
-# 封面
-s = blank_slide()
-add_text(s, "文档标题", Inches(1.5), Inches(3), Inches(10.33), Inches(1),
-         font=SERIF, size=44)
-add_line(s, Inches(1.5), Inches(4), Inches(2))
-add_text(s, "副标题 · 副说明", Inches(1.5), Inches(4.2), Inches(10.33), Inches(0.6),
-         font=SANS, size=18, color=RGBColor(0x5e,0x5d,0x59))
-
-prs.save('output.pptx')
 ```
 
-完整版见 `assets/templates/slides.py`。
+### PPT notes
 
-### PPT 注意事项
-
-1. **一页一个核心信息**：超过 3 段文字就拆分
-2. **不用自带 Template**：PowerPoint default 是冷蓝灰，和 parchment 冲突
-3. **动画**：不加。Parchment 风格是印刷品，不是 SaaS 演示。最多允许 fade
-4. **导出 PDF**：分享时推荐导出 PDF，跨机器一致性比 .pptx 高
- - macOS：Keynote 打开 -> Export to PDF
- - Linux：`libreoffice --headless --convert-to pdf output.pptx`
+1. **One idea per slide** - if it runs over three lines, split it
+2. **No default PowerPoint template** - it's cool-blue-gray, clashes with parchment
+3. **Animations**: don't. Parchment is a print aesthetic, not a SaaS demo. At most `fade`
+4. **Export to PDF** for sharing - cross-machine consistency is better than .pptx
+ - macOS: Keynote -> Export to PDF
+ - Linux: `libreoffice --headless --convert-to pdf output.pptx`
 
 ---
 
-## Part 3 · 验证与调试
+## Part 3 · Verify & Debug
 
-### 必跑三步（每次改动）
+### The three-step loop (mandatory after every change)
 
 ```bash
-# 1. 生成
+# 1. Generate
 python3 -c "from weasyprint import HTML; HTML('doc.html').write_pdf('out.pdf')"
 
-# 2. 页数
+# 2. Page count
 python3 -c "from pypdf import PdfReader; print(len(PdfReader('out.pdf').pages))"
 
-# 3. 视觉检查（怀疑视觉问题时）
+# 3. Visual inspect (when in doubt)
 pdftoppm -png -r 300 out.pdf inspect
 ```
 
-**不验证不算改完**。
+**Not verified = not done.**
 
-### 字体是否加载成功
+### Did the font actually load?
 
 ```bash
 pdffonts output.pdf
 ```
 
-输出里如果看到 `DejaVuSerif` / `Bitstream Vera`，说明指定字体没生效，走到了系统兜底。正确应该看到 `TsangerJinKai02` 或 `Source Han Serif SC`。
+If the output shows `DejaVuSerif` / `Bitstream Vera` - your specified font didn't load, fell through to system ultimate fallback. Expected: `Newsreader`, `Charter`, or `TsangerJinKai02`.
 
-### 一键生成 + 验证脚本
+### One-step build + validate
 
-```python
-#!/usr/bin/env python3
-"""生成并验证 PDF"""
-import sys
-from weasyprint import HTML
-from pypdf import PdfReader
-
-html_file = sys.argv[1] if len(sys.argv) > 1 else 'doc.html'
-pdf_file  = sys.argv[2] if len(sys.argv) > 2 else 'output.pdf'
-max_pages = int(sys.argv[3]) if len(sys.argv) > 3 else 0
-
-HTML(html_file).write_pdf(pdf_file)
-n = len(PdfReader(pdf_file).pages)
-print(f'✓ {pdf_file}, {n} pages')
-
-if max_pages and n > max_pages:
-    print(f'✗ Exceeded limit ({n} > {max_pages})')
-    sys.exit(1)
-```
-
-项目脚本 `scripts/build.py` 是这段的产品化版本。
-
-### 高分辨率视觉检查
+Project script `scripts/build.py` is the productized version of the three-step loop:
 
 ```bash
-pdftoppm -png -r 160 output.pdf preview         # 标准
-pdftoppm -png -r 300 output.pdf preview         # 排查细节 bug
-pdftoppm -png -r 400 output.pdf preview         # 极致细节（tag 双层等）
+python3 scripts/build.py               # all 12 examples
+python3 scripts/build.py resume-en     # one target + page count + fonts
+python3 scripts/build.py --check       # scan for CSS rule violations
 ```
 
-### 生成多版本
+### Hi-res visual inspection
 
-```python
-for variant, vars_css in [
-    ('light', '--bg: #f5f4ed;'),
-    ('dark',  '--bg: #141413;'),
-]:
-    custom = base.replace('{{VARS}}', f':root {{ {vars_css} }}')
-    HTML(string=custom).write_pdf(f'out-{variant}.pdf')
+```bash
+pdftoppm -png -r 160 output.pdf preview      # standard
+pdftoppm -png -r 300 output.pdf preview      # detail bugs
+pdftoppm -png -r 400 output.pdf preview      # extreme detail (tag double-rect check)
 ```
 
-### 交付前 5 维自查
+### 5-point pre-ship review
 
-生成成功不等于可以交付。交付前快速扫一遍：
+A successful render is not enough. Scan these before delivery:
 
-| 维度 | 通过标准 |
+| Dimension | Pass standard |
 |---|---|
-| 事实准确性 | 数字、日期、版本、融资、规格、市场事实有来源；不确定处用量级或标注待补 |
-| 内容结构 | 标题串起来能读成摘要；每段第一句有明确论点；没有无意义铺垫 |
-| 素材完整度 | 品牌文档有 logo、产品图或 UI 截图；缺失素材明确标注待补 |
-| 排印细节 | 字体加载正确，行距在规范内，强调只给数字或独特表达，tag 背景是实色 |
-| PDF 可交付性 | 页数符合约束，无未替换占位符，截图检查没有溢出、重叠、断页错误 |
+| Fact accuracy | Numbers, dates, versions, funding, specs, and market facts have sources; uncertainty is written as magnitude or marked as missing |
+| Content structure | Headlines read as a summary; each paragraph opens with a claim; no ceremonial filler |
+| Material coverage | Branded docs include logo, product image, or UI screenshot coverage; missing materials are clearly marked |
+| Typographic detail | Fonts load correctly, line-height stays in spec, emphasis only marks numbers or distinctive phrases, tag backgrounds are solid hex |
+| PDF readiness | Page count fits, placeholders are replaced, visual inspection shows no overflow, overlap, or broken page breaks |
 
-任一项不通过，先修正再交付。
+If any row fails, fix it before delivery.
 
 ---
 
-## Part 4 · 15 条踩坑
+## Part 4 · 15 known pitfalls
 
-每一条都是真实踩出来的。遇到视觉异常立刻来这里查。
+Every entry below came from a real failure. Check here first when something looks wrong.
 
-### 1. Tag / Badge 双层矩形 bug（最坑）
+### 1. Tag / Badge double-rectangle bug (the worst)
 
-**症状**：PDF 放大看背景色 tag，出现内外两层矩形。手机预览器尤其明显。
+**Symptom**: PDFs show two concentric rectangles on tag backgrounds at zoom - an outer softer one and an inner tighter one. Especially visible on mobile PDF viewers.
 
-**根因**：WeasyPrint 渲染 `rgba(..., 0.xx)` 时，**padding 区域**和**字形像素区域**分别做透明度计算，字形 anti-alias 让周围透明度叠加更深，形成视觉第二层。
+**Root cause**: WeasyPrint renders `rgba(..., 0.xx)` by compositing the **padding area** and the **glyph pixel area** independently. Glyph anti-aliasing stacks alpha differently, creating the second visible edge.
 
-**解法**：Tag 背景必须用实色 hex，禁用 rgba。
+**Fix**: Tag backgrounds must be solid hex. No rgba.
 
 ```css
-/* ❌ */ .tag { background: rgba(201, 100, 66, 0.18); }
-/* ✅ */ .tag { background: #E4ECF5; }
+/* avoid */ .tag { background: rgba(201, 100, 66, 0.18); }
+/* use   */ .tag { background: #E4ECF5; }
 ```
 
-**rgba -> 实色对照表**（底 parchment `#f5f4ed` + 前景油墨蓝 `#1B365D`）：
+**rgba -> solid conversion** (parchment `#f5f4ed` base + ink-blue `#1B365D`):
 
-| rgba 透明度 | 等效实色 hex |
+| rgba alpha | Solid hex |
 |---|---|
 | 0.08 | `#EEF2F7` |
 | 0.14 | `#E4ECF5` |
-| **0.18** | **`#E4ECF5`** ← 默认 |
+| **0.18** | **`#E4ECF5`** ← default |
 | 0.22 | `#D0DCE9` |
 | 0.30 | `#D6E1EE` |
 
-公式：`实色通道 = 底 + (前景 - 底) × 透明度`。其他底色要重算。
+Formula: `solid_channel = base + (foreground - base) × alpha`. Different base colors (e.g. ivory) need re-computing.
 
-**如需"呼吸感"效果**：用 CSS linear-gradient，整张 tag 栅格化为位图，绕过逐像素合成：
+**Want "breathing" texture?** Use `linear-gradient` - the whole tag rasterizes as one bitmap, no alpha compositing:
 
 ```css
-.tag {
-  background: linear-gradient(to right, #D6E1EE, #E4ECF5 70%, #EEF2F7);
-}
+.tag { background: linear-gradient(to right, #D6E1EE, #E4ECF5 70%, #EEF2F7); }
 ```
 
-**美学教训**：gradient 工程上可行，审美上往往**用力过猛**。优先级：极淡实色 `#EEF2F7` > 稍浓实色 `#E4ECF5` > 慎用 gradient。读者第一眼落在背景形状而非文字，就说明过度了。
+**Aesthetic warning**: gradients work engineering-wise but usually oversell the tag. Priority order: lightest solid (`#EEF2F7`) > standard solid (`#E4ECF5`) > gradient (rarely). If the reader's eye lands on the tag background shape before the text inside - you went too far.
 
-### 2. 薄边框 + 圆角 = 双圈 bug
+### 2. Thin border + radius = double circle
 
-**症状**：`border: 0.4pt solid ...` + `border-radius: 2pt` 放大后两条平行线。
+**Symptom**: `border: 0.4pt solid ...` + `border-radius: 2pt` shows two parallel arcs on zoom.
 
-**根因**：WeasyPrint 对 < 1pt border + 圆角，分别 stroke 内外 path，薄宽度没法重合。
+**Root cause**: WeasyPrint strokes border inner and outer paths separately when `< 1pt` + rounded corners - at thin widths they can't overlap.
 
-**解法**三选一：
-1. 改用背景填充（首选，设计语言一致）
-2. border ≥ 1pt
-3. 去掉 border-radius
+**Fix (pick one)**:
+1. Use background fill instead (preferred, design-consistent)
+2. Border ≥ 1pt
+3. Drop `border-radius`
 
-### 3. 2 页硬约束溢出
+### 3. 2-page hard-limit overflow
 
-适用于 resume、one-pager 等页数受限的文档。
+For resume, one-pager, and other length-capped docs.
 
-**常见诱因**：字体 fallback、新增内容、字号意外增大、line-height 从 1.4 -> 1.6。
+**Common causes**: font fallback, content added, font-size bumped by accident, line-height pushed from 1.4 to 1.6.
 
-**诊断**：`pdffonts output.pdf` 看实际加载字体。
+**Diagnose**: `pdffonts output.pdf` to verify what actually loaded.
 
-**解法（按优先级）**：
-1. 删冗余副词（"深入研究" -> "研究"）
-2. 合并同义数据
-3. 砍次要项
-4. 减小 section 间距（慎用）
-5. 最后手段：字号降 0.1-0.2pt
+**Fix (priority)**:
+1. Cut redundant qualifiers ("deeply researched" -> "researched")
+2. Merge related data points in the same section
+3. Drop non-essential items whole (not piecemeal)
+4. Reduce section spacing (use sparingly - affects global rhythm)
+5. Last resort: shrink font by 0.1-0.2pt
 
-**不要**：砍掉封面/教育/Timeline 这类结构性内容，也不要删高亮，简历失去强调就没有生气了。
+**Don't**: cut cover / education / timeline structural blocks; cut emphasis (resume becomes flat).
 
-### 4. 字体 fallback 导致页数不一致
+### 4. Font fallback causes page count inconsistency
 
-**症状**：本机 2 页，CI/服务器 4 页。
+**Symptom**: 2 pages locally, 4 pages in CI / on server.
 
-**根因**：字体文件没和 HTML 同目录/未系统安装。
+**Root cause**: font file neither alongside HTML nor system-installed.
 
-**解法**：
+**Fix**:
 
 ```bash
-# 把 .ttf 放 HTML 同目录
-cp TsangerJinKai02-W04.ttf workspace/
+# Put .ttf alongside the HTML
+cp Newsreader.ttf workspace/
 
-# 或系统安装（Linux）
+# Or system install (Linux)
 apt install fonts-noto-cjk
 mkdir -p ~/.fonts && cp *.ttf ~/.fonts/ && fc-cache -f
 ```
 
-### 5. 中英文紧贴
+### 5. CJK and Latin crowding (Chinese mode only)
 
-**症状**：`125.4k GitHub Stars` 看起来 k 和 G 太贴。
+**Symptom**: "125.4k GitHub Stars" - k and G feel glued.
 
-**错误解法**：手动加 `&nbsp;` / `margin-left: 2mm`（影响对齐）。
+**Wrong fixes**: hand-added `&nbsp;` / `margin-left: 2mm` (misaligns adjacent elements).
 
-**正确解法**：独立 span + flex gap：
+**Right fix**: separate spans with flex gap:
 
 ```html
 <div class="metric">
@@ -452,53 +392,59 @@ mkdir -p ~/.fonts && cp *.ttf ~/.fonts/ && fc-cache -f
 .metric { display: flex; align-items: baseline; gap: 6pt; }
 ```
 
-### 6. 全角 vs 半角空格
+### 6. Full-width vs half-width spaces (Chinese mode)
 
-- **中文之间**：全角空格 `　`（U+3000）+ `·` + 空格
-- **英文之间**：半角空格 + `·` + 空格
-- **中英混排**：flex gap 优先，不加空格
+- **Between Chinese characters**: U+3000 full-width space + `·` + space
+- **Between Latin words**: half-width space + `·` + space
+- **Mixed**: prefer flex gap, don't hand-type spaces
 
-### 7. 千分位 · 百分号 · 箭头
+### 7. Thousands / percent / arrows - be consistent
 
-| 正确 | 错误 |
+| Use | Avoid |
 |---|---|
-| `5,000+` | `5000+` / `5，000+`（全角逗号） |
-| `90%` | `90 %`（前有空格） |
+| `5,000+` | `5000+` |
+| `90%` | `90 %` (pre-space) |
 | `->` | `->` / `-&gt;` |
 
-自查：
+Self-check:
 ```bash
 grep -oE '->|->|⟶|⇒' doc.html | sort | uniq -c
 grep -oE '[0-9]{4,}' doc.html | sort -u
 ```
 
-### 8. 高亮过多 / 过少
+### 8. Too much / too little emphasis
 
-- 一行 4-5 处蓝色强调，读者视线无处安放
-- 整节没有高亮，版面一片扁平
+- Four or five ink-blue runs in one line -> visual fatigue, no focal point
+- Entire section with none -> flat, no scan handles
 
-**规则**：每行 ≤ 2 处，每节至少 1 处，只高亮**可量化的数字或独特表达**。
+**Rule**: ≤ 2 emphases per line, ≥ 1 per section, only **quantifiable numbers or distinctive phrases** get highlighted - never adjectives.
 
-合理区间：文档总字数 ÷ 高亮数 ≈ 80-150 字/高亮。
+Healthy ratio: one emphasis per 80-150 words.
 
-### 9. `height: 100vh` 不工作
+### 9. `height: 100vh` doesn't work
 
-**症状**：想做满屏封面，`height: 100vh` 没效果。
+**Symptom**: full-bleed cover using `height: 100vh` renders empty.
 
-**根因**：WeasyPrint 的 @page 语境下 viewport 单位不准。
+**Root cause**: viewport units are undefined in WeasyPrint's `@page` context.
 
-**解法**：
+**Fix**:
 
 ```css
 .cover {
-  min-height: 257mm;    /* A4 高 297 - 上下 margin 40 */
-  display: flex; flex-direction: column; justify-content: center;
+  min-height: 257mm;                   /* A4 height 297 - 40mm margins */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 ```
 
-### 10. break-inside 在 flex 容器里失效
+### 10. `break-inside` fails inside flex
 
-**解法**：给 flex item 额外包一层 block 容器：
+**Symptom**: `.card { break-inside: avoid }` still splits across pages.
+
+**Root cause**: WeasyPrint's flex/grid `break-inside` support on direct children is incomplete.
+
+**Fix**: wrap the flex item in an extra block:
 
 ```html
 <div class="row">
@@ -510,7 +456,7 @@ grep -oE '[0-9]{4,}' doc.html | sort -u
 .card-wrapper { break-inside: avoid; }
 ```
 
-### 11. 首页不要页码
+### 11. Hide page number on the first page
 
 ```css
 @page:first {
@@ -518,49 +464,49 @@ grep -oE '[0-9]{4,}' doc.html | sort -u
 }
 ```
 
-### 12. 打印留白边
+### 12. Printed white margin around the page
 
-**症状**：打印四周有白边（即使 background 设置了）。
+**Symptom**: printing produces a white border even though `background` is set.
 
-**根因**：默认 WeasyPrint 的 `@page background` 只延伸到 page 区域。
+**Root cause**: default `@page background` only covers the content area, not the margin.
 
-**解法**：
+**Fix**:
 
 ```css
 @page {
   size: A4; margin: 20mm;
-  background: #f5f4ed;    /* 让背景延伸到 margin 外 */
+  background: #f5f4ed;    /* extends past margins */
 }
 ```
 
-### 13. 图片模糊
+### 13. Blurry images
 
-**症状**：PDF 里图片发虚。
+**Symptom**: images in PDF look soft.
 
-**根因**：按原始像素渲染。A4 @ 300 dpi 需要 2480 × 3508 像素。
+**Root cause**: WeasyPrint renders at source pixel density. A4 @ 300 dpi = 2480 × 3508 pixels.
 
-**解法**：嵌入图要用 2-3x 源。
+**Fix**: source images at 2x or 3x.
 
-### 14. 验证闭环（兜底）
+### 14. Verification loop (catch-all)
 
 ```bash
 python3 -c "from weasyprint import HTML; HTML('doc.html').write_pdf('out.pdf')"
 python3 -c "from pypdf import PdfReader; print(len(PdfReader('out.pdf').pages))"
-pdftoppm -png -r 300 out.pdf inspect    # 视觉怀疑时
+pdftoppm -png -r 300 out.pdf inspect    # when in doubt
 ```
 
-**不验证不算改完**。
+**Not verified = not done.**
 
-### 15. SVG marker `orient="auto"` 不生效
+### 15. SVG marker `orient="auto"` ignored
 
-**症状**：SVG 里用 `<marker orient="auto">` 或 `orient="auto-start-reverse"` 的箭头，所有方向都指向右（marker 的默认绘制方向），不随路径切线旋转。
+**Symptom**: SVG arrows using `<marker orient="auto">` or `orient="auto-start-reverse"` all point right (the marker's default drawing direction), regardless of the path's tangent angle.
 
-**根因**：WeasyPrint 的 SVG 渲染不支持 marker 的 `orient="auto"` 属性。Marker 永远按 0° 绘制。
+**Root cause**: WeasyPrint's SVG renderer does not support the `orient="auto"` attribute on markers. The marker is always drawn at 0°.
 
-**解法**：不用 `<marker>`，手动在每个箭头端点画 chevron `<path>`，方向写死。
+**Fix**: skip `<marker>` entirely. Draw each arrowhead as a manual chevron `<path>` at the endpoint, with the direction hardcoded.
 
 ```xml
-<!-- ❌ marker 箭头：WeasyPrint 全部朝右 -->
+<!-- Bad: marker arrow, WeasyPrint renders all pointing right -->
 <defs>
   <marker id="a" orient="auto" ...>
     <path d="M2 1L8 5L2 9" .../>
@@ -568,33 +514,33 @@ pdftoppm -png -r 300 out.pdf inspect    # 视觉怀疑时
 </defs>
 <path d="M 440 52 Q 568 52 568 244" marker-end="url(#a)"/>
 
-<!-- ✅ 手绘 chevron：每个方向单独写 -->
+<!-- Good: manual chevron, direction per endpoint -->
 <path d="M 440 52 Q 568 52 568 244" fill="none" stroke="#5e5d59" stroke-width="1.5"/>
 <path d="M 560 236 L 568 244 L 576 236" fill="none" stroke="#5e5d59" stroke-width="1.5"
       stroke-linecap="round" stroke-linejoin="round"/>
 ```
 
-四个方向的 chevron 模板（tip 在端点，arm 长度 8px）：
+Chevron templates (tip at endpoint, 8px arm length):
 
-| 方向 | chevron path |
+| Direction | chevron path |
 |---|---|
-| ↓ | `M (x-8) (y-8) L x y L (x+8) (y-8)` |
-| ← | `M (x+8) (y-8) L x y L (x+8) (y+8)` |
-| ↑ | `M (x-8) (y+8) L x y L (x+8) (y+8)` |
-| → | `M (x-8) (y-8) L x y L (x-8) (y+8)` |
+| down | `M (x-8) (y-8) L x y L (x+8) (y-8)` |
+| left | `M (x+8) (y-8) L x y L (x+8) (y+8)` |
+| up | `M (x-8) (y+8) L x y L (x+8) (y+8)` |
+| right | `M (x-8) (y-8) L x y L (x-8) (y+8)` |
 
-### 16. Slide letter-spacing 减半
+### 16. Slide letter-spacing must be halved
 
-**症状**：照搬印刷品 letter-spacing 数值（如 `letter-spacing: 8px`）到 slide，文字看起来"散架"，字母间距过大。
+**Symptom**: Slide text looks "scattered" or over-spaced when print letter-spacing values (e.g. `letter-spacing: 8px`) are used directly.
 
-**根因**：印刷品的字距是针对小字号（8-12pt）优化的。Slide 字号（48-64px）乘以相同 letter-spacing 绝对值，间距被放大到失控。
+**Root cause**: Print letter-spacing values are tuned for small sizes (8-12pt). At slide sizes (48-64px), the same absolute value gets multiplied out of control.
 
-**解法**：Slide letter-spacing = 印刷值 / 2。Mono 字体除外（mono 本身是等宽，不需要额外字距调整）。
+**Fix**: Slide letter-spacing = print value / 2. Mono fonts are exempt (fixed-width by nature, no extra tracking needed).
 
 ```css
-/* 印刷品 eyebrow */
+/* Print eyebrow */
 .eyebrow { letter-spacing: 6px; }
 
-/* ✅ Slide eyebrow */
-.slide .eyebrow { letter-spacing: 3px; }   /* 减半 */
+/* Slide eyebrow */
+.slide .eyebrow { letter-spacing: 3px; }   /* halved */
 ```

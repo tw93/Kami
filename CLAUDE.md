@@ -1,41 +1,47 @@
 # Kami
 
-Kaku(写代码) · Waza(练习惯) · **Kami(出文档)** 三部曲之一。
-暖米纸底 + 油墨蓝点缀 + serif 主导层级 + 编辑级留白，覆盖 6 种文档模板。
+Kami is one project in the Kaku (write code), Waza (practice craft), and Kami (ship documents) trilogy.
+Warm parchment canvas, ink-blue accent, serif-led hierarchy, and editorial whitespace across six document templates.
 
-## 文件结构
+## Structure
 
-| 路径 | 用途 | 改动频率 |
+| Path | Purpose | Change frequency |
 |---|---|---|
-| `SKILL.md` | Claude 路由规则 | 低 |
-| `CHEATSHEET.md / .en.md` | 快速设计参考 | 低 |
-| `references/design.md` | 设计语言规范（九条铁律） | 低 |
-| `references/writing.md` | 文案规范 | 低 |
-| `references/production.md` | WeasyPrint 踩坑 | 中 |
-| `assets/templates/` | 6 种模板 × 2 语言 | 中 |
-| `assets/demos/` | README 展示用 demo | 样式改后重新生成 |
-| `scripts/build.py` | 生成 PDF/PNG/PPTX | 低 |
-| `scripts/package-skill.sh` | 打包 Claude Desktop ZIP（排除大字体） | 低 |
+| `SKILL.md` | Claude routing and operating rules | Low |
+| `CHEATSHEET.md` | Quick design reference, English-only source | Low |
+| `references/design.md` | Design system spec, English-only source | Low |
+| `references/writing.md` | Content strategy spec, English-only source | Low |
+| `references/production.md` | WeasyPrint build and troubleshooting runbook, English-only source | Medium |
+| `assets/templates/` | 6 document templates in 2 output languages | Medium |
+| `assets/demos/` | README showcase demos, regenerate after visual changes | Medium |
+| `scripts/build.py` | PDF / PNG / PPTX build and verification script | Low |
+| `scripts/package-skill.sh` | Claude Desktop ZIP packager, excluding large fonts | Low |
+| `dist/kami.zip` | Claude Desktop ZIP artifact, updated from main | Medium |
 
-## 验证
+Reference docs are English-only. Do not recreate `*.en.md` duplicates. Chinese / English output differences belong in the templates.
+Do not use graphic emoticons in docs, template comments, or script output. Use `OK:` / `ERROR:` for status and `Use` / `Avoid` for comparisons.
+
+## Verification
 
 ```bash
-python3 scripts/build.py          # 生成全部
-python3 scripts/build.py --check  # CSS 扫描 (rgba / 冷灰 / 行高)
+python3 scripts/build.py          # build all outputs
+python3 scripts/build.py --check  # scan CSS invariants and token drift
+python3 scripts/build.py --verify # verify templates, page counts, fonts, and slides
+python3 scripts/build.py --check-placeholders path/to/filled.html
 ```
 
-期望页数: one-pager 1 / letter 1 / resume 2(严格) / long-doc 7±2 / portfolio 6±2 / slides 7±3
+Expected page counts: one-pager 1 / letter 1 / resume 2 strict / long-doc 7 +/- 2 / portfolio 6 +/- 2 / slides 7 +/- 3
 
-## Demo 截图
+## Demo Screenshots
 
-所有 demo PNG 统一尺寸 **1241×1754px**（单张 A4 portrait @ 150dpi）。
+All demo PNG files use **1241x1754px** (first A4 portrait page at 150dpi).
 
-单页 / 多页文档 (one-pager / letter / resume / portfolio / long-doc): 取第 1 页:
+For one-page and multi-page documents (one-pager / letter / resume / portfolio / long-doc), capture page 1:
 ```bash
 pdftoppm -r 150 -f 1 -l 1 -png <pdf> /tmp/p && cp /tmp/p-1.png <target>.png
 ```
 
-横向幻灯片 (slides): 取前 2 页，每页缩至 867px 高 + 20px gap = 1754px，补底色至 1241px 宽:
+For landscape slides, capture the first 2 pages, resize each to 867px high, add a 20px gap, then extend to 1241px wide:
 ```bash
 pdftoppm -r 150 -f 1 -l 2 -png <pdf> /tmp/sl
 magick /tmp/sl-1.png -resize x867 /tmp/sl1.png
@@ -45,37 +51,42 @@ magick /tmp/sl1.png /tmp/gap.png /tmp/sl2.png -append /tmp/stacked.png
 magick /tmp/stacked.png -gravity Center -background '#f5f4ed' -extent 1241x1754 <target>.png
 ```
 
-## 改动规范
+## Change Rules
 
-- 改样式: 改 `references/design.md` + 所有模板 `<style>` 对应变量，跑 build.py 确认页数不变
-- 改内容: 保留 CSS 不动，只改 body，跑 build.py 验证
-- 加新模板: copy 最近的模板 -> 保持与 design.md 一致 -> SKILL.md 加路由 -> demos/ 放 demo
+- Style changes: update `references/design.md` and the matching template `<style>` tokens, then run `build.py` and confirm page counts stay stable.
+- Content changes: keep CSS unchanged, edit only the body, then run `build.py`.
+- New templates: copy the nearest existing template, keep it aligned with `design.md`, add routing to `SKILL.md`, and add demos.
 
-## 高风险踩坑 (详见 production.md Part 4)
+## High-Risk Pitfalls
 
-1. Tag rgba 双层矩形: 必须实色 hex
-2. 薄 border + 圆角双圈: border < 1pt + border-radius 触发
-3. 简历 2 页溢出: 字体 fallback / line-height / 字号动一点都会爆
-4. break-inside 在 flex 失效: 要包一层 block wrapper
-5. height: 100vh 在 @page 不准: 改用 mm 明确值
-6. SVG marker orient="auto" 不生效: WeasyPrint 不旋转 marker
-7. section 内文本不加 max-width: `.manifesto`、`.section-lede` 等内容文本应撑满 `.page` 容器宽度，不设 max-width。例外: `.type-sample` 和 `.footer .colophon` 窄是合理的。
+See `references/production.md` Part 4.
 
-## 发布流程
+1. Tag rgba double rectangle: use solid hex backgrounds.
+2. Thin border plus border radius double ring: border < 1pt with border-radius can trigger it.
+3. Resume 2-page overflow: tiny font, fallback, line-height, or margin changes can break it.
+4. `break-inside` fails inside flex: wrap content in a block wrapper.
+5. `height: 100vh` is unreliable under `@page`: use explicit mm values.
+6. SVG marker `orient="auto"` does not rotate in WeasyPrint: draw arrowheads manually.
+7. Section body text should not use `max-width`: `.manifesto`, `.section-lede`, and similar text should fill the `.page` container. Exceptions: `.type-sample` and `.footer .colophon`.
 
-每次打 Release tag 后必须执行：
+## Release Flow
+
+Run this before publishing or refreshing the latest release:
 
 ```bash
-bash scripts/package-skill.sh        # 生成 dist/kami.zip（< 5MB，不含 TsangerJinKai TTF）
-gh release upload <tag> dist/kami.zip -R tw93/kami
+bash scripts/package-skill.sh        # writes dist/kami.zip (<5MB, excludes TsangerJinKai TTF)
+python3 scripts/build.py --verify
+git push origin main
+LATEST_TAG="$(gh release list -R tw93/kami --limit 1 --json tagName -q '.[0].tagName')"
+gh release upload "$LATEST_TAG" dist/kami.zip --clobber -R tw93/kami
 ```
 
-README 下载链接固定用 `releases/latest/download/kami.zip`，不含版本号，发布后无需手动替换。
+`dist/kami.zip` is a tracked artifact and should be committed with the release changes. README and website download links use `https://cdn.jsdelivr.net/gh/tw93/kami@main/dist/kami.zip`, so users can update from the current `main` branch. For small packaging or documentation fixes, refresh the latest release asset with `--clobber` instead of creating a new version tag. Create a new tag only when the user explicitly wants a versioned release.
 
-## 字体
+## Fonts
 
-TsangerJinKai02-W04.ttf 是商业字体，商业用途需从 tsanger.cn 获取授权。
-无字体时 fallback: Source Han Serif SC -> Noto Serif CJK SC -> Songti SC -> Georgia。
-英文模板用 Newsreader serif。
+`TsangerJinKai02-W04.ttf` is a commercial font. Commercial use requires a license from tsanger.cn.
+Fallback without TsangerJinKai: Source Han Serif SC -> Noto Serif CJK SC -> Songti SC -> Georgia.
+English templates use Newsreader serif.
 
-Claude Desktop ZIP 不打包 TsangerJinKai TTF（体积 ~19MB/个，会触发上传限制）。Skill 在构建中文文档前会自动检测字体，缺失时从 jsDelivr 下载到 `assets/fonts/`，WeasyPrint 通过已有相对路径读取，无需改 HTML。
+The Claude Desktop ZIP does not bundle TsangerJinKai TTF files. They are about 19MB each and can make upload or execution time out. Before building Chinese documents, the skill checks for missing fonts and downloads them from jsDelivr into `assets/fonts/`. WeasyPrint then uses the existing relative `@font-face` paths without changing HTML.

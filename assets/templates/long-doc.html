@@ -245,7 +245,7 @@
   /* ========== CODE ========== */
   /* Mono first for English glyphs, then CJK fallback so Chinese comments
      inside code/pre render correctly. A mono-only chain causes missing
-     glyphs rendered as "?" or "☐" in WeasyPrint when the system lacks
+     glyphs rendered as "?" or missing-glyph boxes in WeasyPrint when the system lacks
      a mono font with CJK coverage. */
   code {
     font-family: "JetBrains Mono", "SF Mono", Consolas,
