@@ -15,8 +15,8 @@
     --parchment:  #f5f4ed;
     --ivory:      #faf9f5;
     --near-black: #141413;
-    --olive:      #5e5d59;
-    --stone:      #87867f;
+    --olive:      #504e49;
+    --stone:      #6b6a64;
     --brand:      #1B365D;
     --brand-tint: #EEF2F7;
     --border:     #e8e6dc;
@@ -77,7 +77,7 @@
     <svg viewBox="0 0 820 540" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-          <polygon points="0 0, 8 3, 0 6" fill="#5e5d59"/>
+          <polygon points="0 0, 8 3, 0 6" fill="#504e49"/>
         </marker>
       </defs>
 
@@ -92,24 +92,24 @@
       <line x1="410" y1="60" x2="410" y2="440" stroke="rgba(20,20,19,0.18)" stroke-width="0.8"/>
 
       <!-- Axis arrows + labels -->
-      <line x1="80" y1="460" x2="740" y2="460" stroke="#5e5d59" stroke-width="1.2" marker-end="url(#arrow)"/>
-      <line x1="60" y1="440" x2="60" y2="60" stroke="#5e5d59" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="80" y1="460" x2="740" y2="460" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="60" y1="440" x2="60" y2="60" stroke="#504e49" stroke-width="1.2" marker-end="url(#arrow)"/>
 
       <text x="410" y="480" fill="#141413" font-size="11" font-weight="600" font-family="inherit" text-anchor="middle" letter-spacing="0.08em">{{X axis · low to high}}</text>
       <text x="30" y="250" fill="#141413" font-size="11" font-weight="600" font-family="inherit" text-anchor="middle" letter-spacing="0.08em" transform="rotate(-90 30 250)">{{Y axis · low to high}}</text>
 
       <!-- Quadrant labels -->
-      <text x="244" y="88" fill="#87867f" font-size="8.5" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.22em">HIGH-Y · LOW-X</text>
-      <text x="244" y="102" fill="#5e5d59" font-size="10" font-family="inherit" text-anchor="middle" font-style="italic">incubate</text>
+      <text x="244" y="88" fill="#6b6a64" font-size="8.5" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.22em">HIGH-Y · LOW-X</text>
+      <text x="244" y="102" fill="#504e49" font-size="10" font-family="inherit" text-anchor="middle" font-style="italic">incubate</text>
 
       <text x="576" y="88" fill="#1B365D" font-size="8.5" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.22em">HIGH-Y · HIGH-X</text>
       <text x="576" y="102" fill="#1B365D" font-size="10" font-family="inherit" text-anchor="middle" font-style="italic" font-weight="500">do first</text>
 
-      <text x="244" y="428" fill="#87867f" font-size="8.5" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.22em">LOW-Y · LOW-X</text>
-      <text x="244" y="420" fill="#87867f" font-size="10" font-family="inherit" text-anchor="middle" font-style="italic">drop</text>
+      <text x="244" y="428" fill="#6b6a64" font-size="8.5" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.22em">LOW-Y · LOW-X</text>
+      <text x="244" y="420" fill="#6b6a64" font-size="10" font-family="inherit" text-anchor="middle" font-style="italic">drop</text>
 
-      <text x="576" y="428" fill="#87867f" font-size="8.5" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.22em">LOW-Y · HIGH-X</text>
-      <text x="576" y="420" fill="#5e5d59" font-size="10" font-family="inherit" text-anchor="middle" font-style="italic">delegate</text>
+      <text x="576" y="428" fill="#6b6a64" font-size="8.5" font-family="'JetBrains Mono', monospace" text-anchor="middle" letter-spacing="0.22em">LOW-Y · HIGH-X</text>
+      <text x="576" y="420" fill="#504e49" font-size="10" font-family="inherit" text-anchor="middle" font-style="italic">delegate</text>
 
       <!-- Plotted points -->
       <!-- 1: Top-left (incubate) -->
@@ -129,16 +129,16 @@
       <text x="500" y="214" fill="#141413" font-size="10" font-family="inherit">{{Item D}}</text>
 
       <!-- 5: Bottom-right (delegate) -->
-      <circle cx="580" cy="350" r="4.5" fill="rgba(20,20,19,0.05)" stroke="#5e5d59" stroke-width="1"/>
-      <text x="590" y="354" fill="#5e5d59" font-size="10" font-family="inherit">{{Item E}}</text>
+      <circle cx="580" cy="350" r="4.5" fill="rgba(20,20,19,0.05)" stroke="#504e49" stroke-width="1"/>
+      <text x="590" y="354" fill="#504e49" font-size="10" font-family="inherit">{{Item E}}</text>
 
       <!-- 6: Bottom-left (drop) -->
       <circle cx="180" cy="380" r="4" fill="rgba(20,20,19,0.03)" stroke="rgba(20,20,19,0.30)" stroke-width="1"/>
-      <text x="190" y="384" fill="#87867f" font-size="10" font-family="inherit">{{Item F}}</text>
+      <text x="190" y="384" fill="#6b6a64" font-size="10" font-family="inherit">{{Item F}}</text>
 
       <!-- 7: Bottom-left -->
       <circle cx="280" cy="340" r="4" fill="rgba(20,20,19,0.03)" stroke="rgba(20,20,19,0.30)" stroke-width="1"/>
-      <text x="290" y="344" fill="#87867f" font-size="10" font-family="inherit">{{Item G}}</text>
+      <text x="290" y="344" fill="#6b6a64" font-size="10" font-family="inherit">{{Item G}}</text>
 
       <!-- 8: Near center -->
       <circle cx="380" cy="270" r="4" fill="#ffffff" stroke="#141413" stroke-width="1"/>
@@ -146,22 +146,22 @@
 
       <!-- Legend -->
       <line x1="40" y1="502" x2="780" y2="502" stroke="rgba(20,20,19,0.10)" stroke-width="0.8"/>
-      <text x="40" y="518" fill="#5e5d59" font-size="8" font-family="'JetBrains Mono', monospace" letter-spacing="0.22em">LEGEND</text>
+      <text x="40" y="518" fill="#504e49" font-size="8" font-family="'JetBrains Mono', monospace" letter-spacing="0.22em">LEGEND</text>
 
       <circle cx="180" cy="514" r="5" fill="#1B365D" stroke="#1B365D" stroke-width="1"/>
-      <text x="192" y="518" fill="#5e5d59" font-size="8.5" font-family="inherit">Focal · do first</text>
+      <text x="192" y="518" fill="#504e49" font-size="8.5" font-family="inherit">Focal · do first</text>
 
       <circle cx="328" cy="514" r="5" fill="#EEF2F7" stroke="#1B365D" stroke-width="1"/>
-      <text x="340" y="518" fill="#5e5d59" font-size="8.5" font-family="inherit">Near-focal</text>
+      <text x="340" y="518" fill="#504e49" font-size="8.5" font-family="inherit">Near-focal</text>
 
       <circle cx="450" cy="514" r="5" fill="#ffffff" stroke="#141413" stroke-width="1"/>
-      <text x="462" y="518" fill="#5e5d59" font-size="8.5" font-family="inherit">Standard</text>
+      <text x="462" y="518" fill="#504e49" font-size="8.5" font-family="inherit">Standard</text>
 
-      <circle cx="555" cy="514" r="5" fill="rgba(20,20,19,0.05)" stroke="#5e5d59" stroke-width="1"/>
-      <text x="567" y="518" fill="#5e5d59" font-size="8.5" font-family="inherit">Secondary</text>
+      <circle cx="555" cy="514" r="5" fill="rgba(20,20,19,0.05)" stroke="#504e49" stroke-width="1"/>
+      <text x="567" y="518" fill="#504e49" font-size="8.5" font-family="inherit">Secondary</text>
 
       <circle cx="660" cy="514" r="5" fill="rgba(20,20,19,0.03)" stroke="rgba(20,20,19,0.30)" stroke-width="1"/>
-      <text x="672" y="518" fill="#5e5d59" font-size="8.5" font-family="inherit">Drop</text>
+      <text x="672" y="518" fill="#504e49" font-size="8.5" font-family="inherit">Drop</text>
     </svg>
 
     <p class="caption">The ink-blue point is where the reader's eye lands. The tinted upper-right quadrant is the preferred region. Everything else recedes so the judgment reads instantly.</p>
