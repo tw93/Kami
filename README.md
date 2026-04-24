@@ -51,13 +51,7 @@ Part of a trilogy: [Kaku](https://github.com/tw93/Kaku) (書く) writes code, [W
 npx skills add tw93/kami -a claude-code -g -y
 ```
 
-**Codex**
-
-```bash
-npx skills add tw93/kami -a codex -g -y
-```
-
-**Generic agents** (opencode, pi, and other tools that read from `~/.agents/`; `codex` is included, but use `-a codex` if you only target Codex)
+**Generic agents** (Codex, OpenCode, Pi, and other tools that read from `~/.agents/`)
 
 ```bash
 npx skills add tw93/kami -a '*' -g -y
