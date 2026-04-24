@@ -77,12 +77,6 @@ Example prompts by language:
 - 中文: `帮我做一份一页纸` / `帮我排版一份长文档` / `帮我写一封正式信件` / `帮我做一份作品集` / `帮我做一份简历` / `帮我做一套演讲幻灯片`
 - 日本語: `スタートアップ向けの一枚資料を作って` / `この調査を長文レポートに整えて` / `正式な依頼文を作って` / `プロジェクト作品集を作って` / `履歴書を作って` / `登壇用スライドを作って`
 
-Inline charts: mention the data and chart type. Kami embeds bar, line, and donut charts as SVG, no external tools needed.
-
-- English: `add a revenue breakdown donut chart` / `show the quarterly delivery trend as a bar chart` / `draw a line chart of user growth`
-- 中文: `加一个营收结构环形图` / `用柱状图展示季度交付量` / `画一条用户增长折线`
-- 日本語: `売上構成ドーナツチャートを追加して` / `四半期の出荷推移を棒グラフで示して` / `ユーザー成長の折れ線グラフを入れて`
-
 ## Design
 
 Warm parchment canvas, ink blue as the sole accent, serif carries hierarchy, no hard shadows or flashy palettes. Not a UI framework; a constraint system for printed matter. Documents should read as composed pages, not dashboards.

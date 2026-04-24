@@ -68,6 +68,8 @@ Read `references/diagrams.md` before drawing - it has the selection guide, kami 
 
 Before drawing, always ask: **would a well-written paragraph teach the reader less than this diagram?** If no, don't draw.
 
+**Auto-select charts from data.** When the content contains numerical data (revenue splits, trends over time, category comparisons), choose the appropriate chart type and embed it. Do not wait for the user to request a specific chart. Selection guide: proportional breakdown -> donut, time series -> line, category comparison -> bar, price history -> candlestick, value decomposition -> waterfall.
+
 ## Step 2.1 · Source and material pass
 
 Run this before distilling or filling content when the document depends on facts or materials outside the user's draft. Skip it only for personal drafts where the user already supplied everything needed.
