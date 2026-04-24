@@ -42,10 +42,12 @@
     --parchment: #f5f4ed;
     --near-black:#141413;
     --dark-warm: #3d3d3a;
-    --olive:     #5e5d59;
-    --stone:     #87867f;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
     --brand:     #1B365D;
+    --ivory:     #faf9f5;
     --border:    #e8e6dc;
+    --border-soft:#e5e3d8;
     --serif: "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", Georgia, serif;
     --sans: var(--serif);
   }
@@ -61,7 +63,7 @@
     font-family: var(--serif);
     font-size: 11.5pt;
     line-height: 1.55;
-    letter-spacing: 0.2pt;
+    letter-spacing: 0.3pt;
   }
 
   /* ========== LETTERHEAD 信头 ========== */
@@ -201,6 +203,40 @@
     line-height: 1.55;
   }
   body.memo .body-content p { text-indent: 0; margin-bottom: 10pt; }
+
+  /* ========== TABLE (kami-table) ========== */
+  table, .kami-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10pt;
+    margin: 10pt 0;
+    break-inside: avoid;
+  }
+  table th, .kami-table th {
+    text-align: left;
+    font-weight: 500;
+    color: var(--dark-warm);
+    padding: 5pt 8pt;
+    border-bottom: 1pt solid var(--border);
+    background: transparent;
+  }
+  table td, .kami-table td {
+    padding: 4pt 8pt;
+    border-bottom: 0.3pt solid var(--border-soft);
+    vertical-align: top;
+  }
+  table.compact th, .kami-table.compact th { padding: 3pt 6pt; font-size: 8pt; }
+  table.compact td, .kami-table.compact td { padding: 2pt 6pt; font-size: 8pt; line-height: 1.4; }
+  table.financial td:not(:first-child), .kami-table.financial td:not(:first-child) {
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  table.financial th:not(:first-child), .kami-table.financial th:not(:first-child) { text-align: right; }
+  table.striped tbody tr:nth-child(even) td, .kami-table.striped tbody tr:nth-child(even) td {
+    background: var(--ivory);
+  }
+  table .total td, .kami-table .total td {
+    font-weight: 500; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
+  }
 </style>
 </head>
 <body>
