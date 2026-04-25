@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>মসলিন · বোনা বাতাস</title>
+<meta name="generator" content="Kami">
+<style>
+  @font-face { font-family: "Noto Serif Bengali"; src: url("../fonts/NotoSerifBengali-Regular.ttf") format("truetype"); font-weight: 400; }
+  @font-face { font-family: "Noto Serif Bengali"; src: url("../fonts/NotoSerifBengali-Medium.ttf") format("truetype"); font-weight: 500; }
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 400; }
+
+  @page { size: A4 landscape; margin: 0; background: #f5f4ed; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed; --ivory: #faf9f5; --near-black: #141413;
+    --dark-warm: #3d3d3a; --olive: #504e49; --stone: #6b6a64;
+    --brand: #1B365D; --brand-tint: #EEF2F7; --border: #e8e6dc;
+    --serif: "Noto Serif Bengali", "Shonar Bangla", Georgia, serif;
+    --mono: "JetBrains Mono", monospace;
+  }
+
+  body { color: var(--near-black); font-family: var(--serif); letter-spacing: 0; }
+
+  .slide {
+    width: 297mm; height: 210mm; padding: 18mm 22mm;
+    background: var(--parchment); break-after: page;
+    position: relative; display: flex; flex-direction: column;
+  }
+  .slide:last-child { break-after: auto; }
+
+  .eyebrow { font-size: 9pt; color: var(--stone); font-weight: 500; }
+  .page-num { position: absolute; bottom: 10mm; right: 22mm; font-family: var(--mono); font-size: 9pt; color: var(--stone); font-variant-numeric: tabular-nums; }
+  .footer-mark { position: absolute; bottom: 10mm; left: 22mm; font-size: 9pt; color: var(--stone); font-weight: 500; }
+
+  /* Cover */
+  .cover { display: grid; grid-template-columns: 1fr 1fr; gap: 32pt; align-items: center; }
+  .cover-left { display: flex; flex-direction: column; }
+  .cover .mark { font-size: 10pt; color: var(--brand); font-weight: 500; margin-bottom: 22pt; }
+  .cover h1 { font-size: 42pt; font-weight: 500; line-height: 1.15; color: var(--near-black); margin-bottom: 16pt; }
+  .cover .sub { font-size: 14pt; color: var(--olive); line-height: 1.55; max-width: 34ch; }
+  .cover .line { width: 60pt; height: 2pt; background: var(--brand); margin: 20pt 0 16pt 0; }
+  .cover .meta { font-size: 10pt; color: var(--stone); }
+  .cover-visual { display: flex; align-items: center; justify-content: center; }
+
+  /* Content */
+  .slide-head { margin-bottom: 10pt; }
+  .slide-title { font-size: 36pt; font-weight: 500; line-height: 1.15; color: var(--near-black); margin-top: 6pt; margin-bottom: 28pt; }
+  .body-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28pt; }
+  .body-single { max-width: 70ch; flex: 1; }
+  .claim { font-size: 16pt; line-height: 1.5; color: var(--dark-warm); margin-bottom: 14pt; }
+  .claim .hl { color: var(--brand); }
+
+  ul.pts { list-style: none; }
+  ul.pts li { font-size: 12pt; line-height: 1.5; color: var(--dark-warm); padding-left: 14pt; position: relative; margin-bottom: 9pt; }
+  ul.pts li::before { content: "\2013"; position: absolute; left: 0; color: var(--brand); }
+  ul.pts li .hl { color: var(--brand); font-weight: 500; }
+
+  .callout { border-left: 2pt solid var(--brand); padding: 8pt 0 8pt 16pt; font-size: 13pt; line-height: 1.55; color: var(--olive); margin-top: 4pt; }
+  .callout .hl { color: var(--brand); }
+
+  .metrics { display: flex; gap: 20pt; margin-top: 20pt; padding-top: 12pt; border-top: 0.3pt dotted var(--border); }
+  .metric { flex: 1; display: flex; align-items: baseline; gap: 8pt; }
+  .metric .v { font-size: 32pt; font-weight: 500; color: var(--brand); line-height: 1; font-variant-numeric: tabular-nums; }
+  .metric .l { font-size: 10pt; color: var(--olive); line-height: 1.45; }
+
+  .diagram-col { display: flex; align-items: flex-start; justify-content: center; }
+  .diagram-col svg { width: 96%; }
+
+  .ending { justify-content: center; align-items: center; text-align: center; }
+  .ending h1 { font-size: 44pt; font-weight: 500; color: var(--near-black); margin-bottom: 12pt; line-height: 1.25; }
+  .ending .sub { font-size: 15pt; color: var(--olive); max-width: 36ch; line-height: 1.55; }
+  .ending .line { width: 60pt; height: 1.5pt; background: var(--brand); margin: 22pt auto; }
+</style>
+</head>
+<body>
+
+<!-- ═══ ০১ · প্রচ্ছদ ═══ -->
+<section class="slide cover">
+  <div class="cover-left">
+    <div class="mark">ঐতিহ্য ও প্রযুক্তি · ২০২৬</div>
+    <h1>মসলিন:<br>বোনা বাতাস</h1>
+    <div class="sub">ঢাকাই মসলিনের উত্থান, পতন এবং পুনরুত্থান — একটি হারিয়ে যাওয়া শিল্পের বৈজ্ঞানিক ও সাংস্কৃতিক ইতিহাস।</div>
+    <div class="line"></div>
+    <div class="meta">কামি স্লাইড ডেমো · ল্যান্ডস্কেপ A4 · ৭ স্লাইড</div>
+  </div>
+  <div class="cover-visual">
+    <!-- Decorative: concentric thread rings suggesting fabric weave -->
+    <svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg" style="width: 220pt;">
+      <!-- outer warp threads -->
+      <circle cx="130" cy="130" r="120" fill="none" stroke="#e8e6dc" stroke-width="0.5"/>
+      <circle cx="130" cy="130" r="108" fill="none" stroke="#e8e6dc" stroke-width="0.5"/>
+      <circle cx="130" cy="130" r="96" fill="none" stroke="#e8e6dc" stroke-width="0.5"/>
+      <circle cx="130" cy="130" r="84" fill="none" stroke="#e8e6dc" stroke-width="0.6"/>
+      <circle cx="130" cy="130" r="72" fill="none" stroke="#e8e6dc" stroke-width="0.6"/>
+      <circle cx="130" cy="130" r="60" fill="none" stroke="#1B365D" stroke-width="0.8" stroke-dasharray="2 4"/>
+      <circle cx="130" cy="130" r="44" fill="#EEF2F7" stroke="#1B365D" stroke-width="1.2"/>
+      <!-- cross threads -->
+      <line x1="130" y1="10" x2="130" y2="250" stroke="#e8e6dc" stroke-width="0.4"/>
+      <line x1="10" y1="130" x2="250" y2="130" stroke="#e8e6dc" stroke-width="0.4"/>
+      <line x1="45" y1="45" x2="215" y2="215" stroke="#e8e6dc" stroke-width="0.3"/>
+      <line x1="215" y1="45" x2="45" y2="215" stroke="#e8e6dc" stroke-width="0.3"/>
+      <!-- center -->
+      <text x="130" y="126" text-anchor="middle" font-size="11" font-weight="500" fill="#141413" font-family="'Noto Serif Bengali', serif">মসলিন</text>
+      <text x="130" y="142" text-anchor="middle" font-size="8" fill="#1B365D" font-family="'JetBrains Mono', monospace">1200 TPI</text>
+    </svg>
+  </div>
+  <div class="page-num">01</div>
+  <div class="footer-mark">মসলিন · বোনা বাতাস</div>
+</section>
+
+<!-- ═══ ০২ · মসলিন কী ═══ -->
+<section class="slide">
+  <div class="slide-head"><span class="eyebrow">০১ · পরিচয়</span></div>
+  <div class="slide-title">বাতাসের মতো হালকা,<br>সোনার চেয়ে দামি</div>
+  <div class="body-grid">
+    <div>
+      <p class="claim">ঢাকাই মসলিন ছিলো এমন এক বস্ত্র যা <span class="hl">একটি আংটির ভিতর দিয়ে</span> পুরো একটি শাড়ি টেনে নেওয়া যেতো।</p>
+      <ul class="pts">
+        <li>সুতার সূক্ষ্মতা: প্রতি ইঞ্চিতে <span class="hl">১,২০০ সুতা</span> — আজকের সেরা সুতির ৪ গুণ।</li>
+        <li>কাঁচামাল: ফুটি কার্পাস — শুধু মেঘনা নদীর তীরে জন্মানো এক বিশেষ তুলা।</li>
+        <li>মুঘল দরবারে এক থান মসলিনের দাম ছিলো একজন দক্ষ কারিগরের <span class="hl">এক বছরের</span> আয়ের সমান।</li>
+      </ul>
+      <div class="callout">
+        ইউরোপীয় বণিকরা একে বলতো <span class="hl">"woven air"</span> — বোনা বাতাস। রোমানরা বলতো "ventus textilis"।
+      </div>
+    </div>
+    <div class="diagram-col">
+      <!-- Thread count comparison: bar chart -->
+      <svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
+        <rect width="300" height="260" fill="#f5f4ed"/>
+        <text x="150" y="16" text-anchor="middle" font-size="8" fill="#6b6a64" font-family="'Noto Serif Bengali', serif" font-weight="500">প্রতি ইঞ্চিতে সুতা সংখ্যা (TPI)</text>
+        <!-- Y axis -->
+        <line x1="44" y1="30" x2="44" y2="210" stroke="#504e49" stroke-width="0.8"/>
+        <line x1="44" y1="210" x2="280" y2="210" stroke="#504e49" stroke-width="0.8"/>
+        <!-- gridlines -->
+        <line x1="44" y1="60" x2="280" y2="60" stroke="#e8e6dc" stroke-width="0.4"/>
+        <line x1="44" y1="110" x2="280" y2="110" stroke="#e8e6dc" stroke-width="0.4"/>
+        <line x1="44" y1="160" x2="280" y2="160" stroke="#e8e6dc" stroke-width="0.4"/>
+        <!-- Y labels -->
+        <text x="38" y="63" text-anchor="end" font-size="7" fill="#6b6a64" font-family="var(--mono)">1200</text>
+        <text x="38" y="113" text-anchor="end" font-size="7" fill="#6b6a64" font-family="var(--mono)">800</text>
+        <text x="38" y="163" text-anchor="end" font-size="7" fill="#6b6a64" font-family="var(--mono)">400</text>
+        <!-- bar 1: আধুনিক সুতি -->
+        <rect x="60" y="160" width="44" height="50" fill="#e8e6dc"/>
+        <text x="82" y="152" text-anchor="middle" font-size="7" fill="#6b6a64">৩০০</text>
+        <text x="82" y="228" text-anchor="middle" font-size="8" fill="#504e49" font-family="'Noto Serif Bengali', serif">আধুনিক সুতি</text>
+        <!-- bar 2: ইউরোপীয় লিনেন -->
+        <rect x="120" y="140" width="44" height="70" fill="#e8e6dc"/>
+        <text x="142" y="132" text-anchor="middle" font-size="7" fill="#6b6a64">৫০০</text>
+        <text x="142" y="228" text-anchor="middle" font-size="8" fill="#504e49" font-family="'Noto Serif Bengali', serif">লিনেন</text>
+        <!-- bar 3: সিল্ক -->
+        <rect x="180" y="120" width="44" height="90" fill="#e8e6dc"/>
+        <text x="202" y="112" text-anchor="middle" font-size="7" fill="#6b6a64">৬৫০</text>
+        <text x="202" y="228" text-anchor="middle" font-size="8" fill="#504e49" font-family="'Noto Serif Bengali', serif">রেশম</text>
+        <!-- bar 4: মসলিন (highlight) -->
+        <rect x="240" y="60" width="44" height="150" fill="#EEF2F7" stroke="#1B365D" stroke-width="1"/>
+        <text x="262" y="52" text-anchor="middle" font-size="8" fill="#1B365D" font-weight="500">১,২০০</text>
+        <text x="262" y="228" text-anchor="middle" font-size="8" fill="#1B365D" font-family="'Noto Serif Bengali', serif" font-weight="500">মসলিন</text>
+      </svg>
+    </div>
+  </div>
+  <div class="page-num">02</div>
+  <div class="footer-mark">মসলিন · বোনা বাতাস</div>
+</section>
+
+<!-- ═══ ০৩ · মুঘল যুগ ═══ -->
+<section class="slide">
+  <div class="slide-head"><span class="eyebrow">০২ · স্বর্ণযুগ</span></div>
+  <div class="slide-title">মুঘল দরবার থেকে<br>ইউরোপের রাজপ্রাসাদ</div>
+  <div class="body-grid">
+    <div>
+      <p class="claim">সপ্তদশ শতকে ঢাকাই মসলিন ছিলো <span class="hl">বিশ্বের সবচেয়ে মূল্যবান</span> রপ্তানি পণ্যগুলোর একটি। মুঘল সম্রাটরা একে "আব-ই-রওয়ান" বলতেন — প্রবাহিত জল।</p>
+      <ul class="pts">
+        <li>সম্রাট আওরঙ্গজেব তাঁর কন্যাকে তিরস্কার করেছিলেন সাত স্তর মসলিন পরেও <span class="hl">"প্রায় নগ্ন"</span> দেখাচ্ছে বলে।</li>
+        <li>ফরাসি রানী মারি আঁতোয়ানেত মসলিনের পোশাক পরে প্রতিকৃতি আঁকিয়েছিলেন।</li>
+        <li>ইস্ট ইন্ডিয়া কোম্পানির মোট রপ্তানির <span class="hl">৬৮%</span> ছিলো বাংলার বস্ত্র।</li>
+      </ul>
+    </div>
+    <div class="diagram-col">
+      <!-- Trade route flow diagram -->
+      <svg viewBox="0 0 300 280" xmlns="http://www.w3.org/2000/svg">
+        <rect width="300" height="280" fill="#f5f4ed"/>
+        <text x="150" y="16" text-anchor="middle" font-size="8" fill="#6b6a64" font-family="'Noto Serif Bengali', serif" font-weight="500">মসলিন বাণিজ্য পথ · ১৭০০ খ্রিস্টাব্দ</text>
+        <!-- Center: Dhaka -->
+        <rect x="105" y="110" width="90" height="40" rx="6" fill="#EEF2F7" stroke="#1B365D" stroke-width="1.2"/>
+        <text x="150" y="134" text-anchor="middle" font-size="11" font-weight="500" fill="#1B365D" font-family="'Noto Serif Bengali', serif">ঢাকা</text>
+        <!-- Top: Delhi -->
+        <rect x="110" y="28" width="80" height="32" rx="6" fill="#fff" stroke="#141413" stroke-width="0.8"/>
+        <text x="150" y="48" text-anchor="middle" font-size="9" font-weight="500" fill="#141413" font-family="'Noto Serif Bengali', serif">দিল্লি</text>
+        <!-- arrow Dhaka → Delhi -->
+        <line x1="150" y1="110" x2="150" y2="60" stroke="#504e49" stroke-width="1.2"/>
+        <path d="M 145 66 L 150 60 L 155 66" fill="none" stroke="#504e49" stroke-width="1.2" stroke-linecap="round"/>
+        <!-- Left: London -->
+        <rect x="10" y="114" width="72" height="32" rx="6" fill="#fff" stroke="#141413" stroke-width="0.8"/>
+        <text x="46" y="134" text-anchor="middle" font-size="9" font-weight="500" fill="#141413" font-family="'Noto Serif Bengali', serif">লন্ডন</text>
+        <!-- arrow Dhaka → London -->
+        <line x1="105" y1="130" x2="82" y2="130" stroke="#504e49" stroke-width="1.2"/>
+        <path d="M 88 125 L 82 130 L 88 135" fill="none" stroke="#504e49" stroke-width="1.2" stroke-linecap="round"/>
+        <!-- Right: Amsterdam -->
+        <rect x="218" y="114" width="72" height="32" rx="6" fill="#fff" stroke="#141413" stroke-width="0.8"/>
+        <text x="254" y="134" text-anchor="middle" font-size="8" font-weight="500" fill="#141413" font-family="'Noto Serif Bengali', serif">আমস্টার্ডাম</text>
+        <!-- arrow Dhaka → Amsterdam -->
+        <line x1="195" y1="130" x2="218" y2="130" stroke="#504e49" stroke-width="1.2"/>
+        <path d="M 212 125 L 218 130 L 212 135" fill="none" stroke="#504e49" stroke-width="1.2" stroke-linecap="round"/>
+        <!-- Bottom-left: Cairo -->
+        <rect x="30" y="200" width="72" height="32" rx="6" fill="#fff" stroke="#141413" stroke-width="0.8"/>
+        <text x="66" y="220" text-anchor="middle" font-size="9" font-weight="500" fill="#141413" font-family="'Noto Serif Bengali', serif">কায়রো</text>
+        <!-- arrow Dhaka → Cairo -->
+        <line x1="125" y1="150" x2="86" y2="200" stroke="#504e49" stroke-width="1.2"/>
+        <path d="M 92 194 L 86 200 L 94 200" fill="none" stroke="#504e49" stroke-width="1.2" stroke-linecap="round"/>
+        <!-- Bottom-right: Paris -->
+        <rect x="198" y="200" width="72" height="32" rx="6" fill="#fff" stroke="#141413" stroke-width="0.8"/>
+        <text x="234" y="220" text-anchor="middle" font-size="9" font-weight="500" fill="#141413" font-family="'Noto Serif Bengali', serif">প্যারিস</text>
+        <!-- arrow Dhaka → Paris -->
+        <line x1="175" y1="150" x2="214" y2="200" stroke="#504e49" stroke-width="1.2"/>
+        <path d="M 206 200 L 214 200 L 208 194" fill="none" stroke="#504e49" stroke-width="1.2" stroke-linecap="round"/>
+        <!-- revenue label -->
+        <text x="150" y="268" text-anchor="middle" font-size="8" fill="#1B365D" font-family="'Noto Serif Bengali', serif" font-weight="500">বার্ষিক রপ্তানি মূল্য: আনুমানিক ৩০ লক্ষ টাকা (১৭৫০)</text>
+      </svg>
+    </div>
+  </div>
+  <div class="page-num">03</div>
+  <div class="footer-mark">মসলিন · বোনা বাতাস</div>
+</section>
+
+<!-- ═══ ০৪ · পতন ═══ -->
+<section class="slide">
+  <div class="slide-head"><span class="eyebrow">০৩ · পতন</span></div>
+  <div class="slide-title">একটি শিল্পের<br>পরিকল্পিত মৃত্যু</div>
+  <div class="body-grid">
+    <div>
+      <p class="claim">ব্রিটিশ ঔপনিবেশিক নীতি <span class="hl">পদ্ধতিগতভাবে</span> বাংলার বস্ত্রশিল্প ধ্বংস করে। কারিগরদের বুড়ো আঙুল কাটার গল্প বিতর্কিত হলেও, অর্থনৈতিক ধ্বংস নথিভুক্ত।</p>
+      <ul class="pts">
+        <li><span class="hl">৭০-৮০% শুল্ক</span> আরোপ করা হয় বাংলার বস্ত্র রপ্তানিতে, একই সময়ে ম্যানচেস্টারের কাপড় শুল্কমুক্ত প্রবেশ করে।</li>
+        <li>১৭৫৭ থেকে ১৮০০ সালের মধ্যে ঢাকার তাঁতি সংখ্যা <span class="hl">৮০,০০০ থেকে ৮,০০০</span>-এ নেমে আসে।</li>
+        <li>ফুটি কার্পাস তুলার চাষ বন্ধ হয়ে যায় — কাঁচামালই বিলুপ্ত হয়।</li>
+      </ul>
+      <div class="callout">
+        ঢাকার জনসংখ্যা ১৮২৪ সালে ১,৫০,০০০ থেকে কমে <span class="hl">৩০,০০০</span>-এ দাঁড়ায় — শুধুমাত্র বস্ত্রশিল্পের পতনের কারণে।
+      </div>
+    </div>
+    <div class="diagram-col">
+      <!-- Production decline line chart -->
+      <svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
+        <rect width="300" height="260" fill="#f5f4ed"/>
+        <text x="150" y="16" text-anchor="middle" font-size="8" fill="#6b6a64" font-family="'Noto Serif Bengali', serif" font-weight="500">মসলিন উৎপাদন হ্রাস (আনুমানিক)</text>
+        <!-- axes -->
+        <line x1="44" y1="30" x2="44" y2="210" stroke="#504e49" stroke-width="0.8"/>
+        <line x1="44" y1="210" x2="280" y2="210" stroke="#504e49" stroke-width="0.8"/>
+        <!-- Y labels -->
+        <text x="38" y="50" text-anchor="end" font-size="7" fill="#6b6a64">১০০%</text>
+        <text x="38" y="130" text-anchor="end" font-size="7" fill="#6b6a64">৫০%</text>
+        <text x="38" y="213" text-anchor="end" font-size="7" fill="#6b6a64">০%</text>
+        <!-- X labels -->
+        <text x="60" y="226" text-anchor="middle" font-size="7" fill="#6b6a64">১৭৫০</text>
+        <text x="120" y="226" text-anchor="middle" font-size="7" fill="#6b6a64">১৭৮০</text>
+        <text x="180" y="226" text-anchor="middle" font-size="7" fill="#6b6a64">১৮১০</text>
+        <text x="240" y="226" text-anchor="middle" font-size="7" fill="#6b6a64">১৮৪০</text>
+        <!-- gridlines -->
+        <line x1="44" y1="50" x2="280" y2="50" stroke="#e8e6dc" stroke-width="0.4"/>
+        <line x1="44" y1="130" x2="280" y2="130" stroke="#e8e6dc" stroke-width="0.4"/>
+        <!-- decline line -->
+        <polyline points="60,52 90,56 120,90 150,140 180,175 210,195 240,202" fill="none" stroke="#1B365D" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+        <!-- dots -->
+        <circle cx="60" cy="52" r="3" fill="#1B365D"/>
+        <circle cx="120" cy="90" r="3" fill="#1B365D"/>
+        <circle cx="180" cy="175" r="3" fill="#1B365D"/>
+        <circle cx="240" cy="202" r="3" fill="#1B365D"/>
+        <!-- Palashi annotation -->
+        <line x1="80" y1="30" x2="80" y2="210" stroke="#1B365D" stroke-width="0.6" stroke-dasharray="3 3"/>
+        <text x="84" y="38" font-size="7" fill="#1B365D" font-family="'Noto Serif Bengali', serif">পলাশী ১৭৫৭</text>
+        <!-- area fill -->
+        <polygon points="60,52 90,56 120,90 150,140 180,175 210,195 240,202 240,210 60,210" fill="#1B365D" fill-opacity="0.06"/>
+      </svg>
+    </div>
+  </div>
+  <div class="page-num">04</div>
+  <div class="footer-mark">মসলিন · বোনা বাতাস</div>
+</section>
+
+<!-- ═══ ০৫ · বিজ্ঞান ═══ -->
+<section class="slide">
+  <div class="slide-head"><span class="eyebrow">০৪ · বিজ্ঞান</span></div>
+  <div class="slide-title">কেন এই সুতা আর<br>কেউ কাটতে পারে না</div>
+  <div class="body-grid">
+    <div>
+      <p class="claim">মসলিনের রহস্য শুধু দক্ষতায় নয় — <span class="hl">ফুটি কার্পাস</span> তুলার অনন্য জৈবিক গঠনে। এই তুলার তন্তু ছিলো অন্য যেকোনো তুলার চেয়ে সূক্ষ্ম ও দীর্ঘ।</p>
+      <ul class="pts">
+        <li>তন্তুর ব্যাস: <span class="hl">১১-১৩ মাইক্রন</span> — আধুনিক সুতির তুলা ২০-২৫ মাইক্রন।</li>
+        <li>শুধু মেঘনা তীরের আর্দ্র মাটি ও ভোরের শিশিরে এই তুলা জন্মাতো।</li>
+        <li>সুতা কাটা হতো ভোরবেলা — যখন আর্দ্রতায় তন্তু নমনীয় থাকতো।</li>
+        <li>এক থান মসলিন বুনতে লাগতো <span class="hl">৬ মাস</span> পর্যন্ত।</li>
+      </ul>
+    </div>
+    <div class="diagram-col">
+      <!-- Fiber diameter comparison -->
+      <svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
+        <rect width="300" height="260" fill="#f5f4ed"/>
+        <text x="150" y="16" text-anchor="middle" font-size="8" fill="#6b6a64" font-family="'Noto Serif Bengali', serif" font-weight="500">তন্তুর ব্যাস তুলনা (মাইক্রন)</text>
+        <!-- Y axis -->
+        <line x1="44" y1="30" x2="44" y2="210" stroke="#504e49" stroke-width="0.8"/>
+        <line x1="44" y1="210" x2="280" y2="210" stroke="#504e49" stroke-width="0.8"/>
+        <!-- gridlines -->
+        <line x1="44" y1="54" x2="280" y2="54" stroke="#e8e6dc" stroke-width="0.4"/>
+        <line x1="44" y1="100" x2="280" y2="100" stroke="#e8e6dc" stroke-width="0.4"/>
+        <line x1="44" y1="148" x2="280" y2="148" stroke="#e8e6dc" stroke-width="0.4"/>
+        <!-- Y labels -->
+        <text x="38" y="57" text-anchor="end" font-size="7" fill="#6b6a64">৩০</text>
+        <text x="38" y="103" text-anchor="end" font-size="7" fill="#6b6a64">২০</text>
+        <text x="38" y="151" text-anchor="end" font-size="7" fill="#6b6a64">১০</text>
+        <!-- bar: মানক সুতি 25μ -->
+        <rect x="56" y="76" width="50" height="134" fill="#e8e6dc"/>
+        <text x="81" y="68" text-anchor="middle" font-size="7" fill="#6b6a64">২৫</text>
+        <text x="81" y="228" text-anchor="middle" font-size="8" fill="#504e49" font-family="'Noto Serif Bengali', serif">মানক সুতি</text>
+        <!-- bar: পিমা সুতি 20μ -->
+        <rect x="120" y="100" width="50" height="110" fill="#e8e6dc"/>
+        <text x="145" y="92" text-anchor="middle" font-size="7" fill="#6b6a64">২০</text>
+        <text x="145" y="228" text-anchor="middle" font-size="8" fill="#504e49" font-family="'Noto Serif Bengali', serif">পিমা সুতি</text>
+        <!-- bar: রেশম 15μ -->
+        <rect x="184" y="124" width="50" height="86" fill="#e8e6dc"/>
+        <text x="209" y="116" text-anchor="middle" font-size="7" fill="#6b6a64">১৫</text>
+        <text x="209" y="228" text-anchor="middle" font-size="8" fill="#504e49" font-family="'Noto Serif Bengali', serif">রেশম</text>
+        <!-- bar: ফুটি কার্পাস 11μ (highlight) -->
+        <rect x="248" y="158" width="50" height="52" fill="#EEF2F7" stroke="#1B365D" stroke-width="1"/>
+        <text x="273" y="150" text-anchor="middle" font-size="8" fill="#1B365D" font-weight="500">১১</text>
+        <text x="273" y="228" text-anchor="middle" font-size="7.5" fill="#1B365D" font-family="'Noto Serif Bengali', serif" font-weight="500">ফুটি কার্পাস</text>
+        <!-- annotation: thinner = better -->
+        <text x="273" y="240" text-anchor="middle" font-size="6.5" fill="#1B365D" font-family="'Noto Serif Bengali', serif">সূক্ষ্মতর = উন্নততর</text>
+        <!-- dotted line at muslin level -->
+        <line x1="44" y1="158" x2="280" y2="158" stroke="#1B365D" stroke-width="0.6" stroke-dasharray="3 3"/>
+      </svg>
+    </div>
+  </div>
+  <div class="page-num">05</div>
+  <div class="footer-mark">মসলিন · বোনা বাতাস</div>
+</section>
+
+<!-- ═══ ০৬ · পুনরুত্থান ═══ -->
+<section class="slide">
+  <div class="slide-head"><span class="eyebrow">০৫ · পুনরুত্থান</span></div>
+  <div class="slide-title">হারানো শিল্পের<br>ফিরে আসা</div>
+  <div class="body-single">
+    <p class="claim">২০২০ সালে বাংলাদেশ সরকার ও রাজশাহী বিশ্ববিদ্যালয়ের গবেষকরা মিলে <span class="hl">ফুটি কার্পাস তুলা পুনরায় চাষ</span> করতে সক্ষম হন এবং ঐতিহ্যবাহী পদ্ধতিতে মসলিন বুনন শুরু করেন।</p>
+    <ul class="pts">
+      <li>ডিএনএ বিশ্লেষণে শনাক্ত হয় ফুটি কার্পাসের <span class="hl">জিনগত স্বাক্ষর</span> — বিলুপ্ত প্রজাতি পুনরুদ্ধার।</li>
+      <li>প্রথম পুনরুৎপাদিত মসলিন শাড়ির সুতা গণনা: প্রতি ইঞ্চিতে <span class="hl">৩০০-৫০০</span> — মূলের অর্ধেক, কিন্তু শুরু।</li>
+      <li>ঢাকা জাতীয় জাদুঘরে ঐতিহাসিক মসলিনের নমুনা সংরক্ষিত — তুলনামূলক গবেষণার ভিত্তি।</li>
+    </ul>
+  </div>
+  <div class="metrics">
+    <div class="metric"><div class="v">৬</div><div class="l">বছর গবেষণায় ফুটি কার্পাস তুলা পুনরুদ্ধার করতে লেগেছে</div></div>
+    <div class="metric"><div class="v">৫০০</div><div class="l">সুতা প্রতি ইঞ্চিতে — পুনরুৎপাদিত মসলিনে এখন পর্যন্ত সর্বোচ্চ</div></div>
+    <div class="metric"><div class="v">১</div><div class="l">টি শাড়ি বুনতে ৬ মাস — ঠিক যেমন আগে লাগতো</div></div>
+  </div>
+  <div class="page-num">06</div>
+  <div class="footer-mark">মসলিন · বোনা বাতাস</div>
+</section>
+
+<!-- ═══ ০৭ · সমাপ্তি ═══ -->
+<section class="slide ending">
+  <h1>সুতা ছিন্ন হয়,<br>ঐতিহ্য হয় না।</h1>
+  <div class="line"></div>
+  <div class="sub">যে কারিগরদের হাতে বাতাস বোনা হতো, তাদের উত্তরসূরিরা আজও সেই সুতা খুঁজছে। মসলিন শুধু কাপড় নয় — এটি একটি সভ্যতার স্বাক্ষর।</div>
+  <div class="page-num">07</div>
+  <div class="footer-mark">সমাপ্তি</div>
+</section>
+
+</body>
+</html>

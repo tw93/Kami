@@ -66,7 +66,7 @@ Branded documents should first make the subject recognizable, then use decoratio
 5. **Next step / contact** (footer)
 
 **Rules**:
-- Length target: English 200-350 words; Chinese 400-600 characters
+- Length target: English 200-350 words; Chinese 400-600 characters; Bengali 200-350 words
 - All section headlines should work as a standalone outline - reading just the headlines should deliver the gist
 - Data must fill 30%+ of the body
 - Company / product one-pagers must confirm logo, core screenshot or product image, and source for key metrics
@@ -114,6 +114,7 @@ Branded documents should first make the subject recognizable, then use decoratio
 **Language notes**:
 - Chinese sign-offs can use "此致 / 敬礼", "顺颂商祺", or a context-appropriate formal closing
 - English sign-offs should stay simple: "Best regards," / "Sincerely," / "Warm regards,"
+- Bengali sign-offs: "শ্রদ্ধাপূর্বক," (with respect) / "বিনীত," (humbly) / "ধন্যবাদান্তে," (with thanks) / "ইতি," (thus, formal)
 
 ### Portfolio
 
@@ -320,6 +321,11 @@ English documents:
 - Use straight quotes in source text unless the document already has a typographic quote convention
 - Prefer compact date forms (`2026.04`) in dense layouts and natural dates (`April 2026`) in prose
 
+Bengali documents:
+- Use standard Bengali full stop/danda (`।`) for prose punctuation instead of Latin period
+- Use Western numerals (0-9) for data, metrics, and technical values to maintain professional convention
+- Keep spaces between Bengali text and English product/company names for readability
+
 ### Emphasis is not bold
 
 Use `color: var(--brand)` alone - don't also add `font-weight: bold`. Bold breaks the single-weight design language.
@@ -341,6 +347,7 @@ Run through before every draft:
 - [ ] Paragraph lengths even? No paragraph over 5 lines?
 - [ ] Number format consistent (commas, percent signs, arrows)?
 - [ ] Chinese punctuation and Chinese / Latin spacing consistent where applicable?
+- [ ] Bengali punctuation consistent? Danda (।) used as sentence-ending, not Latin period? Western numerals for metrics?
 - [ ] Page count within the document's constraint (resume 2, one-pager 1, letter 1)?
 
 ---

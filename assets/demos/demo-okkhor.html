@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>অক্ষর · বাংলা টাইপোগ্রাফি ইঞ্জিন</title>
+<meta name="generator" content="Kami">
+<style>
+  @font-face {
+    font-family: "Noto Serif Bengali";
+    src: url("../fonts/NotoSerifBengali-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Noto Serif Bengali";
+    src: url("../fonts/NotoSerifBengali-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+    background: #f5f4ed;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --near-black:#141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+
+    --serif: "Noto Serif Bengali", "Shonar Bangla",
+             "Noto Serif", Georgia, serif;
+  }
+
+  html, body {
+    background: var(--parchment);
+    height: 100%;
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 10pt;
+    line-height: 1.5;
+    letter-spacing: 0;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    padding: 28mm 24mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  @media screen {
+    body { display: flex; justify-content: center; }
+  }
+
+  /* ── top eyebrow ── */
+  .eyebrow {
+    font-size: 10pt;
+    color: var(--brand);
+    font-weight: 500;
+  }
+
+  /* ── center block ── */
+  .center {
+    display: flex;
+    flex-direction: column;
+    gap: 16pt;
+  }
+
+  .name {
+    font-family: var(--serif);
+    font-size: 72pt;
+    font-weight: 500;
+    line-height: 1.05;
+    color: var(--near-black);
+  }
+
+  .tagline {
+    font-size: 15pt;
+    color: var(--olive);
+    line-height: 1.6;
+    max-width: 75%;
+  }
+
+  .rule {
+    width: 72pt;
+    height: 2.5pt;
+    background: var(--brand);
+    border-radius: 1pt;
+    margin-top: 12pt;
+  }
+
+  /* ── bottom meta ── */
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9.5pt;
+    color: var(--stone);
+  }
+  .meta strong {
+    color: var(--dark-warm);
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="eyebrow">টাইপোগ্রাফি ইঞ্জিন · ২০২৬</div>
+
+  <div class="center">
+    <div class="name">অক্ষর</div>
+    <div class="tagline">বাংলা লিপির জন্য তৈরি ওপেন সোর্স টাইপোগ্রাফি ইঞ্জিন। যুক্তাক্ষর ও মাত্রা সংরক্ষণ করে, মুদ্রণমানের রেন্ডারিং নিশ্চিত করে।</div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="meta">
+    <div><strong>বিভাগ</strong> টাইপোগ্রাফি ইঞ্জিন</div>
+    <div><strong>প্রযুক্তি</strong> Rust · HarfBuzz · OpenType</div>
+    <div><strong>অবস্থা</strong> ওপেন সোর্স · ৩,২০০+ Stars</div>
+  </div>
+</div>
+
+</body>
+</html>

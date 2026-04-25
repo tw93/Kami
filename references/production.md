@@ -61,6 +61,9 @@ font-family: "TsangerJinKai02", "Source Han Serif SC",
 font-family: "YuMincho", "Yu Mincho", "Hiragino Mincho ProN",
              "Noto Serif CJK JP", "Source Han Serif JP",
              "TsangerJinKai02", Georgia, serif;
+
+/* Bengali */
+font-family: "Noto Serif Bengali", "Shonar Bangla", "Noto Serif", Georgia, serif;
 ```
 
 **Font fallback affects page count**. Any font swap requires re-running the page-count check. If it overflows: lower `font-size` first, then tighten margins, then cut content.
@@ -281,7 +284,7 @@ pdftoppm -png -r 300 out.pdf inspect
 pdffonts output.pdf
 ```
 
-If the output shows `DejaVuSerif` / `Bitstream Vera` - your specified font didn't load, fell through to system ultimate fallback. Expected: `Charter`, `Georgia`, `TsangerJinKai02`, or a Japanese Mincho face such as `YuMincho`, `Hiragino-Mincho`, `Noto-Serif-CJK-JP`, or `Source-Han-Serif-JP`.
+If the output shows `DejaVuSerif` / `Bitstream Vera` - your specified font didn't load, fell through to system ultimate fallback. Expected: `Charter`, `Georgia`, `TsangerJinKai02`, `NotoSerifBengali`, or a Japanese Mincho face such as `YuMincho`, `Hiragino-Mincho`, `Noto-Serif-CJK-JP`, or `Source-Han-Serif-JP`.
 
 ### One-step build + validate
 

@@ -52,6 +52,35 @@
     --olive: #4d4c48;  /* YuMincho strokes are thinner; darken olive text to compensate */
   }
 
+  @font-face {
+    font-family: "Noto Serif Bengali";
+    src: url("assets/fonts/NotoSerifBengali-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Noto Serif Bengali";
+    src: url("assets/fonts/NotoSerifBengali-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  html[lang="bn"] {
+    --serif: "Noto Serif Bengali", "Shonar Bangla", "Noto Serif", Charter, Georgia, serif;
+    --sans: var(--serif);
+    letter-spacing: 0 !important;  /* protect Bengali conjuncts */
+  }
+
+  /* Reset uppercase and tracking on specific elements for Bengali to protect conjuncts */
+  html[lang="bn"] .eyebrow, html[lang="bn"] .hero-tokens span b, html[lang="bn"] .section-num, 
+  html[lang="bn"] .tag, html[lang="bn"] .type-label, html[lang="bn"] .comp h4, html[lang="bn"] .chart-label, 
+  html[lang="bn"] .decision th, html[lang="bn"] .no h5, html[lang="bn"] .yes h5, html[lang="bn"] .label, 
+  html[lang="bn"] .btn {
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+  }
   /* Language switcher */
   .lang-switch {
     position: fixed;

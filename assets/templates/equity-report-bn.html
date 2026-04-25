@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     EQUITY REPORT · বাংলা · parchment design system
+     2-3 page A4 equity research / valuation / investment memo
+     Structure: header -> metrics -> charts -> financials -> comps -> risks -> summary
+     ================================================================== -->
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>{{কোম্পানির_নাম}} · ইক্যুইটি প্রতিবেদন</title>
+<meta name="author" content="{{লেখক}}">
+<meta name="description" content="{{বিবরণ}}">
+<meta name="keywords" content="{{মূলশব্দ}}">
+<meta name="generator" content="Kami">
+<style>
+  /* Bengali serif — Noto Serif Bengali */
+  @font-face {
+    font-family: "Noto Serif Bengali";
+    src: url("../fonts/NotoSerifBengali-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Noto Serif Bengali";
+    src: url("../fonts/NotoSerifBengali-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 500; font-style: normal; }
+
+  @page {
+    size: A4;
+    margin: 16mm 18mm 18mm 18mm;
+    background: #f5f4ed;
+
+    @bottom-center {
+      content: counter(page) "  ·  {{কোম্পানির_নাম}} প্রতিবেদন";
+      font-family: "Noto Serif Bengali", "Shonar Bangla", "Noto Serif", Georgia, serif;
+      font-size: 9pt;
+      color: #6b6a64;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --near-black:#141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --border:    #e8e6dc;
+    --border-soft:#e5e3d8;
+    --tag-bg:    #E4ECF5;
+    --positive:  #1B365D;
+    --negative:  #6b6a64;
+
+    --serif: "Noto Serif Bengali", "Shonar Bangla",
+             "Noto Serif", Georgia, serif;
+    --sans: var(--serif);
+    --mono:  "JetBrains Mono", "SF Mono", "Fira Code",
+             Consolas, Monaco, monospace;
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 16mm 18mm 18mm 18mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 10pt;
+    line-height: 1.5;
+    letter-spacing: 0;
+  }
+
+  strong { font-weight: 500; }
+  .hl { color: var(--brand); font-weight: 500; }
+
+  /* HEADER */
+  .report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14pt;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+  }
+  .ticker-block { flex: 1; }
+  .ticker-eyebrow {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--brand);
+    font-weight: 500;
+    margin-bottom: 4pt;
+  }
+  .ticker-name {
+    font-family: var(--serif);
+    font-size: 26pt;
+    font-weight: 500;
+    color: var(--near-black);
+    line-height: 1.12;
+    margin-bottom: 4pt;
+  }
+  .ticker-sub {
+    font-size: 10pt;
+    color: var(--olive);
+    line-height: 1.4;
+  }
+  .price-block {
+    text-align: right;
+    padding-top: 4pt;
+  }
+  .price-current {
+    font-family: var(--serif);
+    font-size: 30pt;
+    font-weight: 500;
+    color: var(--near-black);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .price-change {
+    font-size: 10pt;
+    font-weight: 500;
+    margin-top: 2pt;
+    font-variant-numeric: tabular-nums;
+  }
+  .price-change.up { color: var(--positive); }
+  .price-change.down { color: var(--negative); }
+  .price-date {
+    font-size: 9pt;
+    color: var(--stone);
+    margin-top: 2pt;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* METRICS */
+  .metrics {
+    display: flex;
+    gap: 16pt;
+    margin-bottom: 16pt;
+    padding: 6pt 0;
+    border-top: 0.3pt dotted var(--border);
+    border-bottom: 0.3pt dotted var(--border);
+  }
+  .metric {
+    flex: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 5pt;
+  }
+  .metric-value {
+    font-family: var(--serif);
+    font-size: 18pt;
+    font-weight: 500;
+    color: var(--brand);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .metric-label {
+    font-size: 9pt;
+    color: var(--olive);
+    line-height: 1.3;
+  }
+
+  /* SECTIONS */
+  h2 {
+    font-family: var(--serif);
+    font-size: 16pt;
+    font-weight: 500;
+    color: var(--near-black);
+    margin: 18pt 0 6pt 0;
+    break-after: avoid;
+  }
+
+  h3 {
+    font-size: 13pt;
+    font-weight: 500;
+    color: var(--dark-warm);
+    margin: 12pt 0 4pt 0;
+    break-after: avoid;
+  }
+
+  p { margin: 0 0 8pt 0; line-height: 1.5; }
+
+  ul, ol {
+    margin: 4pt 0 8pt 0;
+    padding-left: 18pt;
+    line-height: 1.5;
+  }
+  ul li::marker { color: var(--brand); }
+  ol li::marker { color: var(--brand); font-weight: 500; }
+
+  /* TAG */
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--brand);
+    font-family: var(--sans);
+    font-size: 9pt;
+    font-weight: 500;
+    padding: 1pt 6pt;
+    border-radius: 3pt;
+    margin-right: 3pt;
+  }
+
+  /* TABLE (kami-table) */
+  table, .kami-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.5pt;
+    margin: 8pt 0;
+    break-inside: avoid;
+  }
+  table th, .kami-table th {
+    text-align: left;
+    font-family: var(--sans);
+    font-weight: 500;
+    color: var(--dark-warm);
+    padding: 5pt 8pt;
+    border-bottom: 1pt solid var(--border);
+    background: transparent;
+  }
+  table td, .kami-table td {
+    padding: 4pt 8pt;
+    border-bottom: 0.3pt solid var(--border-soft);
+    vertical-align: top;
+  }
+  table.compact th, .kami-table.compact th { padding: 3pt 6pt; font-size: 8pt; }
+  table.compact td, .kami-table.compact td { padding: 2pt 6pt; font-size: 8pt; line-height: 1.4; }
+  table.financial td:not(:first-child), .kami-table.financial td:not(:first-child) {
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  table.financial th:not(:first-child), .kami-table.financial th:not(:first-child) { text-align: right; }
+  table.striped tbody tr:nth-child(even) td, .kami-table.striped tbody tr:nth-child(even) td {
+    background: var(--ivory);
+  }
+  table .total td, .kami-table .total td {
+    font-weight: 500; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
+  }
+
+  /* CALLOUT */
+  .callout {
+    background: var(--ivory);
+    border-left: 2pt solid var(--brand);
+    padding: 8pt 12pt;
+    border-radius: 3pt;
+    margin: 10pt 0;
+    line-height: 1.5;
+    break-inside: avoid;
+  }
+
+  /* FIGURE */
+  figure { margin: 12pt 0; break-inside: avoid; }
+  figcaption {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--stone);
+    margin-top: 4pt;
+    text-align: center;
+  }
+
+  /* RISK MATRIX */
+  .risk-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10pt;
+    margin: 8pt 0;
+  }
+  .risk-item {
+    padding: 6pt 10pt;
+    background: var(--ivory);
+    border-radius: 3pt;
+    break-inside: avoid;
+  }
+  .risk-label {
+    font-family: var(--sans);
+    font-size: 9pt;
+    font-weight: 500;
+    color: var(--brand);
+    margin-bottom: 2pt;
+  }
+  .risk-desc {
+    font-size: 9pt;
+    color: var(--olive);
+    line-height: 1.45;
+  }
+
+  /* TWO-COLUMN */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16pt;
+  }
+
+  /* ANALYST SUMMARY */
+  .analyst-box {
+    background: var(--ivory);
+    border: 0.5pt solid var(--border);
+    border-radius: 4pt;
+    padding: 10pt 14pt;
+    margin: 12pt 0;
+    break-inside: avoid;
+  }
+  .analyst-label {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--brand);
+    font-weight: 500;
+    margin-bottom: 4pt;
+  }
+
+  /* FOOTER */
+  .report-footer {
+    margin-top: 16pt;
+    padding-top: 6pt;
+    border-top: 0.3pt dotted var(--border);
+    font-size: 9pt;
+    color: var(--stone);
+    display: flex;
+    justify-content: space-between;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .page-break { break-before: page; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="report-header">
+  <div class="ticker-block">
+    <div class="ticker-eyebrow">{{আইব্রো - যেমন ইক্যুইটি রিসার্চ / ভ্যালুয়েশন / ইনভেস্টমেন্ট মেমো}}</div>
+    <div class="ticker-name">{{কোম্পানির_নাম}} <span style="font-size: 14pt; color: var(--stone);">{{টিকার}}</span></div>
+    <div class="ticker-sub">{{খাত}} · {{এক্সচেঞ্জ}} · {{এক লাইনের থিসিস।}}</div>
+  </div>
+  <div class="price-block">
+    <div class="price-current">{{বর্তমান_মূল্য}}</div>
+    <div class="price-change up">{{পরিবর্তন - যেমন "+১২.৩%"}}</div>
+    <div class="price-date">{{তারিখ}}</div>
+  </div>
+</div>
+
+<!-- METRICS -->
+<div class="metrics">
+  <div class="metric">
+    <div class="metric-value">{{সংখ্যা}}</div>
+    <div class="metric-label">মার্কেট ক্যাপ</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">{{সংখ্যা}}</div>
+    <div class="metric-label">পি/ই রেশিও</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">{{সংখ্যা}}</div>
+    <div class="metric-label">রাজস্ব</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">{{সংখ্যা}}</div>
+    <div class="metric-label">মার্জিন</div>
+  </div>
+</div>
+
+<!-- INVESTMENT THESIS -->
+<h2>বিনিয়োগ থিসিস</h2>
+<p>{{মূল থিসিস তুলে ধরে দুই বা তিনটি বাক্য। যুক্তি সমর্থনে <span class="hl">মূল পরিসংখ্যান</span> ব্যবহার করুন। এই অনুচ্ছেদটি হলো প্রতিবেদনের প্রাণ।}}</p>
+
+<div class="callout">
+  {{এক লাইনের সিদ্ধান্ত: কিনুন / ধরে রাখুন / নজরে রাখুন, এবং এর সবচেয়ে জোরালো কারণ।}}
+</div>
+
+<!-- CHART -->
+<h2>মূল্য গতিবিধি</h2>
+<figure>
+  <div style="height: 60mm; background: var(--ivory); border: 0.5pt solid var(--border-soft); border-radius: 4pt; display: flex; align-items: center; justify-content: center; color: var(--stone); font-size: 9pt;">[ক্যান্ডেলস্টিক / প্রাইস চার্টের স্থান - diagrams/ থেকে SVG আনুন]
+  </div>
+  <figcaption>{{চার্টের শিরোনাম, যেমন "অ্যাকিউমুলেশন ফেজ নির্দেশকারী ২০ দিনের মূল্য গতিবিধি।"}}</figcaption>
+</figure>
+
+<!-- FINANCIALS -->
+<h2>আর্থিক রূপরেখা</h2>
+<table class="financial striped">
+  <thead>
+    <tr>
+      <th>মেট্রিক</th>
+      <th>অর্থবছর ২০২৩</th>
+      <th>অর্থবছর ২০২৪</th>
+      <th>অর্থবছর ২০২৫ (অনুমান)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>রাজস্ব</td><td>{{মান}}</td><td>{{মান}}</td><td>{{মান}}</td></tr>
+    <tr><td>নিট আয়</td><td>{{মান}}</td><td>{{মান}}</td><td>{{মান}}</td></tr>
+    <tr><td>ইপিএস</td><td>{{মান}}</td><td>{{মান}}</td><td>{{মান}}</td></tr>
+    <tr><td>গ্রস মার্জিন</td><td>{{মান}}</td><td>{{মান}}</td><td>{{মান}}</td></tr>
+    <tr><td>আরওই</td><td>{{মান}}</td><td>{{মান}}</td><td>{{মান}}</td></tr>
+  </tbody>
+</table>
+
+<!-- REVENUE BREAKDOWN -->
+<h2>রাজস্ব বিভাজন</h2>
+<figure>
+  <div style="height: 50mm; background: var(--ivory); border: 0.5pt solid var(--border-soft); border-radius: 4pt; display: flex; align-items: center; justify-content: center; color: var(--stone); font-size: 9pt;">[রাজস্ব বিভাজন চার্টের স্থান - ডোনাট বা ওয়াটারফল]
+  </div>
+  <figcaption>{{চার্টের শিরোনাম।}}</figcaption>
+</figure>
+
+<!-- COMPETITIVE POSITIONING -->
+<div class="page-break"></div>
+<h2>প্রতিযোগিতামূলক অবস্থান</h2>
+<p>{{শিল্পের প্রেক্ষাপটের রূপরেখা, এক বা দুটি অনুচ্ছেদ।}}</p>
+
+<table class="financial compact striped">
+  <thead>
+    <tr>
+      <th>কোম্পানি</th>
+      <th>মার্কেট ক্যাপ</th>
+      <th>পি/ই</th>
+      <th>রাজস্ব প্রবৃদ্ধি</th>
+      <th>মার্জিন</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>{{লক্ষ্য}}</strong></td><td>{{মান}}</td><td>{{মান}}</td><td>{{মান}}</td><td>{{মান}}</td></tr>
+    <tr><td>{{প্রতিযোগী_ক}}</td><td>{{মান}}</td><td>{{মান}}</td><td>{{মান}}</td><td>{{মান}}</td></tr>
+    <tr><td>{{প্রতিযোগী_খ}}</td><td>{{মান}}</td><td>{{মান}}</td><td>{{মান}}</td><td>{{মান}}</td></tr>
+    <tr><td>{{প্রতিযোগী_গ}}</td><td>{{মান}}</td><td>{{মান}}</td><td>{{মান}}</td><td>{{মান}}</td></tr>
+  </tbody>
+</table>
+
+<!-- RISKS -->
+<h2>ঝুঁকির কারণসমূহ</h2>
+<div class="risk-grid">
+  <div class="risk-item">
+    <div class="risk-label">{{ঝুঁকির_ধরন_১}}</div>
+    <div class="risk-desc">{{ঝুঁকির বিবরণ।}}</div>
+  </div>
+  <div class="risk-item">
+    <div class="risk-label">{{ঝুঁকির_ধরন_২}}</div>
+    <div class="risk-desc">{{ঝুঁকির বিবরণ।}}</div>
+  </div>
+  <div class="risk-item">
+    <div class="risk-label">{{ঝুঁকির_ধরন_৩}}</div>
+    <div class="risk-desc">{{ঝুঁকির বিবরণ।}}</div>
+  </div>
+  <div class="risk-item">
+    <div class="risk-label">{{ঝুঁকির_ধরন_৪}}</div>
+    <div class="risk-desc">{{ঝুঁকির বিবরণ।}}</div>
+  </div>
+</div>
+
+<!-- ANALYST SUMMARY -->
+<div class="analyst-box">
+  <div class="analyst-label">বিশ্লেষকের সারসংক্ষেপ</div>
+  {{অবস্থানের সারসংক্ষেপ জানিয়ে তিন থেকে পাঁচটি বাক্য। টার্গেট প্রাইস (প্রযোজ্য হলে), রেটিং, মূল প্রভাবক (catalysts), এবং মূল অনুমানসমূহ অন্তর্ভুক্ত করুন।}}
+</div>
+
+<!-- FOOTER -->
+<div class="report-footer">
+  <span>{{প্রতিষ্ঠান / দাবিত্যাগ}}</span>
+  <span>{{লেখক}} · {{তারিখ}}</span>
+</div>
+
+</body>
+</html>

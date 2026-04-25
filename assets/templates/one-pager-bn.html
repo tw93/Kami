@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     ONE-PAGER · বাংলা · parchment design system
+     একক A4 প্রস্তাবনা / প্রতিবেদন / নির্বাহী সারসংক্ষেপ
+     Build: python3 scripts/build.py one-pager-bn
+     Target: exactly 1 page
+     ================================================================== -->
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>{{নথির শিরোনাম}}</title>
+<meta name="author" content="{{লেখক}}">
+<meta name="description" content="{{বিবরণ}}">
+<meta name="keywords" content="{{মূলশব্দ}}">
+<meta name="generator" content="Kami">
+<style>
+  /* Bengali serif — Noto Serif Bengali */
+  @font-face {
+    font-family: "Noto Serif Bengali";
+    src: url("../fonts/NotoSerifBengali-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Noto Serif Bengali";
+    src: url("../fonts/NotoSerifBengali-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 500; font-style: normal; }
+
+  @page {
+    size: A4;
+    margin: 15mm 18mm 15mm 18mm;
+    background: #f5f4ed;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --sand:      #e8e6dc;
+    --near-black:#141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --border:    #e8e6dc;
+    --border-soft:#e5e3d8;
+    --tag-bg:    #E4ECF5;
+
+    --serif: "Noto Serif Bengali", "Shonar Bangla",
+             "Noto Serif", Georgia, serif;
+    --sans: var(--serif);
+    --mono:  "JetBrains Mono", "SF Mono", "Fira Code",
+             Consolas, Monaco, monospace;
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 15mm 18mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 10pt;
+    line-height: 1.5;
+    letter-spacing: 0;
+  }
+
+  .serif { font-family: var(--serif); }
+
+  /* ========== HEADER ========== */
+  .header {
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+    margin-bottom: 14pt;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20pt;
+  }
+  .title-block { flex: 1; }
+  .eyebrow {
+    font-size: 9pt;
+    color: var(--brand);
+    letter-spacing: 0;
+    margin-bottom: 4pt;
+    font-weight: 500;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: 24pt;
+    font-weight: 500;
+    color: var(--near-black);
+    line-height: 1.2;
+    margin-bottom: 5pt;
+  }
+  .subtitle {
+    font-size: 11pt;
+    color: var(--olive);
+    line-height: 1.45;
+  }
+  .meta {
+    font-size: 9pt;
+    color: var(--stone);
+    text-align: right;
+    line-height: 1.5;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ========== METRICS ========== */
+  .metrics {
+    display: flex;
+    gap: 14pt;
+    margin-bottom: 18pt;
+    padding: 4pt 0 6pt 0;
+    border-bottom: 0.3pt dotted var(--border);
+  }
+  .metric {
+    flex: 1;
+    background: transparent;
+    padding: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 5pt;
+    break-inside: avoid;
+  }
+  .metric-value {
+    font-family: var(--serif);
+    font-size: 20pt;
+    font-weight: 500;
+    color: var(--brand);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.2pt;
+  }
+  .metric-label {
+    font-size: 9pt;
+    color: var(--olive);
+    line-height: 1.3;
+  }
+
+  /* ========== SECTIONS ========== */
+  section { margin-bottom: 18pt; break-inside: avoid; }
+  section:last-of-type { margin-bottom: 0; }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 16pt;
+    font-weight: 500;
+    color: var(--near-black);
+    margin-bottom: 6pt;
+  }
+  h2 .sub {
+    font-size: 9pt;
+    color: var(--stone);
+    font-weight: 400;
+    margin-left: 6pt;
+  }
+
+  p { margin-bottom: 6pt; line-height: 1.5; }
+  p:last-child { margin-bottom: 0; }
+
+  .lead {
+    font-size: 12pt;
+    line-height: 1.55;
+    color: var(--dark-warm);
+    margin-bottom: 14pt;
+  }
+
+  .hl { color: var(--brand); font-weight: 500; }
+
+  /* ========== 2-column grid ========== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18pt;
+  }
+
+  /* ========== Dash list ========== */
+  ul.dash {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul.dash li {
+    position: relative;
+    padding-left: 14pt;
+    margin-bottom: 4pt;
+    line-height: 1.5;
+  }
+  ul.dash li::before {
+    content: "\2013";
+    position: absolute;
+    left: 0;
+    color: var(--brand);
+  }
+
+  /* ========== Timeline ========== */
+  .timeline {
+    display: flex;
+    gap: 12pt;
+    margin-top: 6pt;
+  }
+  .tl-step { flex: 1; break-inside: avoid; }
+  .tl-year {
+    font-family: var(--serif);
+    font-size: 11pt;
+    font-weight: 500;
+    color: var(--brand);
+    margin-bottom: 2pt;
+  }
+  .tl-head {
+    font-size: 10pt;
+    font-weight: 500;
+    color: var(--near-black);
+    margin-bottom: 2pt;
+  }
+  .tl-body {
+    font-size: 9pt;
+    color: var(--olive);
+    line-height: 1.5;
+  }
+
+  /* ========== Tag ========== */
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--brand);
+    font-size: 9pt;
+    font-weight: 500;
+    padding: 1pt 5pt;
+    border-radius: 3pt;
+    letter-spacing: 0;
+    margin-right: 3pt;
+  }
+
+  /* ========== Callout ========== */
+  .callout {
+    background: transparent;
+    border-left: 1.8pt solid var(--brand);
+    padding: 4pt 0 4pt 14pt;
+    margin: 10pt 0;
+    font-size: 10pt;
+    line-height: 1.55;
+    color: var(--olive);
+    break-inside: avoid;
+  }
+  .callout .hl, .callout .em-brand { color: var(--brand); }
+
+  /* ========== TABLE (kami-table) ========== */
+  table, .kami-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+    margin: 8pt 0;
+    break-inside: avoid;
+  }
+  table th, .kami-table th {
+    text-align: left;
+    font-weight: 500;
+    color: var(--dark-warm);
+    padding: 4pt 6pt;
+    border-bottom: 1pt solid var(--border);
+    background: transparent;
+  }
+  table td, .kami-table td {
+    padding: 3pt 6pt;
+    border-bottom: 0.3pt solid var(--border-soft);
+    vertical-align: top;
+  }
+  table.compact th, .kami-table.compact th { padding: 2pt 5pt; font-size: 8pt; }
+  table.compact td, .kami-table.compact td { padding: 1pt 5pt; font-size: 8pt; line-height: 1.4; }
+  table.financial td:not(:first-child), .kami-table.financial td:not(:first-child) {
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  table.financial th:not(:first-child), .kami-table.financial th:not(:first-child) { text-align: right; }
+  table.striped tbody tr:nth-child(even) td, .kami-table.striped tbody tr:nth-child(even) td {
+    background: var(--ivory);
+  }
+  table .total td, .kami-table .total td {
+    font-weight: 500; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
+  }
+
+  /* ========== FOOTER ========== */
+  .footer {
+    margin-top: 18pt;
+    padding-top: 6pt;
+    border-top: 0.3pt dotted var(--border);
+    font-size: 9pt;
+    color: var(--stone);
+    display: flex;
+    justify-content: space-between;
+    font-variant-numeric: tabular-nums;
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<div class="header">
+  <div class="title-block">
+    <div class="eyebrow">{{আইব্রো — যেমন "প্রস্তাবনা" / "প্রতিবেদন" / "নির্বাহী সারসংক্ষেপ"}}</div>
+    <h1>{{নথির মূল শিরোনাম — ক্রিয়া+বিশেষ্য গঠন, দুই লাইনের মধ্যে}}</h1>
+    <div class="subtitle">{{এক লাইনের উপশিরোনাম / একটি মূল দাবি।}}</div>
+  </div>
+  <div class="meta">
+    {{লেখকের নাম}}<br>
+    {{তারিখ YYYY.MM.DD}}<br>
+    {{সংস্করণ / অবস্থা}}
+  </div>
+</div>
+
+<!-- ========== METRICS ========== -->
+<div class="metrics">
+  <div class="metric">
+    <div class="metric-value">{{সংখ্যা}}</div>
+    <div class="metric-label">{{লেবেল}}</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">{{সংখ্যা}}</div>
+    <div class="metric-label">{{লেবেল}}</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">{{সংখ্যা}}</div>
+    <div class="metric-label">{{লেবেল}}</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">{{সংখ্যা}}</div>
+    <div class="metric-label">{{লেবেল}}</div>
+  </div>
+</div>
+
+<!-- ========== LEAD ========== -->
+<p class="lead">
+  {{৩০-৪০ শব্দের মূল বক্তব্য। এই অনুচ্ছেদটি পুরো নথির সুর নির্ধারণ করে। সবচেয়ে তীক্ষ্ণ দাবি বা সংখ্যায় <span class="hl">ব্র্যান্ড-রঙের জোর</span> ব্যবহার করুন। নিচের সবকিছু এটির সেবায়।}}
+</p>
+
+<!-- ========== মূল বিষয়বস্তু (দুই কলাম) ========== -->
+<div class="two-col">
+  <section>
+    <h2>{{বিভাগ এক}}</h2>
+    <p>{{দাবি সম্প্রসারণকারী এক বা দুটি বাক্য।}}</p>
+    <ul class="dash">
+      <li>{{সংক্ষিপ্ত বুলেট: একটি তথ্য, পর্যবেক্ষণ, বা মূল্যায়ন।}}</li>
+      <li>{{সংক্ষিপ্ত বুলেট: <span class="hl">মূল সংখ্যা</span> সহ।}}</li>
+      <li>{{সংক্ষিপ্ত বুলেট।}}</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>{{বিভাগ দুই}}</h2>
+    <p>{{এক বা দুটি বাক্য।}}</p>
+    <ul class="dash">
+      <li>{{সংক্ষিপ্ত বুলেট।}}</li>
+      <li>{{সংক্ষিপ্ত বুলেট।}}</li>
+      <li>{{সংক্ষিপ্ত বুলেট।}}</li>
+    </ul>
+  </section>
+</div>
+
+<!-- ========== Timeline / Roadmap ========== -->
+<section>
+  <h2>রোডম্যাপ<span class="sub">প্রস্তাবনার জন্য তিন-ধাপের পরিকল্পনা</span></h2>
+  <div class="timeline">
+    <div class="tl-step">
+      <div class="tl-year">পর্ব ১</div>
+      <div class="tl-head">{{পর্বের শিরোনাম}}</div>
+      <div class="tl-body">{{এক লাইনের ব্যাখ্যা।}}</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-year">পর্ব ২</div>
+      <div class="tl-head">{{পর্বের শিরোনাম}}</div>
+      <div class="tl-body">{{এক লাইনের ব্যাখ্যা।}}</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-year">পর্ব ৩</div>
+      <div class="tl-head">{{পর্বের শিরোনাম}}</div>
+      <div class="tl-body">{{এক লাইনের ব্যাখ্যা।}}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CALLOUT ========== -->
+<div class="callout">
+  {{মূল উদ্ধৃতি / গুরুত্বপূর্ণ টীকা / যে একটি বার্তা মিস করা যাবে না।}}
+</div>
+
+<!-- ========== FOOTER ========== -->
+<div class="footer">
+  <span>{{গোপনীয়তা — অভ্যন্তরীণ / প্রকাশ্য / খসড়া}}</span>
+  <span>{{পৃষ্ঠা / যোগাযোগ}}</span>
+</div>
+
+</body>
+</html>

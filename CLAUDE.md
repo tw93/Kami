@@ -12,13 +12,13 @@ Warm parchment canvas, ink-blue accent, serif-led hierarchy, and editorial white
 | `references/design.md` | Design system spec, English-only source | Low |
 | `references/writing.md` | Content strategy + quality bars per document type, English-only source | Low |
 | `references/production.md` | WeasyPrint build and troubleshooting runbook, English-only source | Medium |
-| `assets/templates/` | 8 document templates in 2 base language families, plus Japanese best-effort mapping | Medium |
+| `assets/templates/` | 8 document templates in 3 language families (CN, EN, BN), plus Japanese best-effort mapping | Medium |
 | `assets/demos/` | README showcase demos, regenerate after visual changes | Medium |
 | `scripts/build.py` | PDF / PNG / PPTX build and verification script | Low |
 | `scripts/package-skill.sh` | Claude Desktop ZIP packager, excluding large fonts | Low |
 | `dist/kami.zip` | Claude Desktop ZIP artifact, updated from main | Medium |
 
-Reference docs are English-only. Do not recreate `*.en.md` duplicates. Chinese / English output differences belong in the templates. Japanese currently uses a best-effort CJK mapping with JP Mincho-first font stacks, no dedicated `-ja` templates yet, and requires visual QA before shipping.
+Reference docs are English-only. Do not recreate `*.en.md` duplicates. Chinese / English / Bengali output differences belong in the templates. Japanese currently uses a best-effort CJK mapping with JP Mincho-first font stacks, no dedicated `-ja` templates yet, and requires visual QA before shipping. Bengali uses Noto Serif Bengali (OFL) with `letter-spacing: 0` to preserve conjuncts.
 Do not use graphic emoticons in docs, template comments, or script output. Use `OK:` / `ERROR:` for status and `Use` / `Avoid` for comparisons.
 
 ## Verification
@@ -45,6 +45,9 @@ Current demos in `assets/demos/`:
 | `demo-kaku.*` | Kaku portfolio (JP) | portfolio |
 | `demo-musk-resume.*` | Elon Musk resume (EN) | resume |
 | `demo-agent-slides.*` | Agent development slides (EN) | slides |
+| `demo-muslin-slides.*` | মসলিন: বোনা বাতাস slides (BN) | slides |
+| `demo-satyajit-resume.*` | Bengali resume (BN) | resume |
+| `demo-okkhor.*` | অক্ষর portfolio page (BN) | portfolio |
 
 All demo PNG files use **1241x1754px** (first A4 portrait page at 150dpi).
 
@@ -111,6 +114,7 @@ Do not mix English and Chinese inside the same numbered item. Keep both lists al
 `TsangerJinKai02-W04.ttf` is a commercial font. Commercial use requires a license from tsanger.cn.
 Fallback without TsangerJinKai: Source Han Serif SC -> Noto Serif CJK SC -> Songti SC -> STSong -> Georgia.
 English templates use Charter serif.
+Bengali templates use Noto Serif Bengali (OFL-licensed, free to redistribute). Font files at `assets/fonts/NotoSerifBengali-Regular.ttf` and `NotoSerifBengali-Medium.ttf`. No packaging restrictions; bundled in the Claude Desktop ZIP. Critical rule: `letter-spacing: 0` to preserve conjuncts.
 Japanese output uses YuMincho as primary with fallback chain: YuMincho -> Hiragino Mincho ProN -> Noto Serif CJK JP -> Source Han Serif JP -> TsangerJinKai02 -> serif. Treat it as best-effort and verify rendering before delivery.
 
 The Claude Desktop ZIP does not bundle TsangerJinKai TTF files. They are about 19MB each and can make upload or execution time out. Before building Chinese documents, the skill checks for missing fonts and downloads them from jsDelivr into `assets/fonts/`. WeasyPrint then uses the existing relative `@font-face` paths without changing HTML.

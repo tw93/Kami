@@ -48,10 +48,19 @@ HTML_TARGETS: dict[str, tuple[str, int]] = {
     # Changelog
     "changelog":    ("changelog.html", 2),
     "changelog-en": ("changelog-en.html", 2),
+    # Bengali
+    "one-pager-bn": ("one-pager-bn.html", 1),
+    "letter-bn":    ("letter-bn.html", 1),
+    "long-doc-bn":  ("long-doc-bn.html", 0),
+    "portfolio-bn": ("portfolio-bn.html", 0),
+    "resume-bn":    ("resume-bn.html", 2),
+    "equity-report-bn": ("equity-report-bn.html", 3),
+    "changelog-bn": ("changelog-bn.html", 2),
 }
 PPTX_TARGETS: dict[str, str] = {
     "slides":    "slides.py",
     "slides-en": "slides-en.py",
+    "slides-bn": "slides-bn.py",
 }
 
 # Diagram HTMLs live in a separate directory and have no page-count contract.
@@ -321,6 +330,7 @@ PLACEHOLDER = re.compile(r"\{\{[^}]+\}\}")
 # Primary fonts expected in embedded PDF font names
 CN_PRIMARY_FONTS = {"TsangerJinKai02"}
 EN_PRIMARY_FONTS = {"Charter"}
+BN_PRIMARY_FONTS = {"NotoSerifBengali"}
 
 
 def _pdf_font_names(pdf_path: Path) -> set[str]:
@@ -399,7 +409,13 @@ def verify_target(name: str, source: str, max_pages: int, src_dir: Path) -> list
         return issues
 
     is_en = name.endswith("-en")
-    expected = EN_PRIMARY_FONTS if is_en else CN_PRIMARY_FONTS
+    is_bn = name.endswith("-bn")
+    if is_bn:
+        expected = BN_PRIMARY_FONTS
+    elif is_en:
+        expected = EN_PRIMARY_FONTS
+    else:
+        expected = CN_PRIMARY_FONTS
     if not any(exp in font_name for exp in expected for font_name in embedded):
         primary = next(iter(expected))
         if not fallback_present:
@@ -556,6 +572,8 @@ BORDER_VAR_USE = re.compile(r"border(?:-\w+)?\s*:\s*[^;]*var\s*\(\s*--([\w-]+)",
 LINE_HEIGHT_LOOSE = re.compile(r"line-height\s*:\s*1\.[6-9]\d*", re.IGNORECASE)
 UNICODE_ARROW = re.compile(r"→")  # U+2192; should not appear in EN template body
 HEX_ANY = re.compile(r"#[0-9a-fA-F]{3,6}\b")
+LETTER_SPACING_NONZERO = re.compile(r"letter-spacing\s*:\s*(?!0\s*[;\s])(?!0px|0pt|0em|0\b)[^;]+;", re.IGNORECASE)
+TEXT_TRANSFORM_UPPER = re.compile(r"text-transform\s*:\s*uppercase", re.IGNORECASE)
 
 
 @dataclass
@@ -580,6 +598,7 @@ def scan_file(path: Path) -> list[Finding]:
             rgba_vars.add(m.group(1))
 
     is_en = path.name.endswith("-en.html")
+    is_bn = path.name.endswith("-bn.html") or path.name.endswith("-bn.py")
 
     # Pass 2: per-line rule checks
     for i, raw in enumerate(lines, start=1):
@@ -622,6 +641,20 @@ def scan_file(path: Path) -> list[Finding]:
             if h in COOL_GRAY_BLOCKLIST:
                 findings.append(Finding(path, i, "cool-gray",
                                         f"{h} is a cool / neutral gray, use warm undertone"))
+
+        # Bengali-specific checks: letter-spacing must be 0, no text-transform: uppercase
+        if is_bn:
+            if LETTER_SPACING_NONZERO.search(raw):
+                # skip CSS comment lines
+                stripped = raw.lstrip()
+                if not stripped.startswith("/*") and not stripped.startswith("*"):
+                    findings.append(Finding(path, i, "bn-letter-spacing",
+                                            "non-zero letter-spacing in Bengali template (breaks conjuncts/যুক্তাক্ষর)"))
+            if TEXT_TRANSFORM_UPPER.search(raw):
+                stripped = raw.lstrip()
+                if not stripped.startswith("/*") and not stripped.startswith("*"):
+                    findings.append(Finding(path, i, "bn-text-transform-uppercase",
+                                            "text-transform: uppercase in Bengali template (Bengali has no uppercase)"))
     return findings
 
 

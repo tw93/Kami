@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>{{নাম}} · জীবনবৃত্তান্ত</title>
+<meta name="author" content="{{নাম}}">
+<meta name="description" content="{{বিবরণ}}">
+<meta name="keywords" content="{{মূলশব্দ}}">
+<meta name="generator" content="Kami">
+<style>
+  /* Bengali serif — Noto Serif Bengali */
+  @font-face {
+    font-family: "Noto Serif Bengali";
+    src: url("../fonts/NotoSerifBengali-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Noto Serif Bengali";
+    src: url("../fonts/NotoSerifBengali-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 500; font-style: normal; }
+
+  @page {
+    size: A4;
+    margin: 11mm 13mm 11mm 13mm;
+    background: #f5f4ed;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --sand:      #e8e6dc;
+    --border:    #e8e6dc;
+    --border-soft: #e5e3d8;
+    --near-black: #141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --brand-tint: #EEF2F7;
+    --brand-tint-strong: #E4ECF5;
+
+    --serif: "Noto Serif Bengali", "Shonar Bangla",
+             "Noto Serif", Georgia, serif;
+    --sans: var(--serif);
+    --mono:  "JetBrains Mono", "SF Mono", "Fira Code",
+             Consolas, Monaco, monospace;
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 11mm 13mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 9.4pt;
+    line-height: 1.45;
+    letter-spacing: 0;
+  }
+
+  .serif { font-family: var(--serif); }
+  .mono  { font-family: var(--mono); }
+
+  a { color: var(--brand); text-decoration: none; }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 3mm;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+  }
+  .header > div:first-child { flex-shrink: 0; }
+  .name {
+    font-family: var(--serif);
+    font-size: 26pt;
+    font-weight: 500;
+    color: var(--near-black);
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 3mm;
+    white-space: nowrap;
+  }
+  .alias {
+    font-size: 12.5pt;
+    font-weight: 400;
+    color: var(--stone);
+  }
+  .contact {
+    text-align: right;
+    font-size: 9pt;
+    color: var(--stone);
+    line-height: 1.5;
+  }
+  .contact .role {
+    color: var(--brand);
+    font-size: 10.5pt;
+    font-weight: 500;
+  }
+  .contact .sep { color: var(--border); margin: 0 0.4em; }
+  .contact a { color: var(--dark-warm); }
+  .contact .loc { color: var(--olive); font-weight: 500; }
+
+  /* METRICS */
+  .metrics { display: flex; gap: 7mm; margin-bottom: 3mm; }
+  .metric {
+    flex: 1;
+    padding: 1mm 0;
+    display: flex;
+    align-items: baseline;
+    gap: 2mm;
+    break-inside: avoid;
+  }
+  .metric-value {
+    font-family: var(--serif);
+    font-size: 14pt;
+    font-weight: 500;
+    color: var(--brand);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .metric-value .unit {
+    font-size: 10.5pt;
+    margin-left: 0.5mm;
+    font-weight: 500;
+    color: var(--brand);
+  }
+  .metric-label { font-size: 9pt; color: var(--olive); line-height: 1.2; }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: var(--serif);
+    font-size: 13pt;
+    font-weight: 500;
+    color: var(--near-black);
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding: 0 0 0 8pt;
+    margin: 5mm 0 2mm 0;
+    display: flex;
+    align-items: baseline;
+    gap: 2.5mm;
+  }
+  .section-title .sub {
+    margin-left: auto;
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 9pt;
+    color: var(--stone);
+  }
+  section:first-of-type .section-title { margin-top: 0; }
+  .page-break > .section-title { margin-top: 0; }
+
+  /* SUMMARY */
+  .summary { font-size: 9.4pt; line-height: 1.45; color: var(--near-black); }
+  .summary .hl { color: var(--brand); }
+
+  /* TIMELINE */
+  .timeline { display: flex; gap: 7mm; margin-bottom: 2.5mm; }
+  .tl-step { flex: 1; padding: 0.8mm 0; break-inside: avoid; }
+  .tl-top {
+    display: flex; align-items: baseline; gap: 2mm;
+    margin-bottom: 0.6mm;
+  }
+  .tl-year {
+    font-family: var(--serif);
+    font-size: 11pt; font-weight: 500;
+    color: var(--brand); line-height: 1;
+  }
+  .tl-head {
+    font-size: 11pt; font-weight: 500;
+    color: var(--near-black);
+  }
+  .tl-body { font-size: 9pt; color: var(--olive); line-height: 1.45; }
+
+  /* PROJECTS */
+  .project {
+    padding: 1.6mm 0;
+    border-top: 0.4pt solid var(--border-soft);
+    break-inside: avoid;
+  }
+  .project:first-of-type {
+    border-top: 0.4pt solid var(--border);
+    padding-top: 1.6mm;
+  }
+  .proj-head {
+    display: flex; align-items: baseline;
+    gap: 2mm; margin-bottom: 0.9mm;
+  }
+  .proj-name {
+    font-family: var(--serif);
+    font-size: 11pt; font-weight: 500; color: var(--near-black);
+  }
+  .proj-kind { font-size: 11pt; color: var(--olive); }
+  .proj-role {
+    font-size: 9pt; color: var(--brand); font-weight: 500;
+    margin-left: auto; background: #EEF2F7;
+    padding: 0.4mm 1.6mm; border-radius: 2pt;
+  }
+  .proj-lines { display: table; width: 100%; }
+  .proj-row { display: table-row; }
+  .proj-label {
+    display: table-cell; width: 16mm;
+    font-size: 9pt; color: var(--brand);
+    font-weight: 500;
+    padding: 0.4mm 0 0.4mm 0; vertical-align: top;
+  }
+  .proj-text {
+    display: table-cell; font-size: 9.2pt;
+    color: var(--near-black); line-height: 1.45;
+    padding: 0 0 0.4mm 1mm;
+  }
+  .proj-text .hl { color: var(--brand); }
+
+  /* PAGE 2 FORCE BREAK */
+  .page-break { break-before: page; }
+
+  /* OPEN SOURCE */
+  .os-intro {
+    font-size: 9.4pt; line-height: 1.45;
+    color: var(--near-black);
+    margin: 1.6mm 0 2.4mm 0;
+    break-inside: avoid;
+  }
+  .os-intro .hl { color: var(--brand); }
+  .os-intro .strong { color: var(--near-black); font-weight: 500; }
+
+  .os-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 9mm; row-gap: 1.2mm;
+  }
+  .os-item {
+    display: flex; align-items: baseline;
+    gap: 2.5mm; padding: 1.2mm 0;
+    border-bottom: 0.3pt dotted var(--border);
+    break-inside: avoid;
+  }
+  .os-name {
+    font-family: var(--serif);
+    font-size: 10.5pt; font-weight: 500;
+    flex-shrink: 0; min-width: 18mm;
+  }
+  .os-name a { color: var(--brand); }
+  .os-desc { font-size: 9pt; color: var(--olive); line-height: 1.4; flex: 1; }
+  .os-star {
+    font-size: 9pt; color: var(--dark-warm);
+    font-weight: 500; white-space: nowrap;
+    flex-shrink: 0; min-width: 10mm; text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .os-star.big { color: var(--brand); font-size: 9.2pt; }
+
+  .os-highlight {
+    margin-top: 2.5mm;
+    padding: 1.8mm 3mm;
+    background: var(--brand-tint);
+    border-left: 1.4pt solid var(--brand);
+    border-radius: 2pt;
+    font-size: 9pt; line-height: 1.45;
+    color: var(--near-black);
+    break-inside: avoid;
+  }
+  .os-highlight .hl { color: var(--brand); }
+  .os-highlight .tag {
+    display: inline-block;
+    background: var(--brand); color: var(--ivory);
+    font-size: 9pt; font-weight: 500;
+    padding: 0.2mm 1.6mm; border-radius: 2pt;
+    margin-right: 1.5mm;
+    transform: translateY(-0.2mm);
+  }
+
+  /* CONVICTIONS */
+  .convictions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3mm;
+    margin-top: 1.4mm;
+  }
+  .conv-card { padding: 0 2mm 0 0; break-inside: avoid; }
+  .conv-head {
+    font-family: var(--serif);
+    font-size: 10pt; font-weight: 500;
+    color: var(--near-black); margin-bottom: 1mm;
+    display: flex; align-items: baseline; gap: 2mm;
+  }
+  .conv-head .year {
+    color: var(--brand); font-weight: 500;
+    font-size: 9pt;
+    font-variant-numeric: tabular-nums;
+  }
+  .conv-body {
+    font-size: 9pt; color: var(--olive);
+    line-height: 1.45;
+  }
+  .conv-body .hl { color: var(--brand); }
+
+  /* IMPACT */
+  .handle-strip {
+    padding: 0; margin: 1.4mm 0 2mm 0;
+    display: flex; align-items: baseline; gap: 3.5mm;
+    break-inside: avoid;
+  }
+  .handle-strip .handle {
+    font-family: var(--serif);
+    font-size: 10pt; font-weight: 500; color: var(--brand);
+    flex-shrink: 0;
+  }
+  .handle-strip .follower { font-size: 9pt; color: var(--stone); flex-shrink: 0; font-variant-numeric: tabular-nums; }
+  .handle-strip .desc { font-size: 9pt; color: var(--olive); line-height: 1.45; flex: 1; }
+
+  .impact-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 6mm; }
+  .inf-block-title {
+    margin-top: 2.5mm;
+    font-family: var(--serif);
+    font-size: 10pt; font-weight: 500;
+    color: var(--near-black);
+    margin-bottom: 1.5mm; padding-bottom: 0.5mm;
+    border-bottom: 0.3pt dotted var(--border);
+    display: flex; align-items: baseline; gap: 2mm;
+  }
+  .inf-block-title .small {
+    font-family: var(--sans);
+    font-size: 9pt; color: var(--stone);
+    font-weight: 400;
+  }
+  .art-row {
+    padding: 1.8mm 0;
+    border-bottom: 0.3pt dotted var(--border-soft);
+  }
+  .talk-row {
+    display: flex; justify-content: space-between;
+    align-items: flex-start;
+    gap: 2mm; padding: 1.8mm 0;
+    border-bottom: 0.3pt dotted var(--border-soft);
+  }
+  .art-row:last-of-type, .talk-row:last-of-type { border-bottom: none; }
+  .art-header {
+    display: flex; align-items: baseline;
+    justify-content: space-between;
+    gap: 2mm;
+  }
+  .art-title, .talk-title {
+    font-size: 9.2pt; color: var(--near-black);
+    font-weight: 500; line-height: 1.4;
+    flex: 1 1 auto; min-width: 0;
+  }
+  .art-stats, .talk-venue {
+    font-size: 9pt; color: var(--stone);
+    line-height: 1.4; margin-top: 0.6mm;
+  }
+  .art-stats .em-brand { color: var(--brand); }
+  .art-date, .talk-date {
+    font-size: 9pt; color: var(--stone);
+    font-variant-numeric: tabular-nums;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  /* SKILLS */
+  .skill-row {
+    display: flex; gap: 3mm; padding: 1.8mm 0;
+    border-bottom: 0.3pt dotted var(--border);
+    align-items: baseline;
+  }
+  .skill-row:last-of-type { border-bottom: none; }
+  .skill-label {
+    font-size: 9pt; font-weight: 500;
+    color: var(--brand);
+    width: 32mm; flex-shrink: 0;
+    line-height: 1.35;
+  }
+  .skill-body { font-size: 9.2pt; color: var(--near-black); line-height: 1.45; flex: 1; }
+  .skill-body .em-brand { color: var(--brand); }
+
+  .no-break { break-inside: avoid; }
+
+  /* EDUCATION */
+  .edu-row {
+    display: flex; justify-content: space-between;
+    align-items: baseline; padding: 1.8mm 0;
+  }
+  .edu-row .school {
+    font-family: var(--serif);
+    font-weight: 500; font-size: 11pt;
+  }
+  .edu-row .major { color: var(--olive); font-size: 9.4pt; }
+  .edu-row .date { color: var(--stone); font-variant-numeric: tabular-nums; font-size: 9pt; }
+
+  /* TABLE (kami-table) */
+  table, .kami-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+    margin: 6pt 0;
+    break-inside: avoid;
+  }
+  table th, .kami-table th {
+    text-align: left;
+    font-weight: 500;
+    color: var(--dark-warm);
+    padding: 3pt 6pt;
+    border-bottom: 1pt solid var(--border);
+    background: transparent;
+  }
+  table td, .kami-table td {
+    padding: 2pt 6pt;
+    border-bottom: 0.3pt solid var(--border-soft);
+    vertical-align: top;
+  }
+  table.compact th, .kami-table.compact th { padding: 2pt 4pt; font-size: 8pt; }
+  table.compact td, .kami-table.compact td { padding: 1pt 4pt; font-size: 8pt; line-height: 1.4; }
+  table.financial td:not(:first-child), .kami-table.financial td:not(:first-child) {
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  table.financial th:not(:first-child), .kami-table.financial th:not(:first-child) { text-align: right; }
+  table.striped tbody tr:nth-child(even) td, .kami-table.striped tbody tr:nth-child(even) td {
+    background: var(--ivory);
+  }
+  table .total td, .kami-table .total td {
+    font-weight: 500; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
+  }
+</style>
+</head>
+<body>
+
+<!-- =====================================================================
+     Usage:
+ - Replace all {{VAR}} placeholders with real content
+ - Drop sections that don't apply (e.g. no open source -> remove that block)
+ - Each project strictly three-part: ROLE / ACTIONS / IMPACT
+ - Must verify: 2 pages exactly (strict)
+       python3 scripts/build.py resume-bn
+ - Content strategy: references/writing.md
+     ===================================================================== -->
+
+
+<!-- ═══════════ PAGE 1 ═══════════ -->
+
+<div class="header">
+  <div>
+    <div class="name serif">{{নাম}}<span class="alias">{{ডাকনাম_বা_পছন্দের_নাম}}</span></div>
+  </div>
+  <div class="contact">
+    <span class="role">{{পদের_নাম - যেমন এআই / এজেন্ট ইঞ্জিনিয়ার}}</span>
+    <br>
+    <a href="{{গিটহাব_ইউআরএল}}">github.com/{{গিটহাব_আইডি}}</a>
+    <span class="sep">·</span>
+    <a href="{{এক্স_ইউআরএল}}">x.com/{{এক্স_আইডি}}</a>
+    <span class="sep">·</span>
+    <a href="mailto:{{ইমেইল}}">{{ইমেইল}}</a>
+    <span class="sep">·</span>
+    <span class="loc">{{শহর}}, {{দেশ_বা_অঞ্চল}}</span>
+  </div>
+</div>
+
+<!-- Four strongest numeric badges -->
+<div class="metrics">
+  <div class="metric"><span class="metric-value serif">{{সংখ্যা}}<span class="unit">{{একক}}</span></span><span class="metric-label">{{লেবেল}}</span></div>
+  <div class="metric"><span class="metric-value serif">{{সংখ্যা}}<span class="unit">{{একক}}</span></span><span class="metric-label">{{লেবেল}}</span></div>
+  <div class="metric"><span class="metric-value serif">{{সংখ্যা}}<span class="unit">{{একক}}</span></span><span class="metric-label">{{লেবেল}}</span></div>
+  <div class="metric"><span class="metric-value serif">{{সংখ্যা}}<span class="unit">{{একক}}</span></span><span class="metric-label">{{লেবেল}}</span></div>
+</div>
+
+<section>
+  <div class="section-title">সারসংক্ষেপ</div>
+  <div class="summary">
+    {{~৫০ শব্দ। কাঠামো: বর্তমান পদ + জ্যেষ্ঠতা + মেয়াদ। দলের গঠন (আকার, জ্যেষ্ঠতার মিশ্রণ, ক্রস-ফাংশনাল সহযোগী)। দীর্ঘমেয়াদী দিকনির্দেশনা। তিন থেকে পাঁচটি মূল দক্ষতার ক্ষেত্র।}}
+  </div>
+</section>
+
+<section>
+  <div class="section-title">অভিজ্ঞতা<span class="sub">{{শুরুর_তারিখ}} - বর্তমান · {{মূল_মাইলফলক}}</span></div>
+
+  <!-- Timeline: three-step long-range arc -->
+  <div class="timeline">
+    <div class="tl-step">
+      <div class="tl-top"><div class="tl-year serif">{{বছর}}</div><div class="tl-head">{{পর্যায়ের_শিরোনাম}}</div></div>
+      <div class="tl-body">{{এই পর্যায়টির অর্থ কী ছিল তা নিয়ে এক বাক্য।}}</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-top"><div class="tl-year serif">{{বছর}}</div><div class="tl-head">{{পর্যায়ের_শিরোনাম}}</div></div>
+      <div class="tl-body">{{এই পর্যায়টির অর্থ কী ছিল তা নিয়ে এক বাক্য।}}</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-top"><div class="tl-year serif">{{বছর}}</div><div class="tl-head">{{পর্যায়ের_শিরোনাম}}</div></div>
+      <div class="tl-body">{{এই পর্যায়টির অর্থ কী ছিল তা নিয়ে এক বাক্য।}}</div>
+    </div>
+  </div>
+
+  <!-- Project block - repeat 3–5 times -->
+  <div class="project">
+    <div class="proj-head">
+      <span class="proj-name serif">{{প্রকল্পের_নাম}}</span>
+      <span class="proj-kind">· {{প্রকল্পের_ধরন}}</span>
+      <span class="proj-role">{{ভূমিকা - যেমন টেক লিড}}</span>
+    </div>
+    <div class="proj-lines">
+      <div class="proj-row">
+        <div class="proj-label">ভূমিকা</div>
+        <div class="proj-text">{{~৪০ শব্দ: প্রকল্পটি কী, কেন এটি তৈরি হয়েছিল, এতে আপনার ভূমিকা কী ছিল।}}</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">কার্যক্রম</div>
+        <div class="proj-text">{{~৫৫ শব্দ: প্রযুক্তিগত পদ্ধতি, মূল সিদ্ধান্ত, বাস্তবায়নের পথ।}}</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">প্রভাব</div>
+        <div class="proj-text">{{~৬৫ শব্দ: সংখ্যা-নির্ভর। <span class="hl">১-২টি মূল পরিসংখ্যান</span> তুলে ধরুন।}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="proj-head">
+      <span class="proj-name serif">{{প্রকল্পের_নাম}}</span>
+      <span class="proj-kind">· {{প্রকল্পের_ধরন}}</span>
+      <span class="proj-role">{{ভূমিকা}}</span>
+    </div>
+    <div class="proj-lines">
+      <div class="proj-row">
+        <div class="proj-label">ভূমিকা</div>
+        <div class="proj-text">{{~৪০ শব্দ।}}</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">কার্যক্রম</div>
+        <div class="proj-text">{{~৫৫ শব্দ।}}</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">প্রভাব</div>
+        <div class="proj-text">{{~৬৫ শব্দ, <span class="hl">মূল পরিসংখ্যান</span> যুক্ত করুন।}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="proj-head">
+      <span class="proj-name serif">{{প্রকল্পের_নাম}}</span>
+      <span class="proj-kind">· {{প্রকল্পের_ধরন}}</span>
+      <span class="proj-role">{{ভূমিকা}}</span>
+    </div>
+    <div class="proj-lines">
+      <div class="proj-row">
+        <div class="proj-label">ভূমিকা</div>
+        <div class="proj-text">{{প্রকল্পের প্রেক্ষাপট এবং আপনার অবস্থান।}}</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">কার্যক্রম</div>
+        <div class="proj-text">{{বাস্তবায়নের পথ।}}</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">প্রভাব</div>
+        <div class="proj-text">{{<span class="hl">মূল পরিসংখ্যান</span> সহ পরিমাপযোগ্য ফলাফল।}}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ PAGE 2 ═══════════ -->
+
+<section class="page-break">
+  <div class="section-title">ওপেন সোর্স ও স্বাধীন কাজ<span class="sub">{{সময়কাল}} · {{উপশিরোনাম}}</span></div>
+
+  <div class="os-intro">
+    <span class="hl">{{এক লাইনের পজিশনিং স্টেটমেন্ট।}}</span> {{আপনার ইন্ডি ডেভেলপার পরিচয়ের সংক্ষিপ্ত রূপরেখা: ডিজাইনের প্রবৃত্তি, একক এন্ড-টু-এন্ড ডেলিভারি, ক্রস-ল্যাঙ্গুয়েজ দক্ষতা, ব্যবহারকারীদের প্রতিক্রিয়া।}} সামগ্রিক গিটহাব: <span class="strong">{{মোট_স্টার}} স্টার · {{মোট_ফর্ক}} ফর্ক · {{মোট_ফলোয়ার}} ফলোয়ার</span>।
+  </div>
+
+  <div class="os-grid">
+    <div class="os-item">
+      <span class="os-name serif"><a href="{{ইউআরএল}}">{{প্রকল্প}}</a></span>
+      <span class="os-desc">{{প্রযুক্তির স্ট্যাক + মূল পজিশনিং + প্ল্যাটফর্ম।}}</span>
+      <span class="os-star big">★ {{স্টার}}</span>
+    </div>
+    <div class="os-item">
+      <span class="os-name serif"><a href="{{ইউআরএল}}">{{প্রকল্প}}</a></span>
+      <span class="os-desc">{{বিবরণ।}}</span>
+      <span class="os-star big">★ {{স্টার}}</span>
+    </div>
+    <div class="os-item">
+      <span class="os-name serif"><a href="{{ইউআরএল}}">{{প্রকল্প}}</a></span>
+      <span class="os-desc">{{বিবরণ।}}</span>
+      <span class="os-star">★ {{স্টার}}</span>
+    </div>
+    <div class="os-item">
+      <span class="os-name serif"><a href="{{ইউআরএল}}">{{প্রকল্প}}</a></span>
+      <span class="os-desc">{{বিবরণ।}}</span>
+      <span class="os-star">★ {{স্টার}}</span>
+    </div>
+    <div class="os-item">
+      <span class="os-name serif"><a href="{{ইউআরএল}}">{{প্রকল্প}}</a></span>
+      <span class="os-desc">{{বিবরণ।}}</span>
+      <span class="os-star">★ {{স্টার}}</span>
+    </div>
+    <div class="os-item">
+      <span class="os-name serif"><a href="{{ইউআরএল}}">{{প্রকল্প}}</a></span>
+      <span class="os-desc">{{বিবরণ।}}</span>
+      <span class="os-star">★ {{স্টার}}</span>
+    </div>
+  </div>
+
+  <div class="os-highlight">
+    <span class="tag">{{হাইলাইট}}</span>{{এমন একটি ঘটনা যা আপনার কাজকে আলাদা করে: যখন এটি ভাইরাল হয়েছিল, কোনো বিশিষ্ট ব্যক্তি এটি শেয়ার করেছিলেন, বা এর চারপাশে গড়ে ওঠা কমিউনিটি।}}
+  </div>
+</section>
+
+<section>
+  <div class="section-title">বিচারবোধ ও দৃঢ়তা</div>
+  <div class="convictions">
+    <div class="conv-card">
+      <div class="conv-head"><span class="year">{{তারিখ}}</span>{{ইভেন্টের_শিরোনাম}}</div>
+      <div class="conv-body">
+        {{আপনার নেওয়া নির্দিষ্ট সিদ্ধান্ত বা পদক্ষেপ, এবং পরবর্তীতে তার সঠিক হওয়ার প্রমাণ।}}
+      </div>
+    </div>
+    <div class="conv-card">
+      <div class="conv-head"><span class="year">{{তারিখ}}</span>{{ইভেন্টের_শিরোনাম}}</div>
+      <div class="conv-body">
+        {{নির্দিষ্ট সিদ্ধান্ত বা পদক্ষেপ।}}
+      </div>
+    </div>
+    <div class="conv-card">
+      <div class="conv-head"><span class="year">{{তারিখ}}</span>{{ইভেন্টের_শিরোনাম}}</div>
+      <div class="conv-body">
+        {{নির্দিষ্ট সিদ্ধান্ত বা পদক্ষেপ।}}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">জনপ্রভাব</div>
+
+  <div class="handle-strip">
+    <span class="handle serif">{{প্ল্যাটফর্ম}} · <a href="{{ইউআরএল}}">@{{হ্যান্ডেল}}</a></span>
+    <span class="follower">{{ফলোয়ার}} ফলোয়ার</span>
+    <span class="desc">{{ব্লগ / নিউজলেটার / অন্যান্য কন্টেন্ট প্রোডাক্ট।}}</span>
+  </div>
+
+  <div class="impact-grid">
+    <div>
+      <div class="inf-block-title">নির্বাচিত লেখা<span class="small">{{উপশিরোনাম}}</span></div>
+      <div class="art-row">
+        <div class="art-header">
+          <a class="art-title" href="{{ইউআরএল}}">{{প্রবন্ধের_শিরোনাম}}</a>
+          <span class="art-date">{{তারিখ}}</span>
+        </div>
+        <div class="art-stats">{{ভিউ / লাইক / প্রভাবের মেট্রিক।}}</div>
+      </div>
+      <div class="art-row">
+        <div class="art-header">
+          <a class="art-title" href="{{ইউআরএল}}">{{প্রবন্ধের_শিরোনাম}}</a>
+          <span class="art-date">{{তারিখ}}</span>
+        </div>
+        <div class="art-stats">{{ভিউ / লাইক।}}</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="inf-block-title">আমন্ত্রিত বক্তৃতা<span class="small">{{উপশিরোনাম}}</span></div>
+      <div class="talk-row">
+        <div>
+          <div class="talk-title">{{বক্তৃতার_শিরোনাম}}</div>
+          <div class="talk-venue">{{আয়োজক / ভেন্যু}}</div>
+        </div>
+        <div class="talk-date">{{তারিখ}}</div>
+      </div>
+      <div class="talk-row">
+        <div>
+          <div class="talk-title">{{বক্তৃতার_শিরোনাম}}</div>
+          <div class="talk-venue">{{আয়োজক / ভেন্যু}}</div>
+        </div>
+        <div class="talk-date">{{তারিখ}}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">মূল দক্ষতা</div>
+  <!-- Five fixed rows, each with at least one brand-color emphasis -->
+  <div class="skill-row">
+    <div class="skill-label">{{দক্ষতার_লেবেল_১}}</div>
+    <div class="skill-body">{{অন্তত <span class="em-brand">একটি জোর দেওয়া শব্দ</span> সহ বিবরণ।}}</div>
+  </div>
+  <div class="skill-row">
+    <div class="skill-label">{{দক্ষতার_লেবেল_২}}</div>
+    <div class="skill-body">{{অন্তত <span class="em-brand">একটি জোর দেওয়া শব্দ</span> সহ বিবরণ।}}</div>
+  </div>
+  <div class="skill-row">
+    <div class="skill-label">{{দক্ষতার_লেবেল_৩}}</div>
+    <div class="skill-body">{{অন্তত <span class="em-brand">একটি জোর দেওয়া শব্দ</span> সহ বিবরণ।}}</div>
+  </div>
+  <div class="skill-row">
+    <div class="skill-label">{{দক্ষতার_লেবেল_৪}}</div>
+    <div class="skill-body">{{অন্তত <span class="em-brand">একটি জোর দেওয়া শব্দ</span> সহ বিবরণ।}}</div>
+  </div>
+  <div class="skill-row">
+    <div class="skill-label">{{দক্ষতার_লেবেল_৫}}</div>
+    <div class="skill-body">{{অন্তত <span class="em-brand">একটি জোর দেওয়া শব্দ</span> সহ বিবরণ।}}</div>
+  </div>
+</section>
+
+<section class="no-break">
+  <div class="section-title">শিক্ষা</div>
+  <div class="edu-row">
+    <div>
+      <span class="school serif">{{শিক্ষাপ্রতিষ্ঠান}}</span>
+      <span class="major"> · {{কলেজ}} · {{প্রধান_বিষয়}} · {{এক লাইনের বিচারবোধ-সম্পন্ন নোট, যেমন "স্নাতকোত্তর না করে সরাসরি ইন্ডাস্ট্রিতে যোগ দিয়েছি"।}}</span>
+    </div>
+    <div class="date">{{তারিখের_সীমা}}</div>
+  </div>
+</section>
+
+</body>
+</html>

@@ -39,6 +39,14 @@ HTML_TARGETS: dict[str, tuple[str, int]] = {
     "long-doc-en": ("long-doc-en.html", 0),
     "portfolio-en": ("portfolio-en.html", 0),
     "resume-en": ("resume-en.html", 2),
+    # Bengali
+    "one-pager-bn": ("one-pager-bn.html", 1),
+    "letter-bn": ("letter-bn.html", 1),
+    "long-doc-bn": ("long-doc-bn.html", 0),
+    "portfolio-bn": ("portfolio-bn.html", 0),
+    "resume-bn": ("resume-bn.html", 2),
+    "equity-report-bn": ("equity-report-bn.html", 3),
+    "changelog-bn": ("changelog-bn.html", 2),
 }
 
 STYLE_BLOCK_RE = re.compile(r"(<style>\s*)(?P<css>.*?)(\s*</style>)", re.DOTALL | re.IGNORECASE)
@@ -60,6 +68,8 @@ PAGE_MARGIN_MM_RE = re.compile(
     r"(margin\s*:\s*)([0-9]*\.?[0-9]+)mm\s+([0-9]*\.?[0-9]+)mm\s+([0-9]*\.?[0-9]+)mm\s+([0-9]*\.?[0-9]+)mm(\s*;)",
     re.IGNORECASE,
 )
+LETTER_SPACING_RE = re.compile(r"(letter-spacing\s*:\s*)([^;]+)(;)", re.IGNORECASE)
+TEXT_TRANSFORM_UPPER_RE = re.compile(r"text-transform\s*:\s*uppercase\s*;", re.IGNORECASE)
 
 COOL_GRAY_BLOCKLIST = {
     "#888",
@@ -302,6 +312,41 @@ def clamp_line_heights(css: str, minimum: float, maximum: float) -> tuple[str, i
         return f"{m.group(1)}{round_number(new_value, 3)}{m.group(3)}"
 
     return LINE_HEIGHT_RE.sub(repl, css), changed
+
+
+def normalize_bengali_letter_spacing(css: str) -> tuple[str, int]:
+    """Force all letter-spacing declarations to 0 for Bengali templates.
+
+    Non-zero letter-spacing breaks Bengali conjuncts (যুক্তাক্ষর) by inserting gaps
+    between base characters and their combining marks.
+    """
+    changed = 0
+
+    def repl(m: re.Match[str]) -> str:
+        nonlocal changed
+        value = m.group(2).strip()
+        if value in ("0", "0pt", "0px", "0em", "normal"):
+            return m.group(0)
+        changed += 1
+        return f"{m.group(1)}0{m.group(3)}"
+
+    return LETTER_SPACING_RE.sub(repl, css), changed
+
+
+def normalize_bengali_text_transform(css: str) -> tuple[str, int]:
+    """Remove text-transform: uppercase from Bengali templates.
+
+    Bengali script has no uppercase; this property is meaningless and can
+    cause rendering glitches. Replace with font-weight: 500 for emphasis.
+    """
+    changed = 0
+
+    def repl(m: re.Match[str]) -> str:
+        nonlocal changed
+        changed += 1
+        return "font-weight: 500;"
+
+    return TEXT_TRANSFORM_UPPER_RE.sub(repl, css), changed
 
 
 def _replace_in_block(
@@ -602,6 +647,19 @@ def run_for_target(
     if hits:
         changed = True
     rule_hits["section_gap_clamped"] = hits
+
+    # Bengali-specific normalization: force letter-spacing: 0, strip uppercase
+    is_bn = target.endswith("-bn")
+    if is_bn:
+        css, hits = normalize_bengali_letter_spacing(css)
+        if hits:
+            changed = True
+        rule_hits["bn_letter_spacing_zeroed"] = hits
+
+        css, hits = normalize_bengali_text_transform(css)
+        if hits:
+            changed = True
+        rule_hits["bn_text_transform_removed"] = hits
 
     html_after = replace_css(html, css, style_match)
     try:

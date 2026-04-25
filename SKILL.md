@@ -1,6 +1,6 @@
 ---
 name: kami
-description: 'Typeset professional documents: resumes, one-pagers, white papers, letters, portfolios, slide decks. Warm parchment, ink-blue accent, serif-led hierarchy. CN uses TsangerJinKai02, EN uses Charter, JA uses YuMincho (best-effort). Triggers on "做 PDF / 排版 / 一页纸 / 白皮书 / 作品集 / 简历 / PPT / slides", or "build me a resume / make a one-pager / design a slide deck / turn this into a PDF / make this presentable".'
+description: 'Typeset professional documents: resumes, one-pagers, white papers, letters, portfolios, slide decks. Warm parchment, ink-blue accent, serif-led hierarchy. CN uses TsangerJinKai02, EN uses Charter, BN uses Noto Serif Bengali, JA uses YuMincho (best-effort). Triggers on "做 PDF / 排版 / 一页纸 / 白皮书 / 作品集 / 简历 / PPT / slides", or "build me a resume / make a one-pager / design a slide deck / turn this into a PDF / make this presentable", or "রিজিউমে / জীবনবৃত্তান্ত / প্রতিবেদন / স্লাইড / নকশা / পোর্টফোলিও / চিঠি".'
 ---
 
 # kami · 紙
@@ -13,7 +13,7 @@ Part of `Kaku · Waza · Kami` - Kaku writes code, Waza drills habits, **Kami de
 
 ## Step 1 · Decide the language
 
-**Match the user's language.** Chinese -> `*.html` / `slides.py`. English -> `*-en.html` / `slides-en.py`. Japanese -> CJK path (`.html` / `slides.py`) as best-effort, JP Mincho first, visual QA before shipping. Reference docs are shared English specs.
+**Match the user's language.** Chinese -> `*.html` / `slides.py`. English -> `*-en.html` / `slides-en.py`. Bengali -> `*-bn.html` / `slides-bn.py`. Japanese -> CJK path (`.html` / `slides.py`) as best-effort, JP Mincho first, visual QA before shipping. Reference docs are shared English specs.
 
 When ambiguous (e.g. a one-word command like "resume"), ask a one-liner rather than guess.
 
@@ -21,6 +21,7 @@ When ambiguous (e.g. a one-word command like "resume"), ask a one-liner rather t
 |---|---|---|
 | Chinese (primary) | `*.html` | `slides.py` |
 | English | `*-en.html` | `slides-en.py` |
+| Bengali (বাংলা) | `*-bn.html` | `slides-bn.py` |
 | Japanese (best-effort) | `*.html` | `slides.py` |
 | Other languages (best-effort) | choose CJK or EN path by script coverage, then verify manually | choose `slides.py` or `slides-en.py`, then verify manually |
 
@@ -28,16 +29,16 @@ Always use `CHEATSHEET.md` and `references/*.md` for design, writing, production
 
 ## Step 2 · Pick the document type
 
-| User says | Document | CN template | EN template |
-|---|---|---|---|
-| "one-pager / 方案 / 执行摘要 / exec summary" | One-Pager | `one-pager.html` | `one-pager-en.html` |
-| "white paper / 白皮书 / 长文 / 年度总结 / technical report" | Long Doc | `long-doc.html` | `long-doc-en.html` |
-| "formal letter / 信件 / 辞职信 / 推荐信 / memo" | Letter | `letter.html` | `letter-en.html` |
-| "portfolio / 作品集 / case studies" | Portfolio | `portfolio.html` | `portfolio-en.html` |
-| "resume / resume / CV / 简历" | Resume | `resume.html` | `resume-en.html` |
-| "slides / PPT / deck / 演示" | Slides | `slides.py` | `slides-en.py` |
-| "个股研报 / equity report / 估值分析 / investment memo / 股票分析" | Equity Report | `equity-report.html` | `equity-report-en.html` |
-| "更新日志 / changelog / release notes / 版本记录" | Changelog | `changelog.html` | `changelog-en.html` |
+| User says | Document | CN template | EN template | BN template |
+|---|---|---|---|---|
+| "one-pager / 方案 / 执行摘要 / exec summary / ওয়ান-পেজার" | One-Pager | `one-pager.html` | `one-pager-en.html` | `one-pager-bn.html` |
+| "white paper / 白皮书 / 长文 / 年度总结 / technical report / প্রতিবেদন" | Long Doc | `long-doc.html` | `long-doc-en.html` | `long-doc-bn.html` |
+| "formal letter / 信件 / 辞职信 / 推荐信 / memo / চিঠি" | Letter | `letter.html` | `letter-en.html` | `letter-bn.html` |
+| "portfolio / 作品集 / case studies / পোর্টফোলিও" | Portfolio | `portfolio.html` | `portfolio-en.html` | `portfolio-bn.html` |
+| "resume / CV / 简历 / জীবনবৃত্তান্ত / রিজিউমে" | Resume | `resume.html` | `resume-en.html` | `resume-bn.html` |
+| "slides / PPT / deck / 演示 / স্লাইড" | Slides | `slides.py` | `slides-en.py` | `slides-bn.py` |
+| "个股研报 / equity report / 估值分析 / investment memo / ইক্যুইটি রিপোর্ট" | Equity Report | `equity-report.html` | `equity-report-en.html` | `equity-report-bn.html` |
+| "更新日志 / changelog / release notes / পরিবর্তন লগ" | Changelog | `changelog.html` | `changelog-en.html` | `changelog-bn.html` |
 
 > Long deck (>20 slides): also read Deck Recipe (design.md section 8).
 
@@ -217,6 +218,12 @@ Visual anomalies (tag double rectangle, font fallback, page break issues) -> `pr
 - No separate sans: `--sans: var(--serif)`, one font per page
 - Fallback: Georgia (cross-platform) / Palatino / Times New Roman
 
+**Bengali (বাংলা)**
+- Main serif: NotoSerifBengali-Regular.ttf (400) + NotoSerifBengali-Medium.ttf (500)
+- Google OFL license — free to redistribute, no packaging restrictions
+- Fallback chain: Shonar Bangla -> Noto Serif -> Georgia -> serif
+- Critical rules: `letter-spacing: 0` (conjuncts break), no `text-transform: uppercase`, body `line-height ≥ 1.45` (matras extend above/below baseline)
+
 Font files next to HTML with relative `@font-face` paths is the most stable setup. `scripts/package-skill.sh` excludes TsangerJinKai TTFs from the Claude Desktop ZIP.
 
 **Font auto-recovery (Claude Desktop)**
@@ -234,6 +241,17 @@ test -f assets/fonts/TsangerJinKai02-W04.ttf || {
 ```
 
 Run once before building. If network is unavailable, WeasyPrint falls back to Source Han Serif SC.
+
+Bengali fonts (`NotoSerifBengali-Regular.ttf`, `NotoSerifBengali-Medium.ttf`) are already bundled in `assets/fonts/` under the OFL license. Auto-recovery is rarely needed, but if missing:
+
+```bash
+test -f assets/fonts/NotoSerifBengali-Regular.ttf || {
+  curl -fsSL "https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NotoSerifBengali-Regular.ttf" \
+    -o assets/fonts/NotoSerifBengali-Regular.ttf
+  curl -fsSL "https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NotoSerifBengali-Medium.ttf" \
+    -o assets/fonts/NotoSerifBengali-Medium.ttf
+}
+```
 
 ## Feedback protocol
 

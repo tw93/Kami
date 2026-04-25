@@ -156,6 +156,82 @@
       "overflow_solver": {
         "enabled": false
       }
+    },
+    "one-pager-bn": {
+      "section_gap_pt": {
+        "min": 12.0,
+        "max": 24.0
+      },
+      "page_margin_mm": {
+        "min": [12.0, 14.0, 12.0, 14.0]
+      },
+      "overflow_solver": {
+        "max_iterations": 30
+      }
+    },
+    "letter-bn": {
+      "body_font_size_pt": {
+        "min": 10.5,
+        "max": 12.0
+      },
+      "body_line_height": {
+        "min": 1.48,
+        "max": 1.55
+      },
+      "section_gap_pt": {
+        "min": 18.0,
+        "max": 32.0
+      },
+      "page_margin_mm": {
+        "min": [20.0, 20.0, 20.0, 20.0]
+      },
+      "overflow_solver": {
+        "max_iterations": 20
+      }
+    },
+    "resume-bn": {
+      "body_font_size_pt": {
+        "min": 8.8,
+        "max": 10.0
+      },
+      "body_line_height": {
+        "min": 1.38,
+        "max": 1.50
+      },
+      "section_gap_pt": {
+        "min": 8.0,
+        "max": 22.0
+      },
+      "page_margin_mm": {
+        "min": [9.0, 10.0, 9.0, 10.0]
+      },
+      "overflow_solver": {
+        "max_iterations": 60,
+        "body_font_step_pt": 0.1,
+        "margin_step_mm": 0.5
+      }
+    },
+    "long-doc-bn": {
+      "overflow_solver": {
+        "enabled": false
+      }
+    },
+    "portfolio-bn": {
+      "overflow_solver": {
+        "enabled": false
+      }
+    },
+    "equity-report-bn": {
+      "body_line_height": {
+        "min": 1.42,
+        "max": 1.55
+      }
+    },
+    "changelog-bn": {
+      "body_line_height": {
+        "min": 1.45,
+        "max": 1.55
+      }
     }
   }
 }

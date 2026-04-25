@@ -12,7 +12,7 @@
 
 Kami (紙, かみ) means paper in Japanese: the surface where a finished idea lands. AI-generated documents keep drifting into generic gray, inconsistent styling, and layouts that change every session.
 
-Kami is a document design system for the AI era: one constraint language, six formats, simple enough for agents to run reliably, strict enough to keep every output coherent and ready to ship. English and Chinese are first-class; Japanese works via a best-effort CJK path with visual QA before delivery.
+Kami is a document design system for the AI era: one constraint language, six formats, simple enough for agents to run reliably, strict enough to keep every output coherent and ready to ship. English, Chinese, and Bengali are first-class; Japanese works via a best-effort CJK path with visual QA before delivery.
 
 Part of a trilogy: [Kaku](https://github.com/tw93/Kaku) (書く) writes code, [Waza](https://github.com/tw93/Waza) (技) drills habits, [Kami](https://github.com/tw93/Kami) (紙) delivers documents.
 
@@ -39,6 +39,18 @@ Part of a trilogy: [Kaku](https://github.com/tw93/Kaku) (書く) writes code, [W
     <a href="assets/demos/demo-kaku.pdf"><img src="assets/demos/demo-kaku.png" alt="Kaku portfolio"></a>
     <br><b>Portfolio</b> · 日本語
     <br><sub>Kaku ターミナル作品集 · 7 ページ</sub>
+  </td>
+</tr>
+<tr>
+  <td align="center" width="25%">
+    <a href="assets/demos/demo-muslin-slides.pdf"><img src="assets/demos/demo-muslin-slides.png" alt="Muslin history slides" /></a>
+    <br><b>Slides</b> · বাংলা
+    <br><sub>মসলিন: বোনা বাতাস · 7 slides</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="assets/demos/demo-satyajit-resume.pdf"><img src="assets/demos/demo-satyajit-resume.png" alt="Bengali resume"></a>
+    <br><b>Resume</b> · বাংলা
+    <br><sub>জীবনবৃত্তান্ত · 2 pages</sub>
   </td>
 </tr>
 </table>
@@ -69,19 +81,20 @@ Download [kami.zip](https://cdn.jsdelivr.net/gh/tw93/kami@main/dist/kami.zip), o
 
 The ZIP is lightweight: Chinese fonts load from local checkout first, then jsDelivr CDN. If rendering is off, Claude downloads them on the next run. To update: download the same URL, click "..." on the skill card, choose Replace, upload.
 
-The skill auto-triggers from natural requests, no slash command needed. Optimized for English and Chinese; Japanese supported via a best-effort CJK path with visual QA before delivery.
+The skill auto-triggers from natural requests, no slash command needed. Optimized for English, Chinese, and Bengali; Japanese supported via a best-effort CJK path with visual QA before delivery.
 
 Example prompts by language:
 
 - English: `make a one-pager for my startup` / `turn this research into a long doc` / `write a formal letter` / `make a portfolio of my projects` / `build me a resume` / `design a slide deck for my talk`
 - 中文: `帮我做一份一页纸` / `帮我排版一份长文档` / `帮我写一封正式信件` / `帮我做一份作品集` / `帮我做一份简历` / `帮我做一套演讲幻灯片`
+- বাংলা: `আমার স্টার্টআপের জন্য একটি ওয়ান-পেজার তৈরি করো` / `এই গবেষণা একটি দীর্ঘ প্রতিবেদনে সাজাও` / `একটি আনুষ্ঠানিক চিঠি লেখো` / `আমার প্রকল্পগুলোর পোর্টফোলিও তৈরি করো` / `আমার জীবনবৃত্তান্ত তৈরি করো` / `আমার বক্তৃতার জন্য স্লাইড ডিজাইন করো`
 - 日本語: `スタートアップ向けの一枚資料を作って` / `この調査を長文レポートに整えて` / `正式な依頼文を作って` / `プロジェクト作品集を作って` / `履歴書を作って` / `登壇用スライドを作って`
 
 ## Design
 
 Warm parchment canvas, ink blue as the sole accent, serif carries hierarchy, no hard shadows or flashy palettes. Not a UI framework; a constraint system for printed matter. Documents should read as composed pages, not dashboards.
 
-Six document types (One-Pager, Long Doc, Letter, Portfolio, Resume, Slides) with dedicated EN/CN templates and a best-effort Japanese path. Twelve inline SVG diagram types included. Kami picks the right variant based on the language you write in.
+Eight document types (One-Pager, Long Doc, Letter, Portfolio, Resume, Slides, Equity Report, Changelog) with dedicated EN/CN/BN templates and a best-effort Japanese path. Fourteen inline SVG diagram types included. Kami picks the right variant based on the language you write in.
 
 | Element | Rule |
 |---|---|
@@ -93,7 +106,7 @@ Six document types (One-Pager, Long Doc, Letter, Portfolio, Resume, Slides) with
 | Shadows | Ring or whisper only, no hard drop shadows |
 | Tags | Solid hex backgrounds only. `rgba()` triggers a WeasyPrint double-rectangle bug |
 
-**Fonts**: Each language uses a single serif font for the entire page. Chinese: TsangerJinKai02. Japanese: YuMincho. English: Charter. TsangerJinKai is free for personal use, commercial use requires a license from [tsanger.cn](https://tsanger.cn). All other fonts are system-bundled.
+**Fonts**: Each language uses a single serif font for the entire page. Chinese: TsangerJinKai02. Japanese: YuMincho. English: Charter. Bengali: Noto Serif Bengali. TsangerJinKai is free for personal use, commercial use requires a license from [tsanger.cn](https://tsanger.cn). Noto Serif Bengali is Google OFL-licensed (free to redistribute). All other fonts are system-bundled.
 
 Full spec: [design.md](references/design.md). Cheatsheet: [CHEATSHEET.md](CHEATSHEET.md).
 

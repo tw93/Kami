@@ -10,7 +10,7 @@ One-page quick reference. Scan before filling a template or tweaking a detail. F
 4. English: serif for headlines and body. Chinese: serif headlines, sans body. Sans for UI only
 5. Serif weight locked at 500, no bold
 6. Line-height: headlines 1.1-1.3 / dense 1.4-1.45 / reading 1.5-1.55
-7. Letter-spacing: Chinese body 0.3pt; English body 0; tracking for short labels only
+7. Letter-spacing: Chinese body 0.3pt; English body 0; Bengali body 0 (conjuncts break with any spacing); tracking for short labels only
 8. Tag backgrounds solid hex, no rgba (WeasyPrint double-rectangle bug)
 9. Depth via ring / whisper shadow, no hard drop shadows
 10. No italic in templates or demos
@@ -105,6 +105,14 @@ Japanese:
 --sans:  var(--serif);
 ```
 
+Bengali:
+
+```css
+--serif: "Noto Serif Bengali", "Shonar Bangla", "Noto Serif",
+         Georgia, serif;
+--sans:  var(--serif);
+```
+
 Any font-family that may render Chinese or Japanese must include a CJK fallback, including `@page` footer text, `pre`, `code`, and SVG labels. A pure mono stack can render missing glyph boxes in WeasyPrint.
 
 ## Spacing (4pt base)
@@ -160,7 +168,7 @@ Any font-family that may render Chinese or Japanese must include a CJK fallback,
   padding: 1pt 5pt;
   border-radius: 2pt;
   letter-spacing: 0.4pt;
-  text-transform: uppercase;
+  text-transform: uppercase;       /* Bengali: remove this, use font-weight: 500 instead */
 }
 ```
 
@@ -297,6 +305,7 @@ Full quality bars in `references/writing.md`. The single most important rule for
 | Headline | serif 500, line-height 1.10-1.30 |
 | Reading body (EN) | serif 400, 9.5-10pt, 1.55 |
 | Reading body (CN) | sans 400, 9.5-10pt, 1.55 |
+| Reading body (BN) | serif 400, 9.5-10pt, 1.45-1.55 |
 | Emphasize a number | `color: var(--brand)`, no bold |
 | Divide two sections | 2.5pt brand left bar, or 0.5pt warm dotted |
 | Quote | 2pt brand left border + olive color |

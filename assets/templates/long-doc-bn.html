@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     LONG DOCUMENT · বাংলা · parchment design system
+     Multi-page A4 white paper / tech report / annual review
+     Flow: cover -> toc -> exec summary -> chapters -> appendix
+     ================================================================== -->
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>{{নথির_শিরোনাম}}</title>
+<meta name="author" content="{{লেখক}}">
+<meta name="description" content="{{বিবরণ}}">
+<meta name="keywords" content="{{মূলশব্দ}}">
+<meta name="generator" content="Kami">
+<style>
+  /* Bengali serif — Noto Serif Bengali */
+  @font-face {
+    font-family: "Noto Serif Bengali";
+    src: url("../fonts/NotoSerifBengali-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Noto Serif Bengali";
+    src: url("../fonts/NotoSerifBengali-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 500; font-style: normal; }
+
+  @page {
+    size: A4;
+    margin: 20mm 22mm 22mm 22mm;
+    background: #f5f4ed;
+
+    @top-right {
+      /* Replaced string-set dynamic header with static title to fix VS Code linter error */
+      content: "{{নথির_শিরোনাম}}";
+      font-family: "Noto Serif Bengali", "Shonar Bangla", "Noto Serif", Georgia, serif;
+      font-size: 8pt;
+      color: #6b6a64;
+    }
+
+    @bottom-center {
+      content: counter(page);
+      font-family: "Noto Serif Bengali", "Shonar Bangla", "Noto Serif", Georgia, serif;
+      font-size: 9pt;
+      color: #6b6a64;
+    }
+  }
+  @page:first {
+    @top-right { content: ""; }
+    @bottom-center { content: ""; }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --near-black:#141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --border:    #e8e6dc;
+    --border-soft:#e5e3d8;
+    --tag-bg:    #E4ECF5;
+
+    --serif: "Noto Serif Bengali", "Shonar Bangla",
+             "Noto Serif", Georgia, serif;
+    --sans: var(--serif);
+    --mono:  "JetBrains Mono", "SF Mono", "Fira Code",
+             Consolas, Monaco, monospace;
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 20mm 22mm 22mm 22mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 10.5pt;
+    line-height: 1.55;
+    letter-spacing: 0;
+  }
+
+  .sans { font-family: var(--sans); }
+
+  /* COVER */
+  .cover {
+    min-height: 240mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40mm 0 0 0;
+    break-after: page;
+  }
+  .cover-eyebrow {
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--brand);
+    font-weight: 500;
+    margin-bottom: 18pt;
+  }
+  .cover-title {
+    font-size: 40pt;
+    font-weight: 500;
+    color: var(--near-black);
+    line-height: 1.12;
+    margin-bottom: 16pt;
+  }
+  .cover-sub {
+    font-family: var(--sans);
+    font-size: 14pt;
+    color: var(--olive);
+    line-height: 1.45;
+    max-width: 85%;
+    margin-bottom: 30pt;
+  }
+  .cover-meta {
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--stone);
+    line-height: 1.55;
+    font-variant-numeric: tabular-nums;
+  }
+  .cover-meta strong { color: var(--dark-warm); font-weight: 500; }
+
+  /* TOC */
+  .toc { break-after: page; }
+  .toc h2 {
+    font-size: 22pt;
+    font-weight: 500;
+    margin-bottom: 14pt;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+  }
+  .toc-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 6pt 0;
+    border-bottom: 0.3pt dotted var(--border);
+    font-size: 11pt;
+  }
+  .toc-num {
+    color: var(--brand);
+    font-weight: 500;
+    min-width: 30pt;
+    font-variant-numeric: tabular-nums;
+  }
+  .toc-title {
+    flex: 1;
+    color: var(--near-black);
+    padding-left: 6pt;
+  }
+  .toc-page {
+    color: var(--stone);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* HEADINGS */
+  h1 {
+    font-size: 24pt;
+    font-weight: 500;
+    line-height: 1.15;
+    margin: 0 0 10pt 0;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+    color: var(--near-black);
+    break-after: avoid;
+  }
+  h2 {
+    font-size: 16pt;
+    font-weight: 500;
+    line-height: 1.25;
+    margin: 24pt 0 6pt 0;
+    color: var(--near-black);
+    break-after: avoid;
+    /* string-set removed here to avoid VS Code unknown property error */
+  }
+  h3 {
+    font-size: 13pt;
+    font-weight: 500;
+    line-height: 1.3;
+    margin: 18pt 0 4pt 0;
+    color: var(--dark-warm);
+    break-after: avoid;
+  }
+
+  .chapter-num {
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--brand);
+    font-weight: 500;
+    margin-bottom: 6pt;
+  }
+
+  /* PARAGRAPHS */
+  p { margin: 0 0 10pt 0; line-height: 1.55; color: var(--near-black); }
+
+  .lead {
+    font-size: 12pt;
+    line-height: 1.55;
+    color: var(--dark-warm);
+    margin-bottom: 14pt;
+  }
+
+  .hl { color: var(--brand); font-weight: 500; }
+  strong { font-weight: 500; }
+
+  /* LISTS */
+  ul, ol {
+    margin: 6pt 0 10pt 0;
+    padding-left: 20pt;
+    line-height: 1.55;
+  }
+  ul li::marker { color: var(--brand); }
+  ol li::marker { color: var(--brand); font-weight: 500; }
+
+  /* QUOTE */
+  blockquote, .quote {
+    border-left: 2pt solid var(--brand);
+    margin: 12pt 0;
+    padding: 4pt 0 4pt 16pt;
+    color: var(--olive);
+    line-height: 1.55;
+    break-inside: avoid;
+  }
+  blockquote .cite, .quote .cite {
+    display: block;
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--stone);
+    margin-top: 4pt;
+  }
+
+  /* CODE */
+  code {
+    font-family: var(--mono);
+    font-size: 9pt;
+    background: var(--ivory);
+    padding: 1pt 4pt;
+    border-radius: 2pt;
+    color: var(--dark-warm);
+  }
+  pre {
+    font-family: var(--mono);
+    font-size: 9pt;
+    line-height: 1.5;
+    background: var(--ivory);
+    border: 0.5pt solid var(--border-soft);
+    border-radius: 4pt;
+    padding: 10pt 14pt;
+    margin: 10pt 0;
+    white-space: pre-wrap;
+    color: var(--near-black);
+    break-inside: avoid;
+  }
+  pre code { background: transparent; padding: 0; font-size: inherit; }
+
+  /* TABLE (kami-table) */
+  table, .kami-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.5pt;
+    margin: 12pt 0;
+    break-inside: avoid;
+  }
+  table th, .kami-table th {
+    text-align: left;
+    font-family: var(--sans);
+    font-weight: 500;
+    color: var(--dark-warm);
+    padding: 6pt 8pt;
+    border-bottom: 1pt solid var(--border);
+    background: var(--ivory);
+  }
+  table td, .kami-table td {
+    padding: 5pt 8pt;
+    border-bottom: 0.3pt solid var(--border-soft);
+    vertical-align: top;
+  }
+  table.compact th, .kami-table.compact th { padding: 3pt 6pt; font-size: 8pt; }
+  table.compact td, .kami-table.compact td { padding: 2pt 6pt; font-size: 8pt; line-height: 1.4; }
+  table.financial td:not(:first-child), .kami-table.financial td:not(:first-child) {
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  table.financial th:not(:first-child), .kami-table.financial th:not(:first-child) { text-align: right; }
+  table.striped tbody tr:nth-child(even) td, .kami-table.striped tbody tr:nth-child(even) td {
+    background: var(--ivory);
+  }
+  table .total td, .kami-table .total td {
+    font-weight: 500; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
+  }
+
+  /* CALLOUT / TAKEAWAY */
+  .callout {
+    background: var(--ivory);
+    border-left: 2pt solid var(--brand);
+    padding: 10pt 14pt;
+    border-radius: 3pt;
+    margin: 12pt 0;
+    line-height: 1.55;
+    break-inside: avoid;
+  }
+  .takeaway {
+    background: var(--ivory);
+    border: 0.5pt solid var(--border);
+    border-radius: 4pt;
+    padding: 10pt 14pt;
+    margin: 14pt 0;
+    break-inside: avoid;
+  }
+  .takeaway-label {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--brand);
+    font-weight: 500;
+    margin-bottom: 4pt;
+  }
+
+  /* TAG */
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--brand);
+    font-family: var(--sans);
+    font-size: 9pt;
+    font-weight: 500;
+    padding: 1pt 6pt;
+    border-radius: 3pt;
+    margin-right: 4pt;
+  }
+
+  /* FIGURE */
+  figure { margin: 14pt 0; break-inside: avoid; }
+  figure img { max-width: 100%; border-radius: 4pt; }
+  figcaption {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--stone);
+    margin-top: 6pt;
+    text-align: center;
+  }
+
+  /* CHAPTER BREAK */
+  .chapter { break-before: page; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div>
+    <div class="cover-eyebrow">{{আইব্রো - যেমন টেকনিক্যাল রিপোর্ট / বার্ষিক পর্যালোচনা / হোয়াইট পেপার}}</div>
+    <div class="cover-title">{{নথির শিরোনাম<br>দুই লাইনে হতে পারে}}</div>
+    <div class="cover-sub">{{এক লাইনের উপশিরোনাম - এটি কী এবং কাদের জন্য।}}</div>
+  </div>
+  <div class="cover-meta">
+    <strong>{{লেখক / দল}}</strong><br>
+    {{সংস্করণ ১.০}} · {{বছর.মাস}}<br>
+    {{প্রকাশক / প্রতিষ্ঠান}}
+  </div>
+</section>
+
+<!-- TOC -->
+<section class="toc">
+  <h2>সূচিপত্র</h2>
+  <div class="toc-item"><span class="toc-num">01</span><span class="toc-title">নির্বাহী সারসংক্ষেপ</span><span class="toc-page">03</span></div>
+  <div class="toc-item"><span class="toc-num">02</span><span class="toc-title">প্রেক্ষাপট ও সমস্যার বিবৃতি</span><span class="toc-page">04</span></div>
+  <div class="toc-item"><span class="toc-num">03</span><span class="toc-title">পদ্ধতি ও প্রাপ্ত ফলাফল</span><span class="toc-page">06</span></div>
+  <div class="toc-item"><span class="toc-num">04</span><span class="toc-title">উপসংহার ও সুপারিশ</span><span class="toc-page">09</span></div>
+  <div class="toc-item"><span class="toc-num">05</span><span class="toc-title">পরিশিষ্ট</span><span class="toc-page">11</span></div>
+</section>
+
+<!-- Chapter 01 -->
+<section>
+  <div class="chapter-num">01 · নির্বাহী সারসংক্ষেপ</div>
+  <h1>নির্বাহী সারসংক্ষেপ</h1>
+
+  <p class="lead">
+    {{পুরো থিসিসের সূচনামূলক দুই বা তিনটি বাক্য। সবচেয়ে তীক্ষ্ণ দাবিতে মনোযোগ আকর্ষণের জন্য <span class="hl">ব্র্যান্ড-রঙের জোর</span> ব্যবহার করুন। শুধুমাত্র এই অনুচ্ছেদটি পড়েই পাঠকের বোঝা উচিত নথিটি কী দাবি করছে।}}
+  </p>
+
+  <h2>মূল শিখনীয় বিষয়</h2>
+  <ul>
+    <li>{{টেকঅ্যাওয়ে ১ - এক লাইনে পরিমাণগত উপসংহার।}}</li>
+    <li>{{টেকঅ্যাওয়ে ২ - তথ্যভিত্তিক অন্তর্দৃষ্টি।}}</li>
+    <li>{{টেকঅ্যাওয়ে ৩ - ভবিষ্যৎমুখী বিচারবোধ।}}</li>
+  </ul>
+
+  <div class="takeaway">
+    <div class="takeaway-label">এই নথিটি যেসব প্রশ্নের উত্তর দেয়</div>
+    {{তিনটি মূল প্রশ্ন তালিকাভুক্ত করুন - যাতে পাঠক দশ সেকেন্ডের মধ্যে সিদ্ধান্ত নিতে পারে যে সে পড়া চালিয়ে যাবে কি না।}}
+  </div>
+</section>
+
+<!-- Chapter 02 -->
+<section class="chapter">
+  <div class="chapter-num">02 · প্রেক্ষাপট</div>
+  <h1>প্রেক্ষাপট ও সমস্যার বিবৃতি</h1>
+
+  <p class="lead">
+    {{অধ্যায়ের সূচনা - এই অধ্যায় কী সমাধান করছে, কেন এটি গুরুত্বপূর্ণ। এক বা দুটি বাক্য।}}
+  </p>
+
+  <h2>বর্তমান অবস্থা</h2>
+  <p>{{বর্তমান অবস্থা বর্ণনা করে তিন থেকে পাঁচটি লাইন। বিশেষণের পরিবর্তে <span class="hl">সুনির্দিষ্ট পরিসংখ্যান</span> ব্যবহার করুন।}}</p>
+
+  <h2>মূল সমস্যা</h2>
+  <p>{{সমস্যাটি নির্দিষ্টভাবে বর্ণনা করুন। মূল পর্যবেক্ষণ তুলে ধরতে একটি কলআউট ব্যবহার করুন:}}</p>
+
+  <div class="callout">
+    {{একটি ছোট উদ্ধৃতি বা মূল পর্যবেক্ষণ। মূল লেখার চেয়ে ভিন্ন সুরের, যাতে পাঠক একটু বিরতি পায়।}}
+  </div>
+
+  <h2>সাফল্যের মাপকাঠি</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>মানদণ্ড</th>
+        <th>বর্তমান</th>
+        <th>লক্ষ্য</th>
+        <th>পার্থক্য</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>{{মানদণ্ড_১}}</td><td>{{মান}}</td><td>{{মান}}</td><td>{{পার্থক্য}}</td></tr>
+      <tr><td>{{মানদণ্ড_২}}</td><td>{{মান}}</td><td>{{মান}}</td><td>{{পার্থক্য}}</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Chapter 03 -->
+<section class="chapter">
+  <div class="chapter-num">03 · পদ্ধতি</div>
+  <h1>পদ্ধতি ও প্রাপ্ত ফলাফল</h1>
+
+  <p class="lead">{{অধ্যায়ের সূচনা।}}</p>
+
+  <h2>পদ্ধতি</h2>
+  <p>{{পদ্ধতি বর্ণনা করুন। কোড বা সূত্রের উদাহরণ দেওয়া যেতে পারে:}}</p>
+
+  <pre><code>def analyze(data):
+    return transform(data)</code></pre>
+
+  <h2>মূল ফলাফল</h2>
+
+  <h3>ফলাফল ১ - {{শিরোনাম}}</h3>
+  <p>{{তথ্যসহ একটি অনুচ্ছেদ: <span class="hl">সুনির্দিষ্ট সংখ্যা বা অনুপাত</span>।}}</p>
+
+  <h3>ফলাফল ২ - {{শিরোনাম}}</h3>
+  <p>{{একটি অনুচ্ছেদ।}}</p>
+
+  <blockquote>
+    {{একটি উদ্ধৃতি - ব্যবহারকারীর সাক্ষাৎকার, বিশেষজ্ঞের দৃষ্টিভঙ্গি বা উদ্ধৃত সূত্র।}}
+    <span class="cite"> - {{সূত্র / ব্যক্তি}}, {{তারিখ}}</span>
+  </blockquote>
+</section>
+
+<!-- Chapter 04 -->
+<section class="chapter">
+  <div class="chapter-num">04 · উপসংহার</div>
+  <h1>উপসংহার ও সুপারিশ</h1>
+
+  <p class="lead">{{অধ্যায়ের সূচনা - উপসংহারের এক লাইনের সারসংক্ষেপ, এরপর নিচের সুপারিশগুলো।}}</p>
+
+  <h2>মূল উপসংহার</h2>
+  <ol>
+    <li>{{উপসংহার ১।}}</li>
+    <li>{{উপসংহার ২।}}</li>
+    <li>{{উপসংহার ৩।}}</li>
+  </ol>
+
+  <h2>প্রস্তাবিত পরবর্তী পদক্ষেপ</h2>
+  <p>{{উপসংহারের সাথে সম্পর্কিত সুনির্দিষ্ট, বাস্তবায়নযোগ্য সুপারিশ।}}</p>
+
+  <div class="takeaway">
+    <div class="takeaway-label">কল-টু-অ্যাকশন</div>
+    {{পাঠক যদি একটি কাজ করে, তবে সেটি কী হবে? সোমবার সকালে শুরু করার মতো যথেষ্ট সুনির্দিষ্ট হতে হবে।}}
+  </div>
+</section>
+
+<!-- Chapter 05 -->
+<section class="chapter">
+  <div class="chapter-num">05 · পরিশিষ্ট</div>
+  <h1>পরিশিষ্ট</h1>
+
+  <h2>ক. তথ্যসূত্র</h2>
+  <ul>
+    <li>{{তথ্যসূত্র ১}}</li>
+    <li>{{তথ্যসূত্র ২}}</li>
+  </ul>
+
+  <h2>খ. পরিভাষা</h2>
+  <p><strong>{{পরিভাষা}}</strong> - {{সংজ্ঞা}}</p>
+  <p><strong>{{পরিভাষা}}</strong> - {{সংজ্ঞা}}</p>
+
+  <h2>গ. কৃতজ্ঞতা স্বীকার</h2>
+  <p>{{কৃতজ্ঞতা স্বীকার অনুচ্ছেদ।}}</p>
+</section>
+
+</body>
+</html>

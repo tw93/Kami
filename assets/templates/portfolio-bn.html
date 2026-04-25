@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     PORTFOLIO · বাংলা · parchment design system
+     Multi-page A4 portfolio / case studies
+     Structure: cover -> About -> project pages -> Contact
+     Each project 1-2 pages, visuals over words
+     ================================================================== -->
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>{{নাম}} · পোর্টফোলিও</title>
+<meta name="author" content="{{নাম}}">
+<meta name="description" content="{{বিবরণ}}">
+<meta name="keywords" content="{{মূলশব্দ}}">
+<meta name="generator" content="Kami">
+<style>
+  /* Bengali serif — Noto Serif Bengali */
+  @font-face {
+    font-family: "Noto Serif Bengali";
+    src: url("../fonts/NotoSerifBengali-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Noto Serif Bengali";
+    src: url("../fonts/NotoSerifBengali-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 500; font-style: normal; }
+
+  @page {
+    size: A4;
+    margin: 12mm 15mm 12mm 15mm;
+    background: #f5f4ed;
+  }
+  @page:first { margin: 0; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --near-black:#141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --brand-deep:#a64f33;
+    --border:    #e8e6dc;
+    --border-soft:#e5e3d8;
+    --tag-bg:    #E4ECF5;
+
+    --serif: "Noto Serif Bengali", "Shonar Bangla",
+             "Noto Serif", Georgia, serif;
+    --sans: var(--serif);
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 12mm 15mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 10pt;
+    line-height: 1.5;
+    letter-spacing: 0;
+  }
+
+  .serif { font-family: var(--serif); }
+
+  /* COVER */
+  .cover {
+    width: 100%;
+    height: 297mm;
+    padding: 25mm 20mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    break-after: page;
+  }
+  .cover-top {
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--brand);
+    font-weight: 500;
+  }
+  .cover-center {
+    display: flex;
+    flex-direction: column;
+    gap: 14pt;
+  }
+  .cover-name {
+    font-family: var(--serif);
+    font-size: 64pt;
+    font-weight: 500;
+    line-height: 1.02;
+    color: var(--near-black);
+  }
+  .cover-tagline {
+    font-family: var(--serif);
+    font-size: 18pt;
+    color: var(--olive);
+    line-height: 1.4;
+    max-width: 80%;
+  }
+  .cover-line {
+    width: 80pt;
+    height: 2pt;
+    background: var(--brand);
+    margin: 18pt 0 4pt 0;
+  }
+  .cover-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 10pt;
+    color: var(--stone);
+    font-variant-numeric: tabular-nums;
+  }
+  .cover-meta strong {
+    color: var(--dark-warm);
+    font-weight: 500;
+  }
+
+  /* ABOUT */
+  section.about {
+    break-after: page;
+    padding: 10mm 0;
+  }
+  .about-eyebrow {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--brand);
+    font-weight: 500;
+    margin-bottom: 8pt;
+  }
+  .about-title {
+    font-family: var(--serif);
+    font-size: 34pt;
+    font-weight: 500;
+    line-height: 1.15;
+    margin-bottom: 20pt;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+  }
+  .about-lead {
+    font-family: var(--serif);
+    font-size: 15pt;
+    line-height: 1.5;
+    color: var(--dark-warm);
+    margin-bottom: 24pt;
+    max-width: 90%;
+  }
+  .about-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24pt;
+  }
+  .about-body p { line-height: 1.45; margin-bottom: 10pt; }
+  .about-body h3 {
+    font-family: var(--serif);
+    font-size: 13pt;
+    font-weight: 500;
+    color: var(--near-black);
+    margin-bottom: 6pt;
+  }
+
+  /* PROJECT PAGE */
+  .project {
+    break-before: page;
+    break-after: page;
+    padding: 8mm 0;
+  }
+  .project-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 14pt;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+  }
+  .project-num {
+    font-family: var(--serif);
+    font-size: 48pt;
+    font-weight: 500;
+    color: var(--brand);
+    line-height: 1;
+    margin-right: 18pt;
+  }
+  .project-title-block { flex: 1; padding-top: 6pt; }
+  .project-type {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--brand);
+    font-weight: 500;
+    margin-bottom: 3pt;
+  }
+  .project-title {
+    font-family: var(--serif);
+    font-size: 24pt;
+    font-weight: 500;
+    color: var(--near-black);
+    line-height: 1.2;
+    margin-bottom: 4pt;
+  }
+  .project-subtitle {
+    font-size: 11pt;
+    color: var(--olive);
+    line-height: 1.4;
+  }
+  .project-date {
+    text-align: right;
+    font-size: 9pt;
+    color: var(--stone);
+    font-variant-numeric: tabular-nums;
+    min-width: 80pt;
+    padding-top: 10pt;
+  }
+
+  /* Tags */
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4pt;
+    margin-bottom: 14pt;
+  }
+  .tag {
+    background: var(--tag-bg);
+    color: var(--brand);
+    font-family: var(--sans);
+    font-size: 9pt;
+    font-weight: 500;
+    padding: 2pt 8pt;
+    border-radius: 3pt;
+  }
+
+  /* Hero image */
+  .project-hero {
+    width: 100%;
+    height: 110mm;
+    background: var(--ivory);
+    border: 0.5pt solid var(--border-soft);
+    border-radius: 6pt;
+    margin-bottom: 14pt;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--stone);
+    font-size: 10pt;
+  }
+  .project-hero img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* 3-column body */
+  .project-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16pt;
+  }
+  .project-block h3 {
+    font-family: var(--serif);
+    font-size: 12pt;
+    font-weight: 500;
+    color: var(--brand);
+    margin-bottom: 4pt;
+  }
+  .project-block p {
+    font-size: 9.5pt;
+    line-height: 1.5;
+    color: var(--dark-warm);
+  }
+  .project-block .hl { color: var(--brand); font-weight: 500; }
+
+  /* Results */
+  .project-results {
+    display: flex;
+    gap: 14pt;
+    margin-top: 14pt;
+    padding-top: 10pt;
+    border-top: 0.5pt dotted var(--border);
+  }
+  .result-item { flex: 1; }
+  .result-value {
+    font-family: var(--serif);
+    font-size: 20pt;
+    font-weight: 500;
+    color: var(--brand);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+  .result-label {
+    font-size: 9pt;
+    color: var(--olive);
+    margin-top: 2pt;
+    line-height: 1.3;
+  }
+
+  /* 2-image variant */
+  .project-visuals-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10pt;
+    margin-bottom: 14pt;
+  }
+  .project-visuals-2col .project-hero {
+    height: 80mm;
+    margin-bottom: 0;
+  }
+
+  /* SELECTED WORKS */
+  section.more-works {
+    break-before: page;
+    padding-top: 10mm;
+  }
+  .more-works-title {
+    font-family: var(--serif);
+    font-size: 26pt;
+    font-weight: 500;
+    margin-bottom: 16pt;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+  }
+  .work-item {
+    display: grid;
+    grid-template-columns: 40pt 1fr 80pt;
+    gap: 12pt;
+    padding: 8pt 0;
+    border-bottom: 0.3pt dotted var(--border);
+    align-items: baseline;
+  }
+  .work-year {
+    font-family: var(--serif);
+    color: var(--brand);
+    font-size: 11pt;
+    font-variant-numeric: tabular-nums;
+  }
+  .work-title-block .title {
+    font-family: var(--serif);
+    font-size: 11pt;
+    font-weight: 500;
+    color: var(--near-black);
+  }
+  .work-title-block .desc {
+    font-size: 9pt;
+    color: var(--olive);
+    margin-top: 1pt;
+  }
+  .work-link {
+    text-align: right;
+    font-size: 9pt;
+    color: var(--stone);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* CONTACT */
+  section.contact {
+    break-before: page;
+    padding: 20mm 0;
+    min-height: 230mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .contact-eyebrow {
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--brand);
+    font-weight: 500;
+    margin-bottom: 12pt;
+  }
+  .contact-title {
+    font-family: var(--serif);
+    font-size: 52pt;
+    font-weight: 500;
+    line-height: 1.05;
+    margin-bottom: 20pt;
+    color: var(--near-black);
+  }
+  .contact-line {
+    width: 80pt;
+    height: 2pt;
+    background: var(--brand);
+    margin-bottom: 24pt;
+  }
+  .contact-list {
+    font-size: 12pt;
+    line-height: 1.55;
+    color: var(--dark-warm);
+  }
+  .contact-list strong {
+    font-family: var(--sans);
+    color: var(--stone);
+    font-weight: 500;
+    font-size: 10pt;
+    margin-right: 12pt;
+    display: inline-block;
+    min-width: 80pt;
+  }
+  .contact-list a {
+    color: var(--brand);
+    text-decoration: none;
+  }
+
+  /* TABLE (kami-table) */
+  table, .kami-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.5pt;
+    margin: 10pt 0;
+    break-inside: avoid;
+  }
+  table th, .kami-table th {
+    text-align: left;
+    font-weight: 500;
+    color: var(--dark-warm);
+    padding: 5pt 8pt;
+    border-bottom: 1pt solid var(--border);
+    background: transparent;
+  }
+  table td, .kami-table td {
+    padding: 4pt 8pt;
+    border-bottom: 0.3pt solid var(--border-soft);
+    vertical-align: top;
+  }
+  table.compact th, .kami-table.compact th { padding: 3pt 6pt; font-size: 8pt; }
+  table.compact td, .kami-table.compact td { padding: 2pt 6pt; font-size: 8pt; line-height: 1.4; }
+  table.financial td:not(:first-child), .kami-table.financial td:not(:first-child) {
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  table.financial th:not(:first-child), .kami-table.financial th:not(:first-child) { text-align: right; }
+  table.striped tbody tr:nth-child(even) td, .kami-table.striped tbody tr:nth-child(even) td {
+    background: var(--ivory);
+  }
+  table .total td, .kami-table .total td {
+    font-weight: 500; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-top">{{বছরের_সীমা - যেমন নির্বাচিত কাজ ২০২৩–২০২৬}}</div>
+
+  <div class="cover-center">
+    <div class="cover-name">{{নাম}}<br>পোর্টফোলিও</div>
+    <div class="cover-tagline">{{এক লাইনের আত্ম-বিবরণী বা পোর্টফোলিও থিম।}}</div>
+    <div class="cover-line"></div>
+  </div>
+
+  <div class="cover-meta">
+    <div>
+      <strong>{{শৃঙ্খলা / ভূমিকা}}</strong><br>
+      {{অবস্থান}}
+    </div>
+    <div style="text-align: right;">
+      {{ইমেইল}}<br>
+      {{ওয়েবসাইট / সোশ্যাল}}
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="about-eyebrow">সম্পর্কে</div>
+  <div class="about-title">{{এক লাইনের পজিশনিং হেডলাইন।}}</div>
+  <div class="about-lead">
+    {{সেরিফ ফন্টে দুই-তিন লাইনের ভূমিকা। বিক্রয়ের মতো নয়। আপনি কী নিয়ে কাজ করেন এবং কী ভালোভাবে করেন তা নিজের ভাষায় বর্ণনা করুন।}}
+  </div>
+  <div class="about-body">
+    <div>
+      <h3>প্রেক্ষাপট</h3>
+      <p>{{আপনার অতীত অভিজ্ঞতা নিয়ে একটি অনুচ্ছেদ।}}</p>
+    </div>
+    <div>
+      <h3>ফোকাস</h3>
+      <p>{{আপনার বর্তমান ফোকাস বা পদ্ধতি নিয়ে একটি অনুচ্ছেদ।}}</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT 01 -->
+<section class="project">
+  <div class="project-header">
+    <div class="project-num">01</div>
+    <div class="project-title-block">
+      <div class="project-type">{{প্রকল্পের_ধরন - যেমন প্রোডাক্ট ডিজাইন / ওপেন সোর্স}}</div>
+      <div class="project-title">{{প্রকল্পের_নাম}}</div>
+      <div class="project-subtitle">{{এই প্রকল্পে কী করা হয়েছে তার এক লাইনের বিবরণ।}}</div>
+    </div>
+    <div class="project-date">{{তারিখ - যেমন ২০২৫.০৪ - ২০২৬.০২}}</div>
+  </div>
+
+  <div class="project-tags">
+    <span class="tag">{{ট্যাগ ১}}</span>
+    <span class="tag">{{ট্যাগ ২}}</span>
+    <span class="tag">{{ট্যাগ ৩}}</span>
+  </div>
+
+  <div class="project-hero">
+    <!-- Replace with: <img src="project-01-hero.png" alt=""> -->[হিরো ইমেজের স্থান - &lt;img&gt; দিয়ে প্রতিস্থাপন করুন]
+  </div>
+
+  <div class="project-body">
+    <div class="project-block">
+      <h3>প্রেক্ষাপট</h3>
+      <p>{{এই প্রকল্প কেন? এটি কোন সমস্যার সমাধান করে? এর ব্যবহারকারী কারা?}}</p>
+    </div>
+    <div class="project-block">
+      <h3>পদ্ধতি</h3>
+      <p>{{এটি কীভাবে করা হয়েছিল - মূল সিদ্ধান্ত, ডিজাইনের যুক্তি, প্রযুক্তিগত পদ্ধতি।}}</p>
+    </div>
+    <div class="project-block">
+      <h3>ফলাফল</h3>
+      <p>{{ফলাফল - <span class="hl">পরিসংখ্যান</span>, প্রতিক্রিয়া, প্রভাব।}}</p>
+    </div>
+  </div>
+
+  <div class="project-results">
+    <div class="result-item">
+      <div class="result-value">{{সংখ্যা}}</div>
+      <div class="result-label">{{লেবেল}}</div>
+    </div>
+    <div class="result-item">
+      <div class="result-value">{{সংখ্যা}}</div>
+      <div class="result-label">{{লেবেল}}</div>
+    </div>
+    <div class="result-item">
+      <div class="result-value">{{সংখ্যা}}</div>
+      <div class="result-label">{{লেবেল}}</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT 02 (2-image variant) -->
+<section class="project">
+  <div class="project-header">
+    <div class="project-num">02</div>
+    <div class="project-title-block">
+      <div class="project-type">{{প্রকল্পের_ধরন}}</div>
+      <div class="project-title">{{প্রকল্পের_নাম}}</div>
+      <div class="project-subtitle">{{এক লাইনের বিবরণ।}}</div>
+    </div>
+    <div class="project-date">{{তারিখ}}</div>
+  </div>
+
+  <div class="project-tags">
+    <span class="tag">{{ট্যাগ}}</span>
+    <span class="tag">{{ট্যাগ}}</span>
+  </div>
+
+  <div class="project-visuals-2col">
+    <div class="project-hero">[বাম দিকের ছবি]</div>
+    <div class="project-hero">[ডান দিকের ছবি]</div>
+  </div>
+
+  <div class="project-body">
+    <div class="project-block">
+      <h3>প্রেক্ষাপট</h3>
+      <p>{{প্রেক্ষাপট।}}</p>
+    </div>
+    <div class="project-block">
+      <h3>পদ্ধতি</h3>
+      <p>{{পদ্ধতি।}}</p>
+    </div>
+    <div class="project-block">
+      <h3>ফলাফল</h3>
+      <p>{{ফলাফল।}}</p>
+    </div>
+  </div>
+</section>
+
+<!-- MORE WORKS -->
+<section class="more-works">
+  <div class="more-works-title">নির্বাচিত কাজ</div>
+
+  <div class="work-item">
+    <span class="work-year">2025</span>
+    <div class="work-title-block">
+      <div class="title">{{কাজের_শিরোনাম}}</div>
+      <div class="desc">{{এক লাইনের বিবরণ।}}</div>
+    </div>
+    <div class="work-link">{{লিংক / অবস্থা}}</div>
+  </div>
+
+  <div class="work-item">
+    <span class="work-year">2024</span>
+    <div class="work-title-block">
+      <div class="title">{{কাজের_শিরোনাম}}</div>
+      <div class="desc">{{এক লাইনের বিবরণ।}}</div>
+    </div>
+    <div class="work-link">{{লিংক / অবস্থা}}</div>
+  </div>
+
+  <div class="work-item">
+    <span class="work-year">2023</span>
+    <div class="work-title-block">
+      <div class="title">{{কাজের_শিরোনাম}}</div>
+      <div class="desc">{{এক লাইনের বিবরণ।}}</div>
+    </div>
+    <div class="work-link">{{লিংক / অবস্থা}}</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+  <div class="contact-eyebrow">যোগাযোগ</div>
+  <div class="contact-title">{{এক লাইনের সূচনা - যেমন "নতুন কোলাবোরেশনের জন্য উন্মুক্ত।"}}</div>
+  <div class="contact-line"></div>
+  <div class="contact-list">
+    <div><strong>ইমেইল</strong><a href="mailto:{{ইমেইল}}">{{ইমেইল}}</a></div>
+    <div><strong>ফোন</strong>{{ফোন}}</div>
+    <div><strong>ওয়েবসাইট</strong><a href="{{ইউআরএল}}">{{ইউআরএল}}</a></div>
+    <div><strong>{{প্ল্যাটফর্ম}}</strong><a href="{{ইউআরএল}}">@{{হ্যান্ডেল}}</a></div>
+  </div>
+</section>
+
+</body>
+</html>

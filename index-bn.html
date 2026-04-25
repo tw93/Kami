@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <title>Kami · ডিজাইন সিস্টেম</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kami - এআই-সহায়তা প্রাপ্ত পেশাদার নথিপত্রের জন্য একটি উষ্ণ পার্চমেন্ট ডিজাইন সিস্টেম, যা একটি অ্যাকসেন্ট কালার, সেরিফ-নির্ভর কাঠামো এবং সম্পাদকীয় স্পেসিং দ্বারা গঠিত।">
+  <link rel="icon" href="https://gw.alipayobjects.com/zos/k/vl/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<nav class="lang-switch"><a href="./index.html">EN</a><a href="./index-zh.html">中</a><a href="./index-ja.html">日</a><a href="./index-bn.html" class="active">বা</a></nav>
+<main class="page">
+
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="eyebrow">
+      <span>ডিজাইন সিস্টেম · v1.1.0<span class="eyebrow-date"> · ২০২৬.০৪</span></span>
+      <span class="hero-links">
+        <a href="https://github.com/tw93/kami" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/>
+          </svg>
+        </a>
+        <a href="https://x.com/HiTw93" target="_blank" rel="noopener" aria-label="X">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+      </span>
+    </div>
+    <h1>Kami<span class="cn">紙</span></h1>
+    <p class="tagline">ভালো কন্টেন্টের জন্য ভালো কাগজ প্রাপ্য। Kami হলো এআই যুগের জন্য একটি লেআউট ডিজাইন সিস্টেম, যা নথিপত্রকে করে স্পষ্ট, পাঠযোগ্য এবং স্মরণীয়।</p>
+    <div class="hero-tokens">
+      <span><b>ক্যানভাস</b>#f5f4ed</span>
+      <span><b>অ্যাকসেন্ট</b>#1B365D</span>
+      <span><b>সেরিফ</b>Charter / TsangerJinKai / Noto Serif Bengali</span>
+      <span><b>স্যান্স</b>= সেরিফ (প্রতি পৃষ্ঠায় একটি ফন্ট)</span>
+    </div>
+  </header>
+
+  <!-- ============ 00 DEMOS ============ -->
+  <section>
+    <div class="section-head">
+      <p class="section-num">০০ · দেখুন</p>
+      <h2 class="section-title">আউটপুট নমুনা</h2>
+      <p class="section-lede">ক্লডকে নির্দেশনা দিন: ওয়ান-পেজার, দীর্ঘ নথি, চিঠি, পোর্টফোলিও, জীবনবৃত্তান্ত, স্লাইড—সবকিছুই একটি ছোট ও নির্ভরযোগ্য নিয়মকাঠামোর মাধ্যমে সুশৃঙ্খল লেআউটে পরিণত হয়।</p>
+    </div>
+    <div class="demo-grid">
+      <div class="demo-card">
+        <a href="assets/demos/demo-tesla.pdf" target="_blank"><img src="assets/demos/demo-tesla.png" alt="টেসলা কোম্পানির ওয়ান-পেজার"></a>
+        <p class="demo-title">ওয়ান-পেজার</p>
+        <p class="demo-desc">টেসলা কোম্পানির প্রোফাইল, একক A4</p>
+      </div>
+      <div class="demo-card">
+        <a href="assets/demos/demo-musk-resume.pdf" target="_blank"><img src="assets/demos/demo-musk-resume.png" alt="মাস্কের সিভি"></a>
+        <p class="demo-title">জীবনবৃত্তান্ত</p>
+        <p class="demo-desc">প্রতিষ্ঠাতার সিভি, ২ পৃষ্ঠা</p>
+      </div>
+      <div class="demo-card">
+        <a href="assets/demos/demo-kaku.pdf" target="_blank"><img src="assets/demos/demo-kaku.png" alt="কাকু পোর্টফোলিও"></a>
+        <p class="demo-title">পোর্টফোলিও</p>
+        <p class="demo-desc">কাকু টার্মিনাল পোর্টফোলিও, জাপানি, ৭ পৃষ্ঠা</p>
+      </div>
+      <div class="demo-card">
+        <a href="assets/demos/demo-agent-slides.pdf" target="_blank"><img src="assets/demos/demo-agent-slides.png" alt="এজেন্ট স্লাইড"></a>
+        <p class="demo-title">স্লাইড</p>
+        <p class="demo-desc">এজেন্ট কীনোট, ৬ স্লাইড</p>
+      </div>
+      <div class="demo-card">
+        <a href="assets/demos/demo-muslin-slides.pdf" target="_blank"><img src="assets/demos/demo-muslin-slides.png" alt="বাংলা মসলিন স্লাইড"></a>
+        <p class="demo-title">স্লাইড · বাংলা</p>
+        <p class="demo-desc">মসলিন: বোনা বাতাস, ৭ স্লাইড</p>
+      </div>
+      <div class="demo-card">
+        <a href="assets/demos/demo-satyajit-resume.pdf" target="_blank"><img src="assets/demos/demo-satyajit-resume.png" alt="বাংলা জীবনবৃত্তান্ত"></a>
+        <p class="demo-title">জীবনবৃত্তান্ত · বাংলা</p>
+        <p class="demo-desc">জীবনবৃত্তান্ত, ২ পৃষ্ঠা</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 01 INSTALL ============ -->
+  <section>
+    <div class="section-head">
+      <p class="section-num">০১ · ব্যবহার</p>
+      <h2 class="section-title">ইনস্টল এবং ব্যবহার</h2>
+      <p class="section-lede">আপনার কী প্রয়োজন তা ক্লডকে বলুন, যেমন "আমার জন্য একটি জীবনবৃত্তান্ত তৈরি করো", "আমার স্টার্টআপের জন্য একটি ওয়ান-পেজার বানাও", বা "আমার বক্তৃতার জন্য একটি স্লাইড ডেক ডিজাইন করো"। স্কিলটি স্বয়ংক্রিয়ভাবে চালু হয়, কোনো স্ল্যাশ কমান্ডের প্রয়োজন নেই।</p>
+    </div>
+<pre class="code"><span class="c"># ক্লড কোড (Claude Code)</span>
+npx skills add tw93/kami -a claude-code -g -y
+
+<span class="c"># কোডেক্স (Codex)</span>
+npx skills add tw93/kami -a codex -g -y</pre>
+    <p class="section-lede" style="font-size:14px;">ক্লড ডেস্কটপ: <a href="https://cdn.jsdelivr.net/gh/tw93/kami@main/dist/kami.zip" style="color:var(--brand); text-decoration:none; font-weight:500;">kami.zip</a> ডাউনলোড করুন, তারপর Customize &gt; Skills &gt; "+" &gt; Create skill-এ আপলোড করুন।</p>
+  </section>
+
+  <!-- ============ 02 MANIFESTO ============ -->
+  <section>
+    <div class="section-head">
+      <p class="section-num">০২ · ইশতেহার</p>
+      <h2 class="section-title">ডিজাইন নীতিমালা</h2>
+    </div>
+    <p class="manifesto">উষ্ণ পার্চমেন্ট ক্যানভাস, একমাত্র অ্যাকসেন্ট হিসেবে <em>ইঙ্ক ব্লু</em>, সেরিফ ফন্টে সাজানো কাঠামো, আর কড়া শ্যাডো বা চটকদার রঙের অনুপস্থিতি। এই সিস্টেমটি মুদ্রিত উপাদানের জন্য তৈরি: স্থিতিশীল, স্পষ্ট এবং সুবিন্যস্ত।</p>
+    <ol class="rules">
+      <li><span class="n">১</span><p>পৃষ্ঠার ব্যাকগ্রাউন্ড হলো পার্চমেন্ট <code>#f5f4ed</code>, কখনোই সম্পূর্ণ সাদা নয়</p></li>
+      <li><span class="n">২</span><p>অ্যাকসেন্ট রং শুধুমাত্র ইঙ্ক ব্লু <code>#1B365D</code>; অন্য কোনো ক্রোম্যাটিক রঙের ব্যবহার নেই</p></li>
+      <li><span class="n">৩</span><p>সব ধূসর রং উষ্ণ, হলুদ-বাদামি আন্ডারটোন যুক্ত; কোনো শীতল নীলচে-ধূসর নয়</p></li>
+      <li><span class="n">৪</span><p>ইংরেজি শিরোনাম এবং বডির জন্য সেরিফ ব্যবহার করে; চীনা শিরোনামে সেরিফ এবং বডিতে স্যান্স ব্যবহার করে; বাংলা উভয় ক্ষেত্রে সেরিফ ব্যবহার করে</p></li>
+      <li><span class="n">৫</span><p>সেরিফ বডি ৪০০, শিরোনাম ৫০০ ওজনের। সিন্থেটিক বোল্ড এড়িয়ে চলুন</p></li>
+      <li><span class="n">৬</span><p>তিনটি লাইন-হাইট ব্যান্ড: টাইট শিরোনাম ১.১-১.৩ / ঘন ১.৪-১.৪৫ / পড়ার জন্য ১.৫-১.৫৫</p></li>
+      <li><span class="n">৭</span><p>ট্যাগের ব্যাকগ্রাউন্ড অবশ্যই সলিড হেক্স হতে হবে; কোনো rgba নয়, WeasyPrint ডাবল-রেক্টেঙ্গেল বাগের কারণে</p></li>
+      <li><span class="n">৮</span><p>শ্যাডো: শুধুমাত্র রিং বা হুইসপার শ্যাডো, কোনো কড়া ড্রপ শ্যাডো নয়</p></li>
+    </ol>
+  </section>
+
+  <!-- ============ 03 COLOR ============ -->
+  <section>
+    <div class="section-head">
+      <p class="section-num">০৩ · রং</p>
+      <h2 class="section-title">উষ্ণ সংযম</h2>
+      <p class="section-lede">একটি অ্যাকসেন্ট + উষ্ণ নিউট্রাল রং + শীতল রঙের অনুপস্থিতি। ইঙ্ক ব্লু (কালি নীল) কোনো পৃষ্ঠার সর্বোচ্চ <b>৫%</b> জুড়ে থাকবে। এর বেশি মানেই বিশৃঙ্খলা, সংযম নয়।</p>
+    </div>
+
+    <h3 class="subhead">ক্যানভাস</h3>
+    <div class="swatches">
+      <div class="swatch"><div class="chip" style="background:#f5f4ed"></div><div class="info"><p class="name">পার্চমেন্ট</p><p class="role">পৃষ্ঠার ব্যাকগ্রাউন্ড, ইমোশনাল ভিত্তি</p><span class="hex">#F5F4ED</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#faf9f5"></div><div class="info"><p class="name">আইভরি</p><p class="role">কার্ড / এলিভেটেড সারফেস</p><span class="hex">#FAF9F5</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#e8e6dc"></div><div class="info"><p class="name">উষ্ণ বালি</p><p class="role">বাটন ডিফল্ট / ইন্টারঅ্যাকটিভ সারফেস</p><span class="hex">#E8E6DC</span></div></div>
+      <div class="swatch dark"><div class="chip" style="background:#141413"></div><div class="info"><p class="name" style="color:var(--deep-dark)">গভীর কালচে</p><p class="role">ডার্ক থিমের পৃষ্ঠার ভিত্তি, পুরোপুরি কালো নয়</p><span class="hex">#141413</span></div></div>
+    </div>
+
+    <h3 class="subhead">ব্র্যান্ড</h3>
+    <div class="swatches">
+      <div class="swatch brand"><div class="chip" style="background:#1B365D"></div><div class="info"><p class="name">ইঙ্ক ব্লু</p><p class="role">প্রাথমিক রং · কল-টু-অ্যাকশন · কোট বার · সেকশন ওভারলাইন</p><span class="hex">#1B365D</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#2D5A8A"></div><div class="info"><p class="name">হালকা ইঙ্ক</p><p class="role">ডার্ক সারফেসে লিংক · হালকা ভ্যারিয়েন্ট</p><span class="hex">#2D5A8A</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#30302e"></div><div class="info"><p class="name" style="color:var(--deep-dark)">ডার্ক সারফেস</p><p class="role">ডার্ক থিম কন্টেইনার · উষ্ণ চারকোল</p><span class="hex">#30302E</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#b53333"></div><div class="info"><p class="name">ত্রুটি (Error)</p><p class="role">ত্রুটির অবস্থা, গাঢ় উষ্ণ লাল</p><span class="hex">#B53333</span></div></div>
+    </div>
+
+    <h3 class="subhead">উষ্ণ নিউট্রাল রং</h3>
+    <div class="swatches" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="swatch"><div class="chip" style="background:#141413"></div><div class="info"><p class="name">প্রায় কালো</p><span class="hex">#141413</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#3d3d3a"></div><div class="info"><p class="name">উষ্ণ কালচে</p><span class="hex">#3D3D3A</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#504e49"></div><div class="info"><p class="name">অলিভ</p><span class="hex">#504e49</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#6b6a64"></div><div class="info"><p class="name">স্টোন</p><span class="hex">#6b6a64</span></div></div>
+    </div>
+
+    <h3 class="subhead">ট্যাগ টিন্ট: rgba থেকে সলিড হেক্স</h3>
+    <p style="font-size:14px; color: var(--olive); margin: 0 0 16px; line-height: 1.55;">পার্চমেন্টের উপর ইঙ্ক ব্লু <code style="font-family:var(--mono);font-size:12px;background:#EEF2F7;color:var(--brand);padding:1px 5px;border-radius:2px">#1B365D</code> এর সমতুল্য সলিড হেক্স। WeasyPrint ডাবল-রেক্টেঙ্গেল রেন্ডারিং বাগ এড়াতে ট্যাগগুলো <code style="font-family:var(--mono);font-size:12px;background:#EEF2F7;color:var(--brand);padding:1px 5px;border-radius:2px">rgba()</code> এর পরিবর্তে সলিড হেক্স ব্যবহার করে।</p>
+    <div class="tint-strip">
+      <div class="tint"><span class="flag">&nbsp;</span><span class="sample" style="background:#EEF2F7">ট্যাগ নমুনা</span><p class="opacity">0.08</p><span class="hex">#EEF2F7</span></div>
+      <div class="tint"><span class="flag">&nbsp;</span><span class="sample" style="background:#E4ECF5">ট্যাগ নমুনা</span><p class="opacity">0.14</p><span class="hex">#E4ECF5</span></div>
+      <div class="tint default"><span class="flag">ডিফল্ট</span><span class="sample" style="background:#E4ECF5">ট্যাগ নমুনা</span><p class="opacity">0.18</p><span class="hex">#E4ECF5</span></div>
+      <div class="tint"><span class="flag">&nbsp;</span><span class="sample" style="background:#D0DCE9">ট্যাগ নমুনা</span><p class="opacity">0.22</p><span class="hex">#D0DCE9</span></div>
+      <div class="tint"><span class="flag">&nbsp;</span><span class="sample" style="background:#D6E1EE">ট্যাগ নমুনা</span><p class="opacity">0.30</p><span class="hex">#D6E1EE</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 04 TYPE ============ -->
+  <section>
+    <div class="section-head">
+      <p class="section-num">০৪ · টাইপোগ্রাফি</p>
+      <h2 class="section-title">টাইপ সিস্টেম</h2>
+      <p class="section-lede">সেরিফ ফন্ট কাঠামো ধরে রাখে, স্যান্স ফন্ট কাজ করে। সেরিফ বডির ওজন ৪০০, শিরোনামের ৫০০।</p>
+    </div>
+
+    <div class="family-grid">
+      <div class="family serif">
+        <p class="glyph">অ</p>
+        <p class="role">সেরিফ · শিরোনাম + বডি</p>
+        <p class="name">Charter / TsangerJinKai02</p>
+        <p class="use">শিরোনাম, বডি টেক্সট, পুল কোট এবং সংখ্যার জোর দেওয়ার জন্য ব্যবহৃত হয়। ইংরেজি Charter ব্যবহার করে, চীনা TsangerJinKai02, আর বাংলা Noto Serif Bengali ব্যবহার করে।</p>
+      </div>
+      <div class="family mono">
+        <p class="glyph">&lt;/&gt;</p>
+        <p class="role">মনো · কোড</p>
+        <p class="name">JetBrains Mono</p>
+        <p class="use">কোড ব্লক, ভার্সন নাম্বার, হেক্স ভ্যালু, ট্যাবুুলার ফিগার।</p>
+      </div>
+    </div>
+
+    <h3 class="subhead">স্কেল (প্রিন্ট pt; স্ক্রিন px = pt x ১.৩৩)</h3>
+    <div class="type-grid">
+      <div class="type-row">
+        <div class="type-label">ডিসপ্লে</div>
+        <div class="type-sample display">ভালো নথি পড়া যায়<br>স্পষ্ট, স্থিতিশীল, সুবিন্যস্তভাবে</div>
+        <div class="type-specs"><b>36-48 pt</b><br>weight 500<br>line 1.10</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">H1 সেকশন</div>
+        <div class="type-sample h1">কালার সিস্টেম · প্যালেট</div>
+        <div class="type-specs"><b>18-22 pt</b><br>weight 500<br>line 1.20</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">H2 সাবসেকশন</div>
+        <div class="type-sample h2">ক্যানভাস · উষ্ণ নিউট্রাল রং</div>
+        <div class="type-specs"><b>14-16 pt</b><br>weight 500<br>line 1.25</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">H3 আইটেম</div>
+        <div class="type-sample h3">ট্যাগ টিন্ট · সলিড হেক্স</div>
+        <div class="type-specs"><b>12-13 pt</b><br>weight 500<br>line 1.30</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">বডি</div>
+        <div class="type-sample body">ইঙ্ক ব্লু (কালি নীল) কোনো পৃষ্ঠার সর্বোচ্চ ৫% জুড়ে থাকবে। এর বেশি মানেই বিশৃঙ্খলা, সংযম নয়। সব ধূসর রঙের একটি হলুদ-বাদামি আন্ডারটোন রয়েছে: R ≈ G > B হলো এর মূল সূত্র।</div>
+        <div class="type-specs"><b>9.5-10 pt</b><br>weight 400<br>line 1.55</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">ক্যাপশন</div>
+        <div class="type-sample caption">ছবির নোট, ফুটনোট, অ্যানোটেশন টেক্সট। রঙের তীব্রতা কমে অলিভ বা স্টোনে নেমে আসে।</div>
+        <div class="type-specs"><b>8.5-9 pt</b><br>weight 400<br>line 1.45</div>
+      </div>
+      <div class="type-row">
+        <div class="type-label">লেবেল</div>
+        <div class="type-sample label">ডিজাইন সিস্টেম · v1.1.0</div>
+        <div class="type-specs"><b>7.5-8 pt</b><br>weight 600<br>line 1.35</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 SPACING ============ -->
+  <section>
+    <div class="section-head">
+      <p class="section-num">০৫ · স্পেসিং ও আকৃতি</p>
+      <h2 class="section-title">ছন্দ ও রূপ</h2>
+      <p class="section-lede">মূল একক: ৪pt। ঘন লেআউটে ছোট মার্জিন ব্যবহৃত হয়; আরও আনুষ্ঠানিক নথিতে বড় মার্জিন থাকে।</p>
+    </div>
+
+    <table class="space-table">
+      <tr><th>স্কেল</th><th>মান</th><th>ব্যবহার</th><th></th></tr>
+      <tr><td class="name">xs</td><td class="val">2-3 pt</td><td class="use">ইনলাইন উপাদান</td><td class="bar"><span style="width:6px"></span></td></tr>
+      <tr><td class="name">sm</td><td class="val">4-5 pt</td><td class="use">ট্যাগ প্যাডিং · টাইট লেআউট</td><td class="bar"><span style="width:12px"></span></td></tr>
+      <tr><td class="name">md</td><td class="val">8-10 pt</td><td class="use">কম্পোনেন্টের ভেতরের অংশ</td><td class="bar"><span style="width:24px"></span></td></tr>
+      <tr><td class="name">lg</td><td class="val">16-20 pt</td><td class="use">কম্পোনেন্টের মাঝে · কার্ড প্যাডিং</td><td class="bar"><span style="width:48px"></span></td></tr>
+      <tr><td class="name">xl</td><td class="val">24-32 pt</td><td class="use">সেকশন শিরোনামের মার্জিন</td><td class="bar"><span style="width:72px"></span></td></tr>
+      <tr><td class="name">2xl</td><td class="val">40-60 pt</td><td class="use">প্রধান সেকশনগুলোর মাঝে</td><td class="bar"><span style="width:140px"></span></td></tr>
+      <tr><td class="name">3xl</td><td class="val">80-120 pt</td><td class="use">দীর্ঘ নথির অধ্যায়গুলোর মাঝে</td><td class="bar"><span style="width:240px"></span></td></tr>
+    </table>
+
+    <h3 class="subhead">রেডিয়াস</h3>
+    <div class="radii">
+      <div class="radius"><div class="box" style="border-radius:4px"></div><div class="r"><b>4</b> pt</div><div class="label">টাইট</div></div>
+      <div class="radius"><div class="box" style="border-radius:6px"></div><div class="r"><b>6</b> pt</div><div class="label">কোড ব্লক</div></div>
+      <div class="radius"><div class="box" style="border-radius:8px"></div><div class="r"><b>8</b> pt</div><div class="label">ডিফল্ট কার্ড</div></div>
+      <div class="radius"><div class="box" style="border-radius:12px"></div><div class="r"><b>12</b> pt</div><div class="label">কন্টেইনার</div></div>
+      <div class="radius"><div class="box" style="border-radius:16px"></div><div class="r"><b>16</b> pt</div><div class="label">ফিচার কার্ড</div></div>
+      <div class="radius"><div class="box" style="border-radius:24px"></div><div class="r"><b>24</b> pt</div><div class="label">বড় কন্টেইনার</div></div>
+      <div class="radius"><div class="box" style="border-radius:32px"></div><div class="r"><b>32</b> pt</div><div class="label">হিরো</div></div>
+    </div>
+
+    <h3 class="subhead">গভীরতা: তিনটি শ্যাডো পদ্ধতি</h3>
+    <p style="font-size:14px; color: var(--olive); margin: 0 0 12px; line-height: 1.55;">Kami প্রচলিত কড়া শ্যাডো পরিহার করে। গভীরতা আসে রিং শ্যাডো, হুইসপার শ্যাডো এবং হালকা-গাঢ় রঙের বিকল্প ব্যবহার থেকে।</p>
+    <div class="shadow-row">
+      <div class="shadow-demo sd-ring">
+        <p class="t">রিং শ্যাডো</p>
+        <p class="s">0 0 0 1pt var(--ring-warm)<br>&nbsp;<br>বাটন · কার্ড হোভার</p>
+      </div>
+      <div class="shadow-demo sd-whisper">
+        <p class="t">হুইসপার শ্যাডো</p>
+        <p class="s">0 4pt 24pt rgba(0,0,0,0.05)<br>&nbsp;<br>মৃদু এলিভেশন · ফিচার কার্ড</p>
+      </div>
+      <div class="shadow-demo sd-alt">
+        <p class="t">হালকা ⇌ গাঢ়</p>
+        <p class="s">parchment ⇌ deep-dark<br>&nbsp;<br>সেকশন-লেভেল · সর্বোচ্চ কন্ট্রাস্ট</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 COMPONENTS ============ -->
+  <section>
+    <div class="section-head">
+      <p class="section-num">০৬ · কম্পোনেন্ট</p>
+      <h2 class="section-title">অ্যাটমিক মডিউল</h2>
+      <p class="section-lede">একটি ছোট নির্দিষ্ট সেট, যা কেবল তখনই ব্যবহৃত হয় যখন এটি নথির কোনো বাস্তব সমস্যার সমাধান করে।</p>
+    </div>
+
+    <div class="comp-grid">
+      <div class="comp">
+        <h4>বাটন</h4>
+        <p class="hint">কড়া ড্রপের বদলে রিং শ্যাডো · 8pt রেডিয়াস</p>
+        <div class="demo" style="display:flex; gap:10px; flex-wrap:wrap;">
+          <span class="btn btn-primary">Primary CTA</span>
+          <span class="btn btn-secondary">Secondary</span>
+          <span class="btn btn-ghost">Ghost</span>
+        </div>
+      </div>
+      <div class="comp">
+        <h4>ট্যাগ, তিনটি স্তর</h4>
+        <p class="hint">সলিড হেক্স · দুর্বল থেকে সবল অনুযায়ী বেছে নিন</p>
+        <div class="demo" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <span class="tag calm">Light 0.08</span>
+          <span class="tag standard">Standard 0.18</span>
+          <span class="tag brush">Brush gradient</span>
+        </div>
+      </div>
+      <div class="comp">
+        <h4>উদ্ধৃতি (Quote)</h4>
+        <p class="hint">বামে 2pt ব্র্যান্ড সলিড লাইন + অলিভ টেক্সট</p>
+        <blockquote class="quote">A thousand no's for every yes, prefer clarity over decoration.</blockquote>
+      </div>
+      <div class="comp">
+        <h4>মেট্রিক</h4>
+        <p class="hint">সেরিফ সংখ্যা + স্যান্স লেবেল · ট্যাবুুলার-নামস</p>
+        <div class="metrics demo">
+          <div class="metric"><span class="metric-value">6</span><span class="metric-label">Doc types</span></div>
+          <div class="metric"><span class="metric-value">1</span><span class="metric-label">Accent</span></div>
+          <div class="metric"><span class="metric-value">8</span><span class="metric-label">Rules</span></div>
+        </div>
+      </div>
+      <div class="comp">
+        <h4>সেকশন শিরোনাম</h4>
+        <p class="hint">সেরিফ ৫০০ · 15pt · আকার-নির্ভর কাঠামো, কোনো অলংকরণ নেই</p>
+        <div class="demo">
+          <span class="sample-section-title">নির্বাচিত কাজ · প্রকল্পসমূহ</span>
+        </div>
+      </div>
+      <div class="comp">
+        <h4>ড্যাশ লিস্ট</h4>
+        <p class="hint">বুলেটের বদলে ড্যাশ · সম্পাদকীয় সুর</p>
+        <ul class="dash demo">
+          <li>উষ্ণ পার্চমেন্ট, কখনোই সম্পূর্ণ সাদা নয়</li>
+          <li>ইঙ্ক ব্লু অ্যাকসেন্ট, অন্য কোনো রং নয়</li>
+          <li>সেরিফ ফন্ট কাঠামো ধরে রাখে</li>
+        </ul>
+      </div>
+      <div class="comp">
+        <h4>কোড ব্লক</h4>
+        <p class="hint">আইভরি ব্যাকগ্রাউন্ড + 0.5pt বর্ডার + 6pt রেডিয়াস</p>
+<pre class="code"><span class="c">// warmth from restraint, not from color</span>
+canvas   = parchment; accent = <span class="k">ink_blue</span>
+palette  = <span class="k">warm_neutrals</span> − cool_grays
+document = <span class="k">serif</span> × hierarchy + generous_space
+beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
+      </div>
+      <div class="comp">
+        <h4>ফিচার কার্ড</h4>
+        <p class="hint">হুইসপার শ্যাডো + 16pt রেডিয়াস</p>
+        <div class="demo" style="background:var(--ivory); border-radius:16px; padding:18px 20px; box-shadow: 0 4px 24px rgba(0,0,0,0.05); border: 1px solid var(--border-cream);">
+          <p style="font-family:var(--serif); font-weight:500; font-size:15px; margin:0 0 6px; color:var(--near-black);">টেসলা কোম্পানির প্রোফাইল · ওয়ান-পেজার</p>
+          <p style="font-size:12px; color:var(--olive); margin:0 0 10px; line-height:1.5;">একক A4 পৃষ্ঠা · ৪টি মেট্রিক কার্ড + ৩টি বডি সেকশন + টাইমলাইন</p>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <span class="tag calm">ইংরেজি</span>
+            <span class="tag calm">A4 x ১</span>
+            <span class="tag calm">ইঙ্ক ব্লু</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 DIAGRAMS ============ -->
+  <section>
+    <div class="section-head">
+      <p class="section-num">০৭ · ডায়াগ্রাম</p>
+      <h2 class="section-title">ইনলাইন চার্ট</h2>
+      <p class="section-lede">বারোটি ইনলাইন এসভিজি ডায়াগ্রাম আর্কিটেকচার, প্রক্রিয়া এবং ডেটা চার্টের পরিস্থিতি কভার করে। ক্লডকে বলুন আপনার কোন ধরনের ডায়াগ্রাম প্রয়োজন, এটি সরাসরি নথিতে এমবেড হবে, রং এবং ফন্ট Kami ডিজাইন ল্যাঙ্গুয়েজ অনুসরণ করবে।</p>
+    </div>
+    <div class="chart-showcase">
+      <!-- Architecture mini -->
+      <div class="chart-card">
+        <div class="chart-label">আর্কিটেকচার</div>
+        <svg viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
+          <rect width="280" height="160" fill="#f5f4ed"/>
+          <!-- Browser → API -->
+          <path d="M 84,79.5 L 103,79.5 L 103,78 L 107,80 L 103,82 L 103,80.5 L 84,80.5 Z" fill="#6b6a64"/>
+          <!-- API → Database -->
+          <path d="M 172,79.5 L 191,79.5 L 191,78 L 195,80 L 191,82 L 191,80.5 L 172,80.5 Z" fill="#504e49"/>
+          <!-- Node: Client -->
+          <rect x="20" y="58" width="64" height="44" rx="3" fill="#f5f4ed" stroke="#6b6a64" stroke-width="0.8"/>
+          <text x="52" y="76" text-anchor="middle" font-size="7" letter-spacing="0" fill="#6b6a64">ক্লায়েন্ট</text>
+          <text x="52" y="91" text-anchor="middle" font-size="9" font-weight="500" fill="#141413">ব্রাউজার</text>
+          <!-- Node: API (focal) -->
+          <rect x="108" y="58" width="64" height="44" rx="3" fill="#EEF2F7" stroke="#1B365D" stroke-width="1"/>
+          <text x="140" y="76" text-anchor="middle" font-size="7" letter-spacing="0" fill="#1B365D">সার্ভিস</text>
+          <text x="140" y="91" text-anchor="middle" font-size="9" font-weight="500" fill="#141413">এপিআই</text>
+          <!-- Node: Database -->
+          <rect x="196" y="58" width="64" height="44" rx="3" fill="#f5f4ed" stroke="#504e49" stroke-width="0.8"/>
+          <text x="228" y="76" text-anchor="middle" font-size="7" letter-spacing="0" fill="#6b6a64">তথ্য</text>
+          <text x="228" y="91" text-anchor="middle" font-size="9" font-weight="500" fill="#141413">ডেটাবেস</text>
+        </svg>
+        <p class="chart-caption">সিস্টেম কম্পোনেন্ট এবং সংযোগ, একটি মূল ফোকাল নোড</p>
+      </div>
+      <!-- Flowchart mini -->
+      <div class="chart-card">
+        <div class="chart-label">ফ্লোচার্ট</div>
+        <svg viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
+          <rect width="280" height="160" fill="#f5f4ed"/>
+          <rect x="100" y="8" width="80" height="28" rx="14" fill="#141413"/>
+          <text x="140" y="25" text-anchor="middle" font-size="9" fill="#f5f4ed">শুরু</text>
+          <!-- Start → diamond -->
+          <path d="M 139.5,36 L 139.5,48 L 138,48 L 140,52 L 142,48 L 140.5,48 L 140.5,36 Z" fill="#504e49"/>
+          <polygon points="140,52 172,72 140,92 108,72" fill="#f5f4ed" stroke="#141413" stroke-width="1"/>
+          <text x="140" y="76" text-anchor="middle" font-size="8" fill="#141413">বৈধ?</text>
+          <!-- Yes right -->
+          <path d="M 172,71.5 L 204,71.5 L 204,70 L 208,72 L 204,74 L 204,72.5 L 172,72.5 Z" fill="#1B365D"/>
+          <text x="186" y="68" text-anchor="middle" font-size="8" fill="#1B365D">হ্যাঁ</text>
+          <rect x="208" y="56" width="64" height="32" rx="4" fill="#EEF2F7" stroke="#1B365D" stroke-width="1"/>
+          <text x="240" y="75" text-anchor="middle" font-size="9" fill="#141413">প্রক্রিয়া</text>
+          <!-- No down -->
+          <path d="M 139.5,92 L 139.5,112 L 138,112 L 140,116 L 142,112 L 140.5,112 L 140.5,92 Z" fill="#504e49"/>
+          <text x="148" y="106" font-size="8" fill="#504e49">না</text>
+          <rect x="96" y="116" width="88" height="32" rx="4" fill="#f5f4ed" stroke="#6b6a64" stroke-width="0.8"/>
+          <text x="140" y="134" text-anchor="middle" font-size="9" fill="#504e49">প্রত্যাখ্যান</text>
+        </svg>
+        <p class="chart-caption">সিদ্ধান্ত গ্রহণের শাখা, হ্যাঁ/না পাথ, সফলতার দিকে ফোকাস</p>
+      </div>
+      <!-- Bar chart (shifted left) -->
+      <div class="chart-card">
+        <div class="chart-label">বার চার্ট</div>
+        <svg viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
+          <rect width="280" height="160" fill="#f5f4ed"/>
+          <rect x="18" y="78" width="42" height="50" rx="3" fill="#6b6a64"/>
+          <rect x="78" y="62" width="42" height="66" rx="3" fill="#504e49"/>
+          <rect x="138" y="44" width="42" height="84" rx="3" fill="#2d4e7a"/>
+          <rect x="198" y="30" width="42" height="98" rx="3" fill="#1B365D"/>
+          <text x="39" y="145" text-anchor="middle" font-size="10" fill="#6b6a64">১ম</text>
+          <text x="99" y="145" text-anchor="middle" font-size="10" fill="#504e49">২য়</text>
+          <text x="159" y="145" text-anchor="middle" font-size="10" fill="#4d4c48">৩য়</text>
+          <text x="219" y="145" text-anchor="middle" font-size="10" fill="#4d4c48">৪র্থ</text>
+          <text x="39" y="73" text-anchor="middle" font-size="9" font-weight="500" fill="#6b6a64">১৮০</text>
+          <text x="99" y="57" text-anchor="middle" font-size="9" font-weight="500" fill="#504e49">২২০</text>
+          <text x="159" y="39" text-anchor="middle" font-size="9" font-weight="500" fill="#2d4e7a">১৯৫</text>
+          <text x="219" y="25" text-anchor="middle" font-size="9" font-weight="500" fill="#1B365D">২৪০</text>
+        </svg>
+        <p class="chart-caption">ত্রৈমাসিক রাজস্ব তুলনা, গ্রেডিয়েন্ট বা একক রং</p>
+      </div>
+      <!-- Donut chart -->
+      <div class="chart-card">
+        <div class="chart-label">ডোনাট চার্ট</div>
+        <svg viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
+          <rect width="280" height="160" fill="#f5f4ed"/>
+          <path d="M 80,25 A 55,55 0 1,1 47.7,124.5 L 62.4,104.3 A 30,30 0 1,0 80,50 Z" fill="#1B365D" stroke="white" stroke-width="1.5"/>
+          <path d="M 47.7,124.5 A 55,55 0 0,1 35.5,47.7 L 55.7,62.4 A 30,30 0 0,0 62.4,104.3 Z" fill="#504e49" stroke="white" stroke-width="1.5"/>
+          <path d="M 35.5,47.7 A 55,55 0 0,1 80,25 L 80,50 A 30,30 0 0,0 55.7,62.4 Z" fill="#6b6a64" stroke="white" stroke-width="1.5"/>
+          <text x="80" y="77" text-anchor="middle" font-size="13" font-weight="500" fill="#1B365D">৬০%</text>
+          <text x="80" y="92" text-anchor="middle" font-size="10" fill="#504e49">প্রধান</text>
+          <rect x="150" y="46" width="10" height="10" rx="2" fill="#1B365D"/>
+          <text x="165" y="55" font-size="11" fill="#4d4c48">মূল রাজস্ব · ৬০%</text>
+          <rect x="150" y="72" width="10" height="10" rx="2" fill="#504e49"/>
+          <text x="165" y="81" font-size="11" fill="#4d4c48">সেবা · ২৫%</text>
+          <rect x="150" y="98" width="10" height="10" rx="2" fill="#6b6a64"/>
+          <text x="165" y="107" font-size="11" fill="#4d4c48">অন্যান্য · ১৫%</text>
+        </svg>
+        <p class="chart-caption">রাজস্ব কাঠামো বিভাজন, ৩–৬টি সেগমেন্ট সমর্থন করে</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 DECISION TABLE ============ -->
+  <section>
+    <div class="section-head">
+      <p class="section-num">০৮ · সিদ্ধান্ত সহায়িকা</p>
+      <h2 class="section-title">দ্রুত রেফারেন্স</h2>
+      <p class="section-lede">কোনটি ব্যবহার করবেন তা নিয়ে দ্বিধায় থাকলে এই টেবিলটি দেখুন। যদি এখানে না থাকে, তবে মূল নীতিমালায় ফিরে যান।</p>
+    </div>
+    <table class="decision">
+      <tr><th>কাজ</th><th>কীভাবে</th></tr>
+      <tr><td class="task">বড় শিরোনাম</td><td class="how">সেরিফ <code>500</code>, কাঠামোর ওপর ভিত্তি করে আকার, লাইন-হাইট <code>1.10-1.30</code></td></tr>
+      <tr><td class="task">পড়ার বডি টেক্সট</td><td class="how">সেরিফ <code>400</code>, <code>9.5-10 pt</code>, লাইন-হাইট <code>1.55</code></td></tr>
+      <tr><td class="task">সংখ্যায় জোর দেওয়া</td><td class="how"><code>color: var(--brand)</code>, বোল্ড নয়</td></tr>
+      <tr><td class="task">দুটি সেকশন আলাদা করা</td><td class="how"><code>2.5pt</code> ব্র্যান্ড লেফট বার, অথবা <code>0.5pt</code> উষ্ণ-ধূসর ড্যাশড লাইন</td></tr>
+      <tr><td class="task">কারো উদ্ধৃতি দেওয়া</td><td class="how">বামে <code>2pt</code> ব্র্যান্ড সলিড লাইন + অলিভ টেক্সট</td></tr>
+      <tr><td class="task">কোড দেখানো</td><td class="how">আইভরি ব্যাকগ্রাউন্ড + <code>0.5pt</code> বর্ডার + <code>6pt</code> রেডিয়াস + মনো ফন্ট</td></tr>
+      <tr><td class="task">প্রাইমারি বনাম সেকেন্ডারি</td><td class="how">প্রাইমারি: ব্র্যান্ড ফিল + আইভরি টেক্সট; সেকেন্ডারি: উষ্ণ-বালি + চারকোল</td></tr>
+      <tr><td class="task">বিশেষ কার্ড চিহ্নিত করা</td><td class="how"><code>border: 0.5pt solid var(--brand)</code> অথবা <code>border-left: 3pt</code></td></tr>
+      <tr><td class="task">সেকশন শুরু করা</td><td class="how">সেরিফ <code>500</code> · <code>15pt</code> · আকার-নির্ভর কাঠামো, কোনো অলংকরণের প্রয়োজন নেই</td></tr>
+      <tr><td class="task">নথির কভার</td><td class="how">একক পৃষ্ঠা, ডিসপ্লে সাইজ + ডানে-সারিবদ্ধ লেখক/তারিখ + পর্যাপ্ত ফাঁকা জায়গা</td></tr>
+      <tr><td class="task">ডেটা কার্ড</td><td class="how">আইভরি ব্যাকগ্রাউন্ড + <code>8pt</code> রেডিয়াস + সেরিফ বড় সংখ্যা, ইঙ্ক ব্লু + স্যান্স ছোট লেবেল</td></tr>
+    </table>
+  </section>
+
+  <!-- ============ 08 ANTI ============ -->
+  <section>
+    <div class="section-head">
+      <p class="section-num">০৯ · অ্যান্টি-প্যাটার্ন</p>
+      <h2 class="section-title">যা পরিহার করবেন</h2>
+      <p class="section-lede">ব্যতিক্রম গ্রহণযোগ্য, তবে এর কারণ সুস্পষ্ট হওয়া উচিত।</p>
+    </div>
+
+    <div class="anti">
+      <div class="no">
+        <h5>করবেন না</h5>
+        <p>পৃষ্ঠার ব্যাকগ্রাউন্ড হিসেবে সম্পূর্ণ সাদা <code>#ffffff</code> বা শীতল ধূসর <code>#f3f4f6</code> ব্যবহার করবেন না। এটি পৃষ্ঠাকে নিস্তেজ করে তোলে এবং উষ্ণ পার্চমেন্ট চরিত্রকে দুর্বল করে দেয়।</p>
+      </div>
+      <div class="yes">
+        <h5>করুন</h5>
+        <p>সর্বদা <code>#f5f4ed</code> পার্চমেন্ট ব্যবহার করুন। প্রিন্ট করার সময় সাদা প্রান্ত এড়াতে <code>@page background</code>-এ একই রং সেট করুন।</p>
+      </div>
+      <div class="no">
+        <h5>করবেন না</h5>
+        <p>ট্যাগের জন্য <code>rgba(27,54,93,0.18)</code> ব্যবহার করবেন না। WeasyPrint প্যাডিং এবং গ্লিফ এলাকায় ভিন্ন অপাসিটিতে রেন্ডার করে, যা ডাবল-রেক্টেঙ্গেল তৈরি করে।</p>
+      </div>
+      <div class="yes">
+        <h5>করুন</h5>
+        <p>এর সমতুল্য সলিড হেক্স <code>#E4ECF5</code> এর জন্য টিন্ট লুকআপ টেবিল ব্যবহার করুন। এতে রেন্ডারিং পরিষ্কার থাকে এবং রং স্থিতিশীল থাকে।</p>
+      </div>
+      <div class="no">
+        <h5>করবেন না</h5>
+        <p>শিরোনামে <code>font-weight: 600</code> বা তার বেশি ভারী সিন্থেটিক বোল্ড সেট করবেন না। সিন্থেটিক বোল্ড স্ট্রোককে অস্পষ্ট করে এবং টাইপোগ্রাফিক মান কমিয়ে দেয়।</p>
+      </div>
+      <div class="yes">
+        <h5>করুন</h5>
+        <p>বডি ৪০০, শিরোনাম ৫০০ (আসল W05)। আরও জোর বোঝাতে আকারের পরিবর্তন করুন বা ব্র্যান্ড লেফট বার ব্যবহার করুন, কখনোই সিন্থেটিক বোল্ড নয়।</p>
+      </div>
+      <div class="no">
+        <h5>করবেন না</h5>
+        <p>কড়া ড্রপ শ্যাডো <code>0 2px 8px rgba(0,0,0,0.3)</code> ব্যবহার করবেন না। দৃশ্যত এটি বেশ ভারী এবং প্রিন্ট করার সময় কালচে দাগের মতো আসতে পারে।</p>
+      </div>
+      <div class="yes">
+        <h5>করুন</h5>
+        <p>রিং শ্যাডো <code>0 0 0 1pt</code> বা হুইসপার শ্যাডো <code>rgba 0.05</code> ব্যবহার করুন, অথবা কেবল হালকা এবং গাঢ় সেকশনের বিকল্প রাখুন।</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 09 BACKGROUND ============ -->
+  <section>
+    <div class="section-head">
+      <p class="section-num">১০ · প্রেক্ষাপট</p>
+      <h2 class="section-title">ডিজাইনের উৎস</h2>
+    </div>
+    <div class="background-text">
+      <p>আমি মার্কিন ইক্যুইটি মার্কেটে বিনিয়োগ করতে পছন্দ করি এবং গবেষণাপত্র লেখার জন্য প্রায়ই ক্লডকে ব্যবহার করি। কিন্তু প্রতিটি আউটপুট একই ডিফল্ট নথির চেহারায় আসত: ধূসর, নিষ্প্রাণ এবং প্রতিটি সেশনে ভিন্ন একটি লেআউট। এর কাঠামো স্ক্যান করা কঠিন ছিল, ফরম্যাটিং সেকেলে মনে হতো, আর পৃষ্ঠার এমন কিছুই ছিল না যা আমাকে পড়া চালিয়ে যেতে আগ্রহী করবে। তাই আমি একটির পর একটি নিয়ম করে টাইপোগ্রাফি, রঙের প্যালেট এবং স্পেসিং ঠিক করতে শুরু করি, যতক্ষণ না প্রতিবেদনটি এমন একটি পৃষ্ঠায় পরিণত হয় যা আমি সত্যিই উপভোগ করতে পারি।</p>
+      <p>পরবর্তীতে আমাকে "The Agent You Don't Know: Principles, Architecture and Engineering Practice" বিষয়টি উপস্থাপন করতে হয়। আমার কাছে ইতিমধ্যে নথিটি ছিল এবং আমি স্ক্র্যাচ থেকে স্লাইড তৈরি করতে চাইছিলাম না, তাই আমি আমার নিজস্ব স্টাইলে এটি সাজানোর জন্য ক্লড ডিজাইন ব্যবহার করি, রাউন্ডের পর রাউন্ড পরিবর্তন করি এবং শেষপর্যন্ত এমন একটি জায়গায় নিয়ে আসি যেখানে আমি সন্তুষ্ট। সেই প্রক্রিয়াটিতে ইনলাইন এসভিজি চার্ট, একটি সমন্বিত উষ্ণ রঙের প্যালেট এবং আরও নিখুঁত সম্পাদকীয় ছন্দ যুক্ত হয়েছিল। আমি নিয়মিত যেসব নথি প্রকাশ করি তার সবকটিতে এটি ব্যবহৃত হতে শুরু করে, তাই আমি পুরো প্রক্রিয়াটিকে আরও সুসংবদ্ধ করতে থাকি, আর এভাবেই এটি হয়ে ওঠে kami: একটি শান্ত ডিজাইন সিস্টেম, যা আমি যেকোনো এজেন্টকে দিতে পারি এবং আউটপুটের ওপর সম্পূর্ণ আস্থা রাখতে পারি।</p>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="mark">
+      <svg width="56" height="56" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-label="Kami mark">
+        <rect x="6" y="6" width="68" height="68" rx="10" fill="#faf9f5" stroke="#1B365D" stroke-width="1.25"/>
+        <line x1="16" y1="26" x2="64" y2="26" stroke="#1B365D" stroke-width="1.25"/>
+        <text x="40" y="56" font-family="TsangerJinKai02, Georgia, serif" font-size="34" font-weight="500" fill="#141413" text-anchor="middle">紙</text>
+      </svg>
+      <div>
+        <p class="wm-name">Kami · 紙</p>
+        <p class="wm-sub">ভালো কন্টেন্টের জন্য ভালো কাগজ প্রাপ্য।</p>
+      </div>
+    </div>
+    <div class="colophon">
+      <div><a href="https://github.com/tw93/kami" style="color:var(--brand); text-decoration:none; font-weight:500;">GitHub</a>&nbsp;&nbsp;·&nbsp;&nbsp;ওয়ান-পেজার · দীর্ঘ নথি · চিঠি · পোর্টফোলিও · জীবনবৃত্তান্ত · স্লাইড&nbsp;&nbsp;·&nbsp;&nbsp;EN · 中文 · বাংলা · 日本語</div>
+      <div style="margin-top:8px; color: var(--olive); font-family: var(--serif);">
+        সেরিফ ফন্ট কাঠামো ধরে রাখে, স্যান্স ফন্ট কাজ করে, উষ্ণ ধূসর রং ছন্দ আনে, কালি নীল ফোকাস তৈরি করে।
+      </div>
+    </div>
+  </footer>
+
+</main>
+<script>
+(function(){
+  var sw=document.querySelector('.lang-switch'),last=0;
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY;
+    if(y>80&&y>last)sw.classList.add('hidden');
+    else sw.classList.remove('hidden');
+    last=y;
+  },{passive:true});
+})();
+</script>
+</body>
+</html>

@@ -11,10 +11,10 @@ This is not a UI framework. It is a constraint system for print, designed to kee
 1. Page background parchment `#f5f4ed`, never pure white
 2. Single accent: ink-blue `#1B365D`, no second chromatic color
 3. All grays warm-toned (yellow-brown undertone), no cool blue-grays
-4. English: serif for everything (headlines and body). Chinese: serif headlines, sans body. Sans only for UI elements (labels, eyebrows, meta) in both
+4. English/Bengali: serif for everything (headlines and body). Chinese: serif headlines, sans body. Sans only for UI elements (labels, eyebrows, meta) in English/Chinese. Bengali has no uppercase, so eyebrows use medium weight instead of sans+caps.
 5. Serif weight locked at 500, no bold
 6. Line-heights: tight headlines 1.1-1.3, dense body 1.4-1.45, reading body 1.5-1.55
-7. Letter-spacing: Chinese body 0.3pt for comfortable reading; English body 0; tracking only for short labels and overlines
+7. Letter-spacing: Chinese body 0.3pt for comfortable reading; English body 0; Bengali body exactly 0 (spacing breaks conjuncts); tracking only for short labels and overlines
 8. Tag backgrounds must be solid hex, never rgba (WeasyPrint renders a double rectangle)
 9. Depth via ring shadow or whisper shadow, never hard drop shadows
 10. **No italic anywhere**. No `font-style: italic` in any template or demo. No italic @font-face declarations needed
@@ -108,6 +108,10 @@ font-family: "YuMincho", "Yu Mincho",
              "TsangerJinKai02",
              Georgia, serif;
 
+/* Bengali */
+font-family: "Noto Serif Bengali", "Shonar Bangla", "Noto Serif",
+             Georgia, serif;
+
 /* Mono, with CJK fallback for comments and labels */
 font-family: "JetBrains Mono", "SF Mono", "Fira Code",
              Consolas, Monaco,
@@ -167,7 +171,7 @@ Print documents are **tighter** than English web body. English web typically run
 
 ### Letter-spacing
 
-- Body text: **0**
+- Body text: **0** (Mandatory for Bengali to preserve conjuncts/যুক্তাক্ষর)
 - Chinese and Japanese body text with TsangerJinKai02: **0.1–0.2pt** to compensate for the font's natural density; section titles and Mincho samples: **0**
 - Chinese lede text (14–22pt) with TsangerJinKai02: **0.03–0.06em** to open up large-body paragraphs without breaking density; EN and JA lede: **0** (only TsangerJinKai02 needs density compensation)
 - Chinese and Japanese display text (24pt+): **0.2–1pt** optical spacing for visual breathing room at large sizes; scale with font size
@@ -595,6 +599,7 @@ When you're not sure "what should I use":
 | Big headline | serif 500, size by level, line-height 1.10-1.30 |
 | Reading body (EN) | serif 400, 9.5-10pt, line-height 1.55 |
 | Reading body (CN) | sans 400, 9.5-10pt, line-height 1.55 |
+| Reading body (BN) | serif 400, 9.5-10pt, line-height 1.45-1.55, letter-spacing 0 |
 | Emphasize a number | `color: var(--brand)`, no bold |
 | Divide two sections | 2.5pt brand left bar, or 0.5pt warm-gray dotted |
 | Quote someone | 2pt brand left border + olive color |
@@ -624,3 +629,4 @@ For decks longer than 20 slides, the following rules apply. Each came from real 
 | R8 | Images use `object-fit: contain` + flex centering. Never stretch or crop |
 | R9 | Use `.kami-slide-footer` for page number and deck mark, absolutely positioned to bottom |
 | R10 | Code uses pseudocode style: more comment lines than code lines. Show logic, not syntax |
+| R11 | Bengali eyebrows: no `text-transform: uppercase` (no uppercase in Bengali script). Use `font-weight: 500` instead of caps for emphasis |

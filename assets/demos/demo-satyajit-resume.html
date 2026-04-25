@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>সত্যজিৎ রায় · জীবনবৃত্তান্ত</title>
+<meta name="author" content="সত্যজিৎ রায়">
+<meta name="description" content="সত্যজিৎ রায়ের জীবনবৃত্তান্ত">
+<meta name="keywords" content="সত্যজিৎ রায়, চলচ্চিত্র, পরিচালক, লেখক">
+<meta name="generator" content="Kami">
+<style>
+  /* Bengali serif — Noto Serif Bengali */
+  @font-face {
+    font-family: "Noto Serif Bengali";
+    src: url("../fonts/NotoSerifBengali-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Noto Serif Bengali";
+    src: url("../fonts/NotoSerifBengali-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 500; font-style: normal; }
+
+  @page {
+    size: A4;
+    margin: 11mm 13mm 11mm 13mm;
+    background: #f5f4ed;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --sand:      #e8e6dc;
+    --border:    #e8e6dc;
+    --border-soft: #e5e3d8;
+    --near-black: #141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --brand-tint: #EEF2F7;
+    --brand-tint-strong: #E4ECF5;
+
+    --serif: "Noto Serif Bengali", "Shonar Bangla",
+             "Noto Serif", Georgia, serif;
+    --sans: var(--serif);
+    --mono:  "JetBrains Mono", "SF Mono", "Fira Code",
+             Consolas, Monaco, monospace;
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 11mm 13mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 9.4pt;
+    line-height: 1.45;
+    letter-spacing: 0;
+  }
+
+  .serif { font-family: var(--serif); }
+  .mono  { font-family: var(--mono); }
+
+  a { color: var(--brand); text-decoration: none; }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 3mm;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+  }
+  .header > div:first-child { flex-shrink: 0; }
+  .name {
+    font-family: var(--serif);
+    font-size: 26pt;
+    font-weight: 500;
+    color: var(--near-black);
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 3mm;
+    white-space: nowrap;
+  }
+  .alias {
+    font-size: 12.5pt;
+    font-weight: 400;
+    color: var(--stone);
+  }
+  .contact {
+    text-align: right;
+    font-size: 9pt;
+    color: var(--stone);
+    line-height: 1.5;
+  }
+  .contact .role {
+    color: var(--brand);
+    font-size: 10.5pt;
+    font-weight: 500;
+  }
+  .contact .sep { color: var(--border); margin: 0 0.4em; }
+  .contact a { color: var(--dark-warm); }
+  .contact .loc { color: var(--olive); font-weight: 500; }
+
+  /* METRICS */
+  .metrics { display: flex; gap: 7mm; margin-bottom: 3mm; }
+  .metric {
+    flex: 1;
+    padding: 1mm 0;
+    display: flex;
+    align-items: baseline;
+    gap: 2mm;
+    break-inside: avoid;
+  }
+  .metric-value {
+    font-family: var(--serif);
+    font-size: 14pt;
+    font-weight: 500;
+    color: var(--brand);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .metric-value .unit {
+    font-size: 10.5pt;
+    margin-left: 0.5mm;
+    font-weight: 500;
+    color: var(--brand);
+  }
+  .metric-label { font-size: 9pt; color: var(--olive); line-height: 1.2; }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: var(--serif);
+    font-size: 13pt;
+    font-weight: 500;
+    color: var(--near-black);
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding: 0 0 0 8pt;
+    margin: 5mm 0 2mm 0;
+    display: flex;
+    align-items: baseline;
+    gap: 2.5mm;
+  }
+  .section-title .sub {
+    margin-left: auto;
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 9pt;
+    color: var(--stone);
+  }
+  section:first-of-type .section-title { margin-top: 0; }
+  .page-break > .section-title { margin-top: 0; }
+
+  /* SUMMARY */
+  .summary { font-size: 9.4pt; line-height: 1.45; color: var(--near-black); }
+  .summary .hl { color: var(--brand); }
+
+  /* TIMELINE */
+  .timeline { display: flex; gap: 7mm; margin-bottom: 2.5mm; }
+  .tl-step { flex: 1; padding: 0.8mm 0; break-inside: avoid; }
+  .tl-top {
+    display: flex; align-items: baseline; gap: 2mm;
+    margin-bottom: 0.6mm;
+  }
+  .tl-year {
+    font-family: var(--serif);
+    font-size: 11pt; font-weight: 500;
+    color: var(--brand); line-height: 1;
+  }
+  .tl-head {
+    font-size: 11pt; font-weight: 500;
+    color: var(--near-black);
+  }
+  .tl-body { font-size: 9pt; color: var(--olive); line-height: 1.45; }
+
+  /* PROJECTS */
+  .project {
+    padding: 1.6mm 0;
+    border-top: 0.4pt solid var(--border-soft);
+    break-inside: avoid;
+  }
+  .project:first-of-type {
+    border-top: 0.4pt solid var(--border);
+    padding-top: 1.6mm;
+  }
+  .proj-head {
+    display: flex; align-items: baseline;
+    gap: 2mm; margin-bottom: 0.9mm;
+  }
+  .proj-name {
+    font-family: var(--serif);
+    font-size: 11pt; font-weight: 500; color: var(--near-black);
+  }
+  .proj-kind { font-size: 11pt; color: var(--olive); }
+  .proj-role {
+    font-size: 9pt; color: var(--brand); font-weight: 500;
+    margin-left: auto; background: #EEF2F7;
+    padding: 0.4mm 1.6mm; border-radius: 2pt;
+  }
+  .proj-lines { display: table; width: 100%; }
+  .proj-row { display: table-row; }
+  .proj-label {
+    display: table-cell; width: 16mm;
+    font-size: 9pt; color: var(--brand);
+    font-weight: 500;
+    padding: 0.4mm 0 0.4mm 0; vertical-align: top;
+  }
+  .proj-text {
+    display: table-cell; font-size: 9.2pt;
+    color: var(--near-black); line-height: 1.45;
+    padding: 0 0 0.4mm 1mm;
+  }
+  .proj-text .hl { color: var(--brand); }
+
+  /* PAGE 2 FORCE BREAK */
+  .page-break { break-before: page; }
+
+  /* OPEN SOURCE */
+  .os-intro {
+    font-size: 9.4pt; line-height: 1.45;
+    color: var(--near-black);
+    margin: 1.6mm 0 2.4mm 0;
+    break-inside: avoid;
+  }
+  .os-intro .hl { color: var(--brand); }
+  .os-intro .strong { color: var(--near-black); font-weight: 500; }
+
+  .os-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 9mm; row-gap: 1.2mm;
+  }
+  .os-item {
+    display: flex; align-items: baseline;
+    gap: 2.5mm; padding: 1.2mm 0;
+    border-bottom: 0.3pt dotted var(--border);
+    break-inside: avoid;
+  }
+  .os-name {
+    font-family: var(--serif);
+    font-size: 10.5pt; font-weight: 500;
+    flex-shrink: 0; min-width: 18mm;
+  }
+  .os-name a { color: var(--brand); }
+  .os-desc { font-size: 9pt; color: var(--olive); line-height: 1.4; flex: 1; }
+  .os-star {
+    font-size: 9pt; color: var(--dark-warm);
+    font-weight: 500; white-space: nowrap;
+    flex-shrink: 0; min-width: 10mm; text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .os-star.big { color: var(--brand); font-size: 9.2pt; }
+
+  .os-highlight {
+    margin-top: 2.5mm;
+    padding: 1.8mm 3mm;
+    background: var(--brand-tint);
+    border-left: 1.4pt solid var(--brand);
+    border-radius: 2pt;
+    font-size: 9pt; line-height: 1.45;
+    color: var(--near-black);
+    break-inside: avoid;
+  }
+  .os-highlight .hl { color: var(--brand); }
+  .os-highlight .tag {
+    display: inline-block;
+    background: var(--brand); color: var(--ivory);
+    font-size: 9pt; font-weight: 500;
+    padding: 0.2mm 1.6mm; border-radius: 2pt;
+    margin-right: 1.5mm;
+    transform: translateY(-0.2mm);
+  }
+
+  /* CONVICTIONS */
+  .convictions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3mm;
+    margin-top: 1.4mm;
+  }
+  .conv-card { padding: 0 2mm 0 0; break-inside: avoid; }
+  .conv-head {
+    font-family: var(--serif);
+    font-size: 10pt; font-weight: 500;
+    color: var(--near-black); margin-bottom: 1mm;
+    display: flex; align-items: baseline; gap: 2mm;
+  }
+  .conv-head .year {
+    color: var(--brand); font-weight: 500;
+    font-size: 9pt;
+    font-variant-numeric: tabular-nums;
+  }
+  .conv-body {
+    font-size: 9pt; color: var(--olive);
+    line-height: 1.45;
+  }
+  .conv-body .hl { color: var(--brand); }
+
+  /* IMPACT */
+  .handle-strip {
+    padding: 0; margin: 1.4mm 0 2mm 0;
+    display: flex; align-items: baseline; gap: 3.5mm;
+    break-inside: avoid;
+  }
+  .handle-strip .handle {
+    font-family: var(--serif);
+    font-size: 10pt; font-weight: 500; color: var(--brand);
+    flex-shrink: 0;
+  }
+  .handle-strip .follower { font-size: 9pt; color: var(--stone); flex-shrink: 0; font-variant-numeric: tabular-nums; }
+  .handle-strip .desc { font-size: 9pt; color: var(--olive); line-height: 1.45; flex: 1; }
+
+  .impact-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 6mm; }
+  .inf-block-title {
+    margin-top: 2.5mm;
+    font-family: var(--serif);
+    font-size: 10pt; font-weight: 500;
+    color: var(--near-black);
+    margin-bottom: 1.5mm; padding-bottom: 0.5mm;
+    border-bottom: 0.3pt dotted var(--border);
+    display: flex; align-items: baseline; gap: 2mm;
+  }
+  .inf-block-title .small {
+    font-family: var(--sans);
+    font-size: 9pt; color: var(--stone);
+    font-weight: 400;
+  }
+  .art-row {
+    padding: 1.8mm 0;
+    border-bottom: 0.3pt dotted var(--border-soft);
+  }
+  .talk-row {
+    display: flex; justify-content: space-between;
+    align-items: flex-start;
+    gap: 2mm; padding: 1.8mm 0;
+    border-bottom: 0.3pt dotted var(--border-soft);
+  }
+  .art-row:last-of-type, .talk-row:last-of-type { border-bottom: none; }
+  .art-header {
+    display: flex; align-items: baseline;
+    justify-content: space-between;
+    gap: 2mm;
+  }
+  .art-title, .talk-title {
+    font-size: 9.2pt; color: var(--near-black);
+    font-weight: 500; line-height: 1.4;
+    flex: 1 1 auto; min-width: 0;
+  }
+  .art-stats, .talk-venue {
+    font-size: 9pt; color: var(--stone);
+    line-height: 1.4; margin-top: 0.6mm;
+  }
+  .art-stats .em-brand { color: var(--brand); }
+  .art-date, .talk-date {
+    font-size: 9pt; color: var(--stone);
+    font-variant-numeric: tabular-nums;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  /* SKILLS */
+  .skill-row {
+    display: flex; gap: 3mm; padding: 1.8mm 0;
+    border-bottom: 0.3pt dotted var(--border);
+    align-items: baseline;
+  }
+  .skill-row:last-of-type { border-bottom: none; }
+  .skill-label {
+    font-size: 9pt; font-weight: 500;
+    color: var(--brand);
+    width: 32mm; flex-shrink: 0;
+    line-height: 1.35;
+  }
+  .skill-body { font-size: 9.2pt; color: var(--near-black); line-height: 1.45; flex: 1; }
+  .skill-body .em-brand { color: var(--brand); }
+
+  .no-break { break-inside: avoid; }
+
+  /* EDUCATION */
+  .edu-row {
+    display: flex; justify-content: space-between;
+    align-items: baseline; padding: 1.8mm 0;
+  }
+  .edu-row .school {
+    font-family: var(--serif);
+    font-weight: 500; font-size: 11pt;
+  }
+  .edu-row .major { color: var(--olive); font-size: 9.4pt; }
+  .edu-row .date { color: var(--stone); font-variant-numeric: tabular-nums; font-size: 9pt; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ PAGE 1 ═══════════ -->
+
+<div class="header">
+  <div>
+    <div class="name serif">সত্যজিৎ রায়<span class="alias">মানিক</span></div>
+  </div>
+  <div class="contact">
+    <span class="role">চলচ্চিত্র পরিচালক ও লেখক</span>
+    <br>
+    <a href="https://satyajitray.org">satyajitray.org</a>
+    <span class="sep">·</span>
+    <a href="#">@satyajitray</a>
+    <span class="sep">·</span>
+    <a href="mailto:contact@satyajitray.org">contact@satyajitray.org</a>
+    <span class="sep">·</span>
+    <span class="loc">কলকাতা, ভারত</span>
+  </div>
+</div>
+
+<div class="metrics">
+  <div class="metric"><span class="metric-value serif">৩৬<span class="unit">টি</span></span><span class="metric-label">জাতীয় চলচ্চিত্র পুরস্কার</span></div>
+  <div class="metric"><span class="metric-value serif">৩২<span class="unit">টি</span></span><span class="metric-label">ফিচার ফিল্ম নির্মাণ</span></div>
+  <div class="metric"><span class="metric-value serif">১<span class="unit">টি</span></span><span class="metric-label">একাডেমি সম্মানসূচক পুরস্কার</span></div>
+  <div class="metric"><span class="metric-value serif">১<span class="unit">টি</span></span><span class="metric-label">ভারত রত্ন সম্মাননা</span></div>
+</div>
+
+<section>
+  <div class="section-title">সারসংক্ষেপ</div>
+  <div class="summary">
+    একজন প্রখ্যাত ভারতীয় বাঙালি চলচ্চিত্র পরিচালক, চিত্রনাট্যকার, শিল্প নির্দেশক, সঙ্গীত পরিচালক, লেখক এবং চিত্রকর। বিংশ শতাব্দীর অন্যতম শ্রেষ্ঠ চলচ্চিত্র নির্মাতাদের একজন হিসেবে তাকে গণ্য করা হয়। তার নির্মিত <span class="hl">'অপু ত্রয়ী'</span> বিশ্ব চলচ্চিত্রে একটি বিশাল মাইলফলক। সাহিত্য জগতে ফেলুদা ও শঙ্কুর মত জনপ্রিয় চরিত্রের স্রষ্টা।
+  </div>
+</section>
+
+<section>
+  <div class="section-title">অভিজ্ঞতা<span class="sub">১৯৫৫ - ১৯৯২ · চলচ্চিত্রের স্বর্ণযুগ</span></div>
+
+  <div class="timeline">
+    <div class="tl-step">
+      <div class="tl-top"><div class="tl-year serif">১৯৫৫</div><div class="tl-head">পথের পাঁচালী</div></div>
+      <div class="tl-body">প্রথম চলচ্চিত্র নির্মাণ ও আন্তর্জাতিক স্বীকৃতি লাভ। কান চলচ্চিত্র উৎসবে বিশেষ পুরস্কার প্রাপ্তি।</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-top"><div class="tl-year serif">১৯৬১</div><div class="tl-head">সন্দেশ পত্রিকা</div></div>
+      <div class="tl-body">পারিবারিক শিশু পত্রিকা সন্দেশ পুনরুজ্জীবিত করা এবং লেখালেখি শুরু করা।</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-top"><div class="tl-year serif">১৯৯২</div><div class="tl-head">অস্কার ও ভারত রত্ন</div></div>
+      <div class="tl-body">চলচ্চিত্র শিল্পে অসামান্য অবদানের জন্য একাডেমি সম্মানসূচক পুরস্কার এবং ভারত রত্ন লাভ।</div>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="proj-head">
+      <span class="proj-name serif">পথের পাঁচালী</span>
+      <span class="proj-kind">· ফিচার ফিল্ম</span>
+      <span class="proj-role">পরিচালক ও চিত্রনাট্যকার</span>
+    </div>
+    <div class="proj-lines">
+      <div class="proj-row">
+        <div class="proj-label">ভূমিকা</div>
+        <div class="proj-text">বিভূতিভূষণ বন্দ্যোপাধ্যায়ের উপন্যাস অবলম্বনে প্রথম চলচ্চিত্র। বাংলার গ্রামীণ জীবনের বাস্তবসম্মত চিত্রায়ণ।</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">কার্যক্রম</div>
+        <div class="proj-text">নতুন এবং অপেশাদার অভিনেতাদের নিয়ে কাজ করা। সীমিত বাজেটের মধ্যে প্রাকৃতিক আলো ও পরিবেশে শুটিং সম্পন্ন করা। রবিশঙ্করের সঙ্গীত পরিচালনা।</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">প্রভাব</div>
+        <div class="proj-text">কান চলচ্চিত্র উৎসবে "বেস্ট হিউম্যান ডকুমেন্ট" পুরস্কার। বিশ্ব চলচ্চিত্রের মানচিত্রে ভারতীয় চলচ্চিত্রের <span class="hl">নতুন অধ্যায়ের সূচনা</span>।</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="proj-head">
+      <span class="proj-name serif">চারুলতা</span>
+      <span class="proj-kind">· ফিচার ফিল্ম</span>
+      <span class="proj-role">পরিচালক ও সঙ্গীত পরিচালক</span>
+    </div>
+    <div class="proj-lines">
+      <div class="proj-row">
+        <div class="proj-label">ভূমিকা</div>
+        <div class="proj-text">রবীন্দ্রনাথ ঠাকুরের 'নষ্টনীড়' অবলম্বনে নির্মিত চলচ্চিত্র। সত্যজিৎ রায়ের নিজের মতে এটি তার সবচেয়ে নিখুঁত কাজ।</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">কার্যক্রম</div>
+        <div class="proj-text">ঊনবিংশ শতাব্দীর শেষভাগের বাংলার পুঙ্খানুপুঙ্খ পুনর্নির্মাণ। মনস্তাত্ত্বিক দ্বন্দ্ব ফুটিয়ে তুলতে অভিনব ক্যামেরা ওয়ার্ক এবং সঙ্গীতের ব্যবহার।</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">প্রভাব</div>
+        <div class="proj-text">বার্লিন আন্তর্জাতিক চলচ্চিত্র উৎসবে <span class="hl">সিলভার বিয়ার</span> অর্জন। নারী মনস্তত্ত্বের সূক্ষ্ম চিত্রায়ণের জন্য ব্যাপকভাবে প্রশংসিত।</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="proj-head">
+      <span class="proj-name serif">ফেলুদা ও শঙ্কু</span>
+      <span class="proj-kind">· সাহিত্যকর্ম</span>
+      <span class="proj-role">লেখক ও ইলাস্ট্রেটর</span>
+    </div>
+    <div class="proj-lines">
+      <div class="proj-row">
+        <div class="proj-label">ভূমিকা</div>
+        <div class="proj-text">বাংলা শিশু ও কিশোর সাহিত্যের জনপ্রিয় গোয়েন্দা এবং বিজ্ঞানী চরিত্র সৃষ্টি।</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">কার্যক্রম</div>
+        <div class="proj-text">সন্দেশ পত্রিকার জন্য নিয়মিত গল্প ও উপন্যাস লেখা। নিজের গল্পের অলঙ্করণ এবং প্রচ্ছদ তৈরি।</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">প্রভাব</div>
+        <div class="proj-text">বাংলা সাহিত্যে <span class="hl">সবচেয়ে জনপ্রিয় চরিত্রগুলোর অন্যতম</span> হিসেবে প্রতিষ্ঠা। প্রজন্মের পর প্রজন্ম ধরে বিপুল জনপ্রিয়তা।</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ PAGE 2 ═══════════ -->
+
+<section class="page-break">
+  <div class="section-title">সাহিত্য ও শিল্পকর্ম<span class="sub">১৯৬১ - ১৯৯২ · বহুমুখী প্রতিভা</span></div>
+
+  <div class="os-intro">
+    <span class="hl">চলচ্চিত্রের বাইরেও একজন সৃষ্টিশীল মানুষ।</span> গ্রাফিক ডিজাইন, টাইপোগ্রাফি, এবং অলঙ্করণে তিনি ছিলেন পারদর্শী। নিজের চলচ্চিত্রের পোস্টার, টাইটেল কার্ড এবং বিলবোর্ড নিজেই ডিজাইন করতেন।
+  </div>
+
+  <div class="os-grid">
+    <div class="os-item">
+      <span class="os-name serif">রে রোমান</span>
+      <span class="os-desc">ইংরেজিতে টাইপফেস ডিজাইন।</span>
+      <span class="os-star big">★ ১৯৭০</span>
+    </div>
+    <div class="os-item">
+      <span class="os-name serif">রে বিজার</span>
+      <span class="os-desc">দ্বিতীয় টাইপফেস ডিজাইন যা আন্তর্জাতিক স্বীকৃতি পায়।</span>
+      <span class="os-star big">★ ১৯৭১</span>
+    </div>
+    <div class="os-item">
+      <span class="os-name serif">সন্দেশ প্রচ্ছদ</span>
+      <span class="os-desc">নিয়মিত প্রচ্ছদ ও অলঙ্করণ।</span>
+      <span class="os-star">★ ১৯৬১+</span>
+    </div>
+    <div class="os-item">
+      <span class="os-name serif">সোনার কেল্লা</span>
+      <span class="os-desc">ফেলুদা সিরিজের প্রথম চলচ্চিত্র।</span>
+      <span class="os-star">★ ১৯৭৪</span>
+    </div>
+  </div>
+
+  <div class="os-highlight">
+    <span class="tag">টাইপোগ্রাফি</span>তিনি বাংলা ও ইংরেজি ক্যালিগ্রাফিতে বিশেষ পারদর্শী ছিলেন, যা তার প্রতিটি চলচ্চিত্রের লোগো ও পোস্টারে স্পষ্টভাবে ফুটে ওঠে।
+  </div>
+</section>
+
+<section>
+  <div class="section-title">বিচারবোধ ও দৃষ্টিভঙ্গি</div>
+  <div class="convictions">
+    <div class="conv-card">
+      <div class="conv-head"><span class="year">১৯৫৫</span>আঞ্চলিকতা থেকে বিশ্বজনীনতা</div>
+      <div class="conv-body">
+        গ্রামীণ বাংলার একটি সাধারণ গল্পকে এমনভাবে উপস্থাপন করা, যা সারা বিশ্বের দর্শকদের আবেগকে স্পর্শ করে। আঞ্চলিক গল্পের বিশ্বজনীন আবেদন প্রমাণ করা।
+      </div>
+    </div>
+    <div class="conv-card">
+      <div class="conv-head"><span class="year">১৯৬২</span>রঙিন চলচ্চিত্র নির্মাণ</div>
+      <div class="conv-body">
+        'কাঞ্চনজঙ্ঘা' চলচ্চিত্রের মাধ্যমে প্রথমবারের মতো রঙিন চলচ্চিত্র নির্মাণ এবং নিজস্ব চিত্রনাট্য ব্যবহার।
+      </div>
+    </div>
+    <div class="conv-card">
+      <div class="conv-head"><span class="year">১৯৭৭</span>ভাষা ও মাধ্যমের বৈচিত্র্য</div>
+      <div class="conv-body">
+        হিন্দি ভাষায় 'শতরঞ্জ কি খিলাড়ি' পরিচালনা এবং ভিন্ন ভাষা ও সংস্কৃতির পটভূমিতেও নিজের পরিচালনার দক্ষতা বজায় রাখা।
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">সম্মাননা ও প্রভাব</div>
+
+  <div class="impact-grid">
+    <div>
+      <div class="inf-block-title">চলচ্চিত্র পুরস্কার<span class="small">আন্তর্জাতিক স্বীকৃতি</span></div>
+      <div class="art-row">
+        <div class="art-header">
+          <span class="art-title">একাডেমি সম্মানসূচক পুরস্কার (অস্কার)</span>
+          <span class="art-date">১৯৯২</span>
+        </div>
+        <div class="art-stats">আজীবন অর্জনের জন্য।</div>
+      </div>
+      <div class="art-row">
+        <div class="art-header">
+          <span class="art-title">লিজিওন অফ অনার (ফ্রান্স)</span>
+          <span class="art-date">১৯৮৭</span>
+        </div>
+        <div class="art-stats">ফরাসি সরকারের সর্বোচ্চ সম্মান।</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="inf-block-title">জাতীয় পুরস্কার<span class="small">ভারত সরকার</span></div>
+      <div class="talk-row">
+        <div>
+          <div class="talk-title">ভারত রত্ন</div>
+          <div class="talk-venue">সর্বোচ্চ বেসামরিক সম্মান</div>
+        </div>
+        <div class="talk-date">১৯৯২</div>
+      </div>
+      <div class="talk-row">
+        <div>
+          <div class="talk-title">পদ্মভূষণ</div>
+          <div class="talk-venue">ভারত সরকার</div>
+        </div>
+        <div class="talk-date">১৯৬৫</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">মূল দক্ষতা</div>
+  <div class="skill-row">
+    <div class="skill-label">চলচ্চিত্র পরিচালনা</div>
+    <div class="skill-body">চিত্রনাট্য লেখা থেকে শুরু করে সম্পাদনা এবং <span class="em-brand">সঙ্গীত পরিচালনা</span> পর্যন্ত প্রতিটি ধাপে গভীর দক্ষতা।</div>
+  </div>
+  <div class="skill-row">
+    <div class="skill-label">সাহিত্য রচনা</div>
+    <div class="skill-body">শিশু ও কিশোরদের জন্য গোয়েন্দা গল্প এবং <span class="em-brand">বিজ্ঞান কল্পকাহিনী</span> রচনায় অসামান্য সাফল্য।</div>
+  </div>
+  <div class="skill-row">
+    <div class="skill-label">গ্রাফিক ডিজাইন</div>
+    <div class="skill-body">পোস্টার, টাইপফেস, এবং <span class="em-brand">বইয়ের প্রচ্ছদ</span> ডিজাইনে অনন্য শৈল্পিক দৃষ্টিভঙ্গি।</div>
+  </div>
+</section>
+
+<section class="no-break">
+  <div class="section-title">শিক্ষা</div>
+  <div class="edu-row">
+    <div>
+      <span class="school serif">বিশ্বভারতী বিশ্ববিদ্যালয়, শান্তিনিকেতন</span>
+      <span class="major"> · কলাভবন · ফাইন আর্টস · রবীন্দ্রনাথ ঠাকুরের প্রতিষ্ঠিত প্রতিষ্ঠানে শিল্পকলায় অধ্যয়ন প্রাচ্য ও পাশ্চাত্যের শিল্পের সংমিশ্রণ বুঝতে সাহায্য করে।</span>
+    </div>
+    <div class="date">১৯৪০ - ১৯৪২</div>
+  </div>
+  <div class="edu-row">
+    <div>
+      <span class="school serif">প্রেসিডেন্সি কলেজ, কলকাতা</span>
+      <span class="major"> · অর্থনীতিবিভাগ · বি.এ. (অনার্স)</span>
+    </div>
+    <div class="date">১৯৩৯</div>
+  </div>
+</section>
+
+</body>
+</html>
