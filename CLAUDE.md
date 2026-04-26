@@ -45,6 +45,8 @@ Current demos in `assets/demos/`:
 | `demo-kaku.*` | Kaku portfolio (JP) | portfolio |
 | `demo-musk-resume.*` | Elon Musk resume (EN) | resume |
 | `demo-agent-slides.*` | Agent development slides (EN) | slides |
+| `demo-one-pager-ko.*` | Korean one-pager v0.1 | one-pager |
+| `demo-resume-ko.*` | Korean resume v0.1 | resume |
 
 All demo PNG files use **1241x1754px** (first A4 portrait page at 150dpi).
 
@@ -111,6 +113,7 @@ Do not mix English and Chinese inside the same numbered item. Keep both lists al
 `TsangerJinKai02-W04.ttf` is a commercial font. Commercial use requires a license from tsanger.cn.
 Fallback without TsangerJinKai: Source Han Serif SC -> Noto Serif CJK SC -> Songti SC -> STSong -> Georgia.
 English templates use Charter serif.
+Korean v0.1 templates use Pretendard for body text and BM DoHyeon for limited display roles. These webfonts are bundled under their free redistribution licenses; do not sell font files by themselves.
 Japanese output uses YuMincho as primary with fallback chain: YuMincho -> Hiragino Mincho ProN -> Noto Serif CJK JP -> Source Han Serif JP -> TsangerJinKai02 -> serif. Treat it as best-effort and verify rendering before delivery.
 
 The Claude Desktop ZIP does not bundle TsangerJinKai TTF files. They are about 19MB each and can make upload or execution time out. Before building Chinese documents, the skill checks for missing fonts and downloads them from jsDelivr into `assets/fonts/`. WeasyPrint then uses the existing relative `@font-face` paths without changing HTML.

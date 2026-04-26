@@ -16,6 +16,10 @@ trap 'rm -f "$MANIFEST" "$FILTERED_MANIFEST"' EXIT
 git ls-files > "$MANIFEST"
 awk '
   /^assets\/fonts\/TsangerJinKai02-W0[45]\.ttf$/ { next }
+  /^assets\/fonts\/Pretendard-(Regular|SemiBold)\.woff2$/ { next }
+  /^assets\/fonts\/BM(DOHYEON|JUA)\.woff2$/ { next }
+  /^assets\/demos\/demo-(one-pager|resume)-ko\.(pdf|png)$/ { next }
+  /^assets\/illustrations\// { next }
   /^assets\/examples\// { next }
   /^dist\// { next }
   /^\.vercel\// { next }

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<!-- RESUME · Korean · parchment design system
+     Build: python3 scripts/build.py resume-ko
+     Target: 2 A4 pages -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>{{이름}} · 이력서</title>
+<meta name="author" content="{{이름}}">
+<meta name="description" content="{{요약}}">
+<meta name="keywords" content="{{키워드}}">
+<meta name="generator" content="Kami">
+<style>
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "Pretendard"; src: url("../fonts/Pretendard-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "Pretendard"; src: url("../fonts/Pretendard-SemiBold.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+  @font-face { font-family: "BM DoHyeon"; src: url("../fonts/BMDOHYEON.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+
+  @page { size: A4; margin: 11mm 13mm; background: #f5f4ed; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --parchment: #f5f4ed;
+    --ivory: #faf9f5;
+    --sand: #e8e6dc;
+    --border: #e8e6dc;
+    --border-soft: #e5e3d8;
+    --near-black: #141413;
+    --dark-warm: #3d3d3a;
+    --olive: #504e49;
+    --stone: #6b6a64;
+    --brand: #1B365D;
+    --brand-tint: #EEF2F7;
+    --serif: "Noto Serif KR", "Nanum Myeongjo", "AppleMyungjo", "Batang", Georgia, serif;
+    --sans: "Pretendard", "Sunghyun Sans KR", "Sunghyun Sans", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    --display: "BM DoHyeon", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    --mono: "JetBrains Mono", "SF Mono", Consolas, "Pretendard", monospace;
+  }
+  html, body { background: var(--parchment); }
+  @media screen { body { max-width: 210mm; margin: 0 auto; padding: 11mm 13mm; } }
+  body {
+    color: var(--near-black);
+    font-family: var(--sans);
+    font-size: 9.2pt;
+    line-height: 1.46;
+    letter-spacing: 0;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  a { color: var(--brand); text-decoration: none; }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3mm;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+  }
+  .name {
+    font-family: var(--display);
+    font-size: 25pt;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.015em;
+    white-space: nowrap;
+  }
+  .role { margin-top: 3pt; color: var(--brand); font-weight: 600; font-size: 10.5pt; }
+  .contact { text-align: right; color: var(--stone); font-size: 8.7pt; line-height: 1.55; }
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7mm; margin-bottom: 3mm; }
+  .metric { display: flex; align-items: baseline; gap: 2mm; }
+  .metric-value {
+    font-family: var(--display);
+    font-size: 14.5pt;
+    color: var(--brand);
+    line-height: 1;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .metric-label { color: var(--olive); font-size: 8.7pt; line-height: 1.25; }
+  .section-title {
+    display: flex;
+    align-items: baseline;
+    gap: 2mm;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+    margin: 4.5mm 0 2mm;
+    font-family: var(--serif);
+    font-size: 13pt;
+    font-weight: 600;
+    color: var(--near-black);
+  }
+  section:first-of-type .section-title { margin-top: 0; }
+  .section-title .sub { margin-left: auto; font-family: var(--sans); font-size: 8.5pt; font-weight: 400; color: var(--stone); }
+  .summary { font-size: 9.3pt; line-height: 1.5; color: var(--dark-warm); }
+  .hl { color: var(--brand); font-weight: 600; }
+  .timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7mm; margin-bottom: 2mm; }
+  .tl-step { padding-top: 1mm; border-top: 0.8pt solid var(--border); break-inside: avoid; }
+  .tl-year { color: var(--brand); font-weight: 600; font-size: 9pt; font-variant-numeric: tabular-nums; }
+  .tl-head { margin-top: 1pt; font-size: 10pt; font-weight: 600; color: var(--near-black); }
+  .tl-body { margin-top: 1pt; font-size: 8.7pt; color: var(--olive); line-height: 1.42; }
+  .project {
+    padding: 1.5mm 0;
+    border-top: 0.4pt solid var(--border-soft);
+    break-inside: avoid;
+  }
+  .project:first-of-type { border-top: 0.4pt solid var(--border); }
+  .proj-head { display: flex; align-items: baseline; gap: 2mm; margin-bottom: 0.8mm; }
+  .proj-name { font-family: var(--serif); font-size: 10.7pt; font-weight: 600; color: var(--near-black); }
+  .proj-kind { font-size: 9pt; color: var(--olive); }
+  .proj-role {
+    margin-left: auto;
+    background: var(--brand-tint);
+    color: var(--brand);
+    font-weight: 600;
+    font-size: 8.5pt;
+    padding: 0.4mm 1.5mm;
+    border-radius: 2pt;
+  }
+  .proj-lines { display: table; width: 100%; }
+  .proj-row { display: table-row; }
+  .proj-label {
+    display: table-cell;
+    width: 17mm;
+    color: var(--brand);
+    font-weight: 600;
+    font-size: 8.6pt;
+    padding: 0.35mm 0;
+    vertical-align: top;
+  }
+  .proj-text {
+    display: table-cell;
+    padding: 0.2mm 0 0.45mm 1mm;
+    color: var(--near-black);
+    line-height: 1.45;
+  }
+  .page-break { break-before: page; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; column-gap: 9mm; row-gap: 1mm; }
+  .item {
+    display: flex;
+    align-items: baseline;
+    gap: 2mm;
+    padding: 1mm 0;
+    border-bottom: 0.3pt dotted var(--border);
+    break-inside: avoid;
+  }
+  .item-name { min-width: 20mm; color: var(--near-black); font-weight: 600; }
+  .item-desc { flex: 1; color: var(--olive); font-size: 8.8pt; line-height: 1.4; }
+  .item-num { min-width: 11mm; text-align: right; color: var(--brand); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .skills { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2mm; }
+  .skill {
+    background: var(--ivory);
+    border: 0.4pt solid var(--border);
+    border-radius: 6pt;
+    padding: 2mm;
+    break-inside: avoid;
+  }
+  .skill-title { color: var(--brand); font-weight: 600; margin-bottom: 1mm; }
+  .skill-body { color: var(--olive); font-size: 8.6pt; line-height: 1.38; }
+  .edu { color: var(--olive); line-height: 1.45; }
+  .footer {
+    margin-top: 4mm;
+    border-top: 0.3pt dotted var(--border);
+    padding-top: 2mm;
+    display: flex;
+    justify-content: space-between;
+    color: var(--stone);
+    font-size: 8.4pt;
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <div><div class="name">{{이름}}</div><div class="role">{{포지션 · 핵심 전문성}}</div></div>
+  <div class="contact">{{email@example.com}} · {{010-0000-0000}}<br>{{Seoul, Korea}} · {{github.com/name}} · {{portfolio}}</div>
+</div>
+
+<div class="metrics">
+  <div class="metric"><div class="metric-value">{{8년}}</div><div class="metric-label">{{제품 개발}}</div></div>
+  <div class="metric"><div class="metric-value">{{12명}}</div><div class="metric-label">{{리딩 규모}}</div></div>
+  <div class="metric"><div class="metric-value">{{62%}}</div><div class="metric-label">{{지표 개선}}</div></div>
+  <div class="metric"><div class="metric-value">{{3.4억}}</div><div class="metric-label">{{비용 절감}}</div></div>
+</div>
+
+<section>
+  <div class="section-title">요약<span class="sub">50~80자 안에 판단과 성과를 쓴다</span></div>
+  <p class="summary">{{무엇을 해온 사람인지가 아니라 어떤 판단으로 어떤 규모의 결과를 만들었는지 쓴다. 핵심 수치 하나는 <span class="hl">강조</span>한다.}}</p>
+</section>
+
+<section>
+  <div class="section-title">성장 궤적</div>
+  <div class="timeline">
+    <div class="tl-step"><div class="tl-year">{{2019-2021}}</div><div class="tl-head">{{실행자}}</div><div class="tl-body">{{구축·개선 중심 성과.}}</div></div>
+    <div class="tl-step"><div class="tl-year">{{2021-2024}}</div><div class="tl-head">{{리드}}</div><div class="tl-body">{{팀과 시스템 단위 성과.}}</div></div>
+    <div class="tl-step"><div class="tl-year">{{2024-현재}}</div><div class="tl-head">{{승수}}</div><div class="tl-body">{{조직 반복성·사업 지표 성과.}}</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">핵심 프로젝트</div>
+  <div class="project">
+    <div class="proj-head"><div class="proj-name">{{프로젝트명}}</div><div class="proj-kind">{{제품 / 플랫폼 / 운영}}</div><div class="proj-role">{{Owner}}</div></div>
+    <div class="proj-lines">
+      <div class="proj-row"><div class="proj-label">판단</div><div class="proj-text">{{세 가지 대안 중 무엇을 왜 선택했는지.}}</div></div>
+      <div class="proj-row"><div class="proj-label">실행</div><div class="proj-text">{{범위, 팀 규모, 기술 선택, 기간.}}</div></div>
+      <div class="proj-row"><div class="proj-label">결과</div><div class="proj-text">{{전후 수치와 사업적 의미. <span class="hl">p99 800ms에서 120ms</span>처럼 쓴다.}}</div></div>
+    </div>
+  </div>
+  <div class="project">
+    <div class="proj-head"><div class="proj-name">{{프로젝트명}}</div><div class="proj-kind">{{성장 / 데이터 / 인프라}}</div><div class="proj-role">{{Lead}}</div></div>
+    <div class="proj-lines">
+      <div class="proj-row"><div class="proj-label">판단</div><div class="proj-text">{{핵심 트레이드오프.}}</div></div>
+      <div class="proj-row"><div class="proj-label">실행</div><div class="proj-text">{{구체 실행.}}</div></div>
+      <div class="proj-row"><div class="proj-label">결과</div><div class="proj-text">{{측정 가능한 결과.}}</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="page-break">
+  <div class="section-title">공개 작업 / 영향</div>
+  <div class="grid-2">
+    <div class="item"><div class="item-name">{{프로젝트}}</div><div class="item-desc">{{짧은 설명}}</div><div class="item-num">{{1.2k}}</div></div>
+    <div class="item"><div class="item-name">{{글 / 발표}}</div><div class="item-desc">{{영향이나 독자 규모}}</div><div class="item-num">{{35k}}</div></div>
+    <div class="item"><div class="item-name">{{오픈소스}}</div><div class="item-desc">{{채택 또는 기여}}</div><div class="item-num">{{420}}</div></div>
+    <div class="item"><div class="item-name">{{멘토링}}</div><div class="item-desc">{{조직 내 영향}}</div><div class="item-num">{{4명}}</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">핵심 역량</div>
+  <div class="skills">
+    <div class="skill"><div class="skill-title">{{제품 판단}}</div><div class="skill-body">{{사용자 지표와 사업 목표 연결.}}</div></div>
+    <div class="skill"><div class="skill-title">{{시스템 설계}}</div><div class="skill-body">{{성능·신뢰성·비용 균형.}}</div></div>
+    <div class="skill"><div class="skill-title">{{팀 리딩}}</div><div class="skill-body">{{작업 분해와 리뷰 체계.}}</div></div>
+    <div class="skill"><div class="skill-title">{{데이터}}</div><div class="skill-body">{{실험 설계와 지표 해석.}}</div></div>
+    <div class="skill"><div class="skill-title">{{커뮤니케이션}}</div><div class="skill-body">{{의사결정 문서화.}}</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">학력 / 기타</div>
+  <p class="edu">{{학교 / 전공 / 수상 / 자격. 불필요한 나열보다 역할에 연결되는 것만 남긴다.}}</p>
+</section>
+
+<div class="footer"><span>{{이름}} · Resume</span><span>{{YYYY.MM}}</span></div>
+</body>
+</html>

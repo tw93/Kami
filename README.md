@@ -75,7 +75,7 @@ Example prompts by language:
 
 Warm parchment canvas, ink blue as the sole accent, serif carries hierarchy, no hard shadows or flashy palettes. Not a UI framework; a constraint system for printed matter. Documents should read as composed pages, not dashboards.
 
-Six document types (One-Pager, Long Doc, Letter, Portfolio, Resume, Slides) with dedicated EN/CN templates and a best-effort Japanese path. Twelve inline SVG diagram types included. Kami picks the right variant based on the language you write in.
+Six document types (One-Pager, Long Doc, Letter, Portfolio, Resume, Slides) with dedicated EN/CN templates, Korean v0.1 templates for one-pagers, resumes, and slides, and a best-effort Japanese path. Twelve inline SVG diagram types included. Kami picks the right variant based on the language you write in.
 
 | Element | Rule |
 |---|---|
@@ -87,7 +87,7 @@ Six document types (One-Pager, Long Doc, Letter, Portfolio, Resume, Slides) with
 | Shadows | Ring or whisper only, no hard drop shadows |
 | Tags | Solid hex backgrounds only. `rgba()` triggers a WeasyPrint double-rectangle bug |
 
-**Fonts**: Each language uses a single serif font for the entire page. Chinese: TsangerJinKai02. Japanese: YuMincho. English: Charter. TsangerJinKai is free for personal use, commercial use requires a license from [tsanger.cn](https://tsanger.cn). All other fonts are system-bundled.
+**Fonts**: Each language uses a constrained font strategy. Chinese: TsangerJinKai02. Japanese: YuMincho. English: Charter. Korean v0.1: Pretendard for body text, BM DoHyeon for limited display use, and Noto Serif KR / Nanum Myeongjo as formal fallbacks. TsangerJinKai is free for personal use, commercial use requires a license from [tsanger.cn](https://tsanger.cn). All other bundled Korean webfonts are free redistribution fonts; do not sell font files by themselves.
 
 Full spec: [design.md](references/design.md). Cheatsheet: [CHEATSHEET.md](CHEATSHEET.md).
 

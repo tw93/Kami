@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>Kami · 한국어 문서 디자인 시스템</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kami 한국어 v0.1: Pretendard, BM DoHyeon, 한글 조판 리듬을 반영한 AI 문서 디자인 시스템.">
+  <link rel="icon" href="https://gw.alipayobjects.com/zos/k/vl/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<nav class="lang-switch"><a href="./index.html">EN</a><a href="./index-zh.html">中</a><a href="./index-ko.html" class="active">한</a><a href="./index-ja.html">日</a></nav>
+<main class="page">
+
+  <header class="hero">
+    <div class="eyebrow">
+      <span>Design System · Korean v0.1<span class="eyebrow-date"> · 2026.04</span></span>
+      <span class="hero-links">
+        <a href="https://github.com/tw93/kami" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/>
+          </svg>
+        </a>
+      </span>
+    </div>
+    <h1>Kami<span class="cn">한글</span></h1>
+    <p class="tagline">좋은 내용은 좋은 종이 위에 놓여야 합니다. 한국어 Kami는 한글의 네모틀, 받침 밀도, 숫자·영문 혼용을 반영해 PDF와 PPT를 안정적으로 조판합니다.</p>
+    <div class="hero-tokens">
+      <span><b>Body</b>Pretendard</span>
+      <span><b>Display</b>BM DoHyeon</span>
+      <span><b>Canvas</b>#f5f4ed</span>
+      <span><b>Accent</b>#1B365D</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="section-head">
+      <p class="section-num">00 · Samples</p>
+      <h2 class="section-title">한국어 출력 샘플</h2>
+      <p class="section-lede">원본 Kami의 parchment/ink-blue 제약은 유지하되, 한국어 본문은 Pretendard로 안정성을 잡고, BM DoHyeon은 제목과 숫자 같은 디스플레이 역할에만 제한적으로 씁니다.</p>
+    </div>
+    <div class="demo-grid">
+      <div class="demo-card">
+        <a href="assets/demos/demo-one-pager-ko.pdf" target="_blank"><img src="assets/demos/demo-one-pager-ko.png" alt="한국어 원페이지"></a>
+        <p class="demo-title">One-Pager · 한국어</p>
+        <p class="demo-desc">단일 A4, Pretendard 본문 + DoHyeon 제목</p>
+      </div>
+      <div class="demo-card">
+        <a href="assets/demos/demo-resume-ko.pdf" target="_blank"><img src="assets/demos/demo-resume-ko.png" alt="한국어 이력서"></a>
+        <p class="demo-title">Resume · 한국어</p>
+        <p class="demo-desc">2페이지 이력서, 숫자·영문 혼용 최적화</p>
+      </div>
+      <div class="demo-card">
+        <a href="assets/templates/slides-ko.py" target="_blank"><img src="assets/demos/demo-agent-slides.png" alt="한국어 슬라이드 템플릿"></a>
+        <p class="demo-title">Slides · 한국어</p>
+        <p class="demo-desc">PPTX 템플릿, 한 슬라이드 한 주장</p>
+      </div>
+      <div class="demo-card">
+        <a href="assets/templates/one-pager-ko.html" target="_blank"><img src="assets/demos/demo-one-pager-ko.png" alt="한국어 HTML 템플릿"></a>
+        <p class="demo-title">HTML Template</p>
+        <p class="demo-desc">브라우저에서 바로 확인 가능한 원본 템플릿</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="section-num">01 · Korean Type</p>
+      <h2 class="section-title">한글 조판 원칙</h2>
+    </div>
+    <ol class="rules">
+      <li><span class="n">1</span><p>본문 자간은 <code>0</code>. 한글은 자간을 열면 바로 산만해집니다.</p></li>
+      <li><span class="n">2</span><p>밀도 높은 문서는 행간 <code>1.42-1.50</code>, 긴 글은 <code>1.56-1.62</code>를 씁니다.</p></li>
+      <li><span class="n">3</span><p>Resume, one-pager, report summary는 고딕 본문이 더 안정적입니다.</p></li>
+      <li><span class="n">4</span><p>명조는 긴 문서, 서한, 인용문, 격식 있는 섹션 제목에 제한적으로 씁니다.</p></li>
+      <li><span class="n">5</span><p>숫자와 영문 혼용은 1급 문제입니다. 지표와 표는 tabular number를 씁니다.</p></li>
+      <li><span class="n">6</span><p>BM DoHyeon은 강합니다. 제목, 이름, 큰 숫자 외에는 쓰지 않습니다.</p></li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="section-num">02 · Usage</p>
+      <h2 class="section-title">사용과 검증</h2>
+      <p class="section-lede">한국어 문서 요청은 `one-pager-ko`, `resume-ko`, `slides-ko` 경로로 라우팅됩니다. PDF 검증은 macOS에서 Homebrew 라이브러리 경로가 필요할 수 있습니다.</p>
+    </div>
+<pre class="code"><span class="c"># Korean fonts</span>
+scripts/fetch-ko-fonts.sh
+
+<span class="c"># PDF verification on macOS</span>
+XDG_CACHE_HOME=/tmp DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib python3 scripts/build.py --verify one-pager-ko
+XDG_CACHE_HOME=/tmp DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib python3 scripts/build.py --verify resume-ko
+
+<span class="c"># Slides</span>
+python3 scripts/build.py --verify slides-ko</pre>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <p class="section-num">03 · Writing</p>
+      <h2 class="section-title">문체 기준</h2>
+      <p class="section-lede">한국어 문서는 번역투보다 판단과 숫자가 먼저입니다. “혁신적인”, “차별화된”, “고도화” 같은 표현은 수치와 전후 변화로 바꿉니다.</p>
+    </div>
+    <blockquote>
+      <p>첫 세션 이탈률을 73%에서 31%로 낮춰, 가입 후 7일 유지율을 18pt 올렸습니다.</p>
+      <cite>좋은 이력서 문장은 행동, 범위, 결과, 사업적 의미를 함께 말합니다.</cite>
+    </blockquote>
+  </section>
+
+  <footer class="footer">
+    <div class="mark">
+      <svg width="56" height="56" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-label="Kami mark">
+        <rect x="6" y="6" width="68" height="68" rx="10" fill="#faf9f5" stroke="#1B365D" stroke-width="1.25"/>
+        <line x1="16" y1="26" x2="64" y2="26" stroke="#1B365D" stroke-width="1.25"/>
+        <text x="40" y="56" font-family="Pretendard, Apple SD Gothic Neo, sans-serif" font-size="26" font-weight="600" fill="#141413" text-anchor="middle">한글</text>
+      </svg>
+      <div>
+        <p class="wm-name">Kami · 한국어</p>
+        <p class="wm-sub">좋은 내용은 좋은 종이 위에 놓입니다.</p>
+      </div>
+    </div>
+    <div class="colophon">
+      <div><a href="./references/design-ko.md" style="color:var(--brand); text-decoration:none; font-weight:500;">design-ko.md</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="./references/writing-ko.md" style="color:var(--brand); text-decoration:none; font-weight:500;">writing-ko.md</a></div>
+    </div>
+  </footer>
+</main>
+<script>
+(function(){
+  var sw=document.querySelector('.lang-switch'),last=0;
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY;
+    if(y>80&&y>last)sw.classList.add('hidden');
+    else sw.classList.remove('hidden');
+    last=y;
+  },{passive:true});
+})();
+</script>
+</body>
+</html>

@@ -13,7 +13,7 @@ Part of `Kaku · Waza · Kami` - Kaku writes code, Waza drills habits, **Kami de
 
 ## Step 1 · Decide the language
 
-**Match the user's language.** Chinese -> `*.html` / `slides.py`. English -> `*-en.html` / `slides-en.py`. Japanese -> CJK path (`.html` / `slides.py`) as best-effort, JP Mincho first, visual QA before shipping. Reference docs are shared English specs.
+**Match the user's language.** Chinese -> `*.html` / `slides.py`. English -> `*-en.html` / `slides-en.py`. Korean -> `*-ko.html` / `slides-ko.py`. Japanese -> CJK path (`.html` / `slides.py`) as best-effort, JP Mincho first, visual QA before shipping. Reference docs are shared English specs unless a language-specific spec exists.
 
 When ambiguous (e.g. a one-word command like "resume"), ask a one-liner rather than guess.
 
@@ -21,6 +21,7 @@ When ambiguous (e.g. a one-word command like "resume"), ask a one-liner rather t
 |---|---|---|
 | Chinese (primary) | `*.html` | `slides.py` |
 | English | `*-en.html` | `slides-en.py` |
+| Korean (primary) | `*-ko.html` | `slides-ko.py` |
 | Japanese (best-effort) | `*.html` | `slides.py` |
 | Other languages (best-effort) | choose CJK or EN path by script coverage, then verify manually | choose `slides.py` or `slides-en.py`, then verify manually |
 
@@ -28,16 +29,16 @@ Always use `CHEATSHEET.md` and `references/*.md` for design, writing, production
 
 ## Step 2 · Pick the document type
 
-| User says | Document | CN template | EN template |
-|---|---|---|---|
-| "one-pager / 方案 / 执行摘要 / exec summary" | One-Pager | `one-pager.html` | `one-pager-en.html` |
-| "white paper / 白皮书 / 长文 / 年度总结 / technical report" | Long Doc | `long-doc.html` | `long-doc-en.html` |
-| "formal letter / 信件 / 辞职信 / 推荐信 / memo" | Letter | `letter.html` | `letter-en.html` |
-| "portfolio / 作品集 / case studies" | Portfolio | `portfolio.html` | `portfolio-en.html` |
-| "resume / resume / CV / 简历" | Resume | `resume.html` | `resume-en.html` |
-| "slides / PPT / deck / 演示" | Slides | `slides.py` | `slides-en.py` |
-| "个股研报 / equity report / 估值分析 / investment memo / 股票分析" | Equity Report | `equity-report.html` | `equity-report-en.html` |
-| "更新日志 / changelog / release notes / 版本记录" | Changelog | `changelog.html` | `changelog-en.html` |
+| User says | Document | CN template | EN template | KO template |
+|---|---|---|---|---|
+| "one-pager / 方案 / 执行摘要 / exec summary / 원페이지 / 한 장짜리 / 제안서" | One-Pager | `one-pager.html` | `one-pager-en.html` | `one-pager-ko.html` |
+| "white paper / 白皮书 / 长文 / 年度总结 / technical report / 보고서 / 백서 / 리서치" | Long Doc | `long-doc.html` | `long-doc-en.html` | planned |
+| "formal letter / 信件 / 辞职信 / 推荐信 / memo / 공문 / 공식 서한 / 추천서" | Letter | `letter.html` | `letter-en.html` | planned |
+| "portfolio / 作品集 / case studies / 포트폴리오 / 작업물 소개" | Portfolio | `portfolio.html` | `portfolio-en.html` | planned |
+| "resume / resume / CV / 简历 / 이력서 / 경력기술서" | Resume | `resume.html` | `resume-en.html` | `resume-ko.html` |
+| "slides / PPT / deck / 演示 / 발표자료 / 슬라이드 / 덱" | Slides | `slides.py` | `slides-en.py` | `slides-ko.py` |
+| "个股研报 / equity report / 估值分析 / investment memo / 股票分析 / 기업 분석 / 투자 메모 / 주식 리포트" | Equity Report | `equity-report.html` | `equity-report-en.html` | planned |
+| "更新日志 / changelog / release notes / 版本记录 / 릴리즈노트 / 변경사항" | Changelog | `changelog.html` | `changelog-en.html` | planned |
 
 > Long deck (>20 slides): also read Deck Recipe (design.md section 8).
 
@@ -130,7 +131,7 @@ Pick the tier that matches the task. Default to the lowest tier that covers the 
 |---|---|---|
 | **Content-only** | Updating text, swapping bullets, translating an existing doc. CSS stays untouched. | `CHEATSHEET.md` only |
 | **Layout tweak** | Adjusting spacing, moving sections, changing font size within spec. CSS touched. | `CHEATSHEET.md` + template (tokens already inline) |
-| **New document** | Building from scratch or from raw content. | Full design spec + writing spec + template |
+| **New document** | Building from scratch or from raw content. | Full design spec + writing spec + template. For Korean, also read `references/design-ko.md` and `references/writing-ko.md`. |
 | **Sources / materials** | Company, product, market, launch, funding, specs, or branded subject. | `writing.md` source rules + user/source material |
 | **Deck (>20 slides)** | Long presentation needing Part Divider, Code Cards, section headers. | Full design spec + Deck Recipe (design.md section 8) |
 | **Troubleshoot** | Rendering bug, font issue, page overflow. | `production.md` (+ design spec if CSS is the cause) |
@@ -190,6 +191,7 @@ PDF always ships. PPTX follows slides. PNG follows sharing context. The user sho
 ```bash
 python3 scripts/build.py --verify           # build all templates + page count + font check + slides
 python3 scripts/build.py --verify resume-en # single target full verification
+python3 scripts/build.py --verify resume-ko # Korean resume verification
 python3 scripts/build.py --verify slides    # single slide deck verification
 python3 scripts/build.py --check-placeholders path/to/filled.html
 python3 scripts/build.py --check            # CSS rule violations only (fast, no build)
@@ -216,6 +218,17 @@ Visual anomalies (tag double rectangle, font fallback, page break issues) -> `pr
 - Single serif: Charter (system-bundled, macOS/iOS), used for both headlines and body
 - No separate sans: `--sans: var(--serif)`, one font per page
 - Fallback: Georgia (cross-platform) / Palatino / Times New Roman
+
+**Korean**
+- Main body sans: Pretendard Regular + SemiBold
+- Display face: BM DoHyeon for cover titles, names, and metric values only
+- Fallback chain baked into templates: Apple SD Gothic Neo -> Noto Sans KR -> Malgun Gothic -> sans-serif
+- Korean webfonts are kept in the repository for local preview, but excluded from Claude Desktop skill ZIPs to keep the ZIP lightweight
+- If Korean rendering is off, download the fonts into `assets/fonts/`:
+
+```bash
+scripts/fetch-ko-fonts.sh
+```
 
 Font files next to HTML with relative `@font-face` paths is the most stable setup. `scripts/package-skill.sh` excludes TsangerJinKai TTFs from the Claude Desktop ZIP.
 

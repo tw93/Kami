@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<!-- ONE-PAGER · Korean · parchment design system
+     Build: python3 scripts/build.py one-pager-ko
+     Target: exactly 1 A4 page -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>{{문서 제목}}</title>
+<meta name="author" content="{{작성자}}">
+<meta name="description" content="{{요약}}">
+<meta name="keywords" content="{{키워드}}">
+<meta name="generator" content="Kami">
+<style>
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "Pretendard"; src: url("../fonts/Pretendard-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "Pretendard"; src: url("../fonts/Pretendard-SemiBold.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+  @font-face { font-family: "BM DoHyeon"; src: url("../fonts/BMDOHYEON.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+
+  @page { size: A4; margin: 15mm 18mm; background: #f5f4ed; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --parchment: #f5f4ed;
+    --ivory: #faf9f5;
+    --sand: #e8e6dc;
+    --near-black: #141413;
+    --dark-warm: #3d3d3a;
+    --olive: #504e49;
+    --stone: #6b6a64;
+    --brand: #1B365D;
+    --border: #e8e6dc;
+    --border-soft: #e5e3d8;
+    --tag-bg: #E4ECF5;
+    --serif: "Noto Serif KR", "Nanum Myeongjo", "AppleMyungjo", "Batang", Georgia, serif;
+    --sans: "Pretendard", "Sunghyun Sans KR", "Sunghyun Sans", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    --display: "BM DoHyeon", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    --mono: "JetBrains Mono", "SF Mono", Consolas, "Pretendard", monospace;
+  }
+  html, body { background: var(--parchment); }
+  @media screen { body { max-width: 210mm; margin: 0 auto; padding: 15mm 18mm; } }
+  body {
+    color: var(--near-black);
+    font-family: var(--sans);
+    font-size: 10pt;
+    line-height: 1.5;
+    letter-spacing: 0;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  .header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 18pt;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+    margin-bottom: 14pt;
+  }
+  .eyebrow {
+    font-size: 8.8pt;
+    color: var(--brand);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 4pt;
+  }
+  h1 {
+    font-family: var(--display);
+    font-size: 25pt;
+    font-weight: 400;
+    line-height: 1.16;
+    letter-spacing: -0.015em;
+    color: var(--near-black);
+    margin-bottom: 5pt;
+  }
+  .subtitle { font-size: 11pt; color: var(--olive); line-height: 1.45; }
+  .meta {
+    flex-shrink: 0;
+    text-align: right;
+    font-size: 8.8pt;
+    color: var(--stone);
+    line-height: 1.55;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12pt;
+    margin: 0 0 17pt;
+    padding-bottom: 7pt;
+    border-bottom: 0.4pt dotted var(--border);
+  }
+  .metric { break-inside: avoid; }
+  .metric-value {
+    font-family: var(--display);
+    font-size: 22pt;
+    color: var(--brand);
+    line-height: 1;
+    letter-spacing: -0.015em;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .metric-label { margin-top: 3pt; font-size: 8.8pt; color: var(--olive); line-height: 1.35; }
+  .lead {
+    font-size: 12pt;
+    line-height: 1.58;
+    color: var(--dark-warm);
+    margin-bottom: 13pt;
+  }
+  .hl { color: var(--brand); font-weight: 600; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18pt; }
+  section { margin-bottom: 16pt; break-inside: avoid; }
+  h2 {
+    font-family: var(--serif);
+    font-size: 15pt;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--near-black);
+    margin-bottom: 6pt;
+  }
+  h2 .sub { font-family: var(--sans); font-size: 8.6pt; font-weight: 400; color: var(--stone); margin-left: 5pt; }
+  p { margin-bottom: 6pt; line-height: 1.5; }
+  ul.dash { list-style: none; padding: 0; margin: 0; }
+  ul.dash li { position: relative; padding-left: 12pt; margin-bottom: 4pt; line-height: 1.48; }
+  ul.dash li::before { content: "-"; position: absolute; left: 0; color: var(--brand); font-weight: 600; }
+  .timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10pt; margin-top: 5pt; }
+  .tl-step { border-top: 1pt solid var(--brand); padding-top: 6pt; break-inside: avoid; }
+  .tl-kicker { font-size: 8.6pt; color: var(--brand); font-weight: 600; margin-bottom: 2pt; }
+  .tl-head { font-size: 10.2pt; color: var(--near-black); font-weight: 600; margin-bottom: 2pt; }
+  .tl-body { font-size: 8.8pt; color: var(--olive); line-height: 1.45; }
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--brand);
+    font-size: 8.6pt;
+    font-weight: 600;
+    padding: 1pt 5pt;
+    border-radius: 3pt;
+    margin-right: 3pt;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 8.8pt; margin: 7pt 0; break-inside: avoid; }
+  th { text-align: left; color: var(--dark-warm); font-weight: 600; padding: 4pt 5pt; border-bottom: 1pt solid var(--border); }
+  td { padding: 3pt 5pt; border-bottom: 0.3pt solid var(--border-soft); vertical-align: top; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .callout {
+    border-left: 1.8pt solid var(--brand);
+    padding: 4pt 0 4pt 12pt;
+    margin: 8pt 0 0;
+    font-family: var(--serif);
+    font-size: 10.5pt;
+    line-height: 1.58;
+    color: var(--olive);
+    break-inside: avoid;
+  }
+  .footer {
+    margin-top: 14pt;
+    padding-top: 6pt;
+    border-top: 0.3pt dotted var(--border);
+    display: flex;
+    justify-content: space-between;
+    color: var(--stone);
+    font-size: 8.6pt;
+    font-variant-numeric: tabular-nums;
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <div>
+    <div class="eyebrow">{{제안서 / 리포트 / 실행 요약}}</div>
+    <h1>{{두 줄 안에 들어오는 한국어 제목}}</h1>
+    <div class="subtitle">{{핵심 주장 한 문장. 꾸미지 말고 판단과 숫자를 앞에 둔다.}}</div>
+  </div>
+  <div class="meta">{{작성자}}<br>{{YYYY.MM.DD}}<br>{{상태 / 버전}}</div>
+</div>
+
+<div class="metrics">
+  <div class="metric"><div class="metric-value">{{42%}}</div><div class="metric-label">{{전환율 개선}}</div></div>
+  <div class="metric"><div class="metric-value">{{3.1배}}</div><div class="metric-label">{{처리량 증가}}</div></div>
+  <div class="metric"><div class="metric-value">{{18일}}</div><div class="metric-label">{{도입 기간}}</div></div>
+  <div class="metric"><div class="metric-value">{{9.8억}}</div><div class="metric-label">{{연간 절감액}}</div></div>
+</div>
+
+<p class="lead">
+  {{30~45단어 분량. 이 문서의 결론을 먼저 쓴다. 가장 중요한 숫자나 판단만 <span class="hl">브랜드 컬러</span>로 강조한다.}}
+</p>
+
+<div class="two-col">
+  <section>
+    <h2>{{왜 지금인가}}</h2>
+    <p>{{상황을 설명하되 배경 설명으로 시작하지 말고 관찰 가능한 변화부터 쓴다.}}</p>
+    <ul class="dash">
+      <li>{{검증된 수치나 사실.}}</li>
+      <li>{{기존 방식의 병목과 영향.}}</li>
+      <li>{{이번 제안의 판단 근거.}}</li>
+    </ul>
+  </section>
+  <section>
+    <h2>{{무엇이 달라지는가}}</h2>
+    <p>{{실행 후 달라지는 운영 방식이나 사용자 경험을 구체적으로 쓴다.}}</p>
+    <ul class="dash">
+      <li>{{짧은 실행 항목.}}</li>
+      <li>{{측정할 지표와 목표.}}</li>
+      <li>{{리스크를 낮추는 장치.}}</li>
+    </ul>
+  </section>
+</div>
+
+<section>
+  <h2>실행 경로<span class="sub">3단계만 남긴다</span></h2>
+  <div class="timeline">
+    <div class="tl-step"><div class="tl-kicker">1단계</div><div class="tl-head">{{검증}}</div><div class="tl-body">{{작게 확인할 범위와 기준.}}</div></div>
+    <div class="tl-step"><div class="tl-kicker">2단계</div><div class="tl-head">{{확장}}</div><div class="tl-body">{{운영에 붙이는 방식.}}</div></div>
+    <div class="tl-step"><div class="tl-kicker">3단계</div><div class="tl-head">{{정착}}</div><div class="tl-body">{{반복 가능한 체계로 만드는 기준.}}</div></div>
+  </div>
+</section>
+
+<div class="callout">{{놓치면 안 되는 결론. 한 문장으로 끝낸다.}}</div>
+<div class="footer"><span>{{공개 범위}}</span><span>{{연락처 / 페이지}}</span></div>
+</body>
+</html>

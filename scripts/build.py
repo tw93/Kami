@@ -45,10 +45,14 @@ HTML_TARGETS: dict[str, tuple[str, int]] = {
     # Changelog
     "changelog":    ("changelog.html", 2),
     "changelog-en": ("changelog-en.html", 2),
+    # Korean v0.1
+    "one-pager-ko": ("one-pager-ko.html", 1),
+    "resume-ko":    ("resume-ko.html", 2),
 }
 PPTX_TARGETS: dict[str, str] = {
     "slides":    "slides.py",
     "slides-en": "slides-en.py",
+    "slides-ko": "slides-ko.py",
 }
 
 # Diagram HTMLs live in a separate directory and have no page-count contract.
@@ -150,8 +154,9 @@ def build_html(name: str, source: str, max_pages: int,
     try:
         from weasyprint import HTML
         from pypdf import PdfReader
-    except ImportError:
-        print("ERROR: missing deps: pip install weasyprint pypdf --break-system-packages")
+    except Exception as exc:
+        print(f"ERROR: missing or broken PDF deps: {exc}")
+        print("       Install WeasyPrint system libraries, then: pip install weasyprint pypdf --break-system-packages")
         return False
 
     src = src_dir / source
@@ -350,6 +355,7 @@ PLACEHOLDER = re.compile(r"\{\{[^}]+\}\}")
 # Primary fonts expected in embedded PDF font names
 CN_PRIMARY_FONTS = {"TsangerJinKai02"}
 EN_PRIMARY_FONTS = {"Charter"}
+KO_PRIMARY_FONTS = {"Pretendard", "SunghyunSans", "Sunghyun Sans", "NotoSansKR", "Noto Sans KR"}
 
 
 def _pdf_font_names(pdf_path: Path) -> set[str]:
@@ -395,8 +401,11 @@ def verify_target(name: str, source: str, max_pages: int, src_dir: Path) -> list
     try:
         from weasyprint import HTML
         from pypdf import PdfReader
-    except ImportError:
-        issues.append("missing deps: pip install weasyprint pypdf --break-system-packages")
+    except Exception as exc:
+        issues.append(
+            "missing or broken PDF deps: install WeasyPrint system libraries, then "
+            f"pip install weasyprint pypdf --break-system-packages ({exc})"
+        )
         return issues
 
     EXAMPLES.mkdir(parents=True, exist_ok=True)
@@ -428,7 +437,8 @@ def verify_target(name: str, source: str, max_pages: int, src_dir: Path) -> list
         return issues
 
     is_en = name.endswith("-en")
-    expected = EN_PRIMARY_FONTS if is_en else CN_PRIMARY_FONTS
+    is_ko = name.endswith("-ko")
+    expected = KO_PRIMARY_FONTS if is_ko else (EN_PRIMARY_FONTS if is_en else CN_PRIMARY_FONTS)
     if not any(exp in font_name for exp in expected for font_name in embedded):
         primary = next(iter(expected))
         if not fallback_present:
