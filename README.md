@@ -93,9 +93,9 @@ Full spec: [design.md](references/design.md). Cheatsheet: [CHEATSHEET.md](CHEATS
 
 ## Travel
 
-The same constraint system doubles as a brief you can hand to any drawing tool. Point it at [diagrams.md](references/diagrams.md) and [writing.md](references/writing.md), and the output inherits warm parchment, ink-blue restraint, single-line geometric icons, and editorial typography. Append this snippet after your drawing request:
+The same constraint system doubles as a brief you can hand to any drawing tool. Point it at the [references folder](references/) and the output inherits warm parchment, ink-blue restraint, single-line geometric icons, and editorial typography.
 
-> Apply the Kami design system from https://cdn.jsdelivr.net/gh/tw93/kami@main/references/diagrams.md and https://cdn.jsdelivr.net/gh/tw93/kami@main/references/writing.md.
+> Apply the Kami design system from github.com/tw93/kami/tree/main/references
 
 <table>
 <tr>
