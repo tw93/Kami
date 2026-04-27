@@ -182,7 +182,7 @@ Example gap-check:
 | 3-5 core projects | 2 mentioned | at least 1 more with outcome |
 | Materials | logo file provided | product screenshot source |
 
-Then proceed to Step 2.6 (slides) or the layout brief (all other doc types) with structured, distilled content.
+Then proceed to Step 2.6 (slides) or the layout note (all other doc types) with structured, distilled content.
 
 ## Step 2.6 · Deck pre-flight (slides only)
 
@@ -201,23 +201,19 @@ Before drafting any slide, confirm these six points with the user. Ask all six i
 
 If the user has already answered any of these in the conversation, skip only those questions.
 
-## Step 2.7 · Layout brief (transparent, non-blocking)
+## Step 2.7 · Layout note (transparent, non-blocking)
 
-Before reading specs and filling the template, output a one-shot layout brief so the user can see the plan without being asked to confirm. Continue immediately after; do not wait.
+Before loading specs and filling the template, write a short editor-style note stating the layout intent: template choice, length target, narrative arc, embedded diagrams, material status, and output formats. Match the document's language. Keep it under 80 words, written as prose, not a status panel. Continue immediately after; do not wait.
 
-Format:
+Example (CN):
 
-```
-Layout brief:
-- Doc type: Equity Report (CN) -> equity-report.html
-- Length target: 2 pages
-- Structure: thesis + rating + price target -> valuation (DCF + comparables) -> catalysts -> risks
-- Diagrams: 1 line chart (revenue trend), 1 waterfall (FY26 bridge)
-- Materials: logo OK, product image MISSING (proceeding with text-only header)
-- Output: HTML + PDF
-```
+> 排版意图：Equity Report 中文版，2 页 A4。先立论与目标价，进入估值 (DCF 与可比公司)，落于催化剂与风险。中段嵌一张营收趋势折线和 FY26 收入桥瀑布。Logo 已就位，产品图暂缺，header 改走纯文字。输出 HTML 与 PDF。
 
-The brief is for transparency, not approval. If the user disagrees, they will say so; otherwise proceed to Step 3.
+Example (EN):
+
+> Layout intent: Equity Report (EN), two pages A4. Open with thesis and price target, run through valuation (DCF and comparables), close on catalysts and risks. A revenue line chart and an FY26 waterfall sit mid-doc. Logo is in hand; product image is absent, so the header stays text-only. Output: HTML and PDF.
+
+The note is for transparency, not approval. If the user pushes back, adjust; otherwise proceed to Step 3.
 
 ---
 
