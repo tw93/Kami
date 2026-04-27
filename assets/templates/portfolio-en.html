@@ -216,6 +216,7 @@
     font-size: 9pt;
     color: var(--stone);
     font-variant-numeric: tabular-nums;
+    white-space: nowrap;
     min-width: 80pt;
     padding-top: 10pt;
   }
@@ -244,7 +245,6 @@
     width: 100%;
     height: 110mm;
     background: var(--ivory);
-    border: 0.5pt solid var(--border-soft);
     border-radius: 6pt;
     margin-bottom: 14pt;
     overflow: hidden;
@@ -336,11 +336,13 @@
     border-bottom: 0.3pt dotted var(--border);
     align-items: baseline;
   }
+  .work-item:last-of-type { border-bottom: none; }
   .work-year {
     font-family: var(--serif);
     color: var(--brand);
     font-size: 11pt;
     font-variant-numeric: tabular-nums;
+    white-space: nowrap;
   }
   .work-title-block .title {
     font-family: var(--serif);

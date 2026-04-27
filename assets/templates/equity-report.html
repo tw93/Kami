@@ -300,11 +300,22 @@
   /* ========== ANALYST SUMMARY ========== */
   .analyst-box {
     background: var(--ivory);
-    border: 0.5pt solid var(--border);
+    border-left: 1.4pt solid var(--brand);
     border-radius: 4pt;
     padding: 10pt 14pt;
     margin: 12pt 0;
     break-inside: avoid;
+  }
+
+  /* ========== CHART PLACEHOLDER ========== */
+  .chart-placeholder {
+    background: var(--ivory);
+    border-radius: 4pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--stone);
+    font-size: 9pt;
   }
   .analyst-label {
     font-size: 9pt;
@@ -376,7 +387,7 @@
 <h2>价格走势</h2>
 <figure>
   <!-- 从 candlestick.html 或 line-chart.html 提取 <svg> 嵌入此处 -->
-  <div style="height: 60mm; background: var(--ivory); border: 0.5pt solid var(--border-soft); border-radius: 4pt; display: flex; align-items: center; justify-content: center; color: var(--stone); font-size: 9pt;">
+  <div class="chart-placeholder" style="height: 60mm;">
     [K 线图 / 价格走势图占位 · 从 diagrams/ 提取 SVG 嵌入]
   </div>
   <figcaption>{{图表标题，如 "近 20 个交易日价格走势"}}</figcaption>
@@ -430,7 +441,7 @@
 <!-- ========== REVENUE BREAKDOWN (可选图表) ========== -->
 <h2>收入结构</h2>
 <figure>
-  <div style="height: 50mm; background: var(--ivory); border: 0.5pt solid var(--border-soft); border-radius: 4pt; display: flex; align-items: center; justify-content: center; color: var(--stone); font-size: 9pt;">
+  <div class="chart-placeholder" style="height: 50mm;">
     [营收分解图占位 · 环形图或瀑布图]
   </div>
   <figcaption>{{图表标题}}</figcaption>

@@ -155,6 +155,7 @@
     border-bottom: 0.3pt dotted var(--border);
     font-size: 11pt;
   }
+  .toc-item:last-of-type { border-bottom: none; }
   .toc-num {
     color: var(--brand);
     font-weight: 500;
@@ -275,7 +276,6 @@
     font-size: 9pt;
     line-height: 1.5;
     background: var(--ivory);
-    border: 0.5pt solid var(--border-soft);
     border-radius: 4pt;
     padding: 10pt 14pt;
     margin: 10pt 0;
@@ -332,7 +332,6 @@
 
   .takeaway {
     background: var(--ivory);
-    border: 0.5pt solid var(--border);
     border-radius: 4pt;
     padding: 10pt 14pt;
     margin: 14pt 0;
@@ -380,7 +379,7 @@
   /* ========== EXECUTIVE SUMMARY ========== */
   .exec-summary {
     background: var(--ivory);
-    border: 0.5pt solid var(--border);
+    border-left: 1.4pt solid var(--brand);
     border-radius: 6pt;
     padding: 16pt 20pt;
     margin: 14pt 0;

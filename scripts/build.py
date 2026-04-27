@@ -589,6 +589,12 @@ BORDER_VAR_USE = re.compile(r"border(?:-\w+)?\s*:\s*[^;]*var\s*\(\s*--([\w-]+)",
 LINE_HEIGHT_LOOSE = re.compile(r"line-height\s*:\s*1\.[6-9]\d*", re.IGNORECASE)
 UNICODE_ARROW = re.compile(r"→")  # U+2192; should not appear in EN template body
 HEX_ANY = re.compile(r"#[0-9a-fA-F]{3,6}\b")
+# Thin closed border: border shorthand (not single-side) with sub-1pt width — pitfall #2
+THIN_CLOSED_BORDER = re.compile(
+    r"border(?!-(?:left|right|top|bottom))\s*:\s*[^;]*0\.\d+pt",
+    re.IGNORECASE,
+)
+BORDER_RADIUS_PROP = re.compile(r"border-radius\s*:", re.IGNORECASE)
 
 
 @dataclass
@@ -655,6 +661,27 @@ def scan_file(path: Path) -> list[Finding]:
             if h in COOL_GRAY_BLOCKLIST:
                 findings.append(Finding(path, i, "cool-gray",
                                         f"{h} is a cool / neutral gray, use warm undertone"))
+
+    # Pass 3: thin-border-radius block scan (pitfall #2 double-ring).
+    # For each thin closed border line, check ±5 lines for border-radius within
+    # the same rule block (no closing brace between them).
+    for i, raw in enumerate(lines):
+        if not THIN_CLOSED_BORDER.search(raw):
+            continue
+        if "skip-thin-border-radius" in raw:
+            continue
+        window_start = max(0, i - 5)
+        window_end = min(len(lines), i + 6)
+        for j in range(window_start, window_end):
+            if j == i:
+                continue
+            # stop at a closing brace that is outside range on either side
+            if "}" in lines[j] and ((j < i and j > window_start) or (j > i and j < window_end)):
+                pass  # brace within window; continue checking
+            if BORDER_RADIUS_PROP.search(lines[j]):
+                findings.append(Finding(path, i + 1, "thin-border-radius",
+                    "thin border (<1pt) with border-radius -- pitfall #2 double-ring risk"))
+                break
     return findings
 
 

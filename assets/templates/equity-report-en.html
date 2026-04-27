@@ -298,11 +298,22 @@
   /* ANALYST SUMMARY */
   .analyst-box {
     background: var(--ivory);
-    border: 0.5pt solid var(--border);
+    border-left: 1.4pt solid var(--brand);
     border-radius: 4pt;
     padding: 10pt 14pt;
     margin: 12pt 0;
     break-inside: avoid;
+  }
+
+  /* CHART PLACEHOLDER */
+  .chart-placeholder {
+    background: var(--ivory);
+    border-radius: 4pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--stone);
+    font-size: 9pt;
   }
   .analyst-label {
     font-family: var(--sans);
@@ -376,7 +387,7 @@
 <!-- CHART -->
 <h2>Price Action</h2>
 <figure>
-  <div style="height: 60mm; background: var(--ivory); border: 0.5pt solid var(--border-soft); border-radius: 4pt; display: flex; align-items: center; justify-content: center; color: var(--stone); font-size: 9pt;">
+  <div class="chart-placeholder" style="height: 60mm;">
     [Candlestick / price chart placeholder - extract SVG from diagrams/]
   </div>
   <figcaption>{{Chart title, e.g. "20-day price action showing accumulation phase."}}</figcaption>
@@ -405,7 +416,7 @@
 <!-- REVENUE BREAKDOWN -->
 <h2>Revenue Breakdown</h2>
 <figure>
-  <div style="height: 50mm; background: var(--ivory); border: 0.5pt solid var(--border-soft); border-radius: 4pt; display: flex; align-items: center; justify-content: center; color: var(--stone); font-size: 9pt;">
+  <div class="chart-placeholder" style="height: 50mm;">
     [Revenue breakdown chart placeholder - donut or waterfall]
   </div>
   <figcaption>{{Chart title.}}</figcaption>

@@ -282,7 +282,8 @@
     border-bottom: 0.3pt dotted var(--border);
     break-inside: avoid;
   }
-  .os-item:nth-last-child(-n+2) { border-bottom: none; }
+  .os-item:last-child,
+  .os-item:nth-last-child(2):nth-child(odd) { border-bottom: none; }
   .os-name {
     font-family: var(--serif);
     font-size: 10pt; font-weight: 500;
