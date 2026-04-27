@@ -11,6 +11,28 @@ Good content deserves good paper. One design language across eight document type
 
 Part of `Kaku · Waza · Kami` - Kaku writes code, Waza drills habits, **Kami delivers documents**.
 
+## Step 0 · Load brand profile (if exists)
+
+Before anything else, check for a brand profile:
+
+1. `.kami/brand.md` in the current project directory
+2. `~/.kami/brand.md` (global fallback)
+
+If found, silently load it. Profile fields:
+
+| Field | Purpose |
+|---|---|
+| `author` | Name for non-personal docs; overrides git config |
+| `language` | Default (`cn` / `en` / `ja`) when request is ambiguous |
+| `logo` | Path to logo file |
+| `brand_color` | Hex to map to `--brand` (warm palette constraint still applies) |
+| `company` | Company or project name for headers and footers |
+| `tagline` | Default one-liner for one-pager / long-doc footers |
+
+Profile values are defaults only. Explicit instructions in the current conversation always win. If no profile exists, continue without interruption.
+
+---
+
 ## Step 1 · Decide the language
 
 **Match the user's language.** Chinese -> `*.html` / `slides.py`. English -> `*-en.html` / `slides-en.py`. Japanese -> CJK path (`.html` / `slides.py`) as best-effort, JP Mincho first, visual QA before shipping. Reference docs are shared English specs.
@@ -68,7 +90,25 @@ Read `references/diagrams.md` before drawing - it has the selection guide, kami 
 
 Before drawing, always ask: **would a well-written paragraph teach the reader less than this diagram?** If no, don't draw.
 
-**Auto-select charts from data.** When the content contains numerical data (revenue splits, trends over time, category comparisons), choose the appropriate chart type and embed it. Do not wait for the user to request a specific chart. Selection guide: proportional breakdown -> donut, time series -> line, category comparison -> bar, price history -> candlestick, value decomposition -> waterfall.
+**Auto-select charts from data.** When content contains numerical data, choose the chart type and embed it without waiting for the user to specify. Decision tree (first match wins):
+
+| Data shape | Chart |
+|---|---|
+| Has open/high/low/close fields, or per-day price | Candlestick |
+| Has + and - contributions that sum to a total (bridge, waterfall, P&L) | Waterfall |
+| One series, values sum to ~100%, items ≤ 6 | Donut |
+| One series, values sum to ~100%, items ≥ 7 | Horizontal bar |
+| Two or more series across time (months, quarters, years) | Line |
+| One series across time, large count changes dominate (not rate) | Bar |
+| Multiple categories, same time snapshot, 2+ series | Grouped bar |
+| 2×2 strategic or priority positioning | Quadrant |
+| Hierarchical data with depth ≥ 2 | Tree |
+| Process with decision branches | Flowchart |
+| Cross-team or cross-role process with ≥ 3 actors | Swimlane |
+| Set overlaps or shared attributes between 2-3 groups | Venn |
+| Category comparison, single series, no time axis | Bar |
+
+When data fits multiple types, prefer the one that shows variance most clearly. Always embed inside a `<figure>` with a caption that states the insight, not just the data range.
 
 ## Step 2.1 · Source and material pass
 
@@ -99,9 +139,33 @@ Confirm the materials that make the subject recognizable before layout:
 
 If a required item is missing, use a compact gap table and ask once. Do not replace missing material with generic imagery, approximate logo drawings, or invented values.
 
+### Materials status block
+
+After the material check, output a structured status block before continuing. This is a one-shot transparency display, not a question:
+
+```
+Materials status:
+- Logo: OK assets/client-logo.svg
+- Brand colors: OK #1B365D mapped to --brand
+- Product screenshot: MISSING (proceeding with kami default placeholder)
+- UI screenshot: not required for this doc type
+```
+
+Use `OK`, `MISSING`, or `not required`. If a required item is missing and no user input arrived, ask once with the gap table; otherwise continue silently.
+
 ## Step 2.5 · Distill raw content (if applicable)
 
-Skip this step if the user already provides structured content (clear sections, bullet points, metrics in place).
+**Auto-detect whether to distill.** Do not ask the user; judge from the input:
+
+| Skip distill (fill directly) | Run distill |
+|---|---|
+| Content has explicit section labels matching template structure | Raw prose without section structure |
+| Metrics already quantified with units in place | Numbers scattered or implied, not extracted |
+| User wrote "use this as-is" / "直接用这个" / "原封不动" | User pasted multi-source dump (chat / email thread / multiple docs) |
+| Content count matches template (e.g. 4 metrics for 4 metric cards) | Content count mismatches template (too many or too few items) |
+| One coherent voice with consistent claims | Conflicting claims or duplicate facts across sources |
+
+When in doubt, run distill. Distill is cheap; rebuilding a misaligned doc is not.
 
 When the user hands over **raw material** (meeting notes, brain dump, existing doc in different format, chat transcript, scattered points):
 
@@ -118,7 +182,7 @@ Example gap-check:
 | 3-5 core projects | 2 mentioned | at least 1 more with outcome |
 | Materials | logo file provided | product screenshot source |
 
-Then proceed to Step 3 with structured, distilled content.
+Then proceed to Step 2.6 (slides) or the layout brief (all other doc types) with structured, distilled content.
 
 ## Step 2.6 · Deck pre-flight (slides only)
 
@@ -136,6 +200,24 @@ Before drafting any slide, confirm these six points with the user. Ask all six i
 | 6 | **Format confirmation** - slides deck vs. a one-pager that looks like a deck? | Rules out routing to the wrong template |
 
 If the user has already answered any of these in the conversation, skip only those questions.
+
+## Step 2.7 · Layout brief (transparent, non-blocking)
+
+Before reading specs and filling the template, output a one-shot layout brief so the user can see the plan without being asked to confirm. Continue immediately after; do not wait.
+
+Format:
+
+```
+Layout brief:
+- Doc type: Equity Report (CN) -> equity-report.html
+- Length target: 2 pages
+- Structure: thesis + rating + price target -> valuation (DCF + comparables) -> catalysts -> risks
+- Diagrams: 1 line chart (revenue trend), 1 waterfall (FY26 bridge)
+- Materials: logo OK, product image MISSING (proceeding with text-only header)
+- Output: HTML + PDF
+```
+
+The brief is for transparency, not approval. If the user disagrees, they will say so; otherwise proceed to Step 3.
 
 ---
 
