@@ -663,25 +663,32 @@ def scan_file(path: Path) -> list[Finding]:
                                         f"{h} is a cool / neutral gray, use warm undertone"))
 
     # Pass 3: thin-border-radius block scan (pitfall #2 double-ring).
-    # For each thin closed border line, check ±5 lines for border-radius within
-    # the same rule block (no closing brace between them).
+    # For each thin closed border line, scan backward to the block open and
+    # forward to the block close, checking for border-radius in the same block.
     for i, raw in enumerate(lines):
         if not THIN_CLOSED_BORDER.search(raw):
             continue
         if "skip-thin-border-radius" in raw:
             continue
-        window_start = max(0, i - 5)
-        window_end = min(len(lines), i + 6)
-        for j in range(window_start, window_end):
-            if j == i:
-                continue
-            # stop at a closing brace that is outside range on either side
-            if "}" in lines[j] and ((j < i and j > window_start) or (j > i and j < window_end)):
-                pass  # brace within window; continue checking
-            if BORDER_RADIUS_PROP.search(lines[j]):
-                findings.append(Finding(path, i + 1, "thin-border-radius",
-                    "thin border (<1pt) with border-radius -- pitfall #2 double-ring risk"))
+        found = False
+        # Scan backward; stop at { or } (entering/leaving a block).
+        for j in range(i - 1, max(0, i - 6) - 1, -1):
+            if "{" in lines[j] or "}" in lines[j]:
                 break
+            if BORDER_RADIUS_PROP.search(lines[j]):
+                found = True
+                break
+        # Scan forward; stop at } (leaving the block).
+        if not found:
+            for j in range(i + 1, min(len(lines), i + 6)):
+                if "}" in lines[j]:
+                    break
+                if BORDER_RADIUS_PROP.search(lines[j]):
+                    found = True
+                    break
+        if found:
+            findings.append(Finding(path, i + 1, "thin-border-radius",
+                "thin border (<1pt) with border-radius -- pitfall #2 double-ring risk"))
     return findings
 
 
