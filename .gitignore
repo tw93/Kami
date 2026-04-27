@@ -17,3 +17,6 @@ assets/examples/
 !/dist/kami.zip
 *.log
 .vercel
+
+# Slides build artifact (moved into assets/examples/ by build.py)
+/output.pptx
