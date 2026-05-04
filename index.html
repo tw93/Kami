@@ -55,7 +55,7 @@
         "name": "How do I set up Kami?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Three ways. Claude Code: npx skills add tw93/kami. Generic agents: npx skills add tw93/kami -a '*'. Claude Desktop: download kami.zip from GitHub Releases and upload it in Skills settings."
+          "text": "Four ways. Claude Code: npx skills add tw93/kami, or use the plugin marketplace with /plugin marketplace add tw93/Kami and /plugin install kami@kami. Generic agents: npx skills add tw93/kami -a '*'. Claude Desktop: download kami.zip from GitHub Releases and upload it in Skills settings."
         }
       },
       {
@@ -141,6 +141,10 @@
     </div>
 <pre class="code"><span class="c"># Claude Code</span>
 npx skills add tw93/kami -a claude-code -g -y
+
+<span class="c"># Claude Code plugin marketplace</span>
+/plugin marketplace add tw93/Kami
+/plugin install kami@kami
 
 <span class="c"># Codex</span>
 npx skills add tw93/kami -a codex -g -y</pre>
@@ -596,7 +600,7 @@ beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
       </div>
       <div class="faq-pair">
         <dt>How do I set it up?</dt>
-        <dd>Three ways. Claude Code: <code style="font-family:var(--mono); font-size:0.9em; color:var(--brand);">npx skills add tw93/kami -a claude-code -g -y</code>. Generic agents like Codex or OpenCode: <code style="font-family:var(--mono); font-size:0.9em; color:var(--brand);">npx skills add tw93/kami -a '*' -g -y</code>. Claude Desktop: download kami.zip from GitHub Releases and upload it in Customize &gt; Skills. No slash command needed, the skill auto-triggers from natural requests.</dd>
+        <dd>Four ways. Claude Code: <code style="font-family:var(--mono); font-size:0.9em; color:var(--brand);">npx skills add tw93/kami -a claude-code -g -y</code>, or plugin marketplace: <code style="font-family:var(--mono); font-size:0.9em; color:var(--brand);">/plugin marketplace add tw93/Kami</code> then <code style="font-family:var(--mono); font-size:0.9em; color:var(--brand);">/plugin install kami@kami</code>. Generic agents like Codex or OpenCode: <code style="font-family:var(--mono); font-size:0.9em; color:var(--brand);">npx skills add tw93/kami -a '*' -g -y</code>. Claude Desktop: download kami.zip from GitHub Releases and upload it in Customize &gt; Skills. No slash command needed, the skill auto-triggers from natural requests.</dd>
       </div>
       <div class="faq-pair">
         <dt>What languages does it support?</dt>

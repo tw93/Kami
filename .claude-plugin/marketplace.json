@@ -1,6 +1,6 @@
 {
   "name": "kami",
-  "description": "Personal typesetting skill for Claude Code.",
+  "description": "Document typesetting skill for Claude Code.",
   "owner": {
     "name": "Tw93",
     "email": "hitw93@gmail.com"
@@ -9,7 +9,6 @@
     {
       "name": "kami",
       "description": "Typeset professional documents: resumes, one-pagers, white papers, letters, portfolios, slide decks. Warm parchment, ink-blue accent, serif-led hierarchy.",
-      "version": "1.3.0",
       "category": "documents",
       "source": "./",
       "homepage": "https://github.com/tw93/Kami"
