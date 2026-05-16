@@ -11,9 +11,7 @@
       "description": "Typeset professional documents: resumes, one-pagers, white papers, letters, portfolios, slide decks. Warm parchment, ink-blue accent, serif-led hierarchy.",
       "category": "documents",
       "source": "./",
-      "homepage": "https://github.com/tw93/kami",
-      "skills": ["./"],
-      "strict": false
+      "homepage": "https://github.com/tw93/kami"
     }
   ]
 }

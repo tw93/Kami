@@ -75,7 +75,12 @@ The landing-page template in action: three products, one constraint set.
 npx skills add tw93/kami -a claude-code -g -y
 ```
 
-Note: Claude Code 2.1.136-2.1.138 currently rejects root skill paths during marketplace install. Use the `npx skills` command above until the upstream path validation regression is fixed.
+**Claude Code plugin marketplace** (requires Claude Code v2.1.143+)
+
+```bash
+/plugin marketplace add tw93/kami
+/plugin install kami@kami
+```
 
 **Generic agents** (Codex, OpenCode, Pi, and other tools that read from `~/.agents/`)
 
