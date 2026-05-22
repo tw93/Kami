@@ -17,7 +17,7 @@ Kami is a layout design system for the AI era. Give Claude (or any LLM) a brief,
 
 ## Install
 - Claude Code: `npx skills add tw93/kami -a claude-code -g -y`
-- Claude Code plugin marketplace (v2.1.143+): `/plugin marketplace add tw93/kami && /plugin install kami@kami`
+- Claude Code plugin marketplace (v2.1.142+): `/plugin marketplace add tw93/kami && /plugin install kami@kami`
 - Generic agents: `npx skills add tw93/kami -a '*' -g -y`
 - Claude Desktop: download `kami.zip` from GitHub Releases and upload it in Skills settings
 

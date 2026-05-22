@@ -75,7 +75,7 @@ The landing-page template in action: three products, one constraint set.
 npx skills add tw93/kami -a claude-code -g -y
 ```
 
-**Claude Code plugin marketplace** (requires Claude Code v2.1.143+)
+**Claude Code plugin marketplace** (requires Claude Code v2.1.142+)
 
 ```bash
 /plugin marketplace add tw93/kami
