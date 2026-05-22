@@ -1,0 +1,15 @@
+{
+  "rhythm": {
+    "max_content_run": 5,
+    "divider_min_deck_size": 12
+  },
+  "density": {
+    "warn_pct": 0.25,
+    "sparse_pct": 0.50,
+    "dpi": 36
+  },
+  "orphan": {
+    "max_words": 2,
+    "max_chars": 15
+  }
+}

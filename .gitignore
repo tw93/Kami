@@ -18,12 +18,5 @@ assets/examples/
 *.log
 .vercel
 
-# Local agent and Claude Code state
-CLAUDE.md
-CLAUDE.local.md
-AGENTS.md
-AGENTS.override.md
-.claude/
-
 # Slides build artifact (moved into assets/examples/ by build.py)
 /output.pptx

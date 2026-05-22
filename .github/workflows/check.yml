@@ -31,3 +31,53 @@ jobs:
         run: |
           bash scripts/package-skill.sh /tmp/kami-ci.zip
           unzip -l /tmp/kami-ci.zip | tail -3
+
+  verify-render:
+    name: render and verify
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install WeasyPrint system libs and CJK fallback fonts
+        # libcairo2 / libpango / libharfbuzz are required by WeasyPrint at
+        # runtime; fonts-noto-cjk provides a serif CJK fallback so the Chinese
+        # templates render with embedded glyphs even though TsangerJinKai02 is
+        # commercial and not shipped in CI. The verify step accepts Noto as a
+        # recognized fallback (see scripts/build.py fallback_present).
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libcairo2 libpango-1.0-0 libpangoft2-1.0-0 libharfbuzz0b \
+            fonts-noto-cjk fonts-noto-cjk-extra
+
+      - name: Install Python deps
+        run: python3 -m pip install weasyprint pypdf Pygments
+
+      - name: Verify strict page-count targets
+        # Only the four hard-invariant templates (resume == 2, one-pager == 1)
+        # run in CI. The long-doc / portfolio / slides ceilings are soft and
+        # rely on the stabilizer; the next step exercises that path.
+        # KAMI_ALLOW_FALLBACK_ONLY=1: CI does not ship commercial fonts
+        # (TsangerJinKai02, Charter). Treat fallback-only embedding as a
+        # warning instead of a failure so CI can still gate page counts.
+        env:
+          KAMI_ALLOW_FALLBACK_ONLY: '1'
+        run: |
+          python3 scripts/build.py --verify one-pager
+          python3 scripts/build.py --verify one-pager-en
+          python3 scripts/build.py --verify resume
+          python3 scripts/build.py --verify resume-en
+
+      - name: Stabilize end-to-end (smoke)
+        # Runs the solver across every stabilize_max > 0 target. Non-strict
+        # because CI uses Noto CJK fallback (not TsangerJinKai02) and Noto's
+        # different glyph widths can change page count by +/- 1, which the
+        # solver should handle but should not gate CI on. A solver crash
+        # still fails the build.
+        run: python3 scripts/stabilize.py all --report

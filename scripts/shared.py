@@ -1,15 +1,35 @@
 """Shared constants and helpers for kami build and stabilize scripts."""
 from __future__ import annotations
 
+import functools
+import json
 import os
 import sys
 from pathlib import Path
+from typing import Any, NamedTuple
+
+
+class TemplateSpec(NamedTuple):
+    """Per-template configuration.
+
+    build_max_pages: hard ceiling enforced by `build.py --verify`. 0 = no limit.
+    stabilize_max_pages: target pages for the overflow solver in `stabilize.py`.
+        0 = solver disabled. The two values can differ because stabilize aims
+        to keep doc-style targets within an editorial range while build only
+        catches gross overflow.
+    """
+    source: str
+    build_max_pages: int
+    stabilize_max_pages: int
 
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATES = ROOT / "assets" / "templates"
 DIAGRAMS = ROOT / "assets" / "diagrams"
 EXAMPLES = ROOT / "assets" / "examples"
 TOKENS_FILE = ROOT / "references" / "tokens.json"
+CHECKS_THRESHOLDS_FILE = ROOT / "references" / "checks_thresholds.json"
+COOL_GRAY_BUCKETS_FILE = ROOT / "references" / "cool_gray_buckets.json"
+CROSS_TEMPLATE_ALLOWLIST_FILE = ROOT / "references" / "cross_template_diff_allowlist.json"
 
 # Canonical parchment background color, kept here so build/stabilize/density
 # checks share one source of truth instead of redefining the RGB triple.
@@ -76,36 +96,29 @@ COOL_GRAY_BLOCKLIST = {
 # Template registry
 #
 # Single source of truth for HTML targets across build.py and stabilize.py.
-#
-# Each entry is (source_filename, build_max_pages, stabilize_max_pages):
-#   - build_max_pages: hard ceiling enforced by `build.py --verify`. 0 = no
-#     limit.
-#   - stabilize_max_pages: target pages for the overflow solver in
-#     `stabilize.py`. 0 = solver disabled. The two values can differ because
-#     stabilize aims to keep doc-style targets within an editorial range while
-#     build only catches gross overflow.
+# See TemplateSpec for field meanings.
 # ---------------------------------------------------------------------------
-HTML_TEMPLATES: dict[str, tuple[str, int, int]] = {
+HTML_TEMPLATES: dict[str, TemplateSpec] = {
     # Core six
-    "one-pager":    ("one-pager.html",    1, 1),
-    "letter":       ("letter.html",       1, 1),
-    "long-doc":     ("long-doc.html",     0, 9),
-    "portfolio":    ("portfolio.html",    0, 8),
-    "resume":       ("resume.html",       2, 2),
-    "one-pager-en": ("one-pager-en.html", 1, 1),
-    "letter-en":    ("letter-en.html",    1, 1),
-    "long-doc-en":  ("long-doc-en.html",  0, 9),
-    "portfolio-en": ("portfolio-en.html", 0, 8),
-    "resume-en":    ("resume-en.html",    2, 2),
+    "one-pager":    TemplateSpec("one-pager.html",    1, 1),
+    "letter":       TemplateSpec("letter.html",       1, 1),
+    "long-doc":     TemplateSpec("long-doc.html",     0, 9),
+    "portfolio":    TemplateSpec("portfolio.html",    0, 8),
+    "resume":       TemplateSpec("resume.html",       2, 2),
+    "one-pager-en": TemplateSpec("one-pager-en.html", 1, 1),
+    "letter-en":    TemplateSpec("letter-en.html",    1, 1),
+    "long-doc-en":  TemplateSpec("long-doc-en.html",  0, 9),
+    "portfolio-en": TemplateSpec("portfolio-en.html", 0, 8),
+    "resume-en":    TemplateSpec("resume-en.html",    2, 2),
     # Equity report
-    "equity-report":    ("equity-report.html",    3, 0),
-    "equity-report-en": ("equity-report-en.html", 3, 0),
+    "equity-report":    TemplateSpec("equity-report.html",    3, 0),
+    "equity-report-en": TemplateSpec("equity-report-en.html", 3, 0),
     # Changelog
-    "changelog":    ("changelog.html",    2, 0),
-    "changelog-en": ("changelog-en.html", 2, 0),
+    "changelog":    TemplateSpec("changelog.html",    2, 0),
+    "changelog-en": TemplateSpec("changelog-en.html", 2, 0),
     # Slides (WeasyPrint default)
-    "slides-weasy":    ("slides-weasy.html",    0, 0),
-    "slides-weasy-en": ("slides-weasy-en.html", 0, 0),
+    "slides-weasy":    TemplateSpec("slides-weasy.html",    0, 0),
+    "slides-weasy-en": TemplateSpec("slides-weasy-en.html", 0, 0),
 }
 
 SCREEN_TEMPLATES: dict[str, str] = {
@@ -116,12 +129,48 @@ SCREEN_TEMPLATES: dict[str, str] = {
 
 def build_targets() -> dict[str, tuple[str, int]]:
     """Return target -> (source, max_pages) mapping for build.py."""
-    return {name: (src, build_max) for name, (src, build_max, _) in HTML_TEMPLATES.items()}
+    return {name: (spec.source, spec.build_max_pages) for name, spec in HTML_TEMPLATES.items()}
 
 
 def screen_targets() -> dict[str, str]:
     """Return target -> source mapping for browser-only HTML templates."""
     return dict(SCREEN_TEMPLATES)
+
+
+@functools.lru_cache(maxsize=1)
+def load_checks_thresholds() -> dict[str, Any]:
+    """Return rhythm / density / orphan thresholds.
+
+    Falls back to baked-in defaults if the JSON is missing so build.py works
+    on a half-installed checkout.
+    """
+    if CHECKS_THRESHOLDS_FILE.exists():
+        return json.loads(CHECKS_THRESHOLDS_FILE.read_text(encoding="utf-8"))
+    return {
+        "rhythm": {"max_content_run": 5, "divider_min_deck_size": 12},
+        "density": {"warn_pct": 0.25, "sparse_pct": 0.50, "dpi": 36},
+        "orphan": {"max_words": 2, "max_chars": 15},
+    }
+
+
+@functools.lru_cache(maxsize=1)
+def load_cross_template_allowlist() -> dict[str, Any]:
+    """Return the CN/EN drift allowlist. Missing file -> empty allowlist."""
+    if CROSS_TEMPLATE_ALLOWLIST_FILE.exists():
+        return json.loads(CROSS_TEMPLATE_ALLOWLIST_FILE.read_text(encoding="utf-8"))
+    return {"always_allowed": [], "per_pair_allowed": {}}
+
+
+@functools.lru_cache(maxsize=1)
+def load_cool_gray_buckets() -> list[dict[str, Any]]:
+    """Return luminance buckets used to remap cool-gray hex literals."""
+    if COOL_GRAY_BUCKETS_FILE.exists():
+        return json.loads(COOL_GRAY_BUCKETS_FILE.read_text(encoding="utf-8"))["buckets"]
+    return [
+        {"lum_max": 0.35, "replacement": "#4D4C48"},
+        {"lum_max": 0.72, "replacement": "#87867F"},
+        {"lum_max": 1.00, "replacement": "#E8E6DC"},
+    ]
 
 
 def stabilize_targets() -> dict[str, tuple[str, int]]:
@@ -131,7 +180,7 @@ def stabilize_targets() -> dict[str, tuple[str, int]]:
     overflow solver should constrain).
     """
     return {
-        name: (src, stab_max)
-        for name, (src, _build_max, stab_max) in HTML_TEMPLATES.items()
-        if stab_max > 0
+        name: (spec.source, spec.stabilize_max_pages)
+        for name, spec in HTML_TEMPLATES.items()
+        if spec.stabilize_max_pages > 0
     }

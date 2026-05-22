@@ -300,6 +300,12 @@ def ending_slide(prs, message, contact):
 # ═══════════════════════════════════════════════════════════
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--out", default="output.pptx",
+                        help="Output PPTX path (default: output.pptx in cwd)")
+    args = parser.parse_args()
+
     prs = Presentation()
     prs.slide_width  = SLIDE_W
     prs.slide_height = SLIDE_H
@@ -361,8 +367,8 @@ def main():
         message="Thank you",
         contact="{{EMAIL}} · {{WEBSITE}}")
 
-    prs.save('output.pptx')
-    print("OK: Saved output.pptx")
+    prs.save(args.out)
+    print(f"OK: Saved {args.out}")
 
 
 if __name__ == '__main__':

@@ -1,0 +1,7 @@
+{
+  "buckets": [
+    { "lum_max": 0.35, "replacement": "#4D4C48" },
+    { "lum_max": 0.72, "replacement": "#87867F" },
+    { "lum_max": 1.00, "replacement": "#E8E6DC" }
+  ]
+}

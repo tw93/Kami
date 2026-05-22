@@ -1,0 +1,12 @@
+{
+  "_description": "CSS variables in :root that may legitimately differ between a CN template and its EN counterpart. Anything not listed here must match across the pair.",
+  "always_allowed": [
+    "--serif",
+    "--sans",
+    "--mono",
+    "--latin-ui"
+  ],
+  "per_pair_allowed": {
+    "_doc": "key = template base name (e.g. 'one-pager'); value = list of additional CSS variables that may differ for that pair only"
+  }
+}
