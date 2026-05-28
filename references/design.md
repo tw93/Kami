@@ -1124,3 +1124,39 @@ Both: pill shape (999px radius), 15px `--latin-ui`, weight 500, 1.5px border, mi
 - Links: inline with middot (`&middot;`) separators between items, dark-warm color. Editorial pattern, not flex-gap
 - Ethos: closing italic serif line, olive color, max-width 360px. The italic voice signals a personal sign-off
 - Collapses to single column below 880px
+
+## KO locale tuning
+
+Korean templates use Nanum Myeongjo (OFL, Naver Corp.) as the primary serif.
+The font's hangul metrics differ from TsangerJinKai (CN) and Charter (EN), so
+the CN per-component overrides for `h1` letter-spacing and line-height may
+need re-tuning. Canonical values are locked during the pilot (`one-pager-ko`)
+and applied verbatim across the remaining KO templates.
+
+Canonical values (to be filled in by the `one-pager-ko` pilot):
+
+- Body `font-size`: TBD pt (pilot baseline starts at 10pt, matching CN one-pager)
+- Body `line-height`: TBD (pilot baseline starts at CN value)
+- Body `letter-spacing`: TBD pt (pilot baseline starts at CN value)
+- H1 `font-size`: TBD pt
+- H1 `font-weight`: TBD (CN uses 500 against TsangerJinKai W05; Nanum exposes Regular 400 / Bold 700)
+- H1 `letter-spacing`: TBD
+- H1 `line-height`: TBD
+- `font-synthesis: none;` MUST be applied to the body rule to prevent
+  WeasyPrint from synthesizing fake bold when Bold weight resolution fails
+  through fallbacks.
+
+Fallback chain (consistent across all KO templates):
+
+```css
+--serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR",
+         "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+--sans:  "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
+         -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+--mono:  "JetBrains Mono", "D2Coding", "SF Mono", "Fira Code",
+         Consolas, Monaco, monospace;
+--latin-ui: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+```
+
+The pilot updates the TBD entries above with concrete numeric values before
+the remaining KO templates are forked.
