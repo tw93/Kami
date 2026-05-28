@@ -134,7 +134,7 @@ def test_dist_package_contents() -> None:
 # --------------------------- shared registry ---------------------------
 
 def test_registry_consistency() -> None:
-    check("HTML_TEMPLATES has 17 entries", len(HTML_TEMPLATES) == 17,
+    check("HTML_TEMPLATES has 24 entries", len(HTML_TEMPLATES) == 24,
           f"got {len(HTML_TEMPLATES)}")
     check("SCREEN_TARGETS has 2 entries", len(SCREEN_TARGETS) == 2,
           f"got {len(SCREEN_TARGETS)}")

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     SLIDES TEMPLATE (KO) · parchment design system
+     가로 슬라이드 (280mm × 158mm) · WeasyPrint 렌더링
+     구조: 표지 슬라이드 -> 본문 슬라이드 (자유 구성)
+     변경 후 실행: python3 -c "from weasyprint import HTML; HTML('slides-weasy-ko.html').write_pdf('out.pdf')"
+     목표: 페이지 수 제한 없음 (슬라이드 수 = 섹션 수)
+     ================================================================== -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>{{제목}}</title>
+<style>
+  @font-face { font-family: "NanumMyeongjo"; src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"), url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype"); font-weight: 400; }
+  @font-face { font-family: "NanumMyeongjo"; src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"), url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype"); font-weight: 700; }
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 400; }
+
+  @page {
+    size: 280mm 158mm;
+    margin: 0;
+    background: #f5f4ed;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment:  #f5f4ed;
+    --ivory:      #faf9f5;
+    --near-black: #141413;
+    --dark-warm:  #3d3d3a;
+    --olive:      #504e49;
+    --stone:      #6b6a64;
+    --brand:      #1B365D;
+    --brand-tint: #EEF2F7;
+    --border:     #e8e6dc;
+    --border-soft:#e5e3d8;
+
+    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR", "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+    --sans:  var(--serif);
+    --mono:  "JetBrains Mono", "D2Coding", "SF Mono", "Fira Code", Consolas, Monaco, "NanumMyeongjo", monospace;
+
+    --rhythm-module:  14pt;
+    --rhythm-section: 18pt;
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--sans);
+    font-size: 13pt;
+    line-height: 1.55;
+    letter-spacing: 0.3pt;
+    font-synthesis: none;
+  }
+
+  .slide {
+    width: 280mm;
+    height: 158mm;
+    padding: 16mm 20mm;
+    background: var(--parchment);
+    break-after: page;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .slide:last-child { break-after: auto; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 9.5pt;
+    letter-spacing: 2pt;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 2pt;
+  }
+
+  .page-num {
+    position: absolute;
+    bottom: 10mm;
+    right: 20mm;
+    font-family: var(--mono);
+    font-size: 9pt;
+    color: var(--stone);
+    letter-spacing: 0.5pt;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .footer-mark {
+    position: absolute;
+    bottom: 10mm;
+    left: 20mm;
+    font-family: var(--mono);
+    font-size: 9pt;
+    color: var(--stone);
+    letter-spacing: 1.5pt;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 24pt;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.3pt;
+    color: var(--near-black);
+    margin-bottom: var(--rhythm-module);
+  }
+
+  h3 {
+    font-family: var(--serif);
+    font-size: 15pt;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.3pt;
+    color: var(--brand);
+    margin-bottom: 8pt;
+  }
+
+  .lead {
+    font-family: var(--sans);
+    font-size: 12pt;
+    font-weight: 400;
+    line-height: 1.55;
+    letter-spacing: 0.3pt;
+    color: var(--olive);
+    margin-bottom: 8pt;
+  }
+
+  .mt {
+    font-family: var(--serif);
+    font-size: 16pt;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.3pt;
+    color: var(--near-black);
+    margin-bottom: 8pt;
+  }
+
+  .ml {
+    font-family: var(--serif);
+    font-size: 24pt;
+    font-weight: 700;
+    color: var(--brand);
+    margin-right: 6pt;
+  }
+
+  .ms {
+    font-family: var(--mono);
+    font-size: 7.5pt;
+    letter-spacing: 1.5pt;
+    text-transform: uppercase;
+    color: var(--stone);
+    border-bottom: 0.3pt solid var(--border);
+    padding-bottom: 4pt;
+    margin-bottom: var(--rhythm-module);
+  }
+
+  .mb {
+    font-family: var(--sans);
+    font-size: 11pt;
+    line-height: 1.55;
+    letter-spacing: 0.3pt;
+    color: var(--dark-warm);
+    margin-bottom: var(--rhythm-section);
+  }
+
+  .mi {
+    font-family: var(--sans);
+    font-size: 11pt;
+    line-height: 1.55;
+    letter-spacing: 0.3pt;
+    color: var(--dark-warm);
+    padding: 8pt 0;
+  }
+
+  .mc {
+    font-family: var(--sans);
+    font-size: 9.5pt;
+    line-height: 1.5;
+    letter-spacing: 0.3pt;
+    color: var(--olive);
+    border-top: 0.3pt solid var(--border);
+    padding-top: 8pt;
+    margin-top: var(--rhythm-section);
+  }
+
+  .co {
+    font-family: var(--sans);
+    font-size: 11pt;
+    font-weight: 700;
+    line-height: 1.55;
+    letter-spacing: 0.3pt;
+    color: var(--brand);
+    position: absolute;
+    bottom: 12mm;
+    left: 20mm;
+    right: 20mm;
+  }
+
+  .c2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22pt;
+  }
+
+  /* 2x2 aligned layout uses table; CSS Grid causes row-height misalignment */
+  .t2x2 {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 22pt 18pt;
+    margin: -18pt -22pt;
+  }
+  .t2x2 td {
+    vertical-align: top;
+    width: 50%;
+  }
+
+  table.data {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  table.data td {
+    padding: 8pt;
+    border-bottom: 0.3pt solid var(--border);
+    font-size: 11pt;
+    line-height: 1.55;
+    letter-spacing: 0.3pt;
+  }
+  table.data td:first-child {
+    font-weight: 700;
+    color: var(--brand);
+  }
+
+  svg {
+    max-height: 105mm;
+    width: auto;
+  }
+
+  .cover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .cover h1 {
+    font-family: var(--serif);
+    font-size: 38pt;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.3pt;
+    color: var(--near-black);
+    margin-bottom: 12pt;
+  }
+  .cover .sub {
+    font-family: var(--sans);
+    font-size: 14pt;
+    line-height: 1.5;
+    letter-spacing: 0.3pt;
+    color: var(--olive);
+    max-width: 50ch;
+    margin-bottom: 32pt;
+  }
+  .cover .meta {
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--stone);
+    letter-spacing: 0.3pt;
+  }
+</style>
+</head>
+<body>
+
+<!-- 표지 슬라이드 -->
+<section class="slide cover">
+  <h1>{{제목}}</h1>
+  <div class="sub">{{부제목}}</div>
+  <div class="meta">{{발표자}} · {{날짜}}</div>
+</section>
+
+<!-- 본문 슬라이드 · 2단 레이아웃 -->
+<section class="slide">
+  <span class="eyebrow">01 · {{챕터}}</span>
+  <h2>{{슬라이드 제목}}</h2>
+  <p class="lead">{{도입 문장}}</p>
+
+  <div class="c2">
+    <div>
+      <h3>{{좌측 제목}}</h3>
+      <p class="mb">{{좌측 내용}}</p>
+    </div>
+    <div>
+      <h3>{{우측 제목}}</h3>
+      <p class="mb">{{우측 내용}}</p>
+    </div>
+  </div>
+
+  <div class="page-num">01</div>
+  <div class="footer-mark">{{프로젝트명}}</div>
+</section>
+
+<!-- 본문 슬라이드 · 2×2 모듈 -->
+<section class="slide">
+  <span class="eyebrow">02 · {{챕터}}</span>
+  <h2>{{슬라이드 제목}}</h2>
+
+  <table class="t2x2">
+    <tr>
+      <td>
+        <div class="mt"><span class="ml">A</span>{{모듈 제목}}</div>
+        <p class="mb">{{모듈 설명}}</p>
+      </td>
+      <td>
+        <div class="mt"><span class="ml">B</span>{{모듈 제목}}</div>
+        <p class="mb">{{모듈 설명}}</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="mt"><span class="ml">C</span>{{모듈 제목}}</div>
+        <p class="mb">{{모듈 설명}}</p>
+      </td>
+      <td>
+        <div class="mt"><span class="ml">D</span>{{모듈 제목}}</div>
+        <p class="mb">{{모듈 설명}}</p>
+      </td>
+    </tr>
+  </table>
+
+  <div class="page-num">02</div>
+  <div class="footer-mark">{{프로젝트명}}</div>
+</section>
+
+<!-- 본문 슬라이드 · 하단 callout -->
+<section class="slide">
+  <span class="eyebrow">03 · {{챕터}}</span>
+  <h2>{{슬라이드 제목}}</h2>
+
+  <p class="mb">{{본문 내용}}</p>
+
+  <div class="co">{{하단 결론 또는 핵심 판단}}</div>
+
+  <div class="page-num">03</div>
+  <div class="footer-mark">{{프로젝트명}}</div>
+</section>
+
+<!-- 본문 슬라이드 · 표 -->
+<section class="slide">
+  <span class="eyebrow">04 · {{챕터}}</span>
+  <h2>{{슬라이드 제목}}</h2>
+
+  <table class="data">
+    <tr>
+      <td>{{항목}}</td>
+      <td>{{내용}}</td>
+      <td>{{비고}}</td>
+    </tr>
+    <tr>
+      <td>{{항목}}</td>
+      <td>{{내용}}</td>
+      <td>{{비고}}</td>
+    </tr>
+  </table>
+
+  <div class="page-num">04</div>
+  <div class="footer-mark">{{프로젝트명}}</div>
+</section>
+
+</body>
+</html>

@@ -118,6 +118,7 @@ HTML_TEMPLATES: dict[str, TemplateSpec] = {
     "resume-ko":       TemplateSpec("resume-ko.html",       2, 2),
     "equity-report-ko": TemplateSpec("equity-report-ko.html", 3, 0),
     "changelog-ko":    TemplateSpec("changelog-ko.html",    2, 0),
+    "slides-weasy-ko": TemplateSpec("slides-weasy-ko.html", 0, 0),
     # Equity report
     "equity-report":    TemplateSpec("equity-report.html",    3, 0),
     "equity-report-en": TemplateSpec("equity-report-en.html", 3, 0),
