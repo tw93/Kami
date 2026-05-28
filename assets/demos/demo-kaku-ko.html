@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     PORTFOLIO TEMPLATE · kami design system
+     Kaku 터미널 에뮬레이터 포트폴리오 · 한국어판
+     7 페이지: 표지 + 소개 + 주요 기능 + AI 어시스턴트 + 성능 비교 + 설치 가이드 + 마무리
+     ================================================================== -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Kaku · 터미널 에뮬레이터</title>
+<style>
+  /* Regular weight */
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* Bold weight */
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @page {
+    size: A4;
+    margin: 12mm 15mm 12mm 15mm;
+    background: #f5f4ed;
+  }
+
+  @page:first {
+    margin: 0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --near-black:#141413;
+    --dark-warm: #3d3d3a;
+    --charcoal:  #4d4c48;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --border:    #e8e6dc;
+    --border-soft:#e5e3d8;
+    --tag-bg:    #E4ECF5;
+    --jp-serif:  "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR", "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+  }
+
+  html, body { background: var(--parchment); }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--jp-serif);
+    font-size: 10pt;
+    line-height: 1.6;
+    letter-spacing: 0.3pt;
+    font-synthesis: none;
+  }
+
+  .serif {
+    font-family: var(--jp-serif);
+  }
+
+  code {
+    font-family: var(--jp-serif);
+    font-size: 9pt;
+    background: var(--tag-bg);
+    color: var(--brand);
+    padding: 1pt 4pt;
+    border-radius: 2pt;
+  }
+
+  /* ════════════ COVER ════════════ */
+  .cover {
+    width: 100%;
+    height: 297mm;
+    padding: 25mm 20mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    break-after: page;
+  }
+  .cover-top {
+    font-family: var(--jp-serif);
+    font-size: 10pt;
+    color: var(--brand);
+    letter-spacing: 1pt;
+  }
+  .cover-center {
+    display: flex;
+    flex-direction: column;
+    gap: 14pt;
+  }
+  .cover-name {
+    font-family: var(--jp-serif);
+    font-size: 64pt;
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--near-black);
+    letter-spacing: 1pt;
+  }
+  .cover-tagline {
+    font-size: 16pt;
+    color: var(--olive);
+    line-height: 1.5;
+    max-width: 80%;
+  }
+  .cover-line {
+    width: 80pt;
+    height: 2pt;
+    background: var(--brand);
+    margin: 18pt 0 4pt 0;
+  }
+  .cover-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 10pt;
+    color: var(--stone);
+  }
+  .cover-meta strong {
+    color: var(--dark-warm);
+    font-weight: 700;
+  }
+
+  /* ════════════ SECTION ════════════ */
+  section {
+    break-after: page;
+    padding: 10mm 0;
+  }
+  .section-eyebrow {
+    font-size: 9pt;
+    color: var(--brand);
+    letter-spacing: 1pt;
+    margin-bottom: 8pt;
+  }
+  .section-title {
+    font-family: var(--jp-serif);
+    font-size: 28pt;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20pt;
+  }
+  .section-lead {
+    font-size: 12pt;
+    line-height: 1.55;
+    color: var(--dark-warm);
+    margin-bottom: 24pt;
+  }
+
+  /* ════════════ ABOUT ════════════ */
+  .about-body {
+    line-height: 1.5;
+    font-size: 10pt;
+  }
+  .about-body p {
+    margin-bottom: 6pt;
+    color: var(--dark-warm);
+  }
+  .about-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ════════════ FEATURE CARDS ════════════ */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14pt;
+    margin-bottom: 20pt;
+  }
+  .feature-card {
+    background: var(--ivory);
+    border: 0.5pt solid var(--border);
+    border-radius: 8pt;
+    padding: 14pt 16pt;
+    break-inside: avoid;
+  }
+  .feature-card h3 {
+    font-family: var(--jp-serif);
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--near-black);
+    margin-bottom: 6pt;
+  }
+  .feature-card p {
+    font-size: 9.5pt;
+    line-height: 1.5;
+    color: var(--charcoal);
+  }
+
+  /* ════════════ AI SECTION ════════════ */
+  .ai-modes {
+    margin-bottom: 20pt;
+  }
+  .ai-mode {
+    background: var(--ivory);
+    border-left: 3pt solid var(--brand);
+    border-radius: 2pt;
+    padding: 12pt 14pt;
+    margin-bottom: 12pt;
+    break-inside: avoid;
+  }
+  .ai-mode h3 {
+    font-family: var(--jp-serif);
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--near-black);
+    margin-bottom: 6pt;
+  }
+  .ai-mode p {
+    font-size: 9.5pt;
+    line-height: 1.5;
+    color: var(--charcoal);
+    margin-bottom: 6pt;
+  }
+  .ai-mode code {
+    font-family: var(--jp-serif);
+    font-size: 9pt;
+    background: var(--tag-bg);
+    color: var(--brand);
+    padding: 1pt 4pt;
+    border-radius: 2pt;
+  }
+
+  /* ════════════ PERFORMANCE TABLE ════════════ */
+  .perf-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20pt;
+  }
+  .perf-table th,
+  .perf-table td {
+    text-align: left;
+    padding: 10pt 12pt;
+    border-bottom: 0.5pt solid var(--border-soft);
+    font-size: 9.5pt;
+  }
+  .perf-table th {
+    font-weight: 700;
+    color: var(--stone);
+    font-size: 9pt;
+  }
+  .perf-table td:first-child {
+    font-weight: 700;
+    color: var(--near-black);
+  }
+  .perf-table td:nth-child(2) {
+    color: var(--olive);
+  }
+  .perf-table td:nth-child(3) {
+    color: var(--brand);
+    font-weight: 700;
+  }
+
+  /* ════════════ INSTALL SECTION ════════════ */
+  .install-steps {
+    margin-bottom: 10pt;
+  }
+  .install-step {
+    display: flex;
+    gap: 12pt;
+    margin-bottom: 10pt;
+    break-inside: avoid;
+  }
+  .install-num {
+    font-family: var(--jp-serif);
+    font-size: 24pt;
+    font-weight: 700;
+    color: var(--brand);
+    line-height: 1;
+    min-width: 32pt;
+  }
+  .install-content h3 {
+    font-family: var(--jp-serif);
+    font-size: 12pt;
+    font-weight: 700;
+    color: var(--near-black);
+    margin-bottom: 4pt;
+  }
+  .install-content p {
+    font-size: 9.5pt;
+    line-height: 1.5;
+    color: var(--charcoal);
+  }
+  .install-content code {
+    font-family: var(--jp-serif);
+    font-size: 9pt;
+    background: var(--ivory);
+    border: 0.5pt solid var(--border);
+    padding: 8pt 10pt;
+    border-radius: 4pt;
+    display: block;
+    margin-top: 6pt;
+    color: var(--near-black);
+  }
+
+  /* ════════════ SHORTCUTS ════════════ */
+  .shortcuts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5pt 20pt;
+    margin-bottom: 12pt;
+  }
+  .shortcut-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 4pt 0;
+    border-bottom: 0.5pt solid var(--border-soft);
+    font-size: 9.5pt;
+  }
+  .shortcut-item span:first-child {
+    color: var(--charcoal);
+  }
+  .shortcut-item span:last-child {
+    font-family: var(--jp-serif);
+    font-size: 9pt;
+    color: var(--brand);
+  }
+
+  /* ════════════ CONTACT ════════════ */
+  .contact {
+    padding: 20mm 0 10mm 0;
+  }
+  .contact-title {
+    font-family: var(--jp-serif);
+    font-size: 32pt;
+    font-weight: 700;
+    color: var(--near-black);
+    margin-bottom: 12pt;
+  }
+  .contact-line {
+    width: 60pt;
+    height: 2pt;
+    background: var(--brand);
+    margin-bottom: 20pt;
+  }
+  .contact-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12pt;
+    font-size: 10pt;
+  }
+  .contact-list div {
+    display: flex;
+    gap: 8pt;
+  }
+  .contact-list strong {
+    color: var(--stone);
+    font-weight: 700;
+    min-width: 60pt;
+  }
+  .contact-list a {
+    color: var(--brand);
+    text-decoration: none;
+  }
+
+  /* ════════════ ABOUT METRICS ════════════ */
+  .about-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10pt;
+    margin-bottom: 14pt;
+  }
+  .about-metric {
+    background: var(--ivory);
+    border: 0.5pt solid var(--border);
+    border-radius: 8pt;
+    padding: 10pt 14pt;
+    text-align: center;
+  }
+  .about-metric-value {
+    font-family: var(--jp-serif);
+    font-size: 18pt;
+    font-weight: 700;
+    color: var(--brand);
+    line-height: 1.2;
+  }
+  .about-metric-label {
+    font-size: 9pt;
+    color: var(--stone);
+    margin-top: 3pt;
+  }
+
+  /* ════════════ TOOL CARDS ════════════ */
+  .tools-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12pt;
+    margin-top: 20pt;
+  }
+  .tool-card {
+    background: var(--ivory);
+    border: 0.5pt solid var(--border);
+    border-radius: 8pt;
+    padding: 13pt 15pt;
+    break-inside: avoid;
+  }
+  .tool-card h4 {
+    font-family: var(--jp-serif);
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--near-black);
+    margin-bottom: 5pt;
+  }
+  .tool-card p { font-size: 9pt; line-height: 1.45; color: var(--charcoal); margin-bottom: 7pt; }
+  .tool-shortcut {
+    display: inline-block;
+    font-family: var(--jp-serif);
+    font-size: 9pt;
+    color: var(--brand);
+    background: var(--tag-bg);
+    padding: 1pt 5pt;
+    border-radius: 2pt;
+  }
+
+  /* ════════════ CONFIG TABLE ════════════ */
+  .config-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16pt;
+    font-size: 9pt;
+  }
+  .config-table th, .config-table td {
+    text-align: left;
+    padding: 7pt 10pt;
+    border-bottom: 0.5pt solid var(--border-soft);
+  }
+  .config-table th {
+    font-weight: 700;
+    color: var(--stone);
+    font-size: 9pt;
+  }
+  .config-table td:first-child {
+    font-family: var(--jp-serif);
+    font-size: 9pt;
+    color: var(--brand);
+    white-space: nowrap;
+  }
+  .config-table td { color: var(--charcoal); }
+
+  /* ════════════ OPT GRID ════════════ */
+  .opt-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12pt;
+    margin-bottom: 16pt;
+  }
+  .opt-card {
+    background: var(--ivory);
+    border: 0.5pt solid var(--border);
+    border-radius: 8pt;
+    padding: 13pt 15pt;
+    break-inside: avoid;
+  }
+  .opt-card h4 {
+    font-family: var(--jp-serif);
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--near-black);
+    margin-bottom: 5pt;
+  }
+  .opt-card p { font-size: 9pt; line-height: 1.45; color: var(--charcoal); }
+
+  .contact-screenshot {
+    margin-top: 16pt;
+    border-radius: 8pt;
+    overflow: hidden;
+    border: 0.5pt solid var(--border);
+  }
+  .contact-screenshot img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* ════════════ CLI TABLE ════════════ */
+  .cli-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 6pt;
+    font-size: 9pt;
+  }
+  .cli-table th, .cli-table td {
+    text-align: left;
+    padding: 5pt 10pt;
+    border-bottom: 0.5pt solid var(--border-soft);
+  }
+  .cli-table th { font-weight: 700; color: var(--stone); font-size: 9pt; }
+  .cli-table td:first-child {
+    font-family: var(--jp-serif);
+    font-size: 9pt;
+    color: var(--brand);
+    white-space: nowrap;
+    width: 120pt;
+  }
+  .cli-table td { color: var(--charcoal); }
+</style>
+</head>
+<body>
+
+<!-- ════════════ COVER ════════════ -->
+<div class="cover">
+  <div class="cover-top">TERMINAL EMULATOR · 2025</div>
+  <div class="cover-center">
+    <div class="cover-name">Kaku</div>
+    <div class="cover-tagline">AI 코딩에 최적화된 고속 터미널 에뮬레이터. 기본 설정 그대로 바로 쓸 수 있고, Lua로 깊이 확장할 수 있는 경량 고성능 구현체.</div>
+    <div class="cover-line"></div>
+  </div>
+
+  <div class="cover-meta">
+    <div><strong>카테고리</strong> 터미널 에뮬레이터</div>
+    <div><strong>기술 스택</strong> Rust · WezTerm · Lua</div>
+    <div><strong>상태</strong> OSS · 4800+ Stars</div>
+  </div>
+</div>
+
+<!-- ════════════ ABOUT ════════════ -->
+<section>
+  <div class="section-eyebrow">01 · ABOUT</div>
+  <div class="section-title">Kaku란</div>
+  <div class="section-lead">Kaku(書く)는 생각을 형태로 빚는 행위를 뜻하는 말입니다. WezTerm을 기반으로 깊이 최적화하여 실용적인 기본값, 완전한 Lua 커스터마이징, 가볍고 쾌적한 조작감을 동시에 갖춘 터미널입니다.</div>
+
+  <div class="about-metrics">
+    <div class="about-metric">
+      <div class="about-metric-value">4800+</div>
+      <div class="about-metric-label">GitHub Stars</div>
+    </div>
+    <div class="about-metric">
+      <div class="about-metric-value">Rust</div>
+      <div class="about-metric-label">주요 언어</div>
+    </div>
+    <div class="about-metric">
+      <div class="about-metric-value">40 MB</div>
+      <div class="about-metric-label">실행 파일 크기</div>
+    </div>
+    <div class="about-metric">
+      <div class="about-metric-value">macOS</div>
+      <div class="about-metric-label">주력 플랫폼</div>
+    </div>
+  </div>
+
+  <div class="about-body">
+      <p>Kaku는 3부작 중 하나입니다. Kaku(書く)가 코드를 쓰고, Waza(技)가 습관을 단련하며, Kami(紙)가 문서를 완성합니다. 오랫동안 CLI 중심으로 일해 왔고, Alacritty를 수년간 사용했습니다. AI 보조 코딩으로 무게 중심이 옮겨가면서 더 강력한 탭 관리와 내장 AI 연동이 필요해졌습니다. Kitty, Ghostty, Warp, iTerm2도 써봤지만, 성능 우선 · 기본값으로 쓸 수 있음 · Lua로 전면 확장 가능이라는 세 가지 균형에 가장 가까운 것이 Kaku였습니다.</p>
+      <p>WezTerm은 강력한 엔진입니다. Kaku는 그 위에서 두 가지에 집중했습니다. 불필요한 무게를 줄이고, AI 워크플로를 직접 통합하는 것입니다. 설정은 WezTerm Lua API와 호환되어 기존 설정을 그대로 재사용할 수 있습니다. Starship, Delta, Lazygit, Yazi도 처음부터 연동되어 있습니다. macOS에서는 Traffic Light 탭바 통합, 시스템 외관 자동 전환, 네이티브 폰트 렌더링, Apple 공증까지 포함하여 설치 직후부터 실용 상태가 됩니다.</p>
+  </div>
+  <div class="contact-screenshot">
+    <img src="images/kaku-hero.jpg" alt="Kaku 터미널 인터페이스">
+  </div>
+</section>
+
+<!-- ════════════ FEATURES ════════════ -->
+<section>
+  <div class="section-eyebrow">02 · FEATURES</div>
+  <div class="section-title">주요 기능</div>
+  <div class="section-lead">Kaku는 복잡한 초기 설정 없이 바로 사용할 수 있습니다. 동시에 WezTerm Lua API 호환을 유지해 깊은 커스터마이징도 지원합니다.</div>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <h3>제로 설정 시작</h3>
+      <p>기본 폰트는 JetBrains Mono. macOS 렌더링 특성에 맞게 조정되어 있습니다. 디스플레이 해상도를 자동 감지해 저해상도는 15px, 고해상도는 17px, 행높이 1.28을 자동 적용합니다.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>테마 자동 전환</h3>
+      <p>macOS 외관 설정에 연동해 Kaku Dark / Kaku Light를 자동으로 전환합니다. 선택 색상, 굵기, 색상 오버라이드 테이블도 함께 업데이트되며, <code>color_scheme</code>으로 고정 운용도 가능합니다.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>엄선된 셸 도구</h3>
+      <p>zsh 플러그인을 자동으로 불러옵니다. <code>z</code> 디렉토리 이동, <code>zsh-completions</code>, 구문 강조, 자동 완성 후보, Smart Tab을 지원하며 fish 연동도 가능합니다.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>빠르고 가볍게</h3>
+      <p>심볼 축소와 기능 정리로 바이너리를 40% 압축했습니다(67MB → 40MB). 리소스는 100MB에서 80MB로. JIT 초기화로 셸 초기화 시간도 절반으로 줄었습니다(200ms → 100ms).</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>WezTerm 호환 설정</h3>
+      <p>WezTerm의 Lua 설정을 그대로 사용할 수 있어 마이그레이션이 필요 없습니다. <code>kaku.lua</code>는 기본값을 먼저 읽은 뒤 오버라이드를 적용합니다.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>세련된 기본값</h3>
+      <p>선택 복사, 클릭 가능한 경로, 히스토리 표시, 페인 입력 브로드캐스트, 백그라운드 완료 알림, Traffic Light 탭바 통합을 기본으로 제공합니다.</p>
+    </div>
+  </div>
+
+  <div class="tools-row">
+    <div class="tool-card">
+      <h4>Lazygit 연동</h4>
+      <p>PATH 또는 Homebrew 경로에서 lazygit 바이너리를 자동 감지합니다. 미커밋 변경사항이 있을 때 한 번만 알림을 보냅니다.</p>
+      <span class="tool-shortcut">Cmd + Shift + G</span>
+    </div>
+    <div class="tool-card">
+      <h4>Yazi 연동</h4>
+      <p>셸 래퍼 <code>y</code>로 실행하고, 종료 시 작업 디렉토리를 동기화합니다. 배색은 <code>yazi/theme.toml</code>에 자동 반영됩니다.</p>
+      <span class="tool-shortcut">Cmd + Shift + Y</span>
+    </div>
+    <div class="tool-card">
+      <h4>원격 파일(SSHFS)</h4>
+      <p>활성 SSH 페인에서 연결 대상을 자동 감지하고, sshfs로 원격 파일 시스템을 마운트해 Yazi로 탐색할 수 있습니다.</p>
+      <span class="tool-shortcut">Cmd + Shift + R</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ AI ASSISTANT ════════════ -->
+<section>
+  <div class="section-eyebrow">03 · AI ASSISTANT</div>
+  <div class="section-title">Kaku AI 어시스턴트</div>
+  <div class="section-lead">Kaku에는 AI 어시스턴트가 내장되어 있습니다. 두 가지 모드로 터미널 작업의 주요 AI 사용 사례를 커버합니다. <code style="font-size: 9pt;background:var(--tag-bg);color:var(--brand);padding:1pt 4pt;border-radius:2pt;">kaku ai</code>로 설정 패널을 열어 외부 코딩 도구와 Kaku Assistant를 구성할 수 있습니다.</div>
+
+  <div class="ai-modes">
+    <div class="ai-mode">
+      <h3>오류 자동 복구</h3>
+      <p>명령 실패 시, 실패 명령 + 종료 코드 + 작업 디렉토리 + git 브랜치를 LLM에 전송하고, 수정 제안을 터미널 내에 표시합니다. <code>Cmd + Shift + E</code>로 바로 적용할 수 있습니다.</p>
+      <p>미발동 조건: <code>Ctrl+C</code> 중단, help 플래그, 단순 패키지 매니저 실행, git pull 충돌, 비셸 전경 프로세스. 위험 명령(<code>rm -rf</code>, <code>git reset --hard</code>)은 붙여넣기 가능하지만 자동 실행하지 않습니다.</p>
+    </div>
+
+    <div class="ai-mode">
+      <h3>자연어로 명령 생성</h3>
+      <p>프롬프트에서 <code># &lt;설명&gt;</code>을 입력하고 Enter를 누르면, Kaku가 셸에 전달하기 전에 해당 줄을 가로채 현재 디렉토리와 git 브랜치와 함께 LLM에 전송합니다. 생성된 명령은 프롬프트로 돌아오며, 확인 후 실행할 수 있습니다.</p>
+      <p style="font-size: 9pt;color:var(--brand);line-height:1.7;margin-top:4pt;">
+        # 최근 7일간 수정된 파일 목록 출력<br>
+        # 포트 3000의 프로세스 찾아서 종료<br>
+        # node_modules 제외하고 src 폴더 압축
+      </p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16pt;margin-top:4pt;">
+    <div>
+      <div style="font-family:var(--jp-serif);font-size:11pt;font-weight:700;color:var(--near-black);margin-bottom:8pt;">assistant.toml 설정 항목</div>
+      <table class="config-table">
+        <tr><th>항목</th><th>설명</th></tr>
+        <tr><td>enabled</td><td>true면 활성화 / false면 비활성화</td></tr>
+        <tr><td>api_key</td><td>프로바이더 API 키</td></tr>
+        <tr><td>model</td><td>모델 식별자 (예: DeepSeek-V3.2)</td></tr>
+        <tr><td>base_url</td><td>OpenAI 호환 API 기본 URL</td></tr>
+        <tr><td>custom_headers</td><td>프록시 추가 HTTP 헤더</td></tr>
+      </table>
+    </div>
+    <div>
+      <div style="font-family:var(--jp-serif);font-size:11pt;font-weight:700;color:var(--near-black);margin-bottom:8pt;">지원 AI 코딩 도구</div>
+      <table class="config-table">
+        <tr><th>도구</th><th>설명</th></tr>
+        <tr><td>claude</td><td>Claude Code · Anthropic</td></tr>
+        <tr><td>codex</td><td>OpenAI Codex CLI</td></tr>
+        <tr><td>gemini</td><td>Gemini CLI · Google</td></tr>
+        <tr><td>copilot</td><td>GitHub Copilot CLI</td></tr>
+        <tr><td>kimi</td><td>Kimi Code · Moonshot</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ PERFORMANCE ════════════ -->
+<section>
+  <div class="section-eyebrow">04 · PERFORMANCE</div>
+  <div class="section-title">성능 비교</div>
+  <div class="section-lead">심볼 축소, 기능 정리, 리소스 최적화를 통해 Kaku는 기능을 유지하면서도 크기와 시작 시간을 크게 개선했습니다. macOS 전용 설계로 플랫폼 통합도 깊어졌습니다.</div>
+
+  <table class="perf-table">
+    <tr>
+      <th>지표</th>
+      <th>상위 WezTerm</th>
+      <th>Kaku</th>
+      <th>최적화 방법</th>
+    </tr>
+    <tr>
+      <td>실행 파일 크기</td>
+      <td>~67 MB</td>
+      <td>~40 MB</td>
+      <td>심볼 축소 + 기능 정리</td>
+    </tr>
+    <tr>
+      <td>리소스 용량</td>
+      <td>~100 MB</td>
+      <td>~80 MB</td>
+      <td>리소스 최적화 + 지연 로드</td>
+    </tr>
+    <tr>
+      <td>시작 지연</td>
+      <td>표준</td>
+      <td>즉시</td>
+      <td>JIT 초기화</td>
+    </tr>
+    <tr>
+      <td>셸 초기화 시간</td>
+      <td>~200ms</td>
+      <td>~100ms</td>
+      <td>환경 설정 플로우 최적화</td>
+    </tr>
+  </table>
+
+  <div class="opt-grid">
+    <div class="opt-card">
+      <h4>바이너리 최적화</h4>
+      <p>컴파일 시 미사용 feature flag를 제거하고, 심볼 스트리핑과 디버그 정보 축소를 적용했습니다. Rust release profile은 LTO + codegen-units=1로 최적화를 최대화합니다.</p>
+    </div>
+    <div class="opt-card">
+      <h4>지연 로드 전략</h4>
+      <p>셸 도구군(Starship, Delta, Yazi 테마 동기화)은 just-in-time 초기화를 채택했습니다. 첫 번째 Kaku 세션에서만 시작되어 시스템 전체의 셸 시작 시간에 영향을 주지 않습니다.</p>
+    </div>
+    <div class="opt-card">
+      <h4>macOS 통합</h4>
+      <p>Traffic Light 탭바 통합(INTEGRATED_BUTTONS|RESIZE), 시스템 외관 연동, Apple 공증(경고 없음), macOS 네이티브 폰트 렌더링 스택을 제공합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ INSTALLATION ════════════ -->
+<section>
+  <div class="section-eyebrow">05 · INSTALLATION</div>
+  <div class="section-title">설치와 사용법</div>
+  <div class="section-lead">Kaku는 간단한 설치 절차와 직관적인 단축키 체계를 제공합니다. 첫 실행 시 셸 환경도 자동으로 설정됩니다.</div>
+
+  <div class="install-steps">
+    <div class="install-step">
+      <div class="install-num">1</div>
+      <div class="install-content">
+        <h3>설치</h3>
+        <p>GitHub Releases에서 최신 DMG를 받아 응용 프로그램 폴더로 이동하거나, Homebrew로 설치합니다.</p>
+        <code>brew install tw93/tap/kaku</code>
+      </div>
+    </div>
+
+    <div class="install-step">
+      <div class="install-num">2</div>
+      <div class="install-content">
+        <h3>첫 실행</h3>
+        <p>Kaku는 Apple 공증을 완료했습니다. 보안 경고 없이 실행되며, 첫 실행 시 셸 환경을 자동으로 설정합니다.</p>
+      </div>
+    </div>
+
+    <div class="install-step">
+      <div class="install-num">3</div>
+      <div class="install-content">
+        <h3>설정 커스터마이징</h3>
+        <p><span style="font-size: 9pt;color:var(--brand);">Cmd + ,</span>로 설정 패널을 열거나, <span style="font-size: 9pt;color:var(--brand);">kaku config</span>로 Lua 설정 파일을 편집합니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-lead" style="margin-bottom: 10pt;">주요 단축키:</div>
+
+  <div class="shortcuts">
+    <div class="shortcut-item"><span>새 탭</span><span>Cmd + T</span></div>
+    <div class="shortcut-item"><span>새 창</span><span>Cmd + N</span></div>
+    <div class="shortcut-item"><span>탭/페인 닫기</span><span>Cmd + W</span></div>
+    <div class="shortcut-item"><span>탭 전환</span><span>Cmd + Shift + [ / ]</span></div>
+    <div class="shortcut-item"><span>페인 세로 분할</span><span>Cmd + D</span></div>
+    <div class="shortcut-item"><span>페인 가로 분할</span><span>Cmd + Shift + D</span></div>
+    <div class="shortcut-item"><span>페인 이동</span><span>Cmd + Opt + 방향키</span></div>
+    <div class="shortcut-item"><span>Lazygit 열기</span><span>Cmd + Shift + G</span></div>
+    <div class="shortcut-item"><span>Yazi 열기</span><span>Cmd + Shift + Y</span></div>
+    <div class="shortcut-item"><span>AI 패널</span><span>Cmd + Shift + A</span></div>
+    <div class="shortcut-item"><span>AI 제안 적용</span><span>Cmd + Shift + E</span></div>
+    <div class="shortcut-item"><span>화면 지우기</span><span>Cmd + K</span></div>
+  </div>
+
+  <div style="font-family:var(--jp-serif);font-size:11pt;font-weight:700;color:var(--near-black);margin:10pt 0 6pt;">CLI 명령 목록</div>
+  <table class="cli-table">
+    <tr><th>명령</th><th>설명</th></tr>
+    <tr><td>kaku ai</td><td>AI 설정 패널을 열어 Kaku Assistant와 외부 코딩 도구를 설정</td></tr>
+    <tr><td>kaku config</td><td>기본 편집기로 <code style="font-size: 9pt;color:var(--brand);">~/.config/kaku/kaku.lua</code>를 열기</td></tr>
+    <tr><td>kaku doctor</td><td>진단을 실행해 셸 연동, PATH, 선택 도구 설치 상태 확인</td></tr>
+    <tr><td>kaku update</td><td>최신 버전 확인 및 업데이트 실행</td></tr>
+    <tr><td>kaku init</td><td>셸 연동 설정, Starship / Delta / Lazygit / Yazi 선택 설치</td></tr>
+  </table>
+</section>
+
+<!-- ════════════ CONTACT ════════════ -->
+<section class="contact">
+  <div class="section-eyebrow">06 · GET KAKU</div>
+  <div class="contact-title">Kaku는 오픈 소스입니다</div>
+  <div class="contact-line"></div>
+  <div class="contact-list">
+    <div><strong>GitHub</strong><a href="https://github.com/tw93/Kaku">github.com/tw93/Kaku</a></div>
+    <div><strong>공식 사이트</strong><a href="https://kaku.app">kaku.app</a></div>
+    <div><strong>설치</strong>brew install tw93/tap/kaku</div>
+    <div><strong>Stars</strong>4800+ 증가 중</div>
+    <div><strong>문서</strong><a href="https://github.com/tw93/Kaku/tree/main/docs">전체 문서 및 FAQ</a></div>
+    <div><strong>작성자</strong><a href="https://twitter.com/HiTw93">@HiTw93</a></div>
+  </div>
+
+  <div class="contact-screenshot">
+    <img src="images/kaku-action.jpg" alt="Kaku 터미널 동작 화면">
+  </div>
+</section>
+</html>
