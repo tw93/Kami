@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     ONE-PAGER DEMO (KO) · Daily Market Brief
+     parchment design system · single-page A4
+     Sample content only — figures are illustrative, not investment advice.
+     ================================================================== -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Daily Market Brief — 2026.05.28 · Kami KO demo</title>
+<meta name="author" content="Kami Research">
+<meta name="description" content="KOSPI 0.78% 상승, HBM 모멘텀 주도">
+<meta name="keywords" content="KOSPI, HBM, 외국인 순매수, FOMC">
+<meta name="generator" content="Kami">
+<style>
+  /* Regular weight */
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* Bold weight */
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @page {
+    size: A4;
+    margin: 15mm 18mm 15mm 18mm;
+    background: #f5f4ed;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --sand:      #e8e6dc;
+    --near-black:#141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --border:    #e8e6dc;
+    --border-soft:#e5e3d8;
+    --tag-bg:    #E4ECF5;
+    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR", "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+    --sans: var(--serif);
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 15mm 18mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 10pt;
+    line-height: 1.45;
+    letter-spacing: 0.3pt;
+    font-synthesis: none;
+  }
+
+  .serif {
+    font-family: var(--serif);
+  }
+
+  /* ========== HEADER ========== */
+  .header {
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+    margin-bottom: 14pt;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20pt;
+  }
+  .title-block {
+    flex: 1;
+  }
+  .eyebrow {
+    font-size: 9pt;
+    color: var(--brand);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    margin-bottom: 4pt;
+  }
+  /* KO locale tuning: Nanum Myeongjo hangul glyphs have a smaller optical body
+     than TsangerJinKai. H1 starts at the CN baseline (24pt / line-height 1.15);
+     adjust during pilot if hangul reads too tight or too loose, then lock into
+     references/design.md and propagate to remaining KO templates. */
+  h1 {
+    font-family: var(--serif);
+    font-size: 24pt;
+    font-weight: 500;
+    color: var(--near-black);
+    line-height: 1.15;
+    margin-bottom: 5pt;
+  }
+  .subtitle {
+    font-size: 11pt;
+    color: var(--olive);
+    line-height: 1.4;
+  }
+  .meta {
+    font-size: 9pt;
+    color: var(--stone);
+    text-align: right;
+    line-height: 1.45;
+    white-space: nowrap;
+  }
+
+  /* ========== METRICS ========== */
+  /* Horizontal baseline layout — same kami-native posture as resume.html.
+     Transparent background, no border; typography itself carries the hierarchy. */
+  .metrics {
+    display: flex;
+    gap: 14pt;
+    margin-bottom: 18pt;
+    padding: 4pt 0 6pt 0;
+    border-bottom: 0.3pt dotted var(--border);
+  }
+  .metric {
+    flex: 1;
+    background: transparent;
+    padding: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 4pt;
+    break-inside: avoid;
+  }
+  .metric-value {
+    font-family: var(--serif);
+    font-size: 20pt;
+    font-weight: 500;
+    color: var(--brand);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    letter-spacing: -0.2pt;
+  }
+  .metric-label {
+    font-size: 9pt;
+    color: var(--olive);
+    line-height: 1.3;
+  }
+
+  /* ========== SECTIONS ========== */
+  section { margin-bottom: 18pt; break-inside: avoid; }
+  section:last-of-type { margin-bottom: 0; }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 16pt;
+    font-weight: 500;
+    color: var(--near-black);
+    margin-bottom: 6pt;
+  }
+  h2 .sub {
+    font-size: 9pt;
+    color: var(--stone);
+    font-weight: 400;
+    margin-left: 6pt;
+  }
+
+  p { margin-bottom: 6pt; line-height: 1.45; }
+  p:last-child { margin-bottom: 0; }
+
+  .lead {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: var(--dark-warm);
+    margin-bottom: 14pt;
+  }
+
+  .hl { color: var(--brand); font-weight: 500; }
+
+  /* ========== 2-column grid ========== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18pt;
+  }
+
+  /* ========== Dash list (replaces default bullet) ========== */
+  ul.dash {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul.dash li {
+    position: relative;
+    padding-left: 14pt;
+    margin-bottom: 4pt;
+    line-height: 1.45;
+  }
+  ul.dash li::before {
+    content: "\2013";
+    position: absolute;
+    left: 0;
+    color: var(--brand);
+  }
+
+  /* ========== Timeline (horizontal progress points) ========== */
+  .timeline {
+    display: flex;
+    gap: 12pt;
+    margin-top: 6pt;
+  }
+  .tl-step {
+    flex: 1;
+    break-inside: avoid;
+  }
+  .tl-year {
+    font-family: var(--serif);
+    font-size: 11pt;
+    font-weight: 500;
+    color: var(--brand);
+    margin-bottom: 2pt;
+  }
+  .tl-head {
+    font-size: 10pt;
+    font-weight: 500;
+    color: var(--near-black);
+    margin-bottom: 2pt;
+  }
+  .tl-body {
+    font-size: 9pt;
+    color: var(--olive);
+    line-height: 1.4;
+  }
+
+  /* ========== Tag ========== */
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);    /* solid color — never rgba */
+    color: var(--brand);
+    font-size: 9pt;
+    font-weight: 500;
+    padding: 1pt 5pt;
+    border-radius: 3pt;
+    letter-spacing: 0.3pt;
+    margin-right: 3pt;
+  }
+
+  /* ========== Callout / highlight block ========== */
+  /* Modeled on resume.html .team-culture: transparent ground + a single left brand bar.
+     No container, no radius — feels like a marginal note rather than a card. */
+  .callout {
+    background: transparent;
+    border-left: 1.8pt solid var(--brand);
+    padding: 4pt 0 4pt 14pt;
+    margin: 10pt 0;
+    font-size: 10pt;
+    line-height: 1.5;
+    color: var(--olive);
+    break-inside: avoid;
+  }
+  .callout .hl, .callout .em-brand { color: var(--brand); }
+
+  /* ========== TABLE (kami-table) ========== */
+  table, .kami-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+    margin: 8pt 0;
+    break-inside: avoid;
+  }
+  table th, .kami-table th {
+    text-align: left;
+    font-weight: 500;
+    color: var(--dark-warm);
+    padding: 4pt 6pt;
+    border-bottom: 1pt solid var(--border);
+    background: transparent;
+  }
+  table td, .kami-table td {
+    padding: 3pt 6pt;
+    border-bottom: 0.3pt solid var(--border-soft);
+    vertical-align: top;
+  }
+  table.compact th, .kami-table.compact th { padding: 2pt 5pt; font-size: 8pt; }
+  table.compact td, .kami-table.compact td { padding: 1pt 5pt; font-size: 8pt; line-height: 1.4; }
+  table.financial td:not(:first-child), .kami-table.financial td:not(:first-child) {
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  table.financial th:not(:first-child), .kami-table.financial th:not(:first-child) { text-align: right; }
+  table.striped tbody tr:nth-child(even) td, .kami-table.striped tbody tr:nth-child(even) td {
+    background: var(--ivory);
+  }
+  table .total td, .kami-table .total td {
+    font-weight: 500; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
+  }
+
+  /* ========== FOOTER ========== */
+  .footer {
+    margin-top: 18pt;
+    padding-top: 6pt;
+    border-top: 0.3pt dotted var(--border);
+    font-size: 9pt;
+    color: var(--stone);
+    display: flex;
+    justify-content: space-between;
+    letter-spacing: 0.3pt;
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<div class="header">
+  <div class="title-block">
+    <div class="eyebrow">Daily Market Brief · 시연용 샘플</div>
+    <h1>AI 반도체가 다시 주도주로 — KOSPI 박스 상단 시험</h1>
+    <div class="subtitle">외국인 5거래일 연속 순매수, HBM 모멘텀이 지수를 끌어올렸다</div>
+  </div>
+  <div class="meta">
+    Kami Research<br>
+    2026.05.28<br>
+    일일 브리프 / 가공 데이터
+  </div>
+</div>
+
+<!-- ========== METRICS (선택, 3~4 카드 권장) ========== -->
+<div class="metrics">
+  <div class="metric">
+    <div class="metric-value">2,752.4</div>
+    <div class="metric-label">KOSPI 종가 (+0.78%)</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">851.2</div>
+    <div class="metric-label">KOSDAQ 종가 (+0.32%)</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">1,362.1</div>
+    <div class="metric-label">원/달러 환율 (−3.4원)</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">3.18%</div>
+    <div class="metric-label">국고채 10년 (−2bp)</div>
+  </div>
+</div>
+
+<!-- ========== LEAD (도입부, 1단락) ========== -->
+<p class="lead">
+  오늘 KOSPI는 <span class="hl">HBM 수요 재가속</span> 기대에 0.78% 상승 마감했다. 외국인 순매수가 5거래일 연속 이어졌고, 반도체 대형주가 지수 상승의 70% 이상을 설명한다. 미국 금리 경로에 대한 시장 컨센서스는 큰 변화가 없었다.
+</p>
+
+<!-- ========== 본문 (2단) ========== -->
+<div class="two-col">
+  <section>
+    <h2>시장 흐름</h2>
+    <p>대형 반도체 2종목이 지수 상승을 견인했고, 그 외 업종은 보합권. 거래대금은 14.2조원으로 5거래일 평균(11.8조원) 대비 +20% 확대됐다.</p>
+    <ul class="dash">
+      <li>외국인 순매수 <span class="hl">+8,420억원</span>, 기관 −2,310억원, 개인 −6,110억원</li>
+      <li>반도체 업종 <span class="hl">+2.4%</span>, 그 외 26개 업종 평균 +0.1%로 쏠림 뚜렷</li>
+      <li>VIX 14.2 (−0.3), 미국채 10년 4.32% (−1bp) — 위험선호 유지</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>종목 / 섹터</h2>
+    <p>HBM 공급망 종목이 일제히 강세. 2차전지·인터넷은 차익실현 매물이 우위, 금융은 금리 하락에 약보합.</p>
+    <ul class="dash">
+      <li>SK하이닉스 <span class="hl">+3.8%</span>, 삼성전자 +1.6%, 한미반도체 +5.2%</li>
+      <li>LG에너지솔루션 −1.4%, 에코프로비엠 −2.1% — 2차전지 차익실현</li>
+      <li>네이버 −0.9%, 카카오 −0.6% — 인터넷 약세 지속</li>
+    </ul>
+  </section>
+</div>
+
+<!-- ========== Timeline / Roadmap (선택) ========== -->
+<section>
+  <h2>타임라인 / 로드맵<span class="sub">(제안 문서에 적합)</span></h2>
+  <div class="timeline">
+    <div class="tl-step">
+      <div class="tl-year">6/4</div>
+      <div class="tl-head">ECB 정책결정</div>
+      <div class="tl-body">시장은 동결 우세, 가이던스 톤이 환율에 변수</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-year">6/12</div>
+      <div class="tl-head">FOMC</div>
+      <div class="tl-body">점도표 1회 인하 vs 2회 인하 컨센 분기점</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-year">6/20</div>
+      <div class="tl-head">KOSPI 분기 리밸런싱</div>
+      <div class="tl-body">편입·편출 발표 전후 거래대금 일시 급증 예상</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CALLOUT (선택) ========== -->
+<div class="callout">
+  "지수가 박스 상단을 시험하는 구간 — 반도체 한 종목군에 의존한 상승은 지속력이 제한적이다. 다음 트리거는 FOMC 점도표."
+</div>
+
+<!-- ========== FOOTER ========== -->
+<div class="footer">
+  <span>시연용 샘플 · 본 데이터는 가공 수치이며 투자 자문이 아님</span>
+  <span>Kami Editorial · 1 / 1</span>
+</div>
+
+</body>
+</html>
