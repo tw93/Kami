@@ -23,6 +23,7 @@ from shared import DIAGRAMS, EXAMPLES, TEMPLATES, load_checks_thresholds
 # Primary fonts expected in embedded PDF font names
 CN_PRIMARY_FONTS = {"TsangerJinKai02"}
 EN_PRIMARY_FONTS = {"Charter"}
+KO_PRIMARY_FONTS = {"NanumMyeongjo"}
 
 
 def show_fonts(pdf: Path) -> None:
@@ -154,7 +155,8 @@ def verify_target(
         return issues
 
     is_en = name.endswith("-en")
-    expected = EN_PRIMARY_FONTS if is_en else CN_PRIMARY_FONTS
+    is_ko = name.endswith("-ko")
+    expected = EN_PRIMARY_FONTS if is_en else (KO_PRIMARY_FONTS if is_ko else CN_PRIMARY_FONTS)
     if not any(exp in font_name for exp in expected for font_name in embedded):
         primary = next(iter(expected))
         if not fallback_present:

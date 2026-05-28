@@ -112,6 +112,7 @@ HTML_TEMPLATES: dict[str, TemplateSpec] = {
     "resume-en":    TemplateSpec("resume-en.html",    2, 2),
     # Korean — added incrementally as templates land; see Phase 3 plan.
     "one-pager-ko": TemplateSpec("one-pager-ko.html", 1, 1),
+    "letter-ko":       TemplateSpec("letter-ko.html",       1, 1),
     # Equity report
     "equity-report":    TemplateSpec("equity-report.html",    3, 0),
     "equity-report-en": TemplateSpec("equity-report-en.html", 3, 0),

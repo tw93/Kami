@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     LETTER TEMPLATE (KO) · parchment design system
+     A4 공식 서한 / 메모 / 추천서 / 사직서 / 개인 성명서
+     특징: 극도로 심플, serif 주도, 자간 여유, 단락 간격 넉넉
+     변경 후 실행: python3 -c "from weasyprint import HTML; HTML('letter-ko.html').write_pdf('out.pdf')"
+     목표: 페이지 수 == 1
+     ================================================================== -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>{{서한 주제}}</title>
+<meta name="author" content="{{작성자}}">
+<meta name="description" content="{{요약}}">
+<meta name="keywords" content="{{키워드}}">
+<meta name="generator" content="Kami">
+<style>
+  /* Regular weight */
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* Bold weight */
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @page {
+    size: A4;
+    margin: 25mm 25mm 25mm 25mm;
+    background: #f5f4ed;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --near-black:#141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --ivory:     #faf9f5;
+    --border:    #e8e6dc;
+    --border-soft:#e5e3d8;
+    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR", "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+    --sans: var(--serif);
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 25mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 11.5pt;
+    line-height: 1.55;
+    letter-spacing: 0.3pt;
+    font-synthesis: none;
+  }
+
+  /* ========== LETTERHEAD ========== */
+  .letterhead {
+    text-align: right;
+    margin-bottom: 30pt;
+    font-size: 10pt;
+    line-height: 1.55;
+    color: var(--olive);
+  }
+  .letterhead .sender-name {
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--near-black);
+    margin-bottom: 4pt;
+  }
+  .letterhead a {
+    color: var(--dark-warm);
+    text-decoration: none;
+  }
+
+  /* ========== META ========== */
+  .date {
+    text-align: right;
+    font-size: 10.5pt;
+    color: var(--olive);
+    margin-bottom: 24pt;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .recipient {
+    margin-bottom: 24pt;
+    line-height: 1.5;
+  }
+  .recipient .to {
+    font-size: 10pt;
+    color: var(--stone);
+    letter-spacing: 0.5pt;
+    text-transform: uppercase;
+    margin-bottom: 3pt;
+  }
+  .recipient .name {
+    font-size: 12pt;
+    font-weight: 700;
+    color: var(--near-black);
+  }
+  .recipient .org {
+    font-size: 10.5pt;
+    color: var(--olive);
+  }
+
+  /* ========== SUBJECT ========== */
+  .subject {
+    margin-bottom: 24pt;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+  }
+  .subject .label {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--brand);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    margin-bottom: 3pt;
+  }
+  /* KO locale tuning: Nanum Myeongjo hangul glyphs have a smaller optical body
+     than TsangerJinKai. Numerics inherit the CN baseline (verified during the
+     one-pager-ko pilot — see references/design.md). */
+  .subject .title {
+    font-size: 15pt;
+    font-weight: 700;
+    color: var(--near-black);
+    line-height: 1.3;
+  }
+
+  /* ========== SALUTATION ========== */
+  .salutation {
+    margin-bottom: 18pt;
+    font-size: 12pt;
+    color: var(--near-black);
+  }
+
+  /* ========== BODY ========== */
+  .body-content p {
+    margin-bottom: 14pt;
+    line-height: 1.55;
+  }
+  .body-content p:first-child { }
+  .body-content p.no-indent { text-indent: 0; }
+
+  .body-content .hl {
+    color: var(--brand);
+    font-weight: 700;
+  }
+
+  /* ========== CLOSING ========== */
+  .closing {
+    margin-top: 30pt;
+    line-height: 1.55;
+  }
+  .closing .regards {
+    margin-bottom: 30pt;
+    color: var(--near-black);
+  }
+  .closing .signature {
+    font-size: 14pt;
+    font-weight: 700;
+    color: var(--near-black);
+    margin-bottom: 3pt;
+  }
+  .closing .signoff-meta {
+    font-size: 10pt;
+    color: var(--olive);
+  }
+
+  /* ========== ATTACHMENT ========== */
+  .attachments {
+    margin-top: 36pt;
+    padding-top: 10pt;
+    border-top: 0.5pt dotted var(--border);
+    font-size: 9.5pt;
+    color: var(--stone);
+    font-family: var(--sans);
+    line-height: 1.55;
+  }
+  .attachments .label {
+    color: var(--brand);
+    margin-right: 6pt;
+    font-weight: 700;
+  }
+
+  /* Memo variant: removes indent, uses sans chain */
+  body.memo {
+    font-family: var(--sans);
+    line-height: 1.55;
+  }
+  body.memo .body-content p { text-indent: 0; margin-bottom: 10pt; }
+
+  /* ========== TABLE (kami-table) ========== */
+  table, .kami-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10pt;
+    margin: 10pt 0;
+    break-inside: avoid;
+  }
+  table th, .kami-table th {
+    text-align: left;
+    font-weight: 700;
+    color: var(--dark-warm);
+    padding: 5pt 8pt;
+    border-bottom: 1pt solid var(--border);
+    background: transparent;
+  }
+  table td, .kami-table td {
+    padding: 4pt 8pt;
+    border-bottom: 0.3pt solid var(--border-soft);
+    vertical-align: top;
+  }
+  table.compact th, .kami-table.compact th { padding: 3pt 6pt; font-size: 8pt; }
+  table.compact td, .kami-table.compact td { padding: 2pt 6pt; font-size: 8pt; line-height: 1.4; }
+  table.financial td:not(:first-child), .kami-table.financial td:not(:first-child) {
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  table.financial th:not(:first-child), .kami-table.financial th:not(:first-child) { text-align: right; }
+  table.striped tbody tr:nth-child(even) td, .kami-table.striped tbody tr:nth-child(even) td {
+    background: var(--ivory);
+  }
+  table .total td, .kami-table .total td {
+    font-weight: 700; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== LETTERHEAD (발신인) ========== -->
+<div class="letterhead">
+  <div class="sender-name">{{발신인 성명}}</div>
+  <div>{{발신인 주소 / 부서 / 기관}}</div>
+  <div>{{전화번호}}　·　<a href="mailto:{{EMAIL}}">{{EMAIL}}</a></div>
+</div>
+
+<!-- ========== 날짜 ========== -->
+<div class="date">{{날짜 예: 2026년 4월 18일}}</div>
+
+<!-- ========== 수신인 ========== -->
+<div class="recipient">
+  <div class="to">수신</div>
+  <div class="name">{{수신인 성명 / 직함}}</div>
+  <div class="org">{{수신인 기관 / 부서}}</div>
+</div>
+
+<!-- ========== 제목 ========== -->
+<div class="subject">
+  <div class="label">제목</div>
+  <div class="title">{{서한 주제를 한 문장으로 명확하게}}</div>
+</div>
+
+<!-- ========== 인사말 ========== -->
+<div class="salutation">{{인사말 예: "안녕하세요, XX 님," / "존경하는 XX 귀중,"}}</div>
+
+<!-- ========== 본문 ========== -->
+<div class="body-content">
+
+<p>
+{{첫 번째 단락: 서두. 이 서한을 쓰게 된 배경과 핵심 의도를 밝힌다.
+돌려 말하지 않고 1-2문장으로 독자가 무엇에 관한 편지인지 파악하게 한다.}}
+</p>
+
+<p>
+{{두 번째 단락: 전개. 배경, 이유, 근거를 제시한다.
+<span class="hl">핵심 정보</span>는 하이라이트로 강조할 수 있다.}}
+</p>
+
+<p>
+{{세 번째 단락: 구체적 요청. 상대방이 무엇을, 언제, 어떻게 해야 하는지 명확히 기술한다.
+행동으로 이어질 수 있는 출구를 열어 둔다.}}
+</p>
+
+<p>
+{{네 번째 단락 (선택): 마무리. 기대감 표명, 감사 인사, 또는 정중한 맺음말.}}
+</p>
+
+</div>
+
+<!-- ========== 맺음말 ========== -->
+<div class="closing">
+  <div class="regards">
+    {{맺음말. 예: "감사합니다." / "부탁드립니다." / "Best regards,"}}
+  </div>
+
+  <div class="signature">{{서명 / 성명}}</div>
+  <div class="signoff-meta">
+    {{직함 · 부서}}<br>
+    {{날짜 재기입 · 선택}}
+  </div>
+</div>
+
+<!-- ========== 첨부 (선택) ========== -->
+<div class="attachments">
+  <span class="label">첨부</span>
+  {{첨부 목록: ① 첨부 파일명 1 · ② 첨부 파일명 2}}
+</div>
+
+</body>
+</html>
