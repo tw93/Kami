@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     CHANGELOG TEMPLATE (KO) · parchment design system
+     1-2 페이지 A4 버전 업데이트 로그 / Release Notes
+     구조: 버전 제목 -> Breaking -> Features -> Fixes -> 감사의 말
+     변경 후 실행: python3 -c "from weasyprint import HTML; HTML('changelog-ko.html').write_pdf('out.pdf')"
+     목표: 최대 2페이지
+     ================================================================== -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>{{프로젝트명}} · {{버전}} 업데이트 로그</title>
+<meta name="author" content="{{작성자}}">
+<meta name="description" content="{{요약}}">
+<meta name="keywords" content="{{키워드}}">
+<meta name="generator" content="Kami">
+<style>
+  /* Regular weight */
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* Bold weight */
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @page {
+    size: A4;
+    margin: 20mm 22mm 22mm 22mm;
+    background: #f5f4ed;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --near-black:#141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --border:    #e8e6dc;
+    --border-soft:#e5e3d8;
+    --tag-bg:    #E4ECF5;
+    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR", "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+    --sans: var(--serif);
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 20mm 22mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 10.5pt;
+    line-height: 1.55;
+    letter-spacing: 0.3pt;
+    widows: 3;
+    orphans: 3;
+    font-synthesis: none;
+  }
+
+  strong { font-weight: 700; }
+  .hl { color: var(--brand); font-weight: 700; }
+
+  /* ========== VERSION HEADER ========== */
+  .version-header {
+    text-align: center;
+    margin-bottom: 24pt;
+    padding-bottom: 16pt;
+    border-bottom: 0.5pt solid var(--border);
+  }
+  .version-logo {
+    font-family: var(--serif);
+    font-size: 14pt;
+    font-weight: 700;
+    color: var(--brand);
+    letter-spacing: 1pt;
+    margin-bottom: 8pt;
+  }
+  /* KO locale tuning: Nanum Myeongjo hangul glyphs have a smaller optical body
+     than TsangerJinKai. Numerics inherit the CN baseline (verified during the
+     one-pager-ko pilot — see references/design.md). */
+  .version-title {
+    font-family: var(--serif);
+    font-size: 28pt;
+    font-weight: 700;
+    color: var(--near-black);
+    line-height: 1.2;
+    margin-bottom: 6pt;
+  }
+  .version-tagline {
+    font-size: 12pt;
+    color: var(--olive);
+    line-height: 1.5;
+  }
+  .version-date {
+    font-size: 10pt;
+    color: var(--stone);
+    margin-top: 6pt;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  /* ========== SECTIONS ========== */
+  h2 {
+    font-family: var(--serif);
+    font-size: 16pt;
+    font-weight: 700;
+    color: var(--near-black);
+    margin: 20pt 0 8pt 0;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+    break-after: avoid;
+  }
+
+  h3 {
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--dark-warm);
+    margin: 14pt 0 4pt 0;
+    break-after: avoid;
+  }
+
+  p { margin: 0 0 8pt 0; line-height: 1.55; widows: 2; orphans: 2; }
+
+  /* ========== CHANGE LIST ========== */
+  ol.changes {
+    margin: 6pt 0 14pt 0;
+    padding-left: 24pt;
+    line-height: 1.55;
+  }
+  ol.changes li {
+    margin-bottom: 4pt;
+  }
+  ol.changes li::marker {
+    color: var(--brand);
+    font-weight: 700;
+  }
+
+  /* ========== TAG ========== */
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--brand);
+    font-size: 9pt;
+    font-weight: 700;
+    padding: 1pt 6pt;
+    border-radius: 3pt;
+    margin-right: 3pt;
+  }
+  .tag.breaking {
+    background: #f0e0d8;
+    color: #8b4513;
+  }
+
+  /* ========== CALLOUT ========== */
+  .callout {
+    background: var(--ivory);
+    border-left: 2pt solid var(--brand);
+    padding: 8pt 14pt;
+    border-radius: 3pt;
+    margin: 12pt 0;
+    line-height: 1.55;
+    break-inside: avoid;
+  }
+
+  /* ========== THANKS ========== */
+  .thanks {
+    margin-top: 16pt;
+    padding: 10pt 14pt;
+    background: var(--ivory);
+    border-left: 1.4pt solid var(--brand);
+    border-radius: 4pt;
+    font-size: 10pt;
+    line-height: 1.55;
+    break-inside: avoid;
+  }
+  .thanks-label {
+    font-size: 9pt;
+    color: var(--brand);
+    letter-spacing: 0.5pt;
+    text-transform: uppercase;
+    margin-bottom: 4pt;
+  }
+
+  /* ========== FOOTER ========== */
+  .changelog-footer {
+    margin-top: 20pt;
+    padding-top: 8pt;
+    border-top: 0.3pt dotted var(--border);
+    font-size: 9pt;
+    color: var(--stone);
+    text-align: center;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== 버전 헤더 ========== -->
+<div class="version-header">
+  <div class="version-logo">{{프로젝트명}}</div>
+  <div class="version-title">{{버전}} {{버전 코드네임}}</div>
+  <div class="version-tagline">{{이번 버전의 핵심 한 문장}}</div>
+  <div class="version-date">{{출시 날짜}}</div>
+</div>
+
+<!-- ========== CHANGELOG (English) ========== -->
+<h2>Changelog</h2>
+
+<h3>Breaking Changes</h3>
+<ol class="changes">
+  <li><span class="tag breaking">Breaking</span> {{호환성을 깨는 변경 사항 설명}}</li>
+</ol>
+
+<h3>Features</h3>
+<ol class="changes">
+  <li>{{신기능 1: 한 문장 설명}}</li>
+  <li>{{신기능 2: 한 문장 설명}}</li>
+  <li>{{신기능 3: 한 문장 설명}}</li>
+</ol>
+
+<h3>Fixes</h3>
+<ol class="changes">
+  <li>{{수정 사항 1: 한 문장 설명}}</li>
+  <li>{{수정 사항 2: 한 문장 설명}}</li>
+  <li>{{수정 사항 3: 한 문장 설명}}</li>
+</ol>
+
+<!-- ========== 업데이트 로그 (한국어) ========== -->
+<h2>업데이트 로그</h2>
+
+<h3>호환성 변경 사항</h3>
+<ol class="changes">
+  <li><span class="tag breaking">Breaking</span> {{위와 동일한 내용의 한국어 설명}}</li>
+</ol>
+
+<h3>신기능</h3>
+<ol class="changes">
+  <li>{{한국어 설명}}</li>
+  <li>{{한국어 설명}}</li>
+  <li>{{한국어 설명}}</li>
+</ol>
+
+<h3>수정 사항</h3>
+<ol class="changes">
+  <li>{{한국어 설명}}</li>
+  <li>{{한국어 설명}}</li>
+  <li>{{한국어 설명}}</li>
+</ol>
+
+<!-- ========== 감사의 말 (선택) ========== -->
+<div class="thanks">
+  <div class="thanks-label">감사의 말</div>
+  {{기여자에게 감사. 형식 예: "기여해 주신 @user1, @user2 님께 감사드립니다."}}
+</div>
+
+<!-- ========== 푸터 ========== -->
+<div class="changelog-footer">
+  {{프로젝트 한 줄 설명}}<br>
+  {{프로젝트 URL}}
+</div>
+
+</body>
+</html>
