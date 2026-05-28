@@ -134,7 +134,7 @@ def test_dist_package_contents() -> None:
 # --------------------------- shared registry ---------------------------
 
 def test_registry_consistency() -> None:
-    check("HTML_TEMPLATES has 16 entries", len(HTML_TEMPLATES) == 16,
+    check("HTML_TEMPLATES has 17 entries", len(HTML_TEMPLATES) == 17,
           f"got {len(HTML_TEMPLATES)}")
     check("SCREEN_TARGETS has 2 entries", len(SCREEN_TARGETS) == 2,
           f"got {len(SCREEN_TARGETS)}")
@@ -379,9 +379,11 @@ def test_check_placeholders_passes_clean() -> None:
 # --------------------------- cross-template consistency ---------------------------
 
 def test_pair_names_includes_known_pairs() -> None:
-    pairs = dict(_pair_names())
-    check("pair_names includes one-pager", pairs.get("one-pager") == "one-pager-en",
-          f"got {pairs.get('one-pager')!r}")
+    captured = list(_pair_names())
+    check("pair_names includes one-pager",
+          ("one-pager", "one-pager-en") in captured,
+          f"got {[v for b, v in captured if b == 'one-pager']!r}")
+    pairs = dict(captured)
     check("pair_names includes landing-page", pairs.get("landing-page") == "landing-page-en",
           f"got {pairs.get('landing-page')!r}")
     check("pair_names omits lone -en entries",
