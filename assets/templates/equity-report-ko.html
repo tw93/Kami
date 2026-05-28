@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     EQUITY REPORT TEMPLATE (KO) · parchment design system
+     2-3 페이지 A4 개별 종목 리서치 / 밸류에이션 분석 / 투자 메모
+     구조: 제목 영역 -> 핵심 지표 -> 차트 분석 -> 경쟁 구도 -> 리스크 -> 총평
+     변경 후 실행: python3 -c "from weasyprint import HTML; HTML('equity-report-ko.html').write_pdf('out.pdf')"
+     목표: 최대 3페이지
+     ================================================================== -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>{{종목명}} · 종목 리서치</title>
+<meta name="author" content="{{작성자}}">
+<meta name="description" content="{{요약}}">
+<meta name="keywords" content="{{키워드}}">
+<meta name="generator" content="Kami">
+<style>
+  /* Regular weight */
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* Bold weight */
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @page {
+    size: A4;
+    margin: 16mm 18mm 18mm 18mm;
+    background: #f5f4ed;
+
+    @bottom-center {
+      content: counter(page) "  ·  {{종목명}} 리서치";
+      font-family: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR",
+                   "Source Han Serif K", "AppleMyungjo", Georgia, serif;
+      font-size: 9pt;
+      color: #6b6a64;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --near-black:#141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --border:    #e8e6dc;
+    --border-soft:#e5e3d8;
+    --tag-bg:    #E4ECF5;
+    --positive:  #1B365D;
+    --negative:  #6b6a64;
+    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR", "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+    --sans: var(--serif);
+
+    --rhythm-module:  14pt;
+    --rhythm-section: 18pt;
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 16mm 18mm 18mm 18mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 10pt;
+    line-height: 1.5;
+    letter-spacing: 0.3pt;
+    widows: 3;
+    orphans: 3;
+    font-synthesis: none;
+  }
+
+  strong { font-weight: 700; }
+  .hl { color: var(--brand); font-weight: 700; }
+
+  /* ========== HEADER ========== */
+  .report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--rhythm-module);
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+  }
+  .ticker-block { flex: 1; }
+  .ticker-eyebrow {
+    font-size: 9pt;
+    color: var(--brand);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    margin-bottom: 4pt;
+  }
+  /* KO locale tuning: Nanum Myeongjo hangul glyphs have a smaller optical body
+     than TsangerJinKai. Numerics inherit the CN baseline (verified during the
+     one-pager-ko pilot — see references/design.md). */
+  .ticker-name {
+    font-family: var(--serif);
+    font-size: 24pt;
+    font-weight: 700;
+    color: var(--near-black);
+    line-height: 1.15;
+    margin-bottom: 4pt;
+  }
+  .ticker-sub {
+    font-size: 10pt;
+    color: var(--olive);
+    line-height: 1.4;
+  }
+  .price-block {
+    text-align: right;
+    padding-top: 4pt;
+  }
+  .price-current {
+    font-family: var(--serif);
+    font-size: 28pt;
+    font-weight: 700;
+    color: var(--near-black);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .price-change {
+    font-size: 10pt;
+    font-weight: 700;
+    margin-top: 2pt;
+    font-variant-numeric: tabular-nums;
+  }
+  .price-change.up { color: var(--positive); }
+  .price-change.down { color: var(--negative); }
+  .price-date {
+    font-size: 9pt;
+    color: var(--stone);
+    margin-top: 2pt;
+  }
+
+  /* ========== METRICS ========== */
+  .metrics {
+    display: flex;
+    gap: 14pt;
+    margin-bottom: 16pt;
+    padding: 6pt 0;
+    border-top: 0.3pt dotted var(--border);
+    border-bottom: 0.3pt dotted var(--border);
+  }
+  .metric {
+    flex: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 4pt;
+  }
+  .metric-value {
+    font-family: var(--serif);
+    font-size: 16pt;
+    font-weight: 700;
+    color: var(--brand);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .metric-label {
+    font-size: 9pt;
+    color: var(--olive);
+    line-height: 1.3;
+  }
+
+  /* ========== SECTIONS ========== */
+  h2 {
+    font-family: var(--serif);
+    font-size: 16pt;
+    font-weight: 700;
+    color: var(--near-black);
+    margin: 18pt 0 6pt 0;
+    break-after: avoid;
+  }
+
+  h3 {
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--dark-warm);
+    margin: 12pt 0 4pt 0;
+    break-after: avoid;
+  }
+
+  p { margin: 0 0 8pt 0; line-height: 1.5; widows: 2; orphans: 2; }
+
+  ul, ol {
+    margin: 4pt 0 8pt 0;
+    padding-left: 18pt;
+    line-height: 1.5;
+  }
+  ul li::marker { color: var(--brand); }
+  ol li::marker { color: var(--brand); font-weight: 700; }
+
+  /* ========== TAG ========== */
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--brand);
+    font-size: 9pt;
+    font-weight: 700;
+    padding: 1pt 6pt;
+    border-radius: 3pt;
+    margin-right: 3pt;
+  }
+
+  /* ========== TABLE (kami-table) ========== */
+  table, .kami-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.5pt;
+    margin: 8pt 0;
+    break-inside: avoid;
+  }
+  table th, .kami-table th {
+    text-align: left;
+    font-weight: 700;
+    color: var(--dark-warm);
+    padding: 5pt 8pt;
+    border-bottom: 1pt solid var(--border);
+    background: transparent;
+  }
+  table td, .kami-table td {
+    padding: 4pt 8pt;
+    border-bottom: 0.3pt solid var(--border-soft);
+    vertical-align: top;
+  }
+  table.compact th, .kami-table.compact th { padding: 3pt 6pt; font-size: 8pt; }
+  table.compact td, .kami-table.compact td { padding: 2pt 6pt; font-size: 8pt; line-height: 1.4; }
+  table.financial td:not(:first-child), .kami-table.financial td:not(:first-child) {
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  table.financial th:not(:first-child), .kami-table.financial th:not(:first-child) { text-align: right; }
+  table.striped tbody tr:nth-child(even) td, .kami-table.striped tbody tr:nth-child(even) td {
+    background: var(--ivory);
+  }
+  table .total td, .kami-table .total td {
+    font-weight: 700; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
+  }
+
+  /* ========== CALLOUT ========== */
+  .callout {
+    background: var(--ivory);
+    border-left: 2pt solid var(--brand);
+    padding: 8pt 12pt;
+    border-radius: 3pt;
+    margin: 10pt 0;
+    line-height: 1.5;
+    break-inside: avoid;
+  }
+  .callout blockquote,
+  .callout .quote {
+    border-left: none;
+    padding-left: 0;
+    margin: 6pt 0;
+    color: var(--olive);
+  }
+  .callout blockquote:first-child,
+  .callout .quote:first-child { margin-top: 0; }
+  .callout blockquote:last-child,
+  .callout .quote:last-child  { margin-bottom: 0; }
+
+  /* ========== FIGURE ========== */
+  figure {
+    margin: 12pt 0;
+    break-inside: avoid;
+  }
+  figcaption {
+    font-size: 9pt;
+    color: var(--stone);
+    margin-top: 4pt;
+    text-align: center;
+  }
+
+  /* ========== RISK MATRIX ========== */
+  .risk-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10pt;
+    margin: 8pt 0;
+  }
+  .risk-item {
+    padding: 6pt 10pt;
+    background: var(--ivory);
+    border-radius: 3pt;
+    break-inside: avoid;
+  }
+  .risk-label {
+    font-size: 9pt;
+    font-weight: 700;
+    color: var(--brand);
+    margin-bottom: 2pt;
+  }
+  .risk-desc {
+    font-size: 9pt;
+    color: var(--olive);
+    line-height: 1.4;
+  }
+
+  /* ========== TWO-COLUMN ========== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16pt;
+  }
+
+  /* ========== ANALYST SUMMARY ========== */
+  .analyst-box {
+    background: var(--ivory);
+    border-left: 1.4pt solid var(--brand);
+    border-radius: 4pt;
+    padding: 10pt 14pt;
+    margin: 12pt 0;
+    break-inside: avoid;
+  }
+
+  /* ========== CHART PLACEHOLDER ========== */
+  .chart-placeholder {
+    background: var(--ivory);
+    border-radius: 4pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--stone);
+    font-size: 9pt;
+  }
+  .analyst-label {
+    font-size: 9pt;
+    color: var(--brand);
+    letter-spacing: 0.5pt;
+    text-transform: uppercase;
+    margin-bottom: 4pt;
+  }
+
+  /* ========== FOOTER ========== */
+  .report-footer {
+    margin-top: 16pt;
+    padding-top: 6pt;
+    border-top: 0.3pt dotted var(--border);
+    font-size: 9pt;
+    color: var(--stone);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .page-break { break-before: page; }
+</style>
+</head>
+<body>
+
+<!-- ========== 헤더 ========== -->
+<div class="report-header">
+  <div class="ticker-block">
+    <div class="ticker-eyebrow">{{EYEBROW · 예: "종목 리서치" / "밸류에이션 분석" / "투자 메모"}}</div>
+    <div class="ticker-name">{{회사명}} <span style="font-size: 14pt; color: var(--stone);">{{종목 코드}}</span></div>
+    <div class="ticker-sub">{{섹터}} · {{거래소}} · {{핵심 투자 판단 한 문장}}</div>
+  </div>
+  <div class="price-block">
+    <div class="price-current">{{현재가}}</div>
+    <div class="price-change up">{{등락률 예: "+12.3%"}}</div>
+    <div class="price-date">{{날짜}}</div>
+  </div>
+</div>
+
+<!-- ========== 핵심 지표 ========== -->
+<div class="metrics">
+  <div class="metric">
+    <div class="metric-value">{{수치}}</div>
+    <div class="metric-label">시가총액</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">{{수치}}</div>
+    <div class="metric-label">P/E</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">{{수치}}</div>
+    <div class="metric-label">매출</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">{{수치}}</div>
+    <div class="metric-label">이익률</div>
+  </div>
+</div>
+
+<!-- ========== 투자 논거 ========== -->
+<h2>투자 논거</h2>
+<p>{{2-3문장의 핵심 투자 포인트. <span class="hl">핵심 데이터</span>로 판단을 뒷받침한다. 이 단락이 리서치 전체의 핵심이다.}}</p>
+
+<div class="callout">
+  {{한 문장 요약: 매수/보유/관망의 핵심 이유.}}
+</div>
+
+<!-- ========== 차트 (SVG 삽입) ========== -->
+<h2>가격 추이</h2>
+<figure>
+  <!-- diagrams/에서 <svg>를 추출해 여기에 삽입 -->
+  <div class="chart-placeholder" style="height: 60mm;">
+    [캔들스틱 / 가격 추이 차트 자리 · diagrams/에서 SVG를 추출해 삽입]
+  </div>
+  <figcaption>{{차트 제목, 예: "최근 20 거래일 가격 추이"}}</figcaption>
+</figure>
+
+<!-- ========== 재무 개요 ========== -->
+<h2>재무 개요</h2>
+<table class="financial striped">
+  <thead>
+    <tr>
+      <th>지표</th>
+      <th>FY2023</th>
+      <th>FY2024</th>
+      <th>FY2025E</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>매출</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+    </tr>
+    <tr>
+      <td>순이익</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+    </tr>
+    <tr>
+      <td>EPS</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+    </tr>
+    <tr>
+      <td>매출총이익률</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+    </tr>
+    <tr>
+      <td>ROE</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ========== 매출 구조 (선택 차트) ========== -->
+<h2>매출 구조</h2>
+<figure>
+  <div class="chart-placeholder" style="height: 50mm;">
+    [매출 분해 차트 자리 · 도넛 차트 또는 폭포 차트]
+  </div>
+  <figcaption>{{차트 제목}}</figcaption>
+</figure>
+
+<!-- ========== 경쟁 구도 ========== -->
+<div class="page-break"></div>
+<h2>경쟁 구도</h2>
+<p>{{업계 구도 개요, 1-2 단락.}}</p>
+
+<table class="financial compact striped">
+  <thead>
+    <tr>
+      <th>회사</th>
+      <th>시가총액</th>
+      <th>P/E</th>
+      <th>매출 성장률</th>
+      <th>이익률</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>{{대상 회사}}</strong></td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+    </tr>
+    <tr>
+      <td>{{경쟁사 A}}</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+    </tr>
+    <tr>
+      <td>{{경쟁사 B}}</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+    </tr>
+    <tr>
+      <td>{{경쟁사 C}}</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+      <td>{{데이터}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ========== 리스크 ========== -->
+<h2>리스크 고지</h2>
+<div class="risk-grid">
+  <div class="risk-item">
+    <div class="risk-label">{{리스크 유형 1}}</div>
+    <div class="risk-desc">{{리스크 설명}}</div>
+  </div>
+  <div class="risk-item">
+    <div class="risk-label">{{리스크 유형 2}}</div>
+    <div class="risk-desc">{{리스크 설명}}</div>
+  </div>
+  <div class="risk-item">
+    <div class="risk-label">{{리스크 유형 3}}</div>
+    <div class="risk-desc">{{리스크 설명}}</div>
+  </div>
+  <div class="risk-item">
+    <div class="risk-label">{{리스크 유형 4}}</div>
+    <div class="risk-desc">{{리스크 설명}}</div>
+  </div>
+</div>
+
+<!-- ========== 애널리스트 총평 ========== -->
+<div class="analyst-box">
+  <div class="analyst-label">애널리스트 총평</div>
+  {{3-5문장 총평. 목표 주가(해당 시), 투자 의견, 핵심 촉매제, 주요 가정을 포함한다.}}
+</div>
+
+<!-- ========== 푸터 ========== -->
+<div class="report-footer">
+  <span>{{기관명 / 면책 조항}}</span>
+  <span>{{작성자}} · {{날짜}}</span>
+</div>
+
+</body>
+</html>
