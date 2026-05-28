@@ -7,12 +7,13 @@
 - Site: https://tw93.fun
 
 ## What is Kami
-Kami is a layout design system for the AI era. Give Claude (or any LLM) a brief, and it produces polished documents: one-pagers, resumes, portfolios, slides, long docs, letters, equity reports, and changelogs. The system uses a warm parchment canvas (#f5f4ed), ink-blue accent (#1B365D), and Charter/TsangerJinKai serif fonts.
+Kami is a layout design system for the AI era. Give Claude (or any LLM) a brief, and it produces polished documents: one-pagers, resumes, portfolios, slides, long docs, letters, equity reports, and changelogs. The system uses a warm parchment canvas (#f5f4ed), ink-blue accent (#1B365D), and Charter / TsangerJinKai / Nanum Myeongjo serif fonts (English / Chinese / Korean). Korean templates ship under the OFL-licensed Nanum Myeongjo (Naver).
 
 ## Key Pages
 - [English showcase](https://kami.tw93.fun): Design system overview with live demos
 - [Chinese showcase](https://kami.tw93.fun/index-zh.html): Chinese version
 - [Japanese showcase](https://kami.tw93.fun/index-ja.html): Japanese version (best-effort CJK path)
+- [Korean showcase](https://kami.tw93.fun/index-ko.html): Korean version (Nanum Myeongjo, OFL)
 - [GitHub](https://github.com/tw93/kami): Source code and templates
 
 ## Install

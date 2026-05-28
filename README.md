@@ -92,15 +92,16 @@ npx skills add tw93/kami -a '*' -g -y
 
 Download [kami.zip](https://github.com/tw93/kami/releases/latest/download/kami.zip), open Customize > Skills > "+" > Create skill, and upload the ZIP directly (no need to unzip).
 
-The ZIP is lightweight: Chinese fonts load from local checkout first, then jsDelivr CDN. If rendering is off, Claude downloads them on the next run. To update: download the same URL, click "..." on the skill card, choose Replace, upload.
+The ZIP is lightweight: Chinese and Korean fonts load from local checkout first, then jsDelivr CDN. If rendering is off, Claude downloads them on the next run. To update: download the same URL, click "..." on the skill card, choose Replace, upload.
 
-The skill auto-triggers from natural requests, no slash command needed. Optimized for English and Chinese; Japanese supported via a best-effort CJK path with visual QA before delivery.
+The skill auto-triggers from natural requests, no slash command needed. Optimized for English, Chinese, and Korean; Japanese supported via a best-effort CJK path with visual QA before delivery.
 
 Example prompts by language:
 
 - English: `make a one-pager for my startup` / `turn this research into a long doc` / `write a formal letter` / `make a portfolio of my projects` / `build me a resume` / `design a slide deck for my talk` / `build a landing page for my app`
 - 中文: `帮我做一份一页纸` / `帮我排版一份长文档` / `帮我写一封正式信件` / `帮我做一份作品集` / `帮我做一份简历` / `帮我做一套演讲幻灯片` / `帮我做一个产品落地页`
 - 日本語: `スタートアップ向けの一枚資料を作って` / `この調査を長文レポートに整えて` / `正式な依頼文を作って` / `プロジェクト作品集を作って` / `履歴書を作って` / `登壇用スライドを作って` / `アプリのランディングページを作って`
+- 한국어: `스타트업 원페이저 만들어줘` / `이 조사 자료를 긴 문서로 정리해줘` / `정중한 비즈니스 레터 작성해줘` / `프로젝트 포트폴리오 만들어줘` / `이력서 만들어줘` / `발표용 슬라이드 만들어줘` / `우리 앱 랜딩 페이지 만들어줘`
 
 **Optional: brand profile**
 
@@ -112,7 +113,7 @@ The file has YAML frontmatter (structured fields: name, role, email, website, Gi
 
 Warm parchment canvas, ink blue as the sole accent, serif carries hierarchy, no hard shadows or flashy palettes. Not a UI framework; a constraint system for printed matter. Documents should read as composed pages, not dashboards.
 
-Ten template types: One-Pager, Long Doc, Letter, Portfolio, Resume, Slides, Equity Report, Changelog, and Landing Page in EN and CN. Fourteen inline SVG diagram types included. Code blocks support Pygments-based syntax highlighting when `Pygments` is installed; without it, PDFs still render and code stays monochrome. Kami picks the right variant based on the language you write in.
+Ten template types: One-Pager, Long Doc, Letter, Portfolio, Resume, Slides, Equity Report, Changelog, and Landing Page in EN, CN, and KO. Fourteen inline SVG diagram types included. Code blocks support Pygments-based syntax highlighting when `Pygments` is installed; without it, PDFs still render and code stays monochrome. Kami picks the right variant based on the language you write in.
 
 | Element | Rule |
 |---|---|
@@ -124,7 +125,7 @@ Ten template types: One-Pager, Long Doc, Letter, Portfolio, Resume, Slides, Equi
 | Shadows | Ring or whisper only, no hard drop shadows |
 | Tags | Solid hex backgrounds only. `rgba()` triggers a WeasyPrint double-rectangle bug |
 
-**Fonts**: Each language uses a single serif font for the entire page. Chinese: TsangerJinKai02. Japanese: YuMincho. English: Charter. TsangerJinKai is free for personal use, commercial use requires a license from [tsanger.cn](https://tsanger.cn). All other fonts are system-bundled.
+**Fonts**: Each language uses a single serif font for the entire page. Chinese: TsangerJinKai02. Japanese: YuMincho. English: Charter. Korean: Nanum Myeongjo (OFL, Naver Corp.). TsangerJinKai is free for personal use, commercial use requires a license from [tsanger.cn](https://tsanger.cn). Nanum Myeongjo and other open-licensed fonts are bundled in the ZIP.
 
 Full spec: [design.md](references/design.md). Cheatsheet: [CHEATSHEET.md](CHEATSHEET.md).
 
@@ -174,4 +175,4 @@ Later I needed to present "The Agent You Don't Know: Principles, Architecture an
 
 MIT License for kami code and templates. Feel free to use and contribute.
 
-**Fonts**: TsangerJinKai02 (Chinese) is free for personal use only; commercial use requires a license from [tsanger.cn](https://tsanger.cn). Charter (English), YuMincho (Japanese), and CJK fallbacks are system-bundled or open-licensed.
+**Fonts**: TsangerJinKai02 (Chinese) is free for personal use only; commercial use requires a license from [tsanger.cn](https://tsanger.cn). Charter (English), YuMincho (Japanese), Nanum Myeongjo (Korean, OFL/Naver), and CJK fallbacks are system-bundled or open-licensed.
