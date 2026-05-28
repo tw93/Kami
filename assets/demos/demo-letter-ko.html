@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     LETTER DEMO (KO) · parchment design system
+     벤더 파트너십 제안 서한 — 가상의 한국 SaaS 기업 → 엔터프라이즈 고객사
+     목표: 페이지 수 == 1
+     ================================================================== -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>파트너십 제안 서한 · 클라우드웍스 → 넥서스코리아</title>
+<meta name="author" content="클라우드웍스 주식회사">
+<meta name="description" content="SaaS 벤더 파트너십 제안 서한">
+<meta name="keywords" content="파트너십, 제안, SaaS, 비즈니스 서한">
+<meta name="generator" content="Kami">
+<style>
+  /* Regular weight */
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* Bold weight */
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @page {
+    size: A4;
+    margin: 20mm 22mm 20mm 22mm;
+    background: #f5f4ed;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --near-black:#141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --ivory:     #faf9f5;
+    --border:    #e8e6dc;
+    --border-soft:#e5e3d8;
+    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR", "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+    --sans: var(--serif);
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 25mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 11.5pt;
+    line-height: 1.55;
+    letter-spacing: 0.3pt;
+    font-synthesis: none;
+  }
+
+  /* ========== LETTERHEAD ========== */
+  .letterhead {
+    text-align: right;
+    margin-bottom: 20pt;
+    font-size: 10pt;
+    line-height: 1.55;
+    color: var(--olive);
+  }
+  .letterhead .sender-name {
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--near-black);
+    margin-bottom: 4pt;
+  }
+  .letterhead a {
+    color: var(--dark-warm);
+    text-decoration: none;
+  }
+
+  /* ========== META ========== */
+  .date {
+    text-align: right;
+    font-size: 10.5pt;
+    color: var(--olive);
+    margin-bottom: 16pt;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .recipient {
+    margin-bottom: 16pt;
+    line-height: 1.5;
+  }
+  .recipient .to {
+    font-size: 10pt;
+    color: var(--stone);
+    letter-spacing: 0.5pt;
+    text-transform: uppercase;
+    margin-bottom: 3pt;
+  }
+  .recipient .name {
+    font-size: 12pt;
+    font-weight: 700;
+    color: var(--near-black);
+  }
+  .recipient .org {
+    font-size: 10.5pt;
+    color: var(--olive);
+  }
+
+  /* ========== SUBJECT ========== */
+  .subject {
+    margin-bottom: 16pt;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+  }
+  .subject .label {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--brand);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    margin-bottom: 3pt;
+  }
+  .subject .title {
+    font-size: 15pt;
+    font-weight: 700;
+    color: var(--near-black);
+    line-height: 1.3;
+  }
+
+  /* ========== SALUTATION ========== */
+  .salutation {
+    margin-bottom: 12pt;
+    font-size: 12pt;
+    color: var(--near-black);
+  }
+
+  /* ========== BODY ========== */
+  .body-content p {
+    margin-bottom: 10pt;
+    line-height: 1.52;
+  }
+  .body-content p:first-child { }
+  .body-content p.no-indent { text-indent: 0; }
+
+  .body-content .hl {
+    color: var(--brand);
+    font-weight: 700;
+  }
+
+  /* ========== CLOSING ========== */
+  .closing {
+    margin-top: 18pt;
+    line-height: 1.55;
+  }
+  .closing .regards {
+    margin-bottom: 18pt;
+    color: var(--near-black);
+  }
+  .closing .signature {
+    font-size: 14pt;
+    font-weight: 700;
+    color: var(--near-black);
+    margin-bottom: 3pt;
+  }
+  .closing .signoff-meta {
+    font-size: 10pt;
+    color: var(--olive);
+  }
+
+  /* ========== ATTACHMENT ========== */
+  .attachments {
+    margin-top: 18pt;
+    padding-top: 10pt;
+    border-top: 0.5pt dotted var(--border);
+    font-size: 9.5pt;
+    color: var(--stone);
+    font-family: var(--sans);
+    line-height: 1.55;
+  }
+  .attachments .label {
+    color: var(--brand);
+    margin-right: 6pt;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== LETTERHEAD (발신인) ========== -->
+<div class="letterhead">
+  <div class="sender-name">클라우드웍스 주식회사</div>
+  <div>서울특별시 강남구 테헤란로 152, 12층</div>
+  <div>02-555-0100　·　<a href="mailto:partnerships@cloudworks.kr">partnerships@cloudworks.kr</a></div>
+</div>
+
+<!-- ========== 날짜 ========== -->
+<div class="date">2026년 5월 28일</div>
+
+<!-- ========== 수신인 ========== -->
+<div class="recipient">
+  <div class="to">수신</div>
+  <div class="name">박지수 전무이사</div>
+  <div class="org">넥서스코리아 주식회사 · 디지털 혁신 본부</div>
+</div>
+
+<!-- ========== 제목 ========== -->
+<div class="subject">
+  <div class="label">제목</div>
+  <div class="title">클라우드웍스 엔터프라이즈 플랫폼 벤더 파트너십 제안</div>
+</div>
+
+<!-- ========== 인사말 ========== -->
+<div class="salutation">존경하는 박지수 전무이사님,</div>
+
+<!-- ========== 본문 ========== -->
+<div class="body-content">
+
+<p>
+클라우드웍스는 국내 중견·대기업 고객의 업무 자동화 및 데이터 통합 수요에 특화된 B2B SaaS 플랫폼을 운영하고 있습니다. 이번 서한은 넥서스코리아와 <span class="hl">전략적 벤더 파트너십</span>을 논의하고자 드리는 것입니다.
+</p>
+
+<p>
+클라우드웍스 플랫폼은 현재 국내 제조·금융·유통 분야 47개 기업에 도입되어 있으며, 평균 업무 처리 시간을 <span class="hl">62% 단축</span>하고 연간 운영 비용을 평균 1.8억 원 절감하는 성과를 기록하고 있습니다. 특히 넥서스코리아와 같이 복수의 사업 부문을 운영하는 그룹사에 적합한 멀티 테넌트 아키텍처와 온프레미스 하이브리드 배포 옵션을 갖추고 있습니다.
+</p>
+
+<p>
+파트너십의 첫 단계로, 넥서스코리아 디지털 혁신 본부 담당자 3~5인을 대상으로 <span class="hl">4주간의 무상 파일럿 프로그램</span>을 제안드립니다. 파일럿 기간 중 당사 구현 엔지니어가 현장에 배치되어 기존 ERP 및 그룹웨어와의 연동을 지원합니다. 파일럿 종료 후 정식 계약으로 전환하실 경우, 1년 약정 기준 15% 할인 조건을 적용해 드립니다.
+</p>
+
+<p>
+6월 중 편하신 일정에 화상 또는 대면 미팅을 요청드립니다. 세부 제안서와 레퍼런스 고객사 사례집을 미팅 전 미리 발송해 드리겠습니다. 귀사의 긍정적인 회신을 기대합니다.
+</p>
+
+</div>
+
+<!-- ========== 맺음말 ========== -->
+<div class="closing">
+  <div class="regards">
+    감사합니다.
+  </div>
+
+  <div class="signature">김민준</div>
+  <div class="signoff-meta">
+    사업개발 이사 · 클라우드웍스 주식회사<br>
+    2026년 5월 28일
+  </div>
+</div>
+
+<!-- ========== 첨부 ========== -->
+<div class="attachments">
+  <span class="label">첨부</span>
+  ① 클라우드웍스 플랫폼 소개서 (PDF) · ② 도입 사례 요약 (3사) · ③ 파일럿 프로그램 세부 일정
+</div>
+
+</body>
+</html>
