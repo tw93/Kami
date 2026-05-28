@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     RESUME TEMPLATE (KO) · parchment design system
+     한국어 이력서 (A4 엄격 2페이지)
+     변경 후 실행: python3 -c "from weasyprint import HTML; HTML('resume-ko.html').write_pdf('out.pdf')"
+     목표: 정확히 2페이지 — 넘치거나 모자라면 수정 필요
+     ================================================================== -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>{{성명}} · 이력서</title>
+<meta name="author" content="{{성명}}">
+<meta name="description" content="{{요약}}">
+<meta name="keywords" content="{{키워드}}">
+<meta name="generator" content="Kami">
+<style>
+  /* Regular weight */
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* Bold weight */
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+  }
+
+@page {
+    size: A4;
+    margin: 11mm 13mm 11mm 13mm;
+    background: #f5f4ed;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --sand:      #e8e6dc;
+    --border:    #e8e6dc;
+    --border-soft: #e5e3d8;
+    --near-black: #141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --brand-tint: #EEF2F7;
+    --brand-tint-strong: #E4ECF5;
+    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR", "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+    --sans: var(--serif);
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 11mm 13mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 9.2pt;
+    line-height: 1.42;
+    letter-spacing: 0.3pt;
+    widows: 3;
+    orphans: 3;
+    font-synthesis: none;
+  }
+
+  .serif {
+    font-family: var(--serif);
+  }
+
+  a { color: var(--brand); text-decoration: none; }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-bottom: 3mm;
+    margin-bottom: 3mm;
+    border-bottom: 0.5pt solid #e3baa9;
+  }
+  .header > div:first-child { flex-shrink: 0; }
+  .name {
+    font-family: var(--serif);
+    font-size: 26.5pt;
+    font-weight: 700;
+    letter-spacing: 0.5pt;
+    color: var(--near-black);
+    line-height: 1;
+    margin-bottom: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 2.2mm;
+    white-space: nowrap;
+  }
+  .alias {
+    font-size: 12.5pt;
+    font-weight: 400;
+    color: var(--stone);
+    letter-spacing: 0.2pt;
+  }
+  .alias::before {
+    content: "";
+  }
+  .tagline { font-size: 9.5pt; color: var(--olive); line-height: 1.3; }
+  .tagline .accent { color: var(--brand); font-weight: 700; }
+
+  .contact {
+    text-align: right;
+    font-size: 9pt;
+    color: var(--stone);
+    line-height: 1.5;
+    margin-bottom: -0.5mm;
+  }
+  .contact a { color: var(--dark-warm); }
+  .contact .loc { color: var(--olive); font-weight: 700; }
+
+  /* METRICS */
+  .metrics { display: flex; gap: 6mm; margin-bottom: 3mm; margin-left: 0; margin-right: 0; }
+  .metric {
+    flex: 1;
+    background: transparent;
+    padding: 1mm 0;
+    display: flex;
+    align-items: baseline;
+    gap: 1.8mm;
+    break-inside: avoid;
+  }
+  .metric-value {
+    font-family: var(--serif);
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--brand);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .metric-label { font-size: 9pt; color: var(--olive); line-height: 1.2; }
+
+  .metric-value .unit {
+    font-size: 10.5pt;
+    margin-left: 0.3mm;
+    font-weight: 700;
+    color: var(--brand);
+  }
+
+  .metrics--stack .metric {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5mm;
+    padding-bottom: 2mm;
+    border-bottom: 0.3pt dotted var(--border);
+  }
+
+  /* SECTION */
+  .section-title {
+    font-family: var(--serif);
+    font-size: 12.5pt;
+    font-weight: 700;
+    color: var(--near-black);
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding: 0 0 0 8pt;
+    margin: 5mm 0 1.6mm 0;
+    display: flex;
+    align-items: baseline;
+    gap: 2mm;
+  }
+  .section-title .sub {
+    margin-left: auto;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 9pt;
+    color: var(--stone);
+    letter-spacing: 0.3pt;
+  }
+
+  section:first-of-type .section-title { margin-top: 0; }
+  .page-break > .section-title { margin-top: 0; }
+
+  .section-title + .skill-row { padding-top: 1.2mm; }
+  .section-title + .edu-row { padding-top: 1.2mm; }
+
+  /* SUMMARY */
+  .summary { font-size: 9.2pt; line-height: 1.42; color: var(--near-black); }
+  .summary .em-brand { color: var(--brand); }
+  .summary .hl { color: var(--brand); }
+
+  /* TIMELINE */
+  .timeline { display: flex; gap: 6mm; margin-bottom: 2mm; margin-left: 0; margin-right: 0; }
+  .tl-step {
+    flex: 1; background: transparent;
+    padding: 0.8mm 0;
+    break-inside: avoid;
+  }
+  .tl-top {
+    display: flex; align-items: baseline; gap: 1.5mm;
+    margin-bottom: 0.5mm;
+  }
+  .tl-year {
+    font-family: var(--serif);
+    font-size: 11pt; font-weight: 700;
+    color: var(--brand); line-height: 1;
+  }
+  .tl-head {
+    font-size: 11pt; font-weight: 700;
+    color: var(--near-black);
+  }
+  .tl-body { font-size: 9pt; color: var(--olive); line-height: 1.40; letter-spacing: 0.3pt; }
+
+  /* PROJECTS */
+  .project {
+    padding: 1.2mm 0 1.2mm 0;
+    border-top: 0.4pt solid var(--border-soft);
+    break-inside: avoid;
+  }
+  .project:first-of-type { border-top: 0.4pt solid var(--border); padding-top: 1.2mm; }
+  .proj-head {
+    display: flex; align-items: baseline;
+    gap: 2mm; margin-bottom: 0.75mm;
+  }
+  .proj-name {
+    font-family: var(--serif);
+    font-size: 11pt; font-weight: 700; color: var(--near-black);
+  }
+  .proj-kind { font-size: 11pt; color: var(--olive); }
+  .proj-role {
+    font-size: 9pt; color: var(--brand); font-weight: 700;
+    margin-left: auto; background: #EEF2F7;
+    padding: 0.4mm 1.2mm; border-radius: 2pt; letter-spacing: 0.05pt;
+  }
+  .proj-lines { display: table; width: 100%; }
+  .proj-row { display: table-row; }
+  .proj-label {
+    display: table-cell; width: 11mm;
+    font-size: 9pt; color: var(--brand);
+    font-weight: 700; letter-spacing: 0.2pt;
+    padding: 0.2mm 0 0.4mm 0; vertical-align: top;
+  }
+  .proj-text {
+    display: table-cell; font-size: 9pt;
+    color: var(--near-black); line-height: 1.40; letter-spacing: 0.3pt;
+    padding: 0 0 0.4mm 0.5mm;
+  }
+  .proj-text .hl { color: var(--brand); }
+
+  .team-culture {
+    margin-top: 2mm; padding: 1.5mm 2.5mm;
+    background: transparent;
+    border-left: 1.4pt solid var(--brand);
+    border-radius: 2pt;
+    font-size: 9pt; color: var(--olive); line-height: 1.40;
+    break-inside: avoid;
+  }
+  .team-culture .hl { color: var(--brand); }
+
+  /* PAGE 2 FORCE BREAK */
+  .page-break { break-before: page; }
+
+  /* OPEN SOURCE */
+  .os-intro {
+    font-size: 9.2pt; line-height: 1.40; letter-spacing: 0.3pt;
+    color: var(--near-black);
+    padding: 0; margin: 1.2mm 0 2mm 0;
+    background: transparent;
+    break-inside: avoid;
+  }
+  .os-intro .hl { color: var(--brand); }
+  .os-intro .strong { color: var(--near-black); }
+
+  .os-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 8mm; row-gap: 1mm;
+  }
+  .os-item {
+    display: flex; align-items: baseline;
+    gap: 2mm; padding: 1mm 0 1mm 0;
+    border-bottom: 0.3pt dotted var(--border);
+    break-inside: avoid;
+  }
+  .os-item:last-child,
+  .os-item:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+  .os-name {
+    font-family: var(--serif);
+    font-size: 10pt; font-weight: 700;
+    flex-shrink: 0; min-width: 14mm;
+  }
+  .os-name a { color: var(--brand); }
+  .os-desc { font-size: 9pt; color: var(--olive); line-height: 1.40; flex: 1; }
+  .os-star {
+    font-size: 9pt; color: var(--dark-warm);
+    font-weight: 700; white-space: nowrap; flex-shrink: 0; min-width: 7.5mm; text-align: right;
+  }
+  .os-star.big { color: var(--brand); font-size: 9.2pt; }
+
+  .os-highlight {
+    margin-top: 2.5mm;
+    padding: 1.8mm 2.8mm;
+    background: var(--brand-tint);
+    border-left: 1.4pt solid var(--brand);
+    font-size: 9pt; line-height: 1.40;
+    color: var(--near-black);
+    letter-spacing: 0.3pt;
+    break-inside: avoid;
+  }
+  .os-highlight .hl { color: var(--brand); }
+  .os-highlight .tag {
+    display: inline-block;
+    background: var(--brand); color: var(--ivory);
+    font-size: 9pt; font-weight: 700;
+    padding: 0.2mm 1.5mm; border-radius: 2pt;
+    margin-right: 1.2mm; letter-spacing: 0.2pt;
+    transform: translateY(-0.2mm);
+  }
+
+  /* AI CONVICTION */
+  .convictions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2.5mm;
+    margin-top: 1.2mm;
+  }
+  .conv-card {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0 2mm 0 0;
+    break-inside: avoid;
+  }
+  .conv-head, .ai-card-head {
+    font-family: var(--serif);
+    font-size: 9.8pt; font-weight: 700;
+    color: var(--near-black); margin-bottom: 0.9mm;
+    display: flex; align-items: baseline; gap: 1.5mm;
+  }
+  .conv-head .year, .ai-card-head .year {
+    color: var(--brand); font-weight: 700;
+    font-size: 9pt;
+  }
+  .conv-body, .ai-card-body {
+    font-size: 9pt; color: var(--olive);
+    line-height: 1.40; letter-spacing: 0.3pt;
+  }
+  .conv-body .hl, .ai-card-body .hl { color: var(--brand); }
+  .conv-body .em-brand, .ai-card-body .em-brand { color: var(--brand); }
+
+  /* INFLUENCE */
+  .handle-strip {
+    background: transparent;
+    padding: 0; margin: 1.2mm 0 2mm 0;
+    display: flex; align-items: baseline; gap: 3mm;
+    break-inside: avoid;
+  }
+  .handle-strip .handle {
+    font-family: var(--serif);
+    font-size: 9.8pt; font-weight: 700; color: var(--brand);
+    flex-shrink: 0;
+  }
+  .handle-strip .follower { font-size: 9pt; color: var(--stone); flex-shrink: 0; }
+  .handle-strip .desc { font-size: 9pt; color: var(--olive); line-height: 1.40; letter-spacing: 0.3pt; flex: 1; }
+
+  .impact-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 5.5mm; }
+  .inf-block-title {
+    margin-top: 2.5mm;
+    font-family: var(--serif);
+    font-size: 9.8pt; font-weight: 700;
+    color: var(--near-black);
+    margin-bottom: 1.5mm; padding-bottom: 0.5mm;
+    border-bottom: 0.3pt dotted var(--border);
+    display: flex; align-items: baseline; gap: 2mm;
+  }
+  .inf-block-title .small {
+    font-family: var(--serif);
+    font-size: 9pt; color: var(--stone);
+    font-weight: 400; margin-left: 0; letter-spacing: 0.2pt;
+  }
+  .art-row {
+    padding: 1.6mm 0;
+    border-bottom: 0.3pt dotted var(--border-soft);
+  }
+  .talk-row {
+    display: flex; justify-content: space-between;
+    align-items: flex-start;
+    gap: 2mm; padding: 1.6mm 0;
+    border-bottom: 0.3pt dotted var(--border-soft);
+  }
+  .art-row:last-of-type, .talk-row:last-of-type { border-bottom: none; }
+  .art-header {
+    display: flex; align-items: baseline;
+    justify-content: space-between;
+    gap: 2mm; padding-right: 3mm;
+  }
+  .art-title, .talk-title {
+    font-size: 9pt; color: var(--near-black);
+    font-weight: 700; line-height: 1.40;
+    flex: 1 1 auto; min-width: 0;
+  }
+  .art-stats, .talk-venue {
+    font-size: 9pt; color: var(--stone);
+    line-height: 1.40; margin-top: 0.5mm; padding-left: 0; letter-spacing: 0.3pt;
+    white-space: nowrap;
+  }
+  .art-stats .em-brand {
+    color: var(--brand);
+  }
+  .art-date {
+    font-size: 9pt; color: var(--stone);
+    font-variant-numeric: tabular-nums;
+    font-weight: 400;
+  }
+  .talk-date {
+    font-size: 9pt; color: var(--stone); font-weight: 700;
+    white-space: nowrap; font-variant-numeric: tabular-nums;
+    padding-top: 0.3mm;
+  }
+
+  /* SKILLS */
+  .skill-row {
+    display: flex; gap: 2.5mm; padding: 1.7mm 0;
+    border-bottom: 0.3pt dotted var(--border);
+    align-items: baseline;
+  }
+  .skill-row:last-of-type { border-bottom: none; }
+  .skill-label {
+    font-size: 9pt; font-weight: 700;
+    color: var(--brand); letter-spacing: 0.3pt;
+    width: 22mm; flex-shrink: 0;
+    line-height: 1.36;
+  }
+  .skill-body { font-size: 9pt; color: var(--near-black); line-height: 1.40; letter-spacing: 0.3pt; flex: 1; }
+  .skill-body .em-brand { color: var(--brand); }
+
+  .no-break { break-inside: avoid; }
+
+  /* EDUCATION */
+  .edu-row {
+    display: flex; justify-content: space-between;
+    align-items: baseline; font-size: 9.5pt; padding: 1.7mm 0;
+  }
+  .edu-row .school {
+    font-family: var(--serif);
+    font-weight: 700; font-size: 10.7pt;
+  }
+  .edu-row .major { color: var(--olive); font-size: 9.5pt; }
+  .edu-row .date { color: var(--stone); font-variant-numeric: tabular-nums; font-size: 9pt; }
+
+  /* TABLE (kami-table) */
+  table, .kami-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+    margin: 6pt 0;
+    break-inside: avoid;
+  }
+  table th, .kami-table th {
+    text-align: left;
+    font-weight: 700;
+    color: var(--dark-warm);
+    padding: 3pt 6pt;
+    border-bottom: 1pt solid var(--border);
+    background: transparent;
+  }
+  table td, .kami-table td {
+    padding: 2pt 6pt;
+    border-bottom: 0.3pt solid var(--border-soft);
+    vertical-align: top;
+  }
+  table.compact th, .kami-table.compact th { padding: 2pt 4pt; font-size: 8pt; }
+  table.compact td, .kami-table.compact td { padding: 1pt 4pt; font-size: 8pt; line-height: 1.4; }
+  table.financial td:not(:first-child), .kami-table.financial td:not(:first-child) {
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  table.financial th:not(:first-child), .kami-table.financial th:not(:first-child) { text-align: right; }
+  table.striped tbody tr:nth-child(even) td, .kami-table.striped tbody tr:nth-child(even) td {
+    background: var(--ivory);
+  }
+  table .total td, .kami-table .total td {
+    font-weight: 700; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
+  }
+
+  /* DENSE VARIANT: add class="resume--dense" to <body> when 5+ projects overflow */
+  body.resume--dense { font-size: 9pt; }
+  body.resume--dense .proj-text { line-height: 1.38; }
+  body.resume--dense .tl-body { font-size: 8.5pt; }
+  body.resume--dense .section-title { margin-top: 3.5mm; margin-bottom: 1.2mm; }
+</style>
+</head>
+<body>
+
+<!-- =====================================================================
+     사용 안내:
+ - 모든 {{변수}}를 실제 내용으로 교체
+ - 해당 없는 섹션(오픈소스/AI 판단/외부 영향력)은 삭제
+ - 프로젝트 수는 조정 가능, 각 항목은 역할/행동/결과 3단 구조 유지
+ - 수정 후 검증 필수 — 반드시 2페이지여야 함:
+       python3 -c "from weasyprint import HTML; HTML('resume-ko.html').write_pdf('out.pdf')"
+ - 콘텐츠 전략은 references/writing.md 참고
+     ===================================================================== -->
+
+
+<!-- ========== 1페이지 ========== -->
+
+<div class="header">
+  <div>
+    <div class="name serif">{{성명}}<span class="alias">{{별명/영문명}}</span></div>
+  </div>
+  <div class="contact">
+    <span style="color: var(--brand); font-size: 10.5pt; font-weight: 700;">{{포지션, 예: "AI / 에이전트 엔지니어링"}}</span>　·　<a href="{{GITHUB_URL}}">GitHub @{{GITHUB_ID}}</a>　·　<a href="{{X_URL}}">X @{{X_ID}}</a>　·　<a href="tel:{{PHONE}}">{{PHONE}}</a>　·　<a href="mailto:{{EMAIL}}">{{EMAIL}}</a>　·　{{나이}}세, {{도시}}
+  </div>
+</div>
+
+<!-- 핵심 수치 4개 -->
+<div class="metrics">
+  <div class="metric"><span class="metric-value serif">{{수치}}<span class="unit">{{단위}}</span></span><span class="metric-label">{{라벨}}</span></div>
+  <div class="metric"><span class="metric-value serif">{{수치}}<span class="unit">{{단위}}</span></span><span class="metric-label">{{라벨}}</span></div>
+  <div class="metric"><span class="metric-value serif">{{수치}}<span class="unit">{{단위}}</span></span><span class="metric-label">{{라벨}}</span></div>
+  <div class="metric"><span class="metric-value serif">{{수치}}<span class="unit">{{단위}}</span></span><span class="metric-label">{{라벨}}</span></div>
+</div>
+
+<section>
+  <div class="section-title">자기 소개</div>
+  <div class="summary">
+    {{80자 이내. 권장 구조: 현재 직책 + 직급 + 재직 기간. 팀 구성(인원, 협업 방식). 장기 발전 방향. 핵심 역량 영역(4-6개).}}
+  </div>
+</section>
+
+<section>
+  <div class="section-title">경력<span class="sub">{{시작 연도}} - 현재 ({{핵심 이정표}})</span></div>
+
+  <!-- 타임라인 3단계: 장기 성장 신호 -->
+  <div class="timeline">
+    <div class="tl-step">
+      <div class="tl-top"><div class="tl-year serif">{{연도}}</div><div class="tl-head">{{단계 제목}}</div></div>
+      <div class="tl-body">{{이 단계의 의미를 한 문장으로}}</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-top"><div class="tl-year serif">{{연도}}</div><div class="tl-head">{{단계 제목}}</div></div>
+      <div class="tl-body">{{이 단계의 의미를 한 문장으로}}</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-top"><div class="tl-year serif">{{연도}}</div><div class="tl-head">{{단계 제목}}</div></div>
+      <div class="tl-body">{{이 단계의 의미를 한 문장으로}}</div>
+    </div>
+  </div>
+
+  <!-- 프로젝트 항목 - 3~5회 반복 -->
+  <div class="project">
+    <div class="proj-head">
+      <span class="proj-name serif">{{프로젝트명}}</span>
+      <span class="proj-kind">· {{프로젝트 유형}}</span>
+      <span class="proj-role">{{역할, 예: "방향 주도"}}</span>
+    </div>
+    <div class="proj-lines">
+      <div class="proj-row">
+        <div class="proj-label">역할</div>
+        <div class="proj-text">{{~60자: 프로젝트 개요 + 배경 + 본인 역할}}</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">행동</div>
+        <div class="proj-text">{{~80자: 기술 방안 / 핵심 의사결정 / 실행 경로}}</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">결과</div>
+        <div class="proj-text">{{~100자: 수치 중심. <span class="hl">핵심 수치</span> 1-2곳 하이라이트.}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="proj-head">
+      <span class="proj-name serif">{{프로젝트명}}</span>
+      <span class="proj-kind">· {{프로젝트 유형}}</span>
+      <span class="proj-role">{{역할}}</span>
+    </div>
+    <div class="proj-lines">
+      <div class="proj-row">
+        <div class="proj-label">역할</div>
+        <div class="proj-text">{{~60자}}</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">행동</div>
+        <div class="proj-text">{{~80자}}</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">결과</div>
+        <div class="proj-text">{{~100자, <span class="hl">핵심 수치</span> 포함}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="proj-head">
+      <span class="proj-name serif">{{프로젝트명}}</span>
+      <span class="proj-kind">· {{프로젝트 유형}}</span>
+      <span class="proj-role">{{역할}}</span>
+    </div>
+    <div class="proj-lines">
+      <div class="proj-row">
+        <div class="proj-label">역할</div>
+        <div class="proj-text">{{프로젝트 배경과 포지션}}</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">행동</div>
+        <div class="proj-text">{{실행 경로}}</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">결과</div>
+        <div class="proj-text">{{정량적 결과, <span class="hl">핵심 수치</span> 포함}}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== 2페이지 ========== -->
+
+<section class="page-break">
+  <div class="section-title">오픈소스 &amp; 독립 개발<span class="sub">{{기간}} · {{부제목 한 문장}}</span></div>
+
+  <div class="os-intro">
+    <span class="hl">{{자기 정의 한 문장}}</span>，{{개발자 정체성 간략 서술: 디자인 감각 / 독립 완성 프로세스 / 다국어 실전 / 사용자 피드백}}. GitHub 누적 <span class="strong">{{STARS_TOTAL}} stars · {{FORKS_TOTAL}} forks · {{FOLLOWERS_TOTAL}} followers</span>.
+  </div>
+
+  <div class="os-grid">
+    <div class="os-item">
+      <span class="os-name serif"><a href="{{URL}}">{{프로젝트명}}</a></span>
+      <span class="os-desc">{{언어 + 핵심 정의 + 플랫폼}}</span>
+      <span class="os-star big">★ {{STARS}}</span>
+    </div>
+    <div class="os-item">
+      <span class="os-name serif"><a href="{{URL}}">{{프로젝트명}}</a></span>
+      <span class="os-desc">{{설명}}</span>
+      <span class="os-star big">★ {{STARS}}</span>
+    </div>
+    <div class="os-item">
+      <span class="os-name serif"><a href="{{URL}}">{{프로젝트명}}</a></span>
+      <span class="os-desc">{{설명}}</span>
+      <span class="os-star">★ {{STARS}}</span>
+    </div>
+    <div class="os-item">
+      <span class="os-name serif"><a href="{{URL}}">{{프로젝트명}}</a></span>
+      <span class="os-desc">{{설명}}</span>
+      <span class="os-star">★ {{STARS}}</span>
+    </div>
+    <div class="os-item">
+      <span class="os-name serif"><a href="{{URL}}">{{프로젝트명}}</a></span>
+      <span class="os-desc">{{설명}}</span>
+      <span class="os-star">★ {{STARS}}</span>
+    </div>
+    <div class="os-item">
+      <span class="os-name serif"><a href="{{URL}}">{{프로젝트명}}</a></span>
+      <span class="os-desc">{{설명}}</span>
+      <span class="os-star">★ {{STARS}}</span>
+    </div>
+  </div>
+
+  <div class="os-highlight">
+    <span class="tag">{{하이라이트 TAG}}</span>{{이 프로젝트의 독특한 스토리: 오픈소스 시점 / 전파 범위 / 유명인 추천 등}}
+  </div>
+</section>
+
+<section>
+  <div class="section-title">AI 판단과 행동</div>
+  <div class="convictions">
+    <div class="conv-card">
+      <div class="conv-head"><span class="year">{{시기}}</span>{{사건 제목}}</div>
+      <div class="conv-body">
+        {{구체적으로 어떤 판단이나 행동을 했는지, 왜 그것이 판단력을 증명하는지}}
+      </div>
+    </div>
+    <div class="conv-card">
+      <div class="conv-head"><span class="year">{{시기}}</span>{{사건 제목}}</div>
+      <div class="conv-body">
+        {{구체적으로 어떤 판단이나 행동을 했는지}}
+      </div>
+    </div>
+    <div class="conv-card">
+      <div class="conv-head"><span class="year">{{시기}}</span>{{사건 제목}}</div>
+      <div class="conv-body">
+        {{구체적으로 어떤 판단이나 행동을 했는지}}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">외부 영향력</div>
+
+  <div class="handle-strip">
+    <span class="handle serif">{{플랫폼}} · <a href="{{URL}}">@{{HANDLE}}</a></span>
+    <span class="follower">{{팔로워 수}} 팔로워</span>
+    <span class="desc">{{블로그 / 뉴스레터 / 기타 콘텐츠 소개}}</span>
+  </div>
+
+  <div class="impact-grid">
+    <div>
+      <div class="inf-block-title">대표 기술 장문<span class="small">{{부제목}}</span></div>
+      <div class="art-row">
+        <div class="art-header">
+          <a class="art-title" href="{{URL}}">《{{글 제목}}》</a>
+          <span class="art-date">{{날짜}}</span>
+        </div>
+        <div class="art-stats">{{조회수 / 좋아요 / 영향력 지표}}</div>
+      </div>
+      <div class="art-row">
+        <div class="art-header">
+          <a class="art-title" href="{{URL}}">《{{글 제목}}》</a>
+          <span class="art-date">{{날짜}}</span>
+        </div>
+        <div class="art-stats">{{조회수 / 좋아요}}</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="inf-block-title">초청 강연<span class="small">{{부제목}}</span></div>
+      <div class="talk-row">
+        <div>
+          <div class="talk-title">《{{강연 제목}}》</div>
+          <div class="talk-venue">{{주최 / 장소}}</div>
+        </div>
+        <div class="talk-date">{{날짜}}</div>
+      </div>
+      <div class="talk-row">
+        <div>
+          <div class="talk-title">《{{강연 제목}}》</div>
+          <div class="talk-venue">{{주최 / 장소}}</div>
+        </div>
+        <div class="talk-date">{{날짜}}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">핵심 역량</div>
+  <!-- 5항목 고정 구조, 각 항목마다 최소 1개 강조 -->
+  <div class="skill-row">
+    <div class="skill-label">{{역량 1<br>라벨}}</div>
+    <div class="skill-body">{{설명. 최소 <span class="em-brand">1곳 강조</span>.}}</div>
+  </div>
+  <div class="skill-row">
+    <div class="skill-label">{{역량 2<br>라벨}}</div>
+    <div class="skill-body">{{설명. 최소 <span class="em-brand">1곳 강조</span>.}}</div>
+  </div>
+  <div class="skill-row">
+    <div class="skill-label">{{역량 3<br>라벨}}</div>
+    <div class="skill-body">{{설명. 최소 <span class="em-brand">1곳 강조</span>.}}</div>
+  </div>
+  <div class="skill-row">
+    <div class="skill-label">{{역량 4<br>라벨}}</div>
+    <div class="skill-body">{{설명. 최소 <span class="em-brand">1곳 강조</span>.}}</div>
+  </div>
+  <div class="skill-row">
+    <div class="skill-label">{{역량 5<br>라벨}}</div>
+    <div class="skill-body">{{설명. 최소 <span class="em-brand">1곳 강조</span>.}}</div>
+  </div>
+</section>
+
+<section class="no-break">
+  <div class="section-title">학력</div>
+  <div class="edu-row">
+    <div>
+      <span class="school serif">{{학교}}</span>
+      <span class="major">　· {{단과대학}} · {{전공}} · {{한 줄 판단 설명, 예: "대학원 포기 후 바로 취업"}}</span>
+    </div>
+    <div class="date">{{재학 기간}}</div>
+  </div>
+</section>
+
+</body>
+</html>
