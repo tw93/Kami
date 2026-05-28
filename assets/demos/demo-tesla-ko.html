@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     테슬라 Q1 2026 주식 분석 · equity-report-ko.html 기반
+     데이터 출처: Tesla Q1 2026 실적 발표, 2026.04.22
+     ================================================================== -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>테슬라 · Q1 2026 투자 분석</title>
+<meta name="author" content="Tw93">
+<meta name="description" content="테슬라 Q1 2026 실적 분석: 매출 $22.4B 예상 초과, 매출총이익률 21.1% 회복, Robotaxi 달라스/휴스턴 운행 개시, $250억 자본지출 가이던스로 시장 의견 엇갈려">
+<meta name="keywords" content="테슬라, TSLA, Q1 2026, 실적, 투자 분석, Robotaxi, 전기차">
+<meta name="generator" content="Kami">
+<style>
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @page {
+    size: A4;
+    margin: 12mm 16mm 12mm 16mm;
+    background: #f5f4ed;
+
+    @bottom-center {
+      content: counter(page) "  ·  테슬라 Q1 2026 투자 분석";
+      font-family: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR",
+                   "Source Han Serif K", "AppleMyungjo", Georgia, serif;
+      font-size: 9pt;
+      color: #6b6a64;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --near-black:#141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --border:    #e8e6dc;
+    --border-soft:#e5e3d8;
+    --tag-bg:    #E4ECF5;
+    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR", "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+    --sans: var(--serif);
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 12mm 16mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 9.5pt;
+    line-height: 1.42;
+    letter-spacing: 0.3pt;
+    font-synthesis: none;
+  }
+
+  strong { font-weight: 700; }
+  .hl { color: var(--brand); font-weight: 700; }
+
+  /* ========== HEADER ========== */
+  .report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12pt;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+  }
+  .ticker-block { flex: 1; }
+  .ticker-eyebrow {
+    font-size: 9pt;
+    color: var(--brand);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    margin-bottom: 4pt;
+  }
+  .ticker-name {
+    font-family: var(--serif);
+    font-size: 24pt;
+    font-weight: 700;
+    color: var(--near-black);
+    line-height: 1.15;
+    margin-bottom: 4pt;
+  }
+  .ticker-sub {
+    font-size: 10pt;
+    color: var(--olive);
+    line-height: 1.4;
+  }
+  .price-block {
+    text-align: right;
+    padding-top: 4pt;
+  }
+  .price-current {
+    font-family: var(--serif);
+    font-size: 28pt;
+    font-weight: 700;
+    color: var(--near-black);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .price-change {
+    font-size: 10pt;
+    font-weight: 700;
+    margin-top: 2pt;
+    font-variant-numeric: tabular-nums;
+    color: var(--stone);
+  }
+  .price-date {
+    font-size: 9pt;
+    color: var(--stone);
+    margin-top: 2pt;
+  }
+
+  /* ========== METRICS ========== */
+  .metrics {
+    display: flex;
+    gap: 14pt;
+    margin-bottom: 14pt;
+    padding: 4pt 0;
+    border-top: 0.3pt dotted var(--border);
+    border-bottom: 0.3pt dotted var(--border);
+  }
+  .metric {
+    flex: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 4pt;
+  }
+  .metric-value {
+    font-family: var(--serif);
+    font-size: 16pt;
+    font-weight: 700;
+    color: var(--brand);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .metric-label {
+    font-size: 9pt;
+    color: var(--olive);
+    line-height: 1.3;
+  }
+
+  /* ========== SECTIONS ========== */
+  h2 {
+    font-family: var(--serif);
+    font-size: 15pt;
+    font-weight: 700;
+    color: var(--near-black);
+    margin: 9pt 0 3pt 0;
+    break-after: avoid;
+  }
+
+  h3 {
+    font-size: 12pt;
+    font-weight: 700;
+    color: var(--dark-warm);
+    margin: 6pt 0 2pt 0;
+    break-after: avoid;
+  }
+
+  p { margin: 0 0 4pt 0; line-height: 1.42; }
+
+  ul, ol {
+    margin: 4pt 0 8pt 0;
+    padding-left: 18pt;
+    line-height: 1.45;
+  }
+  ul li { margin-bottom: 1pt; }
+  ul li::marker { color: var(--brand); }
+
+  /* ========== TABLE ========== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.5pt;
+    margin: 8pt 0;
+    break-inside: avoid;
+  }
+  table th {
+    text-align: left;
+    font-weight: 700;
+    color: var(--dark-warm);
+    padding: 5pt 8pt;
+    border-bottom: 1pt solid var(--border);
+    background: transparent;
+  }
+  table td {
+    padding: 5pt 8pt;
+    border-bottom: 0.3pt solid var(--border-soft);
+    vertical-align: top;
+  }
+  table.financial td:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+  table.financial th:not(:first-child) { text-align: right; }
+  table.striped tbody tr:nth-child(even) td { background: var(--ivory); }
+  table.compact th { padding: 4pt 6pt; font-size: 8.5pt; }
+  table.compact td { padding: 3pt 6pt; font-size: 8.5pt; line-height: 1.4; }
+
+  /* ========== CALLOUT ========== */
+  .callout {
+    background: var(--ivory);
+    border-left: 2pt solid var(--brand);
+    padding: 8pt 12pt;
+    border-radius: 3pt;
+    margin: 8pt 0;
+    line-height: 1.42;
+    break-inside: avoid;
+  }
+
+  /* ========== FIGURE ========== */
+  figure { margin: 8pt 0; break-inside: avoid; }
+  figure svg { width: 100%; height: auto; max-height: 70mm; }
+  figcaption {
+    font-size: 9pt;
+    color: var(--stone);
+    margin-top: 4pt;
+    text-align: center;
+  }
+
+  /* ========== RISK MATRIX ========== */
+  .risk-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8pt;
+    margin: 6pt 0;
+  }
+  .risk-item {
+    padding: 5pt 9pt;
+    background: var(--ivory);
+    border-radius: 3pt;
+    break-inside: avoid;
+  }
+  .risk-label {
+    font-size: 9pt;
+    font-weight: 700;
+    color: var(--brand);
+    margin-bottom: 2pt;
+  }
+  .risk-desc {
+    font-size: 9pt;
+    color: var(--olive);
+    line-height: 1.42;
+  }
+
+  /* ========== ANALYST BOX ========== */
+  .analyst-box {
+    background: var(--ivory);
+    border: 0.5pt solid var(--border);
+    border-radius: 4pt;
+    padding: 8pt 12pt;
+    margin: 6pt 0;
+    break-inside: avoid;
+  }
+  .analyst-label {
+    font-size: 9pt;
+    color: var(--brand);
+    letter-spacing: 0.5pt;
+    text-transform: uppercase;
+    margin-bottom: 4pt;
+  }
+
+  /* ========== FOOTER ========== */
+  .report-footer {
+    margin-top: 6pt;
+    padding-top: 4pt;
+    border-top: 0.3pt dotted var(--border);
+    font-size: 9pt;
+    color: var(--stone);
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<div class="report-header">
+  <div class="ticker-block">
+    <div class="ticker-eyebrow">Q1 2026 실적 분석</div>
+    <div class="ticker-name">테슬라 <span style="font-size: 14pt; color: var(--stone);">TSLA</span></div>
+    <div class="ticker-sub">자동차 및 에너지 · NASDAQ · 이익률은 회복됐지만, 자본지출 청구서가 도착했다</div>
+  </div>
+  <div class="price-block">
+    <div class="price-current">$373.72</div>
+    <div class="price-change">실적 발표 후 -3.56%</div>
+    <div class="price-date">2026.04.23 종가</div>
+  </div>
+</div>
+
+<!-- ========== METRICS ========== -->
+<div class="metrics">
+  <div class="metric">
+    <div class="metric-value">$1.2조</div>
+    <div class="metric-label">시가총액</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">~220x</div>
+    <div class="metric-label">선행 P/E</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">$22.4B</div>
+    <div class="metric-label">Q1 매출</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">21.1%</div>
+    <div class="metric-label">매출총이익률</div>
+  </div>
+</div>
+
+<!-- ========== 투자 논리 ========== -->
+<h2>투자 논리</h2>
+<p>테슬라 Q1 2026 매출 <span class="hl">$22.39B(전년 대비 +16%)</span>, 시장 예상치 $21.92B 초과 달성. Non-GAAP EPS <span class="hl">$0.41, 예상치 $0.37 상회</span>. 매출총이익률은 전년 동기 16.3%에서 21.1%(+478bp)로 회복되었으며, 에너지 부문 매출총이익률은 사상 최고인 39.5%를 기록했습니다. 자동차 부문은 엇갈린 신호를 보냈습니다. 인도 대수 358,023대로 시장 예상치를 약 7,600대 하회했지만, 이익률 확장의 논거는 여전히 유효합니다.</p>
+
+<p>핵심 모순: 단기 이익률 회복 vs 2026년 전체 $250억+ 자본지출 공약. 경영진은 연간 잉여현금흐름 적자 전환을 예고했습니다. 실적 발표 후 주가는 3.56% 하락했는데, 시장이 이익 예상 초과가 아닌 자본지출 충격을 반영한 것입니다.</p>
+
+<div class="callout">
+  <strong>보유 유지.</strong> Q1 이익률 회복은 원가 절감 능력을 입증했지만, $250억 capex + 잉여현금흐름 적자 가이던스는 현재 주가에 AI/Robotaxi의 옵션 가치가 반영돼 있음을 의미하며, 이 부분은 아직 규모 있는 매출 기여가 없습니다. Q2 인도 데이터와 Robotaxi 단위 경제성이 확인된 이후 추가 매수 여부를 결정하는 것을 권장합니다.
+</div>
+
+<!-- ========== 주가 차트 ========== -->
+<h2>최근 주가 동향</h2>
+<figure>
+  <svg viewBox="0 0 760 270" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100%" height="100%" fill="#f5f4ed"/>
+
+    <!-- 그리드: 가격 범위 335-410, 차트 영역 x=56 y=20 w=660 h=220, 기준선 y=240 -->
+    <!-- 배율: 1달러 = 2.93px (220/75) -->
+    <line x1="56" y1="240" x2="716" y2="240" stroke="#e8e7e1" stroke-width="0.8"/>
+    <line x1="56" y1="211" x2="716" y2="211" stroke="#e8e7e1" stroke-width="0.8"/>
+    <line x1="56" y1="181" x2="716" y2="181" stroke="#e8e7e1" stroke-width="0.8"/>
+    <line x1="56" y1="152" x2="716" y2="152" stroke="#e8e7e1" stroke-width="0.8"/>
+    <line x1="56" y1="123" x2="716" y2="123" stroke="#e8e7e1" stroke-width="0.8"/>
+    <line x1="56" y1="93"  x2="716" y2="93"  stroke="#e8e7e1" stroke-width="0.8"/>
+    <line x1="56" y1="64"  x2="716" y2="64"  stroke="#e8e7e1" stroke-width="0.8"/>
+    <line x1="56" y1="35"  x2="716" y2="35"  stroke="#e8e7e1" stroke-width="0.8"/>
+
+    <!-- Y축 레이블 -->
+    <text x="48" y="244" fill="#6b6a64" font-size="9" text-anchor="end" font-family="Charter,Georgia,serif">335</text>
+    <text x="48" y="215" fill="#6b6a64" font-size="9" text-anchor="end" font-family="Charter,Georgia,serif">345</text>
+    <text x="48" y="185" fill="#6b6a64" font-size="9" text-anchor="end" font-family="Charter,Georgia,serif">355</text>
+    <text x="48" y="156" fill="#6b6a64" font-size="9" text-anchor="end" font-family="Charter,Georgia,serif">365</text>
+    <text x="48" y="127" fill="#6b6a64" font-size="9" text-anchor="end" font-family="Charter,Georgia,serif">375</text>
+    <text x="48" y="97"  fill="#6b6a64" font-size="9" text-anchor="end" font-family="Charter,Georgia,serif">385</text>
+    <text x="48" y="68"  fill="#6b6a64" font-size="9" text-anchor="end" font-family="Charter,Georgia,serif">395</text>
+    <text x="48" y="39"  fill="#6b6a64" font-size="9" text-anchor="end" font-family="Charter,Georgia,serif">405</text>
+
+    <!-- 캔들 20개 -->
+    <line x1="72" y1="95" x2="72" y2="132" stroke="#6b6a64" stroke-width="1.2"/>
+    <rect x="64" y="103" width="16" height="27" fill="#6b6a64" rx="1"/>
+    <line x1="105" y1="138" x2="105" y2="168" stroke="#6b6a64" stroke-width="1.2"/>
+    <rect x="97" y="138" width="16" height="23" fill="#6b6a64" rx="1"/>
+    <line x1="138" y1="146" x2="138" y2="190" stroke="#6b6a64" stroke-width="1.2"/>
+    <rect x="130" y="149" width="16" height="31" fill="#6b6a64" rx="1"/>
+    <line x1="171" y1="128" x2="171" y2="164" stroke="#1B365D" stroke-width="1.2"/>
+    <rect x="163" y="132" width="16" height="30" fill="#1B365D" rx="1"/>
+    <line x1="204" y1="99" x2="204" y2="126" stroke="#1B365D" stroke-width="1.2"/>
+    <rect x="196" y="104" width="16" height="15" fill="#1B365D" rx="1"/>
+    <line x1="237" y1="137" x2="237" y2="169" stroke="#6b6a64" stroke-width="1.2"/>
+    <rect x="229" y="143" width="16" height="18" fill="#6b6a64" rx="1"/>
+    <line x1="270" y1="144" x2="270" y2="206" stroke="#6b6a64" stroke-width="1.2"/>
+    <rect x="262" y="149" width="16" height="40" fill="#6b6a64" rx="1"/>
+    <line x1="303" y1="202" x2="303" y2="233" stroke="#1B365D" stroke-width="1.2"/>
+    <rect x="295" y="202" width="16" height="15" fill="#1B365D" rx="1"/>
+    <line x1="336" y1="154" x2="336" y2="226" stroke="#6b6a64" stroke-width="1.2"/>
+    <rect x="328" y="154" width="16" height="60" fill="#6b6a64" rx="1"/>
+    <line x1="369" y1="199" x2="369" y2="233" stroke="#1B365D" stroke-width="1.2"/>
+    <rect x="361" y="209" width="16" height="17" fill="#1B365D" rx="1"/>
+    <line x1="402" y1="195" x2="402" y2="217" stroke="#1B365D" stroke-width="1.2"/>
+    <rect x="394" y="199" width="16" height="13" fill="#1B365D" rx="1"/>
+    <line x1="435" y1="177" x2="435" y2="200" stroke="#1B365D" stroke-width="1.2"/>
+    <rect x="427" y="189" width="16" height="7" fill="#1B365D" rx="1"/>
+    <line x1="468" y1="144" x2="468" y2="182" stroke="#1B365D" stroke-width="1.2"/>
+    <rect x="460" y="154" width="16" height="19" fill="#1B365D" rx="1"/>
+    <line x1="501" y1="65" x2="501" y2="159" stroke="#1B365D" stroke-width="1.2"/>
+    <rect x="493" y="73" width="16" height="74" fill="#1B365D" rx="1"/>
+    <line x1="534" y1="67" x2="534" y2="103" stroke="#6b6a64" stroke-width="1.2"/>
+    <rect x="526" y="68" width="16" height="14" fill="#6b6a64" rx="1"/>
+    <line x1="567" y1="23" x2="567" y2="74" stroke="#1B365D" stroke-width="1.2"/>
+    <rect x="559" y="48" width="16" height="14" fill="#1B365D" rx="1"/>
+    <line x1="600" y1="30" x2="600" y2="84" stroke="#6b6a64" stroke-width="1.2"/>
+    <rect x="592" y="42" width="16" height="30" fill="#6b6a64" rx="1"/>
+    <line x1="633" y1="67" x2="633" y2="94" stroke="#6b6a64" stroke-width="1.2"/>
+    <rect x="625" y="70" width="16" height="19" fill="#6b6a64" rx="1"/>
+    <line x1="666" y1="70" x2="666" y2="94" stroke="#6b6a64" stroke-width="1.2"/>
+    <rect x="658" y="86" width="16" height="4" fill="#6b6a64" rx="1"/>
+    <line x1="699" y1="91" x2="699" y2="143" stroke="#6b6a64" stroke-width="1.2"/>
+    <rect x="691" y="101" width="16" height="22" fill="#6b6a64" rx="1"/>
+
+    <!-- X축 -->
+    <text x="72"  y="260" fill="#6b6a64" font-size="8" text-anchor="middle" font-family="Charter,Georgia,serif">3/26</text>
+    <text x="237" y="260" fill="#6b6a64" font-size="8" text-anchor="middle" font-family="Charter,Georgia,serif">4/2</text>
+    <text x="402" y="260" fill="#6b6a64" font-size="8" text-anchor="middle" font-family="Charter,Georgia,serif">4/10</text>
+    <text x="567" y="260" fill="#6b6a64" font-size="8" text-anchor="middle" font-family="Charter,Georgia,serif">4/17</text>
+    <text x="699" y="260" fill="#6b6a64" font-size="8" text-anchor="middle" font-family="Charter,Georgia,serif">4/23</text>
+
+    <!-- 실적 표시 -->
+    <line x1="682" y1="24" x2="682" y2="82" stroke="#1B365D" stroke-width="0.8" stroke-dasharray="3,2"/>
+    <text x="680" y="20" fill="#1B365D" font-size="8" text-anchor="end" font-weight="500" font-family="Charter,Georgia,serif">실적 발표</text>
+
+    <!-- 범례 -->
+    <line x1="56" y1="280" x2="716" y2="280" stroke="#e8e7e1" stroke-width="0.8"/>
+    <rect x="56" y="290" width="10" height="10" fill="#1B365D" rx="2"/>
+    <text x="72" y="299" fill="#504e49" font-size="9" font-family="Charter,Georgia,serif">상승</text>
+    <rect x="120" y="290" width="10" height="10" fill="#6b6a64" rx="2"/>
+    <text x="136" y="299" fill="#504e49" font-size="9" font-family="Charter,Georgia,serif">하락</text>
+    <text x="240" y="299" fill="#504e49" font-size="9" font-family="Charter,Georgia,serif">거래일 20일 | $337 - $409</text>
+  </svg>
+  <figcaption>그림 1. TSLA 최근 20거래일 동향(3/26 - 4/23). 4/17 고점 $409 이후 반락, 실적 발표 후 capex 가이던스로 추가 하락.</figcaption>
+</figure>
+
+<!-- ========== 재무 개요 ========== -->
+<h2>재무 개요</h2>
+<table class="financial striped">
+  <thead>
+    <tr>
+      <th>지표</th>
+      <th>FY2024</th>
+      <th>FY2025</th>
+      <th>Q1 2026</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>매출</td><td>$97.7B</td><td>$97.0B</td><td>$22.39B</td></tr>
+    <tr><td>GAAP 순이익</td><td>$7.1B</td><td>~$3.0B</td><td>$477M</td></tr>
+    <tr><td>GAAP EPS</td><td>$2.04</td><td>~$0.86</td><td>$0.13</td></tr>
+    <tr><td>Non-GAAP EPS</td><td>--</td><td>--</td><td>$0.41</td></tr>
+    <tr><td>매출총이익률</td><td>17.9%</td><td>~17%</td><td>21.1%</td></tr>
+    <tr><td>영업이익률</td><td>7.2%</td><td>~4%</td><td>4.2%</td></tr>
+    <tr><td>잉여현금흐름</td><td>--</td><td>--</td><td>$1.4B</td></tr>
+    <tr><td>자본지출</td><td>--</td><td>--</td><td>$2.49B</td></tr>
+  </tbody>
+</table>
+
+<p>매출총이익률 <span class="hl">21.1%</span>는 이번 분기의 가장 중요한 수치입니다. COGS 개선과 에너지 부문의 믹스 효과가 확장을 이끌었습니다. 다만 일부 분석에 따르면 Q1 영업이익 증가의 일부는 보증 충당금 조정과 관세 환급에서 비롯된 일회성 이익으로, 실질적인 이익률 개선은 19~20%에 더 가까울 수 있습니다.</p>
+
+<!-- ========== 사업 부문 성과 ========== -->
+<h2>사업 부문 성과</h2>
+
+<h3>자동차 부문</h3>
+<p>인도 <span class="hl">358,023대</span>, 시장 예상치 365,645대 하회. 생산 408,386대가 인도를 약 5만 대 초과해 재고가 누적되고 있습니다. Model 3/Y 341,893대, Cybertruck 및 기타 16,130대. 규제 크레딧 수익 $3.8억(자동차 매출의 1.9%), 전년 동기 3.7% 대비 비중이 줄어들어 핵심 사업의 이익 질이 향상되고 있습니다.</p>
+
+<h3>에너지 부문</h3>
+<p>에너지 매출 <span class="hl">$24.1억</span>, 전년 대비 12% 감소(전년 동기 $27.3억은 고기저 효과). 그러나 매출총이익률은 사상 최고인 <span class="hl">39.5%</span>를 달성. 에너지 저장 배포 8.8GWh. 이 부문은 이익 엔진으로 자리 잡고 있습니다. 39.5% 매출총이익률 vs 자동차 부문의 ~17%. Megapack 3 양산은 2026년 하반기 시작 예정입니다.</p>
+
+<!-- ========== 촉매 요인 ========== -->
+<h2>근접 촉매 요인</h2>
+<p><strong>Robotaxi(Q2-Q3):</strong> 4월 달라스/휴스턴에서 무인 유료 서비스 개시, 무사고. 유료 주행 거리 분기 대비 두 배 증가, Q2에 단위 경제성 첫 공개 예정.</p>
+<p><strong>FSD 글로벌화(Q3):</strong> 네덜란드와 중국에서 승인. 유럽 대규모 확산은 Q3 예상. FSD가 순수 구독 모델로 전환, Q1 신규 구독 사상 최고.</p>
+<p><strong>Cybercab + Q2 인도:</strong> Cybercab 하반기 양산, Model Y를 대체해 자율주행 네트워크의 주력이 될 전망. Q2 인도는 Model Y 라인 증산 효과 기대.</p>
+
+<!-- ========== 경쟁 구도 ========== -->
+<h2>경쟁 구도</h2>
+
+<table class="financial compact striped">
+  <thead>
+    <tr>
+      <th>기업</th>
+      <th>시가총액</th>
+      <th>선행 P/E</th>
+      <th>매출 성장률</th>
+      <th>매출총이익률</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>테슬라</strong></td><td>$1.2조</td><td>~220x</td><td>+16%</td><td>21.1%</td></tr>
+    <tr><td>BYD</td><td>~$1,200억</td><td>~22x</td><td>+33%</td><td>~22%</td></tr>
+    <tr><td>Rivian</td><td>~$180억</td><td>N/A</td><td>+8%</td><td>-10%</td></tr>
+    <tr><td>GM(EV)</td><td>$480억</td><td>~5x</td><td>+12%</td><td>~8%</td></tr>
+  </tbody>
+</table>
+
+<p>테슬라 선행 P/E는 BYD의 <span class="hl">10배</span>이지만, 매출 성장률은 더 낮고 매출총이익률은 유사한 수준입니다. 프리미엄 밸류에이션은 전적으로 AI/Robotaxi 옵션 가치에 기반하고 있습니다. 자율주행과 에너지 저장으로의 전략적 전환은 단위 판매 경쟁을 벗어나기 위한 것이지만, Q2-Q3에 Robotaxi 단위 경제성이 검증되지 않으면 밸류에이션 압축 여지가 있습니다.</p>
+
+<!-- ========== 리스크 + 총평 ========== -->
+<h2>리스크와 총평</h2>
+<div class="risk-grid">
+  <div class="risk-item">
+    <div class="risk-label">자본지출</div>
+    <div class="risk-desc">$250억+ capex 가이던스, 연간 잉여현금흐름 적자 전환 예상. AI/Robotaxi 수익화 지연 시 자본배분 신뢰도 훼손.</div>
+  </div>
+  <div class="risk-item">
+    <div class="risk-label">인도 부진</div>
+    <div class="risk-desc">연간 인도 2년 연속 감소(고점 181만 → 164만). Q1도 컨센서스 예상치 하회.</div>
+  </div>
+  <div class="risk-item">
+    <div class="risk-label">HW3 단종</div>
+    <div class="risk-desc">HW3 차량은 무감독 FSD 미지원. 2024년 이전 차주는 하드웨어 업그레이드 장벽에 직면.</div>
+  </div>
+  <div class="risk-item">
+    <div class="risk-label">경쟁 및 관세</div>
+    <div class="risk-desc">BYD의 $2만~$3만 가격대 원가 우위 35%. 미국 관세 정책으로 공급망 불확실성 증가.</div>
+  </div>
+</div>
+
+<div class="analyst-box">
+  <div class="analyst-label">총평</div>
+  이익률은 회복됐고, 매출은 예상을 넘었지만 주가는 하락했습니다. Robotaxi 규모 매출이 없는 상황에서 $250억 capex + 잉여현금흐름 적자가 발목을 잡고 있습니다. 강세 논거: 달라스/휴스턴 Robotaxi 데이터가 Q2에 단위 경제성을 검증하고 재평가를 촉발할 것입니다. 약세 논거: 핵심 자동차 사업이 위축되는 가운데 3~5년 후에야 수익화될 프로젝트에 연 $250억을 투입하고 있습니다. 기존 보유자: Q2까지 유지 후 Robotaxi 데이터로 재평가. 신규 매수: 7월 인도 데이터와 Robotaxi 수치 확인 후 결정을 권장합니다.
+</div>
+
+<!-- ========== FOOTER ========== -->
+<div class="report-footer">
+  <span>개인 투자 참고용이며, 투자 권유가 아닙니다</span>
+  <span>Tw93 · 2026.04.24</span>
+</div>
+
+</body>
+</html>
