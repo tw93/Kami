@@ -136,7 +136,7 @@ def test_dist_package_contents() -> None:
 def test_registry_consistency() -> None:
     check("HTML_TEMPLATES has 24 entries", len(HTML_TEMPLATES) == 24,
           f"got {len(HTML_TEMPLATES)}")
-    check("SCREEN_TARGETS has 2 entries", len(SCREEN_TARGETS) == 2,
+    check("SCREEN_TARGETS has 3 entries", len(SCREEN_TARGETS) == 3,
           f"got {len(SCREEN_TARGETS)}")
     check("build_targets matches HTML_TEMPLATES key set",
           set(build_targets()) == set(HTML_TEMPLATES))
@@ -383,9 +383,9 @@ def test_pair_names_includes_known_pairs() -> None:
     check("pair_names includes one-pager",
           ("one-pager", "one-pager-en") in captured,
           f"got {[v for b, v in captured if b == 'one-pager']!r}")
-    pairs = dict(captured)
-    check("pair_names includes landing-page", pairs.get("landing-page") == "landing-page-en",
-          f"got {pairs.get('landing-page')!r}")
+    check("pair_names includes landing-page (CN/EN)",
+          ("landing-page", "landing-page-en") in captured,
+          f"got {[v for b, v in captured if b == 'landing-page']!r}")
     check("pair_names omits lone -en entries",
           not any(name.endswith("-en") for name, _ in _pair_names()))
 
