@@ -199,21 +199,31 @@ def check_all(verbose: bool) -> int:
 # The project intentionally ships CN/EN templates as forked single-file HTML
 # (no shared partials). The price of that decision is drift: a maintainer
 # updating one side of a pair can silently leave the other behind. This check
-# pairs each `foo.html` with its `foo-en.html`, parses the `:root { ... }`
-# block of both, and flags variables that differ. Font-stack variables
-# (`--serif`, `--sans`, `--mono`, `--latin-ui`) are allowlisted because CN/EN
-# deliberately use different fonts.
+# pairs each base template (e.g. `foo.html`) with every recognized locale
+# variant (`foo-en.html`, `foo-ko.html`), parses the `:root { ... }` block of
+# each, and flags variables that differ. Font-stack variables (`--serif`,
+# `--sans`, `--mono`, `--latin-ui`) are allowlisted because each locale
+# deliberately uses different fonts.
+
+_VARIANT_SUFFIXES: tuple[str, ...] = ("-en", "-ko")
+
 
 def _pair_names() -> list[tuple[str, str]]:
-    """Return [(cn_name, en_name), ...] for every CN template that has an -en sibling."""
+    """Return [(base_name, variant_name), ...] for every base template that has
+    one of the recognized locale-variant siblings (`-en`, `-ko`).
+
+    A base template is any registered name that does not itself end in a
+    recognized variant suffix.
+    """
     pairs: list[tuple[str, str]] = []
     seen = set(HTML_TEMPLATES) | set(SCREEN_TEMPLATES)
     for name in sorted(seen):
-        if name.endswith("-en"):
+        if any(name.endswith(s) for s in _VARIANT_SUFFIXES):
             continue
-        en_name = f"{name}-en"
-        if en_name in seen:
-            pairs.append((name, en_name))
+        for suffix in _VARIANT_SUFFIXES:
+            variant = f"{name}{suffix}"
+            if variant in seen:
+                pairs.append((name, variant))
     return pairs
 
 
@@ -245,36 +255,36 @@ def check_cross_template_consistency(verbose: bool = False) -> int:
     per_pair = allowlist.get("per_pair_allowed", {}) or {}
 
     pairs = _pair_names()
-    drift: list[tuple[str, str, str, str]] = []  # (pair, var, cn_value, en_value)
+    drift: list[tuple[str, str, str, str]] = []  # (pair, var, base_value, variant_value)
 
-    for cn_name, en_name in pairs:
+    for base_name, variant_name in pairs:
         try:
-            cn_path, _ = _source_for(cn_name)
-            en_path, _ = _source_for(en_name)
+            base_path, _ = _source_for(base_name)
+            variant_path, _ = _source_for(variant_name)
         except KeyError:
             continue
-        if not cn_path.exists() or not en_path.exists():
+        if not base_path.exists() or not variant_path.exists():
             continue
 
-        cn_vars = _extract_root_vars(cn_path)
-        en_vars = _extract_root_vars(en_path)
-        allowed_for_pair = always_allowed | set(per_pair.get(cn_name, []) or [])
+        base_vars = _extract_root_vars(base_path)
+        variant_vars = _extract_root_vars(variant_path)
+        allowed_for_pair = always_allowed | set(per_pair.get(base_name, []) or [])
 
-        shared_keys = set(cn_vars) & set(en_vars)
+        shared_keys = set(base_vars) & set(variant_vars)
         for key in sorted(shared_keys):
             if key in allowed_for_pair:
                 continue
-            if cn_vars[key].lower() != en_vars[key].lower():
-                drift.append((cn_name, key, cn_vars[key], en_vars[key]))
+            if base_vars[key].lower() != variant_vars[key].lower():
+                drift.append((base_name, key, base_vars[key], variant_vars[key]))
 
         if verbose:
-            print(f"  pair {cn_name}/{en_name}: checked {len(shared_keys)} shared vars")
+            print(f"  pair {base_name}/{variant_name}: checked {len(shared_keys)} shared vars")
 
     if not drift:
-        print(f"OK: cross-template :root vars in sync across {len(pairs)} CN/EN pair(s)")
+        print(f"OK: cross-template :root vars in sync across {len(pairs)} base-variant pair(s)")
         return 0
 
     print(f"\n[cross-template-drift] {len(drift)}")
-    for pair, var, cn_val, en_val in drift:
-        print(f"  {pair}: {var} CN={cn_val} EN={en_val}")
+    for pair, var, base_val, variant_val in drift:
+        print(f"  {pair}: {var} base={base_val} variant={variant_val}")
     return 1

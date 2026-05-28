@@ -40,6 +40,7 @@ from shared import (  # noqa: E402
     HTML_TEMPLATES,
     PARCHMENT_RGB,
     ROOT as REPO_ROOT,
+    SCREEN_TEMPLATES,
     TEMPLATES,
     build_targets,
     screen_targets,
@@ -391,6 +392,23 @@ def test_cross_template_consistency_clean() -> None:
     """The current repo should pass cross-template consistency."""
     rc = silently(check_cross_template_consistency, False)
     check("cross-template returns 0 on current repo", rc == 0, f"rc={rc}")
+
+
+def test_pair_names_includes_ko_variants_when_present():
+    """`_pair_names` must yield (base, base-ko) pairs in addition to (base, base-en)."""
+    captured = list(_pair_names())
+    # Sanity: existing CN/EN pairs still detected.
+    assert ("one-pager", "one-pager-en") in captured, "CN/EN pair regressed"
+    # KO detection is conditional on KO templates being registered; this test
+    # documents the contract: any base whose `-ko` sibling is present in the
+    # registry must appear as a (base, base-ko) pair.
+    bases = {base for base, _ in captured}
+    seen = set(HTML_TEMPLATES) | set(SCREEN_TEMPLATES)
+    for base in bases:
+        ko_name = f"{base}-ko"
+        if ko_name in seen:
+            assert (base, ko_name) in captured, f"KO sibling for {base} not paired"
+    check("pair_names includes ko variants when present", True)
 
 
 def test_extract_root_vars_picks_up_definitions() -> None:
@@ -786,6 +804,7 @@ def main() -> int:
     test_check_placeholders_flags_unfilled()
     test_check_placeholders_passes_clean()
     test_pair_names_includes_known_pairs()
+    test_pair_names_includes_ko_variants_when_present()
     test_cross_template_consistency_clean()
     test_extract_root_vars_picks_up_definitions()
     test_clamp_basic()
