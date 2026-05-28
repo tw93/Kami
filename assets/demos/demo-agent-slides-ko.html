@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     SLIDES DEMO · 에이전트 개발 · 한국어
+     A4 가로, 슬라이드당 1페이지, kami 팔레트.
+     "에이전트에 대해 당신이 모르는 것들" 내용 번역
+     ================================================================== -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>에이전트에 대해 당신이 모르는 것들 · 슬라이드</title>
+<style>
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 500; font-style: normal; }
+
+  @page {
+    size: A4 landscape;
+    margin: 0;
+    background: #f5f4ed;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment:  #f5f4ed;
+    --ivory:      #faf9f5;
+    --near-black: #141413;
+    --dark-warm:  #3d3d3a;
+    --olive:      #504e49;
+    --stone:      #6b6a64;
+    --brand:      #1B365D;
+    --brand-tint: #EEF2F7;
+    --border:     #e8e6dc;
+
+    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR", "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+    --sans: var(--serif);
+    --mono:  "JetBrains Mono", "SF Mono", Consolas, monospace;
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-synthesis: none;
+  }
+
+  .slide {
+    width: 297mm;
+    height: 210mm;
+    padding: 18mm 22mm;
+    background: var(--parchment);
+    break-after: page;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .slide:last-child { break-after: auto; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 9pt;
+    letter-spacing: 2.5pt;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  .page-num {
+    position: absolute;
+    bottom: 10mm;
+    right: 22mm;
+    font-family: var(--mono);
+    font-size: 9pt;
+    color: var(--stone);
+    letter-spacing: 0.5pt;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .footer-mark {
+    position: absolute;
+    bottom: 10mm;
+    left: 22mm;
+    font-family: var(--mono);
+    font-size: 9pt;
+    color: var(--stone);
+    letter-spacing: 1.5pt;
+    text-transform: uppercase;
+  }
+
+  /* --- Cover --- */
+  .cover {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32pt;
+    align-items: center;
+  }
+  .cover-left { display: flex; flex-direction: column; }
+  .cover .mark {
+    font-family: var(--mono);
+    font-size: 10pt;
+    color: var(--brand);
+    letter-spacing: 3pt;
+    text-transform: uppercase;
+    margin-bottom: 22pt;
+  }
+  .cover h1 {
+    font-family: var(--serif);
+    font-size: 38pt;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.5pt;
+    color: var(--near-black);
+    margin-bottom: 16pt;
+  }
+  .cover .sub {
+    font-family: var(--serif);
+    font-size: 14pt;
+    color: var(--olive);
+    line-height: 1.5;
+    max-width: 34ch;
+  }
+  .cover .line {
+    width: 60pt;
+    height: 2pt;
+    background: var(--brand);
+    margin: 20pt 0 16pt 0;
+  }
+  .cover .meta {
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--stone);
+    letter-spacing: 0.4pt;
+  }
+  .cover-visual { display: flex; align-items: center; justify-content: center; }
+
+  /* --- Content slide --- */
+  .slide-head {
+    margin-bottom: 10pt;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .slide-title {
+    font-family: var(--serif);
+    font-size: 34pt;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.3pt;
+    color: var(--near-black);
+    max-width: 28ch;
+    margin-top: 6pt;
+    margin-bottom: 24pt;
+  }
+
+  .body-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28pt;
+  }
+  .body-single {
+    max-width: 70ch;
+    flex: 1;
+  }
+
+  .claim {
+    font-family: var(--serif);
+    font-size: 15pt;
+    line-height: 1.5;
+    color: var(--dark-warm);
+    margin-bottom: 14pt;
+  }
+  .claim .hl { color: var(--brand); }
+
+  ul.pts {
+    list-style: none;
+    counter-reset: pts;
+  }
+  ul.pts li {
+    counter-increment: pts;
+    font-family: var(--sans);
+    font-size: 12pt;
+    line-height: 1.55;
+    color: var(--dark-warm);
+    padding-left: 18pt;
+    position: relative;
+    margin-bottom: 9pt;
+  }
+  ul.pts li::before {
+    content: counter(pts) ".";
+    position: absolute;
+    left: 0;
+    color: var(--brand);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  ul.pts li .hl { color: var(--brand); font-weight: 700; }
+
+  .callout {
+    background: transparent;
+    border-left: 2pt solid var(--brand);
+    padding: 8pt 0 8pt 16pt;
+    font-family: var(--serif);
+    font-size: 13pt;
+    line-height: 1.5;
+    color: var(--olive);
+    margin-top: 4pt;
+  }
+  .callout .hl { color: var(--brand); }
+
+  .metrics {
+    display: flex;
+    gap: 20pt;
+    margin-top: 20pt;
+    padding-top: 12pt;
+    border-top: 0.3pt dotted var(--border);
+  }
+  .metric {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6pt;
+  }
+  .metric .v {
+    font-family: var(--serif);
+    font-size: 32pt;
+    font-weight: 700;
+    color: var(--brand);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.3pt;
+  }
+  .metric .l {
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--olive);
+    line-height: 1.4;
+  }
+
+  /* --- Diagram column --- */
+  .diagram-col {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: -20pt;
+  }
+  .diagram-col svg { width: 96%; }
+
+  /* --- Ending slide --- */
+  .ending { justify-content: center; align-items: center; text-align: center; }
+  .ending h1 {
+    font-family: var(--serif);
+    font-size: 48pt;
+    font-weight: 700;
+    color: var(--near-black);
+    letter-spacing: -0.5pt;
+    margin-bottom: 12pt;
+  }
+  .ending .sub {
+    font-family: var(--serif);
+    font-size: 16pt;
+    color: var(--olive);
+    max-width: 44ch;
+    line-height: 1.5;
+  }
+  .ending .line {
+    width: 60pt;
+    height: 1.5pt;
+    background: var(--brand);
+    margin: 22pt auto;
+  }
+
+  /* --- Code Card --- */
+  .code-card {
+    background: var(--ivory);
+    border: 1px solid #e8e5da;
+    border-radius: 6pt;
+    padding: 14pt 18pt;
+    font-family: var(--mono);
+    font-size: 10pt;
+    line-height: 1.55;
+    color: var(--near-black);
+    white-space: pre;
+    overflow: hidden;
+  }
+  .code-card .k { color: var(--brand); }
+  .code-card .c { color: #6b6a64; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ 01 · 표지 ═══════════ -->
+<section class="slide cover">
+  <div class="cover-left">
+    <div class="mark">Keynote · 2026</div>
+    <h1>에이전트에 대해 당신이 모르는 것들</h1>
+    <div class="sub">루프, 하네스, 컨텍스트, 메모리: 프로덕션에서 실제로 차이를 만드는 것.</div>
+    <div class="line"></div>
+    <div class="meta">kami 슬라이드 데모 · A4 가로 · 7슬라이드</div>
+  </div>
+  <div class="cover-visual">
+    <svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg" style="width: 220pt;">
+      <circle cx="130" cy="130" r="100" fill="none" stroke="#e8e6dc" stroke-width="1"/>
+      <circle cx="130" cy="130" r="72" fill="none" stroke="#e8e6dc" stroke-width="1"/>
+      <circle cx="130" cy="130" r="44" fill="#EEF2F7" stroke="#1B365D" stroke-width="1.2"/>
+      <path d="M 130 30 A 100 100 0 0 1 230 130" fill="none" stroke="#1B365D" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M 230 130 A 100 100 0 0 1 130 230" fill="none" stroke="#6b6a64" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M 130 230 A 100 100 0 0 1 30 130" fill="none" stroke="#6b6a64" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M 30 130 A 100 100 0 0 1 130 30" fill="none" stroke="#6b6a64" stroke-width="1.2" stroke-linecap="round"/>
+      <text x="130" y="125" text-anchor="middle" font-size="10" font-weight="500" fill="#141413" font-family="Charter, Georgia, serif">Agent</text>
+      <text x="130" y="141" text-anchor="middle" font-size="8" fill="#1B365D" font-family="'JetBrains Mono', monospace" letter-spacing="2">LOOP</text>
+    </svg>
+  </div>
+  <div class="page-num">01</div>
+  <div class="footer-mark">에이전트 엔지니어링</div>
+</section>
+
+<!-- ═══════════ 02 · 에이전트 루프 ═══════════ -->
+<section class="slide">
+  <div class="slide-head">
+    <span class="eyebrow">01 · 에이전트 루프</span>
+  </div>
+  <div class="slide-title">단순한 핵심,<br>복잡한 주변</div>
+
+  <div class="body-grid">
+    <div>
+      <p class="claim">루프 자체는 작습니다. <span class="hl">그 주변의 인프라</span>가 기능이 늘어도 안정성을 유지하게 해줍니다.</p>
+      <ul class="pts">
+        <li>동작하는 에이전트 루프는 <span class="hl">약 20줄</span>의 코드로 충분합니다.</li>
+        <li>제어 흐름은 분기하는 내부 상태가 아닌 도구에 있습니다.</li>
+        <li>워크플로 vs 에이전트: 코드에서 경로를 미리 정하느냐, 실행 시에 모델이 경로를 선택하느냐의 차이.</li>
+      </ul>
+      <div class="callout">
+        루프가 스프린트마다 커지고 있다면 잘못된 레이어를 고치고 있는 것입니다. 비용은 루프 <span class="hl">바깥에서</span> 발생합니다.
+      </div>
+    </div>
+    <div class="diagram-col">
+      <svg viewBox="0 0 680 560" xmlns="http://www.w3.org/2000/svg">
+        <text x="340" y="12" text-anchor="middle" font-size="9" fill="#6b6a64" font-family="'JetBrains Mono', monospace" letter-spacing="1.5">도구 · 하네스 · 평가 · 메모리</text>
+        <circle cx="340" cy="280" r="192" fill="none" stroke="#1B365D" stroke-width="1" stroke-dasharray="4 3"/>
+        <rect x="240" y="16" width="200" height="72" rx="8" fill="#ffffff" stroke="#141413" stroke-width="0.8"/>
+        <text x="340" y="52" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#141413" font-family="Charter, Georgia, serif">계획</text>
+        <rect x="468" y="244" width="200" height="72" rx="8" fill="#ffffff" stroke="#141413" stroke-width="0.8"/>
+        <text x="568" y="280" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#141413" font-family="Charter, Georgia, serif">실행</text>
+        <rect x="240" y="472" width="200" height="72" rx="8" fill="#ffffff" stroke="#141413" stroke-width="0.8"/>
+        <text x="340" y="508" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#141413" font-family="Charter, Georgia, serif">관찰</text>
+        <rect x="12" y="244" width="200" height="72" rx="8" fill="#ffffff" stroke="#141413" stroke-width="0.8"/>
+        <text x="112" y="280" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#141413" font-family="Charter, Georgia, serif">반성</text>
+        <text x="340" y="268" text-anchor="middle" dominant-baseline="central" font-size="16" font-weight="500" fill="#141413" font-family="Charter, Georgia, serif">20 LOC</text>
+        <text x="340" y="292" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#1B365D" font-family="'JetBrains Mono', monospace" letter-spacing="1.5">CORE</text>
+        <path d="M 440 52 Q 568 52 568 244" fill="none" stroke="#504e49" stroke-width="1.5"/>
+        <path d="M 560 236 L 568 244 L 576 236" fill="none" stroke="#504e49" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 568 316 Q 568 508 440 508" fill="none" stroke="#504e49" stroke-width="1.5"/>
+        <path d="M 448 500 L 440 508 L 448 516" fill="none" stroke="#504e49" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 240 508 Q 112 508 112 316" fill="none" stroke="#504e49" stroke-width="1.5"/>
+        <path d="M 104 324 L 112 316 L 120 324" fill="none" stroke="#504e49" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M 112 244 Q 112 52 240 52" fill="none" stroke="#504e49" stroke-width="1.5"/>
+        <path d="M 232 44 L 240 52 L 232 60" fill="none" stroke="#504e49" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+  <div class="page-num">02</div>
+  <div class="footer-mark">에이전트 엔지니어링</div>
+</section>
+
+<!-- ═══════════ 03 · 하네스 ═══════════ -->
+<section class="slide">
+  <div class="slide-head">
+    <span class="eyebrow">02 · 하네스</span>
+  </div>
+  <div class="slide-title">하드웨어보다<br>하네스가 이긴다</div>
+
+  <div class="body-single">
+    <p class="claim">더 비싼 모델로 얻는 이득은 <span class="hl">예상보다 훨씬 작습니다</span>. 검증, 경계, 피드백, 폴백이 모델 능력보다 더 중요합니다.</p>
+    <ul class="pts">
+      <li>하네스를 먼저 개선하세요. 정확도가 움직이지 않는다면, 그때 모델을 바꾸세요.</li>
+      <li>평가는 유일하게 정직한 신호입니다. 모델 테스트 전에 하네스를 테스트하세요.</li>
+      <li>작은 모델 + 강한 하네스가 큰 모델 + 약한 하네스를 프로덕션에서 반복적으로 이깁니다.</li>
+    </ul>
+  </div>
+
+  <div class="metrics">
+    <div class="metric">
+      <div class="v">20</div>
+      <div class="l">동작하는 에이전트 핵심 루프의 코드 줄 수</div>
+    </div>
+    <div class="metric">
+      <div class="v">4</div>
+      <div class="l">중요한 하네스 레이어: 검증, 경계, 피드백, 폴백</div>
+    </div>
+    <div class="metric">
+      <div class="v">10×</div>
+      <div class="l">속도 향상은 모델 교체가 아닌 실행 규율에서 나옵니다</div>
+    </div>
+  </div>
+
+  <div class="page-num">03</div>
+  <div class="footer-mark">에이전트 엔지니어링</div>
+</section>
+
+<!-- ═══════════ 04 · 컨텍스트 ═══════════ -->
+<section class="slide">
+  <div class="slide-head">
+    <span class="eyebrow">03 · 컨텍스트</span>
+  </div>
+  <div class="slide-title">길이보다 밀도</div>
+
+  <div class="body-grid">
+    <div>
+      <p class="claim">긴 컨텍스트 윈도우는 약한 컨텍스트 설계를 고쳐주지 않습니다. <span class="hl">컨텍스트 부패</span>는 모델에 상관없이 30~40만 토큰쯤에서 시작됩니다.</p>
+      <ul class="pts">
+        <li>로드를 계층화하세요: 상수, 온디맨드, 런타임, 메모리, 시스템.</li>
+        <li>먼저 인덱싱하고, 필요할 때 전체 내용을 가져오세요. 처음부터 전부 쏟아붓는 것보다 효과적입니다.</li>
+        <li>안정적인 프롬프트 접두어는 캐싱 효과를 실질적으로 높입니다.</li>
+        <li>로드를 지지하지 않는 모든 토큰은 신호를 희석합니다.</li>
+      </ul>
+    </div>
+    <div class="diagram-col">
+      <svg viewBox="0 0 280 230" xmlns="http://www.w3.org/2000/svg">
+        <rect width="280" height="230" fill="#f5f4ed"/>
+        <text x="140" y="18" text-anchor="middle" font-size="8.5" fill="#6b6a64" font-family="'JetBrains Mono', monospace" letter-spacing="1.5">로딩 전략 vs 정확도</text>
+        <text x="14" y="130" text-anchor="middle" font-size="8" fill="#504e49" font-family="Charter, Georgia, serif" transform="rotate(-90 14 130)">정확도</text>
+        <line x1="36" y1="30" x2="36" y2="180" stroke="#504e49" stroke-width="0.8"/>
+        <line x1="30" y1="56" x2="36" y2="56" stroke="#504e49" stroke-width="0.8"/>
+        <text x="26" y="59" text-anchor="end" font-size="8" fill="#6b6a64" font-family="Charter, Georgia, serif">85%</text>
+        <line x1="30" y1="120" x2="36" y2="120" stroke="#504e49" stroke-width="0.8"/>
+        <text x="26" y="123" text-anchor="end" font-size="8" fill="#6b6a64" font-family="Charter, Georgia, serif">53%</text>
+        <line x1="36" y1="180" x2="256" y2="180" stroke="#504e49" stroke-width="0.8"/>
+        <rect x="56" y="120" width="68" height="60" fill="#e8e6dc" stroke="none"/>
+        <text x="90" y="112" text-anchor="middle" font-size="8" fill="#6b6a64" font-family="Charter, Georgia, serif">53%</text>
+        <text x="90" y="198" text-anchor="middle" font-size="8.5" fill="#504e49" font-family="Charter, Georgia, serif">평면적</text>
+        <text x="90" y="209" text-anchor="middle" font-size="7.5" fill="#6b6a64" font-family="'JetBrains Mono', monospace">로딩</text>
+        <rect x="156" y="56" width="68" height="124" fill="#EEF2F7" stroke="#1B365D" stroke-width="1"/>
+        <text x="190" y="48" text-anchor="middle" font-size="8" fill="#1B365D" font-family="Charter, Georgia, serif" font-weight="500">85%</text>
+        <text x="190" y="198" text-anchor="middle" font-size="8.5" fill="#1B365D" font-family="Charter, Georgia, serif" font-weight="500">계층화</text>
+        <text x="190" y="209" text-anchor="middle" font-size="7.5" fill="#1B365D" font-family="'JetBrains Mono', monospace">로딩</text>
+        <line x1="36" y1="56" x2="256" y2="56" stroke="#1B365D" stroke-width="0.6" stroke-dasharray="3 3"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="page-num">04</div>
+  <div class="footer-mark">에이전트 엔지니어링</div>
+</section>
+
+<!-- ═══════════ 05 · 도구 & 메모리 ═══════════ -->
+<section class="slide">
+  <div class="slide-head">
+    <span class="eyebrow">04 · 도구 &amp; 메모리</span>
+  </div>
+  <div class="slide-title">상태를 컨텍스트<br>밖으로 꺼내라</div>
+
+  <div class="body-grid">
+    <div>
+      <p class="claim">도구는 기저 API 형태가 아닌 에이전트의 목표에 맞게 설계해야 합니다. 메모리는 윈도우가 아닌 디스크에 있어야 합니다.</p>
+      <ul class="pts">
+        <li><span class="hl">ACI 원칙</span>: 에이전트-컴퓨터 인터페이스 — HTTP 동사가 아닌 에이전트가 하고 싶은 것을 위해 설계하세요.</li>
+        <li>나쁜 도구 설명은 도구 설명을 다시 읽기 전까지는 모델 실패처럼 보입니다.</li>
+        <li>파일 기반 상태는 재시작 후에도 살아남습니다. 컨텍스트 내 상태는 그렇지 않습니다.</li>
+      </ul>
+    </div>
+    <div>
+      <p class="claim" style="font-size: 13pt;"><span class="hl">네 가지 메모리 유형</span></p>
+      <ul class="pts">
+        <li><span class="hl">작업 기억</span>: 컨텍스트 윈도우 — 빠르고, 비싸고, 일시적입니다.</li>
+        <li><span class="hl">절차적 기억</span>: SKILL.md 파일 — 어떻게 행동할지, 지연 로드됩니다.</li>
+        <li><span class="hl">에피소딕 기억</span>: JSONL 로그 — 무슨 일이 있었는지, 추가 가능합니다.</li>
+        <li><span class="hl">의미적 기억</span>: MEMORY.md — 세션을 넘어 무엇을 기억할지, 임계점에서 통합됩니다.</li>
+      </ul>
+      <div class="callout">
+        세션 간 일관성은 의도적인 통합이 필요합니다. 기대에 맡겨서는 안 됩니다.
+      </div>
+    </div>
+  </div>
+
+  <div class="page-num">05</div>
+  <div class="footer-mark">에이전트 엔지니어링</div>
+</section>
+
+<!-- ═══════════ 06 · 코드 스타일 ═══════════ -->
+<section class="slide">
+  <div class="slide-head">
+    <span class="eyebrow">05 · 코드 스타일</span>
+  </div>
+  <div class="slide-title">문법보다 의사코드</div>
+
+  <div class="body-grid">
+    <div>
+      <p class="claim">주석이 코드 줄보다 많아야 합니다. 독자는 언어 튜토리얼이 아닌 <span class="hl">논리</span>를 봅니다.</p>
+      <ul class="pts">
+        <li>의도를 먼저 쓰고, 그 아래에 구현 세부 사항을 적으세요.</li>
+        <li>변수명은 타입이 아닌 그것이 <span class="hl">무엇인지</span>를 설명합니다.</li>
+        <li>블록당 하나의 개념. 과감하게 분리하세요.</li>
+      </ul>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14pt;">
+      <div class="code-card"><span class="c"># 도구 호출을 처리하거나 중단을 결정</span>
+<span class="k">function</span> agent_step(context, tools):
+  <span class="c"># 모델이 다음 행동을 선택</span>
+  action = <span class="k">model.think</span>(context)
+
+  <span class="c"># 종료 조건: 모델이 완료라고 판단</span>
+  <span class="k">if</span> action.type == <span class="k">"stop"</span>:
+    <span class="k">return</span> action.result
+
+  <span class="c"># 적절한 도구에 위임</span>
+  result = tools[action.name](action.args)
+  <span class="k">return</span> agent_step(context + result, tools)</div>
+    </div>
+  </div>
+
+  <div class="page-num">06</div>
+  <div class="footer-mark">에이전트 엔지니어링</div>
+</section>
+
+<!-- ═══════════ 07 · 마무리 ═══════════ -->
+<section class="slide ending">
+  <h1>프로토콜 먼저.<br>그 다음 병렬화.</h1>
+  <div class="line"></div>
+  <div class="sub">에이전트를 조정하기 전에 평가를 먼저 고치세요. 모델 실패처럼 보이는 대부분은 위장된 인프라 노이즈입니다.</div>
+  <div class="page-num">07</div>
+  <div class="footer-mark">덱 종료</div>
+</section>
+
+</body>
+</html>
