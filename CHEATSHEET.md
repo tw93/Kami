@@ -294,6 +294,8 @@ Alternate light/dark rhythm: add `.sd-alt` to any section container.
 
 Source templates intentionally keep `{{...}}` fields. Run `python3 scripts/build.py --check-placeholders path/to/filled.html` on completed documents. Run `python3 scripts/build.py --check-density` to warn on pages with >25% trailing whitespace (skips cover).
 
+Marp variant deck (opt-in): `assets/templates/marp/`. Render with local `marp-cli`. See design.md §8 + production.md Part 2.5.
+
 ## Content quality (one rule per type)
 
 Full quality bars in `references/writing.md`. The single most important rule for each document type:

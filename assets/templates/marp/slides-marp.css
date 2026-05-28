@@ -1,0 +1,275 @@
+/* @theme kami */
+/* Kami Marp theme (CN). Mirrors slides-weasy.html tokens. */
+
+@font-face {
+  font-family: "TsangerJinKai02";
+  src: url("../../fonts/TsangerJinKai02-W04.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W04.ttf") format("truetype");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "TsangerJinKai02";
+  src: url("../../fonts/TsangerJinKai02-W05.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W05.ttf") format("truetype");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../../fonts/JetBrainsMono.woff2") format("woff2");
+  font-weight: 400;
+}
+
+:root {
+  --parchment:  #f5f4ed;
+  --ivory:      #faf9f5;
+  --near-black: #141413;
+  --dark-warm:  #3d3d3a;
+  --olive:      #504e49;
+  --stone:      #6b6a64;
+  --brand:      #1B365D;
+  --brand-tint: #EEF2F7;
+  --border:     #e8e6dc;
+  --border-soft:#e5e3d8;
+
+  --serif: "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", Georgia, serif;
+  --sans:  var(--serif);
+  --mono:  "JetBrains Mono", "SF Mono", "Fira Code", Consolas, Monaco, "TsangerJinKai02", "Source Han Serif SC", monospace;
+
+  --rhythm-module:  14pt;
+  --rhythm-section: 18pt;
+}
+
+section {
+  width: 280mm;
+  height: 158mm;
+  padding: 16mm 20mm;
+  background: var(--parchment);
+  color: var(--near-black);
+  font-family: var(--sans);
+  font-size: 13pt;
+  line-height: 1.55;
+  letter-spacing: 0.3pt;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+section * { box-sizing: border-box; }
+section h1, section h2, section h3,
+section p, section ul, section ol, section table {
+  margin: 0;
+  padding: 0;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 9.5pt;
+  letter-spacing: 2pt;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-bottom: 2pt;
+}
+
+section h2 {
+  font-family: var(--serif);
+  font-size: 24pt;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.3pt;
+  color: var(--near-black);
+  margin-bottom: var(--rhythm-module);
+}
+
+section h3 {
+  font-family: var(--serif);
+  font-size: 15pt;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.3pt;
+  color: var(--brand);
+  margin-bottom: 8pt;
+}
+
+.lead {
+  font-family: var(--sans);
+  font-size: 12pt;
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: 0.3pt;
+  color: var(--olive);
+  margin-bottom: 8pt;
+}
+
+.mt {
+  font-family: var(--serif);
+  font-size: 16pt;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.3pt;
+  color: var(--near-black);
+  margin-bottom: 8pt;
+}
+
+.ml {
+  font-family: var(--serif);
+  font-size: 24pt;
+  font-weight: 500;
+  color: var(--brand);
+  margin-right: 6pt;
+}
+
+.ms {
+  font-family: var(--mono);
+  font-size: 7.5pt;
+  letter-spacing: 1.5pt;
+  text-transform: uppercase;
+  color: var(--stone);
+  border-bottom: 0.3pt solid var(--border);
+  padding-bottom: 4pt;
+  margin-bottom: var(--rhythm-module);
+}
+
+.mb,
+section p {
+  font-family: var(--sans);
+  font-size: 11pt;
+  line-height: 1.55;
+  letter-spacing: 0.3pt;
+  color: var(--dark-warm);
+  margin-bottom: var(--rhythm-section);
+}
+
+.mi {
+  font-family: var(--sans);
+  font-size: 11pt;
+  line-height: 1.55;
+  letter-spacing: 0.3pt;
+  color: var(--dark-warm);
+  padding: 8pt 0;
+}
+
+.mc {
+  font-family: var(--sans);
+  font-size: 9.5pt;
+  line-height: 1.5;
+  letter-spacing: 0.3pt;
+  color: var(--olive);
+  border-top: 0.3pt solid var(--border);
+  padding-top: 8pt;
+  margin-top: var(--rhythm-section);
+}
+
+.co {
+  font-family: var(--sans);
+  font-size: 11pt;
+  font-weight: 500;
+  line-height: 1.55;
+  letter-spacing: 0.3pt;
+  color: var(--brand);
+  position: absolute;
+  bottom: 12mm;
+  left: 20mm;
+  right: 20mm;
+}
+
+.c2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22pt;
+}
+
+table.t2x2 {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 22pt 18pt;
+  margin: -18pt -22pt;
+}
+table.t2x2 td {
+  vertical-align: top;
+  width: 50%;
+}
+
+table.data {
+  width: 100%;
+  border-collapse: collapse;
+}
+table.data td {
+  padding: 8pt;
+  border-bottom: 0.3pt solid var(--border);
+  font-size: 11pt;
+  line-height: 1.55;
+  letter-spacing: 0.3pt;
+}
+table.data td:first-child {
+  font-weight: 500;
+  color: var(--brand);
+}
+
+section ul, section ol {
+  margin: 0 0 var(--rhythm-section) 0;
+  padding-left: 1.4em;
+  font-size: 11pt;
+  line-height: 1.55;
+  letter-spacing: 0.3pt;
+  color: var(--dark-warm);
+}
+section li { margin-bottom: 4pt; }
+section li::marker { color: var(--brand); }
+
+section svg {
+  max-height: 105mm;
+  width: auto;
+}
+
+/* Cover layout: <!-- _class: cover --> */
+section.cover {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+section.cover h1 {
+  font-family: var(--serif);
+  font-size: 38pt;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 0.3pt;
+  color: var(--near-black);
+  margin-bottom: 12pt;
+}
+section.cover .sub {
+  font-family: var(--sans);
+  font-size: 14pt;
+  line-height: 1.5;
+  letter-spacing: 0.3pt;
+  color: var(--olive);
+  max-width: 50ch;
+  margin-bottom: 32pt;
+}
+section.cover .meta {
+  font-family: var(--sans);
+  font-size: 10pt;
+  color: var(--stone);
+  letter-spacing: 0.3pt;
+}
+
+/* Pagination (enable with `paginate: true` in deck frontmatter) */
+section::after {
+  font-family: var(--mono);
+  font-size: 9pt;
+  color: var(--stone);
+  letter-spacing: 0.5pt;
+  font-variant-numeric: tabular-nums;
+  bottom: 10mm;
+  right: 20mm;
+}
+
+/* Footer mark (enable with `<!-- footer: '项目名称' -->`) */
+footer {
+  font-family: var(--mono);
+  font-size: 9pt;
+  color: var(--stone);
+  letter-spacing: 1.5pt;
+  position: absolute;
+  bottom: 10mm;
+  left: 20mm;
+}

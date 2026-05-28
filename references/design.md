@@ -973,10 +973,8 @@ Constraints that bite if you arrive from the WeasyPrint slides:
 - The page unit is `section`, not `.slide`. CSS that targets `.slide` will not match. The theme already declares `section { width: 280mm; height: 158mm; position: relative; }`, so `.co { position: absolute; bottom: 12mm }` still pins to the bottom of the current slide.
 - Markdown blocks inside `<div>` wrappers need surrounding blank lines for Marp to parse them as Markdown. The sample deck shows the pattern for `.c2` and `table.t2x2`.
 - `paginate: true` injects a page number via the `section::after` pseudo-element. Do not also place a `.page-num` element by hand; you will get two numbers.
-- The theme is not registered with `--theme-set` by default. Render with `marp --theme-set assets/templates/marp slides-marp.md ...` (see `references/production.md` for the full command matrix).
-- Marp's PDF / PPTX export depends on Chromium. Behind a corporate proxy or in CI, expect a one-time Chromium download.
 
-The full SKILL.md content contract (assertion-evidence titles, 1 slide 1 claim, no section divider slides, no CJK parentheses, pinned `.co` for sparse pages) applies to Marp decks unchanged.
+Render commands and CLI flags live in `references/production.md` Part 2.5.
 
 ---
 

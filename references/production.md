@@ -272,6 +272,74 @@ One rule covers most adjustments: **macro spacing x1.6, micro details x0.5** (le
 
 ---
 
+## Part 2.5 · Markdown -> Marp (variant deck path)
+
+Marp is the third rendering path, used only when the user explicitly asks for Marp / markdown slides / a deck that lives in a `.md` file. The repo does **not** declare `marp-cli` as a dependency; install it on the user's machine.
+
+### Install
+
+Use the `npx @marp-team/marp-cli@latest ...` form below for zero-install. For repeat use, install via `npm i -g @marp-team/marp-cli` or `brew install marp-cli` (see [marp-cli docs](https://github.com/marp-team/marp-cli)). Kami's build pipeline (`build.py` / `stabilize.py` / `package-skill.sh`) does not call `marp`.
+
+### Files
+
+| Asset | Path |
+|---|---|
+| CN theme | `assets/templates/marp/slides-marp.css` (theme name: `kami`) |
+| EN theme | `assets/templates/marp/slides-marp-en.css` (theme name: `kami-en`) |
+| CN sample deck | `assets/templates/marp/slides-marp.md` |
+| EN sample deck | `assets/templates/marp/slides-marp-en.md` |
+
+### Render commands
+
+Run from the repo root so font URLs resolve. **Input file must come before `--theme-set`**; `--theme-set` is a yargs array option and will swallow any positional arg that follows it.
+
+```bash
+# HTML preview (no Chromium needed; zero external download)
+npx @marp-team/marp-cli@latest \
+  assets/templates/marp/slides-marp.md \
+  --theme-set assets/templates/marp \
+  -o /tmp/kami-cn.html
+
+# PDF (needs Chromium; see "Browser strategy" below)
+npx @marp-team/marp-cli@latest \
+  assets/templates/marp/slides-marp.md \
+  --theme-set assets/templates/marp \
+  --pdf --allow-local-files \
+  -o /tmp/kami-cn.pdf
+
+# PPTX (Chromium-rendered; not a python-pptx editable deck)
+npx @marp-team/marp-cli@latest \
+  assets/templates/marp/slides-marp.md \
+  --theme-set assets/templates/marp \
+  --pptx --allow-local-files \
+  -o /tmp/kami-cn.pptx
+```
+
+`--theme-set` points at the directory; Marp picks up every `.css` in there. `--allow-local-files` is required for PDF / PPTX so the renderer may read the local font files referenced by `@font-face` URLs.
+
+### Browser strategy (only for PDF / PPTX)
+
+HTML output is pure Node and needs no browser. PDF / PPTX rendering goes through a headless browser. Three options, lightest first:
+
+| Strategy | Setup | Cost |
+|---|---|---|
+| **HTML only, view in browser** | Use the HTML command above; open in any browser; export to PDF from the browser's print dialog if needed | 0 MB |
+| **Reuse a local Chromium-family browser** | Set `PUPPETEER_EXECUTABLE_PATH` to the absolute path of an installed Chrome, Edge, Brave, Arc, or Chromium binary. Marp also honours `--browser chrome` / `edge` / `firefox` with `--browser-path`. | 0 MB (assumes the browser is already installed) |
+| **Let Marp download its own Chromium** | First run of `--pdf` / `--pptx` triggers Puppeteer to fetch a pinned Chromium build (~150 MB to `~/.cache/puppeteer/`) | ~150 MB, one-time |
+
+For light verification of the theme and sample deck, prefer the HTML path.
+
+### Marp gotchas
+
+| Symptom | Cause | Fix |
+|---|---|---|
+| Two page numbers per slide | Deck pinned a `.page-num` element and also set `paginate: true` | Pick one; the theme injects pagination via `section::after` |
+| `position: absolute` does not pin `.co` | A child `<div>` overrode `position: relative` on the section | Marp themes already set `section { position: relative }`; do not override it per slide |
+| PDF / PPTX export hangs on first run | Marp is downloading Chromium | Network-restricted environments need `PUPPETEER_EXECUTABLE_PATH` to a pre-installed Chrome |
+| Markdown inside `<div class="c2">` renders as a literal HTML block | Missing blank line between the `<div>` and the Markdown body | Always leave a blank line above and below Markdown inside an HTML wrapper |
+
+---
+
 ## Part 3 · Verify & Debug
 
 ### The three-step loop (mandatory after every change)
