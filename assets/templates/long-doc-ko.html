@@ -17,19 +17,19 @@
 <style>
   /* Regular weight */
   @font-face {
-    font-family: "NanumMyeongjo";
-    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-family: "Source Han Serif K";
+    src: url("../fonts/SourceHanSerifKR-Regular.otf") format("opentype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/SourceHanSerifKR-Regular.otf") format("opentype");
     font-weight: 400;
     font-style: normal;
   }
 
-  /* Bold weight */
+  /* Medium weight */
   @font-face {
-    font-family: "NanumMyeongjo";
-    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
-    font-weight: 700;
+    font-family: "Source Han Serif K";
+    src: url("../fonts/SourceHanSerifKR-Medium.otf") format("opentype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/SourceHanSerifKR-Medium.otf") format("opentype");
+    font-weight: 500;
     font-style: normal;
   }
 
@@ -40,7 +40,7 @@
 
     @top-right {
       content: string(section-title);
-      font-family: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR",
+      font-family: "Source Han Serif K", "Apple SD Gothic Neo", "Noto Serif KR",
                    "Source Han Serif K", "AppleMyungjo", Georgia, serif;
       font-size: 8pt;
       color: #6b6a64;
@@ -48,7 +48,7 @@
 
     @bottom-center {
       content: counter(page) "  ·  {{문서 제목}}";
-      font-family: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR",
+      font-family: "Source Han Serif K", "Apple SD Gothic Neo", "Noto Serif KR",
                    "Source Han Serif K", "AppleMyungjo", Georgia, serif;
       font-size: 9pt;
       color: #6b6a64;
@@ -73,7 +73,7 @@
     --border:    #e8e6dc;
     --border-soft:#e5e3d8;
     --tag-bg:    #E4ECF5;
-    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR", "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+    --serif: "Source Han Serif K", "Noto Serif KR", "Apple SD Gothic Neo", "AppleMyungjo", Charter, Georgia, serif;
     --sans: var(--serif);
 
     --rhythm-module:  14pt;
@@ -120,7 +120,7 @@
   }
   .cover-title {
     font-size: 36pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--near-black);
     line-height: 1.15;
     letter-spacing: 0.3pt;
@@ -142,14 +142,14 @@
   }
   .cover-meta strong {
     color: var(--dark-warm);
-    font-weight: 700;
+    font-weight: 500;
   }
 
   /* ========== TOC (목차) ========== */
   .toc { break-after: page; }
   .toc h2 {
     font-size: 22pt;
-    font-weight: 700;
+    font-weight: 500;
     margin-bottom: var(--rhythm-module);
     border-left: 2.5pt solid var(--brand);
     border-radius: 1.5pt;
@@ -166,7 +166,7 @@
   .toc-item:last-of-type { border-bottom: none; }
   .toc-num {
     color: var(--brand);
-    font-weight: 700;
+    font-weight: 500;
     min-width: 30pt;
   }
   .toc-title {
@@ -182,7 +182,7 @@
   /* ========== HEADINGS ========== */
   h1 {
     font-size: 22pt;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 1.2;
     margin: 0 0 10pt 0;
     border-left: 2.5pt solid var(--brand);
@@ -194,7 +194,7 @@
 
   h2 {
     font-size: 16pt;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 1.25;
     margin: 24pt 0 8pt 0;
     color: var(--near-black);
@@ -204,7 +204,7 @@
 
   h3 {
     font-size: 13pt;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 1.3;
     margin: 18pt 0 6pt 0;
     color: var(--dark-warm);
@@ -236,8 +236,8 @@
     margin-bottom: var(--rhythm-module);
   }
 
-  .hl { color: var(--brand); font-weight: 700; }
-  strong { font-weight: 700; }
+  .hl { color: var(--brand); font-weight: 500; }
+  strong { font-weight: 500; }
 
   /* ========== LISTS ========== */
   ul, ol {
@@ -246,7 +246,7 @@
     line-height: 1.55;
   }
   ul li::marker { color: var(--brand); }
-  ol li::marker { color: var(--brand); font-weight: 700; }
+  ol li::marker { color: var(--brand); font-weight: 500; }
 
   /* ========== QUOTE ========== */
   blockquote, .quote {
@@ -265,11 +265,11 @@
   }
 
   /* ========== CODE ========== */
-  /* Mono-first for Latin glyphs; Korean fallback via NanumMyeongjo so
+  /* Mono-first for Latin glyphs; Korean fallback via SourceHanSerifK so
      Korean comments inside code blocks render without missing-glyph boxes. */
   code {
     font-family: "JetBrains Mono", "D2Coding", "SF Mono", Consolas,
-                 "NanumMyeongjo", "Apple SD Gothic Neo", monospace;
+                 "Source Han Serif K", "Apple SD Gothic Neo", monospace;
     font-size: 9pt;
     background: var(--ivory);
     padding: 1pt 4pt;
@@ -278,7 +278,7 @@
   }
   pre {
     font-family: "JetBrains Mono", "D2Coding", "SF Mono", Consolas,
-                 "NanumMyeongjo", "Apple SD Gothic Neo", monospace;
+                 "Source Han Serif K", "Apple SD Gothic Neo", monospace;
     font-size: 9pt;
     line-height: 1.5;
     background: var(--ivory);
@@ -301,7 +301,7 @@
   }
   table th, .kami-table th {
     text-align: left;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--dark-warm);
     padding: 6pt 8pt;
     border-bottom: 1pt solid var(--border);
@@ -322,7 +322,7 @@
     background: var(--ivory);
   }
   table .total td, .kami-table .total td {
-    font-weight: 700; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
+    font-weight: 500; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
   }
 
   /* ========== CALLOUT ========== */
@@ -370,7 +370,7 @@
     color: var(--brand);
     font-family: var(--sans);
     font-size: 9pt;
-    font-weight: 700;
+    font-weight: 500;
     padding: 1pt 6pt;
     border-radius: 3pt;
     margin-right: 4pt;

@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"git add assets/fonts/SourceHanSerifKR-Regular.otf assets/fonts/SourceHanSerifKR-Bold.otf assets/fonts/LICENSE-SourceHanSerifK.txt .gitignore && git ls-files assets/fonts/\",\"description\":\"F...",
+  "error": "Exit code 1\nThe following paths are ignored by one of your .gitignore files:\nassets/fonts/SourceHanSerifKR-Bold.otf\nassets/fonts/SourceHanSerifKR-Regular.otf\nhint: Use -f if you really want to add them.\nhint: Disable this message with \"git config set advice.addIgnoredFile false\"",
+  "timestamp": "2026-05-28T07:03:37.614Z",
+  "retry_count": 2
+}

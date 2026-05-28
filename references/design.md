@@ -1127,12 +1127,16 @@ Both: pill shape (999px radius), 15px `--latin-ui`, weight 500, 1.5px border, mi
 
 ## KO locale tuning
 
-Korean templates use Nanum Myeongjo (OFL, Naver Corp.) as the primary serif.
-The font's hangul metrics are close enough to TsangerJinKai (CN) that the
-CN per-component values render naturally in Korean without per-template
-re-tuning. The `one-pager-ko` pilot confirmed that the CN baseline values
-flow through cleanly — every numeric value below matches the CN one-pager
-(and the rest of the CN doc-style templates by extension).
+Korean templates use Source Han Serif K (Adobe, also distributed by Google
+as Noto Serif KR) as the primary serif. The font's hangul metrics are close
+enough to TsangerJinKai (CN) that the CN per-component values render
+naturally in Korean without per-template re-tuning. The `one-pager-ko`
+pilot confirmed that the CN baseline values flow through cleanly — every
+numeric value below matches the CN one-pager (and the rest of the CN
+doc-style templates by extension), with one KO-specific micro-adjustment:
+`.metric-label` font-size drops from 9pt to 7pt to accommodate the longer
+mixed hangul + parenthesised-metadata labels typical of Korean editorial
+content (see one-pager-ko `.metric-label` rule).
 
 Canonical values (verified during the `one-pager-ko` pilot, 2026-05-28):
 
@@ -1140,14 +1144,19 @@ Canonical values (verified during the `one-pager-ko` pilot, 2026-05-28):
 - Body `line-height`: 1.45 (matches CN baseline)
 - Body `letter-spacing`: 0.3pt (matches CN baseline)
 - H1 `font-size`: 24pt (matches CN baseline)
-- H1 `font-weight`: 700. CN uses 500 against TsangerJinKai W05, which the
-  CN templates treat as a Medium-Bold. Nanum exposes only Regular (400) and
-  Bold (700) — with `font-synthesis: none` in effect, any `font-weight: 500`
-  reference falls back to Regular and the emphasis disappears. KO templates
-  therefore use 700 everywhere CN uses 500.
+- H1 `font-weight`: 500. CN templates use 500 (TsangerJinKai W05, a
+  Medium-Bold) for every emphasis — body bold, headings, tags, metric
+  values — and never reach for 700. Source Han Serif K exposes the full
+  weight range (ExtraLight through Heavy), so KO bundles Regular (400) +
+  Medium (500) to mirror CN's W04/W05 two-weight discipline. The result:
+  KO emphasis reads at the same Medium tier as CN, rather than the heavier
+  Bold the early Nanum-era forks settled on.
 - H1 `letter-spacing`: matches CN per-template setting (typically 0 to −0.2pt
   on display H1s; copied from the CN sibling).
 - H1 `line-height`: 1.15 (matches CN baseline)
+- `.metric-label` `font-size`: 7pt (one-pager-ko only — KO labels read wider
+  than CN/EN, so the baseline-flex metric strip needs a smaller label to
+  avoid wrapping inside the card column).
 - `font-synthesis: none;` MUST be applied to the body rule. WeasyPrint can
   synthesize fake bold when Bold weight resolution fails through fallbacks,
   and disabling synthesis keeps the editorial tone honest (real glyph
@@ -1156,14 +1165,17 @@ Canonical values (verified during the `one-pager-ko` pilot, 2026-05-28):
 Fallback chain (consistent across all KO templates):
 
 ```css
---serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR",
-         "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
---sans:  "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
-         -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+--serif: "Source Han Serif K", "Noto Serif KR", "Apple SD Gothic Neo",
+         "AppleMyungjo", Charter, Georgia, serif;
+--sans:  var(--serif);
 --mono:  "JetBrains Mono", "D2Coding", "SF Mono", "Fira Code",
          Consolas, Monaco, monospace;
 --latin-ui: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
 ```
+
+`"Source Han Serif K"` is the Adobe distribution name; `"Noto Serif KR"` is
+the Google Fonts name for the same font. Listing both keeps the chain
+agnostic to which installer the user used.
 
 Subsequent KO templates (letter-ko, long-doc-ko, etc.) should adopt the
 font variables and `font-synthesis` rule verbatim and leave all numeric

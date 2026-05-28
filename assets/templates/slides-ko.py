@@ -7,7 +7,7 @@ Usage:
   python3 slides-ko.py
 
 Output:
-  output.pptx (16:9, parchment aesthetic, Nanum Myeongjo serif)
+  output.pptx (16:9, parchment aesthetic, Source Han Serif K serif)
 
 This is a template. Fill in your content and run it directly.
 """
@@ -34,10 +34,10 @@ STONE       = RGBColor(0x6b, 0x6a, 0x64)
 BORDER      = RGBColor(0xe8, 0xe6, 0xdc)
 WHITE       = RGBColor(0xff, 0xff, 0xff)
 
-# Korean editorial stack. PowerPoint falls back silently if Nanum Myeongjo
+# Korean editorial stack. PowerPoint falls back silently if Source Han Serif K
 # is not installed on the viewing machine — Apple SD Gothic Neo / Malgun Gothic
 # / system serif then take over.
-SERIF = "NanumMyeongjo"
+SERIF = "Source Han Serif K"
 SANS  = SERIF
 
 SLIDE_W = Inches(13.33)

@@ -5,17 +5,17 @@
 <title>일론 머스크 · 이력서</title>
 <style>
   @font-face {
-    font-family: "NanumMyeongjo";
-    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-family: "Source Han Serif K";
+    src: url("../fonts/SourceHanSerifKR-Regular.otf") format("opentype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/SourceHanSerifKR-Regular.otf") format("opentype");
     font-weight: 400;
     font-style: normal;
   }
   @font-face {
-    font-family: "NanumMyeongjo";
-    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
-    font-weight: 700;
+    font-family: "Source Han Serif K";
+    src: url("../fonts/SourceHanSerifKR-Medium.otf") format("opentype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/SourceHanSerifKR-Medium.otf") format("opentype");
+    font-weight: 500;
     font-style: normal;
   }
 
@@ -41,7 +41,7 @@
     --brand-tint: #EEF2F7;
     --brand-tint-strong: #E4ECF5;
 
-    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR",
+    --serif: "Source Han Serif K", "Apple SD Gothic Neo", "Noto Serif KR",
              "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
     --sans: var(--serif);
     --mono:  "JetBrains Mono", "SF Mono", "Fira Code",
@@ -78,7 +78,7 @@
   .name {
     font-family: var(--serif);
     font-size: 26pt;
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: -0.2pt;
     color: var(--near-black);
     line-height: 1;
@@ -101,11 +101,11 @@
   .contact .role {
     color: var(--brand);
     font-size: 10.5pt;
-    font-weight: 700;
+    font-weight: 500;
   }
   .contact .sep { color: var(--border); margin: 0 0.4em; }
   .contact a { color: var(--dark-warm); }
-  .contact .loc { color: var(--olive); font-weight: 700; }
+  .contact .loc { color: var(--olive); font-weight: 500; }
 
   /* METRICS */
   .metrics { display: flex; gap: 7mm; margin-bottom: 6.5mm; }
@@ -120,7 +120,7 @@
   .metric-value {
     font-family: var(--serif);
     font-size: 14pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--brand);
     line-height: 1;
     font-variant-numeric: tabular-nums;
@@ -128,7 +128,7 @@
   .metric-value .unit {
     font-size: 10.5pt;
     margin-left: 0.5mm;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--brand);
   }
   .metric-label { font-size: 9pt; color: var(--olive); line-height: 1.2; }
@@ -137,7 +137,7 @@
   .section-title {
     font-family: var(--serif);
     font-size: 13pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--near-black);
     border-bottom: 0.5pt solid var(--border);
     padding: 0 0 3pt 0;
@@ -170,11 +170,11 @@
   }
   .tl-year {
     font-family: var(--serif);
-    font-size: 11pt; font-weight: 700;
+    font-size: 11pt; font-weight: 500;
     color: var(--brand); line-height: 1;
   }
   .tl-head {
-    font-size: 11pt; font-weight: 700;
+    font-size: 11pt; font-weight: 500;
     color: var(--near-black);
   }
   .tl-body { font-size: 9pt; color: var(--olive); line-height: 1.45; }
@@ -195,11 +195,11 @@
   }
   .proj-name {
     font-family: var(--serif);
-    font-size: 11pt; font-weight: 700; color: var(--near-black);
+    font-size: 11pt; font-weight: 500; color: var(--near-black);
   }
   .proj-kind { font-size: 11pt; color: var(--olive); }
   .proj-role {
-    font-size: 9pt; color: var(--brand); font-weight: 700;
+    font-size: 9pt; color: var(--brand); font-weight: 500;
     margin-left: auto; background: #EEF2F7;
     padding: 0.4mm 1.6mm; border-radius: 2pt; letter-spacing: 0.3pt;
     text-transform: uppercase;
@@ -209,7 +209,7 @@
   .proj-label {
     display: table-cell; width: 16mm;
     font-size: 9pt; color: var(--brand);
-    font-weight: 700; letter-spacing: 0.4pt;
+    font-weight: 500; letter-spacing: 0.4pt;
     text-transform: uppercase;
     padding: 0.4mm 0 0.4mm 0; vertical-align: top;
   }
@@ -231,7 +231,7 @@
     break-inside: avoid;
   }
   .os-intro .hl { color: var(--brand); }
-  .os-intro .strong { color: var(--near-black); font-weight: 700; }
+  .os-intro .strong { color: var(--near-black); font-weight: 500; }
 
   .os-grid {
     display: grid;
@@ -246,14 +246,14 @@
   }
   .os-name {
     font-family: var(--serif);
-    font-size: 10.5pt; font-weight: 700;
+    font-size: 10.5pt; font-weight: 500;
     flex-shrink: 0; min-width: 18mm;
   }
   .os-name a { color: var(--brand); }
   .os-desc { font-size: 9pt; color: var(--olive); line-height: 1.4; flex: 1; }
   .os-star {
     font-size: 9pt; color: var(--dark-warm);
-    font-weight: 700; white-space: nowrap;
+    font-weight: 500; white-space: nowrap;
     flex-shrink: 0; min-width: 10mm; text-align: right;
     font-variant-numeric: tabular-nums;
   }
@@ -273,7 +273,7 @@
   .os-highlight .tag {
     display: inline-block;
     background: var(--brand); color: var(--ivory);
-    font-size: 9pt; font-weight: 700;
+    font-size: 9pt; font-weight: 500;
     padding: 0.2mm 1.6mm; border-radius: 2pt;
     margin-right: 1.5mm; letter-spacing: 0.5pt;
     text-transform: uppercase;
@@ -290,12 +290,12 @@
   .conv-card { padding: 0 2mm 0 0; break-inside: avoid; }
   .conv-head {
     font-family: var(--serif);
-    font-size: 10pt; font-weight: 700;
+    font-size: 10pt; font-weight: 500;
     color: var(--near-black); margin-bottom: 1mm;
     display: flex; align-items: baseline; gap: 2mm;
   }
   .conv-head .year {
-    color: var(--brand); font-weight: 700;
+    color: var(--brand); font-weight: 500;
     font-size: 9pt;
     font-variant-numeric: tabular-nums;
   }
@@ -313,7 +313,7 @@
   }
   .handle-strip .handle {
     font-family: var(--serif);
-    font-size: 10pt; font-weight: 700; color: var(--brand);
+    font-size: 10pt; font-weight: 500; color: var(--brand);
     flex-shrink: 0;
   }
   .handle-strip .follower { font-size: 9pt; color: var(--stone); flex-shrink: 0; font-variant-numeric: tabular-nums; }
@@ -323,7 +323,7 @@
   .inf-block-title {
     margin-top: 2.5mm;
     font-family: var(--serif);
-    font-size: 10pt; font-weight: 700;
+    font-size: 10pt; font-weight: 500;
     color: var(--near-black);
     margin-bottom: 1.5mm; padding-bottom: 0.5mm;
     border-bottom: 0.3pt dotted var(--border);
@@ -352,7 +352,7 @@
   }
   .art-title, .talk-title {
     font-size: 9.2pt; color: var(--near-black);
-    font-weight: 700; line-height: 1.4;
+    font-weight: 500; line-height: 1.4;
     flex: 1 1 auto; min-width: 0;
   }
   .art-stats, .talk-venue {
@@ -375,7 +375,7 @@
   }
   .skill-row:last-of-type { border-bottom: none; }
   .skill-label {
-    font-size: 9pt; font-weight: 700;
+    font-size: 9pt; font-weight: 500;
     color: var(--brand); letter-spacing: 0.5pt;
     text-transform: uppercase;
     width: 32mm; flex-shrink: 0;
@@ -391,7 +391,7 @@
   }
   .edu-row .school {
     font-family: var(--serif);
-    font-weight: 700; font-size: 11pt;
+    font-weight: 500; font-size: 11pt;
   }
   .edu-row .major { color: var(--olive); font-size: 9.4pt; }
   .edu-row .date { color: var(--stone); font-variant-numeric: tabular-nums; font-size: 9pt; }

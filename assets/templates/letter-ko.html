@@ -17,19 +17,19 @@
 <style>
   /* Regular weight */
   @font-face {
-    font-family: "NanumMyeongjo";
-    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-family: "Source Han Serif K";
+    src: url("../fonts/SourceHanSerifKR-Regular.otf") format("opentype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/SourceHanSerifKR-Regular.otf") format("opentype");
     font-weight: 400;
     font-style: normal;
   }
 
-  /* Bold weight */
+  /* Medium weight */
   @font-face {
-    font-family: "NanumMyeongjo";
-    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
-    font-weight: 700;
+    font-family: "Source Han Serif K";
+    src: url("../fonts/SourceHanSerifKR-Medium.otf") format("opentype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/SourceHanSerifKR-Medium.otf") format("opentype");
+    font-weight: 500;
     font-style: normal;
   }
 
@@ -50,7 +50,7 @@
     --ivory:     #faf9f5;
     --border:    #e8e6dc;
     --border-soft:#e5e3d8;
-    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR", "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+    --serif: "Source Han Serif K", "Noto Serif KR", "Apple SD Gothic Neo", "AppleMyungjo", Charter, Georgia, serif;
     --sans: var(--serif);
   }
 
@@ -79,7 +79,7 @@
   }
   .letterhead .sender-name {
     font-size: 13pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--near-black);
     margin-bottom: 4pt;
   }
@@ -111,7 +111,7 @@
   }
   .recipient .name {
     font-size: 12pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--near-black);
   }
   .recipient .org {
@@ -134,12 +134,12 @@
     text-transform: uppercase;
     margin-bottom: 3pt;
   }
-  /* KO locale tuning: Nanum Myeongjo hangul glyphs have a smaller optical body
+  /* KO locale tuning: Source Han Serif K hangul glyphs have a smaller optical body
      than TsangerJinKai. Numerics inherit the CN baseline (verified during the
      one-pager-ko pilot — see references/design.md). */
   .subject .title {
     font-size: 15pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--near-black);
     line-height: 1.3;
   }
@@ -161,7 +161,7 @@
 
   .body-content .hl {
     color: var(--brand);
-    font-weight: 700;
+    font-weight: 500;
   }
 
   /* ========== CLOSING ========== */
@@ -175,7 +175,7 @@
   }
   .closing .signature {
     font-size: 14pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--near-black);
     margin-bottom: 3pt;
   }
@@ -197,7 +197,7 @@
   .attachments .label {
     color: var(--brand);
     margin-right: 6pt;
-    font-weight: 700;
+    font-weight: 500;
   }
 
   /* Memo variant: removes indent, uses sans chain */
@@ -217,7 +217,7 @@
   }
   table th, .kami-table th {
     text-align: left;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--dark-warm);
     padding: 5pt 8pt;
     border-bottom: 1pt solid var(--border);
@@ -238,7 +238,7 @@
     background: var(--ivory);
   }
   table .total td, .kami-table .total td {
-    font-weight: 700; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
+    font-weight: 500; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
   }
 </style>
 </head>

@@ -11,8 +11,8 @@
 <meta charset="UTF-8">
 <title>{{제목}}</title>
 <style>
-  @font-face { font-family: "NanumMyeongjo"; src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"), url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype"); font-weight: 400; }
-  @font-face { font-family: "NanumMyeongjo"; src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"), url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype"); font-weight: 700; }
+  @font-face { font-family: "Source Han Serif K"; src: url("../fonts/SourceHanSerifKR-Regular.otf") format("opentype"), url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/SourceHanSerifKR-Regular.otf") format("opentype"); font-weight: 400; }
+  @font-face { font-family: "Source Han Serif K"; src: url("../fonts/SourceHanSerifKR-Medium.otf") format("opentype"), url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/SourceHanSerifKR-Medium.otf") format("opentype"); font-weight: 500; }
   @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 400; }
 
   @page {
@@ -35,9 +35,9 @@
     --border:     #e8e6dc;
     --border-soft:#e5e3d8;
 
-    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR", "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+    --serif: "Source Han Serif K", "Noto Serif KR", "Apple SD Gothic Neo", "AppleMyungjo", Charter, Georgia, serif;
     --sans:  var(--serif);
-    --mono:  "JetBrains Mono", "D2Coding", "SF Mono", "Fira Code", Consolas, Monaco, "NanumMyeongjo", monospace;
+    --mono:  "JetBrains Mono", "D2Coding", "SF Mono", "Fira Code", Consolas, Monaco, "Source Han Serif K", monospace;
 
     --rhythm-module:  14pt;
     --rhythm-section: 18pt;
@@ -97,7 +97,7 @@
   h2 {
     font-family: var(--serif);
     font-size: 24pt;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 1.2;
     letter-spacing: 0.3pt;
     color: var(--near-black);
@@ -107,7 +107,7 @@
   h3 {
     font-family: var(--serif);
     font-size: 15pt;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 1.3;
     letter-spacing: 0.3pt;
     color: var(--brand);
@@ -127,7 +127,7 @@
   .mt {
     font-family: var(--serif);
     font-size: 16pt;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 1.3;
     letter-spacing: 0.3pt;
     color: var(--near-black);
@@ -137,7 +137,7 @@
   .ml {
     font-family: var(--serif);
     font-size: 24pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--brand);
     margin-right: 6pt;
   }
@@ -185,7 +185,7 @@
   .co {
     font-family: var(--sans);
     font-size: 11pt;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 1.55;
     letter-spacing: 0.3pt;
     color: var(--brand);
@@ -225,7 +225,7 @@
     letter-spacing: 0.3pt;
   }
   table.data td:first-child {
-    font-weight: 700;
+    font-weight: 500;
     color: var(--brand);
   }
 
@@ -244,7 +244,7 @@
   .cover h1 {
     font-family: var(--serif);
     font-size: 38pt;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 1.1;
     letter-spacing: 0.3pt;
     color: var(--near-black);

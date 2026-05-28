@@ -18,19 +18,19 @@
 <style>
   /* Regular weight */
   @font-face {
-    font-family: "NanumMyeongjo";
-    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-family: "Source Han Serif K";
+    src: url("../fonts/SourceHanSerifKR-Regular.otf") format("opentype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/SourceHanSerifKR-Regular.otf") format("opentype");
     font-weight: 400;
     font-style: normal;
   }
 
-  /* Bold weight */
+  /* Medium weight */
   @font-face {
-    font-family: "NanumMyeongjo";
-    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
-    font-weight: 700;
+    font-family: "Source Han Serif K";
+    src: url("../fonts/SourceHanSerifKR-Medium.otf") format("opentype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/SourceHanSerifKR-Medium.otf") format("opentype");
+    font-weight: 500;
     font-style: normal;
   }
 
@@ -58,7 +58,7 @@
     --border:    #e8e6dc;
     --border-soft:#e5e3d8;
     --tag-bg:    #E4ECF5;
-    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR", "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+    --serif: "Source Han Serif K", "Noto Serif KR", "Apple SD Gothic Neo", "AppleMyungjo", Charter, Georgia, serif;
     --sans: var(--serif);
 
     --rhythm-module:  14pt;
@@ -111,7 +111,7 @@
   .cover-name {
     font-family: var(--serif);
     font-size: 58pt;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 1.05;
     color: var(--near-black);
     letter-spacing: 1pt;
@@ -138,7 +138,7 @@
   }
   .cover-meta strong {
     color: var(--dark-warm);
-    font-weight: 700;
+    font-weight: 500;
   }
 
   /* ========== ABOUT ========== */
@@ -156,7 +156,7 @@
   .about-title {
     font-family: var(--serif);
     font-size: 32pt;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 1.2;
     margin-bottom: 20pt;
     border-left: 2.5pt solid var(--brand);
@@ -183,7 +183,7 @@
   .about-body h3 {
     font-family: var(--serif);
     font-size: 13pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--near-black);
     margin-bottom: 6pt;
   }
@@ -206,7 +206,7 @@
   .project-num {
     font-family: var(--serif);
     font-size: 42pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--brand);
     line-height: 1;
     margin-right: 18pt;
@@ -225,7 +225,7 @@
   .project-title {
     font-family: var(--serif);
     font-size: 22pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--near-black);
     line-height: 1.2;
     margin-bottom: 4pt;
@@ -256,7 +256,7 @@
     background: var(--tag-bg);
     color: var(--brand);
     font-size: 9pt;
-    font-weight: 700;
+    font-weight: 500;
     padding: 2pt 7pt;
     border-radius: 3pt;
   }
@@ -290,7 +290,7 @@
   .project-block h3 {
     font-family: var(--serif);
     font-size: 11pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--brand);
     margin-bottom: 4pt;
     letter-spacing: 0.3pt;
@@ -302,7 +302,7 @@
   }
   .project-block .hl {
     color: var(--brand);
-    font-weight: 700;
+    font-weight: 500;
   }
 
   /* Results metrics row */
@@ -319,7 +319,7 @@
   .result-value {
     font-family: var(--serif);
     font-size: 18pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--brand);
     line-height: 1.1;
     font-variant-numeric: tabular-nums;
@@ -351,7 +351,7 @@
   .more-works-title {
     font-family: var(--serif);
     font-size: 24pt;
-    font-weight: 700;
+    font-weight: 500;
     margin-bottom: 16pt;
     border-left: 2.5pt solid var(--brand);
     border-radius: 1.5pt;
@@ -375,7 +375,7 @@
   .work-title-block .title {
     font-family: var(--serif);
     font-size: 11pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--near-black);
   }
   .work-title-block .desc {
@@ -408,7 +408,7 @@
   .contact-title {
     font-family: var(--serif);
     font-size: 48pt;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 1.1;
     margin-bottom: 20pt;
     color: var(--near-black);
@@ -426,7 +426,7 @@
   }
   .contact-list strong {
     color: var(--stone);
-    font-weight: 700;
+    font-weight: 500;
     font-size: 10pt;
     letter-spacing: 0.5pt;
     margin-right: 12pt;
@@ -449,7 +449,7 @@
   }
   table th, .kami-table th {
     text-align: left;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--dark-warm);
     padding: 5pt 8pt;
     border-bottom: 1pt solid var(--border);
@@ -470,7 +470,7 @@
     background: var(--ivory);
   }
   table .total td, .kami-table .total td {
-    font-weight: 700; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
+    font-weight: 500; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
   }
 </style>
 </head>

@@ -177,5 +177,5 @@ For public releases, keep notes concise and bilingual when requested. Use one-to
 - Chinese templates use TsangerJinKai02 W04/W05. Commercial use requires the appropriate font license.
 - If TsangerJinKai is unavailable, fall back through Source Han Serif SC, Noto Serif CJK SC, Songti SC, STSong, then Georgia.
 - English templates use Charter serif. Japanese output uses YuMincho first, then Hiragino Mincho ProN, Noto Serif CJK JP, Source Han Serif JP, TsangerJinKai02, and generic serif.
-- Korean templates use Nanum Myeongjo (OFL, Naver). Fallback chain: Nanum Myeongjo, Apple SD Gothic Neo, Noto Serif KR, Source Han Serif K, AppleMyungjo, Charter, Georgia.
-- Claude Desktop ZIPs bundle Nanum Myeongjo (OFL allows redistribution) but do not bundle TsangerJinKai TTF files. Run `bash scripts/ensure-fonts.sh` before building Chinese or Korean documents when fonts are missing.
+- Korean templates use Source Han Serif K (Adobe, also distributed as Noto Serif KR by Google). Fallback chain: Source Han Serif K, Noto Serif KR, Apple SD Gothic Neo, AppleMyungjo, Charter, Georgia.
+- Claude Desktop ZIPs bundle Source Han Serif K (OFL allows redistribution) but do not bundle TsangerJinKai TTF files. Run `bash scripts/ensure-fonts.sh` before building Chinese or Korean documents when fonts are missing.

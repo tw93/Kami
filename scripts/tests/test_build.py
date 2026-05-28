@@ -96,7 +96,7 @@ def silently(callable_, *args, **kwargs):
 
 # --------------------------- package archive ---------------------------
 
-PACKAGE_MAX_BYTES = 14_000_000
+PACKAGE_MAX_BYTES = 20_000_000
 PACKAGE_FORBIDDEN_EXACT = {
     "assets/images/1.png",
     "assets/images/2.png",
@@ -113,7 +113,7 @@ def test_dist_package_contents() -> None:
         return
 
     size_bytes = archive.stat().st_size
-    check("dist/kami.zip stays below 14MB",
+    check("dist/kami.zip stays below 20MB",
           size_bytes <= PACKAGE_MAX_BYTES,
           f"{size_bytes} bytes > {PACKAGE_MAX_BYTES} bytes")
 

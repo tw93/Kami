@@ -46,17 +46,17 @@
 </script>
 <style>
   @font-face {
-    font-family: "NanumMyeongjo";
-    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
-         url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-family: "Source Han Serif K";
+    src: url("../fonts/SourceHanSerifKR-Regular.otf") format("opentype"),
+         url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/SourceHanSerifKR-Regular.otf") format("opentype");
     font-weight: 400;
     font-style: normal;
   }
   @font-face {
-    font-family: "NanumMyeongjo";
-    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
-         url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
-    font-weight: 700;
+    font-family: "Source Han Serif K";
+    src: url("../fonts/SourceHanSerifKR-Medium.otf") format("opentype"),
+         url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/SourceHanSerifKR-Medium.otf") format("opentype");
+    font-weight: 500;
     font-style: normal;
   }
 
@@ -80,8 +80,8 @@
   --border-soft:  #e5e3d8;
   --line:         #d8d5c8;
 
-  --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR",
-           "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+  --serif: "Source Han Serif K", "Noto Serif KR", "Apple SD Gothic Neo",
+           "AppleMyungjo", Charter, Georgia, serif;
   --sans:  var(--serif);
   --mono:  "JetBrains Mono", "D2Coding", "SF Mono", "Fira Code",
            Consolas, Monaco, monospace;
@@ -127,7 +127,7 @@ a:hover { color: var(--brand-light); }
   background: var(--brand);
   color: var(--ivory);
   font-family: var(--serif);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 15px;
   letter-spacing: 0.2px;
   padding: 13px 28px;
@@ -150,7 +150,7 @@ a:hover { color: var(--brand-light); }
   justify-content: center;
   gap: 6px;
   font-family: var(--serif);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 15px;
   color: var(--brand);
   background: transparent;
@@ -181,7 +181,7 @@ a:hover { color: var(--brand-light); }
   gap: 8px;
   font-family: var(--latin-ui);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.4px;
   text-transform: uppercase;
   color: var(--stone);
@@ -207,7 +207,7 @@ a:hover { color: var(--brand-light); }
 
 .hero h1 {
   font-family: var(--serif);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 96px;
   line-height: 1.05;
   letter-spacing: 0;
@@ -249,7 +249,7 @@ a:hover { color: var(--brand-light); }
 }
 .hero-tokens b {
   color: var(--dark-warm);
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .hero-cta {
@@ -273,7 +273,7 @@ section { margin-bottom: 72px; }
 }
 .section-title {
   font-family: var(--serif);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 32px;
   line-height: 1.2;
   color: var(--near-black);
@@ -298,7 +298,7 @@ section { margin-bottom: 72px; }
 }
 .section-versus b {
   color: var(--brand);
-  font-weight: 700;
+  font-weight: 500;
 }
 
 /* ========== Gallery (interactive screenshot carousel) ========== */
@@ -410,7 +410,7 @@ section { margin-bottom: 72px; }
 }
 .gallery-caption .title {
   font-family: var(--serif);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 17px;
   color: var(--near-black);
   margin: 0;
@@ -475,7 +475,7 @@ section { margin-bottom: 72px; }
 }
 .features .name {
   font-family: var(--serif);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 22px;
   color: var(--brand);
   margin: 0;
@@ -531,7 +531,7 @@ section { margin-bottom: 72px; }
 }
 .principles .n {
   font-family: var(--serif);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 18px;
   color: var(--brand);
   line-height: 1;
@@ -539,7 +539,7 @@ section { margin-bottom: 72px; }
 .principles .body b {
   display: block;
   font-family: var(--serif);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 15px;
   color: var(--near-black);
   margin-bottom: 4px;
@@ -600,7 +600,7 @@ pre.code .k { color: var(--brand); }
 }
 .metric-value {
   font-family: var(--serif);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 36px;
   line-height: 1;
   color: var(--near-black);
@@ -637,7 +637,7 @@ pre.code .k { color: var(--brand); }
 }
 .demo-card .demo-title {
   font-family: var(--serif);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 15px;
   color: var(--near-black);
   margin: 12px 14px 4px;
@@ -664,7 +664,7 @@ pre.code .k { color: var(--brand); }
 }
 .price-amount {
   font-family: var(--serif);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 112px;
   line-height: 1;
   color: var(--near-black);
@@ -687,7 +687,7 @@ pre.code .k { color: var(--brand); }
 }
 .price-vs .hl {
   color: var(--brand);
-  font-weight: 700;
+  font-weight: 500;
 }
 .price-card .btn-primary {
   min-width: 280px;
@@ -728,7 +728,7 @@ pre.code .k { color: var(--brand); }
 .faq-pair:last-child { margin-bottom: 0; }
 .faq dt {
   font-family: var(--serif);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 16px;
   color: var(--near-black);
   margin: 0 0 6px;
@@ -788,7 +788,7 @@ footer.foot {
 }
 .foot .mark .wm-name {
   font-family: var(--serif);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 28px;
   color: var(--near-black);
   line-height: 1.1;

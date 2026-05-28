@@ -17,19 +17,19 @@
 <style>
   /* Regular weight */
   @font-face {
-    font-family: "NanumMyeongjo";
-    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-family: "Source Han Serif K";
+    src: url("../fonts/SourceHanSerifKR-Regular.otf") format("opentype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/SourceHanSerifKR-Regular.otf") format("opentype");
     font-weight: 400;
     font-style: normal;
   }
 
-  /* Bold weight */
+  /* Medium weight */
   @font-face {
-    font-family: "NanumMyeongjo";
-    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
-    font-weight: 700;
+    font-family: "Source Han Serif K";
+    src: url("../fonts/SourceHanSerifKR-Medium.otf") format("opentype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/SourceHanSerifKR-Medium.otf") format("opentype");
+    font-weight: 500;
     font-style: normal;
   }
 
@@ -40,7 +40,7 @@
 
     @bottom-center {
       content: counter(page) "  ·  {{종목명}} 리서치";
-      font-family: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR",
+      font-family: "Source Han Serif K", "Apple SD Gothic Neo", "Noto Serif KR",
                    "Source Han Serif K", "AppleMyungjo", Georgia, serif;
       font-size: 9pt;
       color: #6b6a64;
@@ -62,7 +62,7 @@
     --tag-bg:    #E4ECF5;
     --positive:  #1B365D;
     --negative:  #6b6a64;
-    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR", "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+    --serif: "Source Han Serif K", "Noto Serif KR", "Apple SD Gothic Neo", "AppleMyungjo", Charter, Georgia, serif;
     --sans: var(--serif);
 
     --rhythm-module:  14pt;
@@ -86,8 +86,8 @@
     font-synthesis: none;
   }
 
-  strong { font-weight: 700; }
-  .hl { color: var(--brand); font-weight: 700; }
+  strong { font-weight: 500; }
+  .hl { color: var(--brand); font-weight: 500; }
 
   /* ========== HEADER ========== */
   .report-header {
@@ -107,13 +107,13 @@
     text-transform: uppercase;
     margin-bottom: 4pt;
   }
-  /* KO locale tuning: Nanum Myeongjo hangul glyphs have a smaller optical body
+  /* KO locale tuning: Source Han Serif K hangul glyphs have a smaller optical body
      than TsangerJinKai. Numerics inherit the CN baseline (verified during the
      one-pager-ko pilot — see references/design.md). */
   .ticker-name {
     font-family: var(--serif);
     font-size: 24pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--near-black);
     line-height: 1.15;
     margin-bottom: 4pt;
@@ -130,14 +130,14 @@
   .price-current {
     font-family: var(--serif);
     font-size: 28pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--near-black);
     line-height: 1;
     font-variant-numeric: tabular-nums;
   }
   .price-change {
     font-size: 10pt;
-    font-weight: 700;
+    font-weight: 500;
     margin-top: 2pt;
     font-variant-numeric: tabular-nums;
   }
@@ -167,7 +167,7 @@
   .metric-value {
     font-family: var(--serif);
     font-size: 16pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--brand);
     line-height: 1;
     font-variant-numeric: tabular-nums;
@@ -183,7 +183,7 @@
   h2 {
     font-family: var(--serif);
     font-size: 16pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--near-black);
     margin: 18pt 0 6pt 0;
     break-after: avoid;
@@ -191,7 +191,7 @@
 
   h3 {
     font-size: 13pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--dark-warm);
     margin: 12pt 0 4pt 0;
     break-after: avoid;
@@ -205,7 +205,7 @@
     line-height: 1.5;
   }
   ul li::marker { color: var(--brand); }
-  ol li::marker { color: var(--brand); font-weight: 700; }
+  ol li::marker { color: var(--brand); font-weight: 500; }
 
   /* ========== TAG ========== */
   .tag {
@@ -213,7 +213,7 @@
     background: var(--tag-bg);
     color: var(--brand);
     font-size: 9pt;
-    font-weight: 700;
+    font-weight: 500;
     padding: 1pt 6pt;
     border-radius: 3pt;
     margin-right: 3pt;
@@ -229,7 +229,7 @@
   }
   table th, .kami-table th {
     text-align: left;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--dark-warm);
     padding: 5pt 8pt;
     border-bottom: 1pt solid var(--border);
@@ -250,7 +250,7 @@
     background: var(--ivory);
   }
   table .total td, .kami-table .total td {
-    font-weight: 700; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
+    font-weight: 500; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
   }
 
   /* ========== CALLOUT ========== */
@@ -302,7 +302,7 @@
   }
   .risk-label {
     font-size: 9pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--brand);
     margin-bottom: 2pt;
   }

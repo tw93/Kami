@@ -23,7 +23,7 @@ from shared import DIAGRAMS, EXAMPLES, TEMPLATES, load_checks_thresholds
 # Primary fonts expected in embedded PDF font names
 CN_PRIMARY_FONTS = {"TsangerJinKai02"}
 EN_PRIMARY_FONTS = {"Charter"}
-KO_PRIMARY_FONTS = {"NanumMyeongjo"}
+KO_PRIMARY_FONTS = {"Source-Han-Serif-K", "SourceHanSerifK"}
 
 
 def show_fonts(pdf: Path) -> None:

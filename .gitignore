@@ -6,8 +6,10 @@ __pycache__/
 *.pyc
 .pytest_cache/
 
-# Font build artifacts
+# Font build artifacts (user-installed OTF fallbacks) — exclude by default,
+# but allow Source Han Serif K (OFL, bundled with the release) through.
 assets/fonts/*.otf
+!assets/fonts/SourceHanSerifKR-*.otf
 
 # Template examples with placeholder content, regenerate via: python3 scripts/build.py
 assets/examples/

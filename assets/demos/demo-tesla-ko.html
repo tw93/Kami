@@ -13,17 +13,17 @@
 <meta name="generator" content="Kami">
 <style>
   @font-face {
-    font-family: "NanumMyeongjo";
-    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-family: "Source Han Serif K";
+    src: url("../fonts/SourceHanSerifKR-Regular.otf") format("opentype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/SourceHanSerifKR-Regular.otf") format("opentype");
     font-weight: 400;
     font-style: normal;
   }
   @font-face {
-    font-family: "NanumMyeongjo";
-    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
-    font-weight: 700;
+    font-family: "Source Han Serif K";
+    src: url("../fonts/SourceHanSerifKR-Medium.otf") format("opentype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/SourceHanSerifKR-Medium.otf") format("opentype");
+    font-weight: 500;
     font-style: normal;
   }
 
@@ -34,7 +34,7 @@
 
     @bottom-center {
       content: counter(page) "  ·  테슬라 Q1 2026 투자 분석";
-      font-family: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR",
+      font-family: "Source Han Serif K", "Apple SD Gothic Neo", "Noto Serif KR",
                    "Source Han Serif K", "AppleMyungjo", Georgia, serif;
       font-size: 9pt;
       color: #6b6a64;
@@ -54,7 +54,7 @@
     --border:    #e8e6dc;
     --border-soft:#e5e3d8;
     --tag-bg:    #E4ECF5;
-    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR", "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+    --serif: "Source Han Serif K", "Noto Serif KR", "Apple SD Gothic Neo", "AppleMyungjo", Charter, Georgia, serif;
     --sans: var(--serif);
   }
 
@@ -73,8 +73,8 @@
     font-synthesis: none;
   }
 
-  strong { font-weight: 700; }
-  .hl { color: var(--brand); font-weight: 700; }
+  strong { font-weight: 500; }
+  .hl { color: var(--brand); font-weight: 500; }
 
   /* ========== HEADER ========== */
   .report-header {
@@ -97,7 +97,7 @@
   .ticker-name {
     font-family: var(--serif);
     font-size: 24pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--near-black);
     line-height: 1.15;
     margin-bottom: 4pt;
@@ -114,14 +114,14 @@
   .price-current {
     font-family: var(--serif);
     font-size: 28pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--near-black);
     line-height: 1;
     font-variant-numeric: tabular-nums;
   }
   .price-change {
     font-size: 10pt;
-    font-weight: 700;
+    font-weight: 500;
     margin-top: 2pt;
     font-variant-numeric: tabular-nums;
     color: var(--stone);
@@ -150,7 +150,7 @@
   .metric-value {
     font-family: var(--serif);
     font-size: 16pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--brand);
     line-height: 1;
     font-variant-numeric: tabular-nums;
@@ -165,7 +165,7 @@
   h2 {
     font-family: var(--serif);
     font-size: 15pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--near-black);
     margin: 9pt 0 3pt 0;
     break-after: avoid;
@@ -173,7 +173,7 @@
 
   h3 {
     font-size: 12pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--dark-warm);
     margin: 6pt 0 2pt 0;
     break-after: avoid;
@@ -199,7 +199,7 @@
   }
   table th {
     text-align: left;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--dark-warm);
     padding: 5pt 8pt;
     border-bottom: 1pt solid var(--border);
@@ -252,7 +252,7 @@
   }
   .risk-label {
     font-size: 9pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--brand);
     margin-bottom: 2pt;
   }

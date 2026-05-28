@@ -125,7 +125,7 @@ Ten template types: One-Pager, Long Doc, Letter, Portfolio, Resume, Slides, Equi
 | Shadows | Ring or whisper only, no hard drop shadows |
 | Tags | Solid hex backgrounds only. `rgba()` triggers a WeasyPrint double-rectangle bug |
 
-**Fonts**: Each language uses a single serif font for the entire page. Chinese: TsangerJinKai02. Japanese: YuMincho. English: Charter. Korean: Nanum Myeongjo (OFL, Naver Corp.). TsangerJinKai is free for personal use, commercial use requires a license from [tsanger.cn](https://tsanger.cn). Nanum Myeongjo and other open-licensed fonts are bundled in the ZIP.
+**Fonts**: Each language uses a single serif font for the entire page. Chinese: TsangerJinKai02. Japanese: YuMincho. English: Charter. Korean: Source Han Serif K (Adobe, also distributed as Noto Serif KR by Google; OFL). TsangerJinKai is free for personal use, commercial use requires a license from [tsanger.cn](https://tsanger.cn). Source Han Serif K and other open-licensed fonts are bundled in the ZIP.
 
 Full spec: [design.md](references/design.md). Cheatsheet: [CHEATSHEET.md](CHEATSHEET.md).
 
@@ -175,4 +175,4 @@ Later I needed to present "The Agent You Don't Know: Principles, Architecture an
 
 MIT License for kami code and templates. Feel free to use and contribute.
 
-**Fonts**: TsangerJinKai02 (Chinese) is free for personal use only; commercial use requires a license from [tsanger.cn](https://tsanger.cn). Charter (English), YuMincho (Japanese), Nanum Myeongjo (Korean, OFL/Naver), and CJK fallbacks are system-bundled or open-licensed.
+**Fonts**: TsangerJinKai02 (Chinese) is free for personal use only; commercial use requires a license from [tsanger.cn](https://tsanger.cn). Charter (English), YuMincho (Japanese), Source Han Serif K (Korean, OFL/Adobe; also distributed as Noto Serif KR by Google), and CJK fallbacks are system-bundled or open-licensed.

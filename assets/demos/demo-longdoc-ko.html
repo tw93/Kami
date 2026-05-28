@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <!-- ==================================================================
      LONG DOCUMENT DEMO (KO) · parchment design system
-     한국어 편집 디자인 노트 — Nanum Myeongjo와 본문 조판
+     한국어 편집 디자인 노트 — Source Han Serif K와 본문 조판
      5-6 챕터 에디토리얼 에세이
      목표: 7 ± 2 페이지
      ================================================================== -->
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>한국어 편집 디자인 노트 — Nanum Myeongjo와 본문 조판</title>
+<title>한국어 편집 디자인 노트 — Source Han Serif K와 본문 조판</title>
 <meta name="author" content="Kami 편집팀">
 <meta name="description" content="한글 타이포그래피, 행 간격, 폰트 폴백 전략, Kami의 한국어 지원에 대한 에디토리얼 에세이">
-<meta name="keywords" content="한글, 타이포그래피, Nanum Myeongjo, Kami, 조판">
+<meta name="keywords" content="한글, 타이포그래피, Source Han Serif K, Kami, 조판">
 <meta name="generator" content="Kami">
 <style>
   /* Regular weight */
   @font-face {
-    font-family: "NanumMyeongjo";
-    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-family: "Source Han Serif K";
+    src: url("../fonts/SourceHanSerifKR-Regular.otf") format("opentype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/SourceHanSerifKR-Regular.otf") format("opentype");
     font-weight: 400;
     font-style: normal;
   }
 
-  /* Bold weight */
+  /* Medium weight */
   @font-face {
-    font-family: "NanumMyeongjo";
-    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
-    font-weight: 700;
+    font-family: "Source Han Serif K";
+    src: url("../fonts/SourceHanSerifKR-Medium.otf") format("opentype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/SourceHanSerifKR-Medium.otf") format("opentype");
+    font-weight: 500;
     font-style: normal;
   }
 
@@ -39,7 +39,7 @@
 
     @top-right {
       content: string(section-title);
-      font-family: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR",
+      font-family: "Source Han Serif K", "Apple SD Gothic Neo", "Noto Serif KR",
                    "Source Han Serif K", "AppleMyungjo", Georgia, serif;
       font-size: 8pt;
       color: #6b6a64;
@@ -47,7 +47,7 @@
 
     @bottom-center {
       content: counter(page) "  ·  한국어 편집 디자인 노트";
-      font-family: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR",
+      font-family: "Source Han Serif K", "Apple SD Gothic Neo", "Noto Serif KR",
                    "Source Han Serif K", "AppleMyungjo", Georgia, serif;
       font-size: 9pt;
       color: #6b6a64;
@@ -72,7 +72,7 @@
     --border:    #e8e6dc;
     --border-soft:#e5e3d8;
     --tag-bg:    #E4ECF5;
-    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR", "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+    --serif: "Source Han Serif K", "Noto Serif KR", "Apple SD Gothic Neo", "AppleMyungjo", Charter, Georgia, serif;
     --sans: var(--serif);
 
     --rhythm-module:  14pt;
@@ -119,7 +119,7 @@
   }
   .cover-title {
     font-size: 36pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--near-black);
     line-height: 1.15;
     letter-spacing: 0.3pt;
@@ -141,14 +141,14 @@
   }
   .cover-meta strong {
     color: var(--dark-warm);
-    font-weight: 700;
+    font-weight: 500;
   }
 
   /* ========== TOC (목차) ========== */
   .toc { break-after: page; }
   .toc h2 {
     font-size: 22pt;
-    font-weight: 700;
+    font-weight: 500;
     margin-bottom: var(--rhythm-module);
     border-left: 2.5pt solid var(--brand);
     border-radius: 1.5pt;
@@ -165,7 +165,7 @@
   .toc-item:last-of-type { border-bottom: none; }
   .toc-num {
     color: var(--brand);
-    font-weight: 700;
+    font-weight: 500;
     min-width: 30pt;
   }
   .toc-title {
@@ -181,7 +181,7 @@
   /* ========== HEADINGS ========== */
   h1 {
     font-size: 22pt;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 1.2;
     margin: 0 0 10pt 0;
     border-left: 2.5pt solid var(--brand);
@@ -193,7 +193,7 @@
 
   h2 {
     font-size: 16pt;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 1.25;
     margin: 24pt 0 8pt 0;
     color: var(--near-black);
@@ -203,7 +203,7 @@
 
   h3 {
     font-size: 13pt;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 1.3;
     margin: 18pt 0 6pt 0;
     color: var(--dark-warm);
@@ -235,8 +235,8 @@
     margin-bottom: var(--rhythm-module);
   }
 
-  .hl { color: var(--brand); font-weight: 700; }
-  strong { font-weight: 700; }
+  .hl { color: var(--brand); font-weight: 500; }
+  strong { font-weight: 500; }
 
   /* ========== LISTS ========== */
   ul, ol {
@@ -245,7 +245,7 @@
     line-height: 1.55;
   }
   ul li::marker { color: var(--brand); }
-  ol li::marker { color: var(--brand); font-weight: 700; }
+  ol li::marker { color: var(--brand); font-weight: 500; }
 
   /* ========== QUOTE ========== */
   blockquote, .quote {
@@ -266,7 +266,7 @@
   /* ========== CODE ========== */
   code {
     font-family: "JetBrains Mono", "D2Coding", "SF Mono", Consolas,
-                 "NanumMyeongjo", "Apple SD Gothic Neo", monospace;
+                 "Source Han Serif K", "Apple SD Gothic Neo", monospace;
     font-size: 9pt;
     background: var(--ivory);
     padding: 1pt 4pt;
@@ -275,7 +275,7 @@
   }
   pre {
     font-family: "JetBrains Mono", "D2Coding", "SF Mono", Consolas,
-                 "NanumMyeongjo", "Apple SD Gothic Neo", monospace;
+                 "Source Han Serif K", "Apple SD Gothic Neo", monospace;
     font-size: 9pt;
     line-height: 1.5;
     background: var(--ivory);
@@ -298,7 +298,7 @@
   }
   table th {
     text-align: left;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--dark-warm);
     padding: 6pt 8pt;
     border-bottom: 1pt solid var(--border);
@@ -345,7 +345,7 @@
     color: var(--brand);
     font-family: var(--sans);
     font-size: 9pt;
-    font-weight: 700;
+    font-weight: 500;
     padding: 1pt 6pt;
     border-radius: 3pt;
     margin-right: 4pt;
@@ -361,7 +361,7 @@
 <section class="cover">
   <div>
     <div class="cover-eyebrow">편집 디자인 노트 · Kami</div>
-    <div class="cover-title">한국어 편집 디자인 노트<br>— Nanum Myeongjo와 본문 조판</div>
+    <div class="cover-title">한국어 편집 디자인 노트<br>— Source Han Serif K와 본문 조판</div>
     <div class="cover-sub">한글 타이포그래피의 기초부터 Kami 한국어 지원의 설계 결정까지 — 실무 편집자를 위한 에디토리얼 에세이.</div>
   </div>
   <div class="cover-meta">
@@ -411,10 +411,10 @@
   </p>
 
   <h2>명조와 고딕의 선택</h2>
-  <p>한글 서체는 크게 명조(明朝)와 고딕(Gothic) 계열로 나뉩니다. 명조는 붓글씨의 획 변화를 계승한 세리프 서체로, 본문 장문에 적합합니다. 고딕은 단일 획 두께의 산세리프로, 제목과 UI에 널리 쓰입니다. Kami 한국어 템플릿은 <span class="hl">Nanum Myeongjo</span>를 기본 본문 서체로 채택했습니다. 네이버가 개발해 SIL 오픈폰트 라이선스로 배포하는 이 서체는 10pt 이하 소본문에서도 균형 잡힌 가독성을 유지합니다.</p>
+  <p>한글 서체는 크게 명조(明朝)와 고딕(Gothic) 계열로 나뉩니다. 명조는 붓글씨의 획 변화를 계승한 세리프 서체로, 본문 장문에 적합합니다. 고딕은 단일 획 두께의 산세리프로, 제목과 UI에 널리 쓰입니다. Kami 한국어 템플릿은 <span class="hl">Source Han Serif K</span>를 기본 본문 서체로 채택했습니다. 네이버가 개발해 SIL 오픈폰트 라이선스로 배포하는 이 서체는 10pt 이하 소본문에서도 균형 잡힌 가독성을 유지합니다.</p>
 
   <h2>획의 굵기와 대비</h2>
-  <p>한글 명조 서체에서 획 대비(stroke contrast)는 세로 획과 가로 획의 두께 차이를 의미합니다. Nanum Myeongjo는 적당한 대비를 유지해 화면 렌더링과 PDF 인쇄 모두에서 안정적인 모습을 보여줍니다. 지나치게 높은 획 대비는 저해상도 화면에서 획이 사라지는 현상(ink trap failure)을 일으키므로, 웹·PDF 겸용 조판에서는 중간 대비 서체가 안전합니다.</p>
+  <p>한글 명조 서체에서 획 대비(stroke contrast)는 세로 획과 가로 획의 두께 차이를 의미합니다. Source Han Serif K는 적당한 대비를 유지해 화면 렌더링과 PDF 인쇄 모두에서 안정적인 모습을 보여줍니다. 지나치게 높은 획 대비는 저해상도 화면에서 획이 사라지는 현상(ink trap failure)을 일으키므로, 웹·PDF 겸용 조판에서는 중간 대비 서체가 안전합니다.</p>
 
   <blockquote>
     한글 조판에서 가장 중요한 것은 글자가 아닌 공간이다. 글자 사이, 단어 사이, 행 사이의 여백이 리듬을 만든다.
@@ -475,7 +475,7 @@
   <h2>Kami KO 폴백 체인</h2>
   <p>Kami 한국어 템플릿의 <code>--serif</code> 변수에 정의된 폴백 체인은 다음과 같습니다:</p>
 
-  <pre><code>--serif: "NanumMyeongjo",      /* 번들 폰트: 한글 주력 */
+  <pre><code>--serif: "Source Han Serif K",      /* 번들 폰트: 한글 주력 */
          "Apple SD Gothic Neo",  /* macOS 시스템 한글 */
          "Noto Serif KR",        /* 크로스 플랫폼 한글 */
          "Source Han Serif K",   /* Adobe 한국어 세리프 */
@@ -484,10 +484,10 @@
          serif;                  /* 시스템 기본 세리프 */</code></pre>
 
   <h2>번들 폰트 우선 원칙</h2>
-  <p>로컬 시스템에 폰트가 없을 경우를 대비해 Kami는 <span class="hl">NanumMyeongjo를 프로젝트에 직접 번들</span>합니다. <code>@font-face</code> 규칙에서 로컬 파일(<code>../fonts/</code>)을 1순위로, jsDelivr CDN URL을 2순위로 지정합니다. 이 이중 구조 덕분에 오프라인 환경과 WeasyPrint CLI 빌드 모두에서 폰트가 정상 렌더링됩니다.</p>
+  <p>로컬 시스템에 폰트가 없을 경우를 대비해 Kami는 <span class="hl">SourceHanSerifK를 프로젝트에 직접 번들</span>합니다. <code>@font-face</code> 규칙에서 로컬 파일(<code>../fonts/</code>)을 1순위로, jsDelivr CDN URL을 2순위로 지정합니다. 이 이중 구조 덕분에 오프라인 환경과 WeasyPrint CLI 빌드 모두에서 폰트가 정상 렌더링됩니다.</p>
 
   <h3>라틴 문자 처리</h3>
-  <p>한글 폰트에 포함된 라틴 글리프는 대개 한글 글리프에 비해 시각적 질감이 다릅니다. 혼용 문서에서는 라틴 부분이 어색하게 보일 수 있습니다. Kami는 이를 허용 오차로 간주하고, 라틴 전용 폰트를 별도 로드하지 않아 파일 크기를 최소화하는 방향을 택했습니다. 단, 코드 블록은 JetBrains Mono를 우선 사용하고 한글 주석이 있을 경우 Nanum Myeongjo로 폴백합니다.</p>
+  <p>한글 폰트에 포함된 라틴 글리프는 대개 한글 글리프에 비해 시각적 질감이 다릅니다. 혼용 문서에서는 라틴 부분이 어색하게 보일 수 있습니다. Kami는 이를 허용 오차로 간주하고, 라틴 전용 폰트를 별도 로드하지 않아 파일 크기를 최소화하는 방향을 택했습니다. 단, 코드 블록은 JetBrains Mono를 우선 사용하고 한글 주석이 있을 경우 Source Han Serif K로 폴백합니다.</p>
 
   <div class="takeaway">
     <div class="takeaway-label">핵심 원칙</div>
@@ -547,7 +547,7 @@
   </blockquote>
 
   <h2>앞으로의 과제</h2>
-  <p>Nanum Myeongjo는 ExtraBold 가중치가 없어, 굵은 디스플레이 제목에서 시각적 강도가 제한됩니다. 향후 <span class="hl">Nanum Myeongjo ExtraBold</span>가 공개된다면 Kami 템플릿에 즉시 통합할 계획입니다. 또한 한자(CJK Unified Ideographs) 포함 문서를 위한 별도 폴백 체인 가이드라인을 추가할 예정입니다. 한국어 편집 디자인은 계속 진화합니다.</p>
+  <p>Source Han Serif K는 ExtraBold 가중치가 없어, 굵은 디스플레이 제목에서 시각적 강도가 제한됩니다. 향후 <span class="hl">Source Han Serif K ExtraBold</span>가 공개된다면 Kami 템플릿에 즉시 통합할 계획입니다. 또한 한자(CJK Unified Ideographs) 포함 문서를 위한 별도 폴백 체인 가이드라인을 추가할 예정입니다. 한국어 편집 디자인은 계속 진화합니다.</p>
 
   <div class="takeaway">
     <div class="takeaway-label">Call to Action</div>

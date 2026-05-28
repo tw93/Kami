@@ -6,14 +6,14 @@ set -euo pipefail
 
 FONT_DIR="$(cd "$(dirname "$0")/../assets/fonts" && pwd)"
 MIN_SIZE_CN=10000000  # 10MB for TsangerJinKai (large CJK glyph set)
-MIN_SIZE_KO=2500000   # 2.5MB for Nanum Myeongjo (smaller per-weight)
+MIN_SIZE_KO=6500000   # 6.5MB for Source Han Serif K (Adobe full subset)
 
 # --- TsangerJinKai (existing) -----------------------------------------------
 CN_NAMES=("仓耳今楷02-W04.ttf" "仓耳今楷02-W05.ttf")
 LOCAL_NAMES=("TsangerJinKai02-W04.ttf" "TsangerJinKai02-W05.ttf")
 
-# --- Nanum Myeongjo (new) ---------------------------------------------------
-NANUM_NAMES=("NanumMyeongjo-Regular.ttf" "NanumMyeongjo-Bold.ttf")
+# --- Source Han Serif K (KO) -----------------------------------------------
+KO_NAMES=("SourceHanSerifKR-Regular.otf" "SourceHanSerifKR-Medium.otf")
 
 # Mirror order is intentionally jsdmirror-first here, opposite of the
 # templates' @font-face fallback (which lists jsdelivr first). Reasoning:
@@ -75,7 +75,7 @@ download_tsanger() {
   return 1
 }
 
-download_nanum() {
+download_ko_serif() {
   local local_name="$1"
   local target="$FONT_DIR/$local_name"
 
@@ -131,13 +131,13 @@ else
     echo "Some TsangerJinKai files could not be downloaded. Alternatives:"
     echo "  1. Install Source Han Serif SC: brew install --cask font-source-han-serif-sc"
     echo "  2. Copy TsangerJinKai02-W04.ttf and W05.ttf manually into $FONT_DIR"
-    # Don't exit yet — try Nanum too so a Korean-only user still gets KO fonts.
+    # Don't exit yet — try the KO recovery too so a Korean-only user still gets KO fonts.
   fi
 fi
 
-# --- Nanum Myeongjo check ---------------------------------------------------
+# --- Source Han Serif K (KO) check ------------------------------------------
 ko_all_present=true
-for local_name in "${NANUM_NAMES[@]}"; do
+for local_name in "${KO_NAMES[@]}"; do
   if ! check_size "$FONT_DIR/$local_name" "$MIN_SIZE_KO"; then
     ko_all_present=false
     break
@@ -146,23 +146,23 @@ done
 
 ko_failed=0
 if $ko_all_present; then
-  echo "OK: Nanum Myeongjo fonts present"
+  echo "OK: Source Han Serif K fonts present"
 else
-  echo "Downloading Nanum Myeongjo fonts..."
-  for local_name in "${NANUM_NAMES[@]}"; do
+  echo "Downloading Source Han Serif K fonts..."
+  for local_name in "${KO_NAMES[@]}"; do
     if check_size "$FONT_DIR/$local_name" "$MIN_SIZE_KO"; then
       echo "  OK: $local_name already present"
       continue
     fi
-    if ! download_nanum "$local_name"; then
+    if ! download_ko_serif "$local_name"; then
       ko_failed=$((ko_failed + 1))
     fi
   done
   if [[ "$ko_failed" -gt 0 ]]; then
     echo ""
-    echo "Some Nanum Myeongjo files could not be downloaded. Alternatives:"
-    echo "  1. Download from https://fonts.google.com/specimen/Nanum+Myeongjo"
-    echo "  2. Copy NanumMyeongjo-Regular.ttf and -Bold.ttf manually into $FONT_DIR"
+    echo "Some Source Han Serif K files could not be downloaded. Alternatives:"
+    echo "  1. Download from https://github.com/adobe-fonts/source-han-serif/releases"
+    echo "  2. Copy SourceHanSerifKR-Regular.otf and -Medium.otf manually into $FONT_DIR"
   fi
 fi
 

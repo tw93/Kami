@@ -9,25 +9,25 @@
 <meta charset="UTF-8">
 <title>Kami · KO 지원 릴리즈 노트</title>
 <meta name="author" content="Kami 팀">
-<meta name="description" content="Kami 한국어 템플릿 풀세트 및 Nanum Myeongjo 번들 도입 릴리즈 노트">
-<meta name="keywords" content="Kami, 한국어, KO, 릴리즈, 업데이트, Nanum Myeongjo">
+<meta name="description" content="Kami 한국어 템플릿 풀세트 및 Source Han Serif K 번들 도입 릴리즈 노트">
+<meta name="keywords" content="Kami, 한국어, KO, 릴리즈, 업데이트, Source Han Serif K">
 <meta name="generator" content="Kami">
 <style>
   /* Regular weight */
   @font-face {
-    font-family: "NanumMyeongjo";
-    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-family: "Source Han Serif K";
+    src: url("../fonts/SourceHanSerifKR-Regular.otf") format("opentype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/SourceHanSerifKR-Regular.otf") format("opentype");
     font-weight: 400;
     font-style: normal;
   }
 
-  /* Bold weight */
+  /* Medium weight */
   @font-face {
-    font-family: "NanumMyeongjo";
-    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
-       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
-    font-weight: 700;
+    font-family: "Source Han Serif K";
+    src: url("../fonts/SourceHanSerifKR-Medium.otf") format("opentype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/SourceHanSerifKR-Medium.otf") format("opentype");
+    font-weight: 500;
     font-style: normal;
   }
 
@@ -50,7 +50,7 @@
     --border:    #e8e6dc;
     --border-soft:#e5e3d8;
     --tag-bg:    #E4ECF5;
-    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR", "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+    --serif: "Source Han Serif K", "Noto Serif KR", "Apple SD Gothic Neo", "AppleMyungjo", Charter, Georgia, serif;
     --sans: var(--serif);
   }
 
@@ -71,8 +71,8 @@
     font-synthesis: none;
   }
 
-  strong { font-weight: 700; }
-  .hl { color: var(--brand); font-weight: 700; }
+  strong { font-weight: 500; }
+  .hl { color: var(--brand); font-weight: 500; }
 
   /* ========== VERSION HEADER ========== */
   .version-header {
@@ -84,7 +84,7 @@
   .version-logo {
     font-family: var(--serif);
     font-size: 14pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--brand);
     letter-spacing: 1pt;
     margin-bottom: 8pt;
@@ -92,7 +92,7 @@
   .version-title {
     font-family: var(--serif);
     font-size: 28pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--near-black);
     line-height: 1.2;
     margin-bottom: 6pt;
@@ -114,7 +114,7 @@
   h2 {
     font-family: var(--serif);
     font-size: 16pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--near-black);
     margin: 20pt 0 8pt 0;
     border-left: 2.5pt solid var(--brand);
@@ -125,7 +125,7 @@
 
   h3 {
     font-size: 13pt;
-    font-weight: 700;
+    font-weight: 500;
     color: var(--dark-warm);
     margin: 14pt 0 4pt 0;
     break-after: avoid;
@@ -144,7 +144,7 @@
   }
   ol.changes li::marker {
     color: var(--brand);
-    font-weight: 700;
+    font-weight: 500;
   }
 
   /* ========== TAG ========== */
@@ -153,7 +153,7 @@
     background: var(--tag-bg);
     color: var(--brand);
     font-size: 9pt;
-    font-weight: 700;
+    font-weight: 500;
     padding: 1pt 6pt;
     border-radius: 3pt;
     margin-right: 3pt;
@@ -219,7 +219,7 @@
 <div class="version-header">
   <div class="version-logo">Kami</div>
   <div class="version-title">KO 지원 풀세트 릴리즈</div>
-  <div class="version-tagline">한국어 편집 문서를 위한 9종 템플릿 + Nanum Myeongjo 번들 완성</div>
+  <div class="version-tagline">한국어 편집 문서를 위한 9종 템플릿 + Source Han Serif K 번들 완성</div>
   <div class="version-date">2026년 5월 28일</div>
 </div>
 
@@ -229,8 +229,8 @@
 <h3>신규 기능 — 한국어 템플릿</h3>
 <ol class="changes">
   <li><span class="tag new">신규</span> <strong>KO 템플릿 풀세트 추가</strong> — one-pager-ko, letter-ko, resume-ko, long-doc-ko, changelog-ko, equity-report-ko, portfolio-ko, landing-page-ko, slides-weasy-ko 총 9종을 <code>assets/templates/</code>에 등록했습니다.</li>
-  <li><span class="tag new">신규</span> <strong>Nanum Myeongjo 번들 도입</strong> — Regular(400) · Bold(700) 두 가중치를 <code>assets/fonts/</code>에 직접 번들했습니다. SIL 오픈폰트 라이선스. jsDelivr CDN을 @font-face 보조 경로로 구성합니다.</li>
-  <li><span class="tag new">신규</span> <strong>ensure-fonts.sh Nanum 지원</strong> — 폰트 파일 누락 또는 손상 시 CDN에서 자동 복구하는 스크립트를 업데이트했습니다.</li>
+  <li><span class="tag new">신규</span> <strong>Source Han Serif K 번들 도입</strong> — Regular(400) · Medium(500) 두 가중치를 <code>assets/fonts/</code>에 직접 번들했습니다. SIL 오픈폰트 라이선스. jsDelivr CDN을 @font-face 보조 경로로 구성합니다.</li>
+  <li><span class="tag new">신규</span> <strong>ensure-fonts.sh KO 지원</strong> — Source Han Serif K 파일 누락 또는 손상 시 CDN에서 자동 복구하는 스크립트를 업데이트했습니다.</li>
   <li><span class="tag new">신규</span> <strong>KO 데모 7종</strong> — demo-kaku-ko, demo-musk-resume-ko, demo-tesla-ko, demo-agent-slides-ko, demo-letter-ko, demo-longdoc-ko, demo-changelog-ko (HTML · PDF · PNG 세트).</li>
   <li><span class="tag new">신규</span> <strong>slides-ko.py PPTX 생성기</strong> — python-pptx 기반의 한국어 슬라이드 PPTX 생성 스크립트를 추가했습니다.</li>
 </ol>
@@ -239,24 +239,24 @@
 <ol class="changes">
   <li><span class="tag fix">개선</span> <strong>lint base-variant 검사 일반화</strong> — 린트 시스템이 ZH/JA 쌍 외에 KO @font-face Regular+Bold 쌍도 자동 감지하도록 확장했습니다. <code>scripts/shared.py</code>의 <code>FONT_PAIR_PATTERNS</code> 업데이트.</li>
   <li><span class="tag fix">개선</span> <strong>HTML_TEMPLATES 레지스트리 확장</strong> — <code>scripts/shared.py</code>에 KO 템플릿 9종을 등록했습니다. <code>build.py</code>와 <code>stabilize.py</code>는 이 레지스트리를 공유해 별도 변경이 불필요합니다.</li>
-  <li><span class="tag fix">개선</span> <strong>design.md KO 로케일 튜닝 기록</strong> — Nanum Myeongjo의 광학적 크기, 자간, 행 간격 권장값을 <code>references/design.md</code>에 문서화했습니다.</li>
+  <li><span class="tag fix">개선</span> <strong>design.md KO 로케일 튜닝 기록</strong> — Source Han Serif K의 광학적 크기, 자간, 행 간격 권장값을 <code>references/design.md</code>에 문서화했습니다.</li>
   <li><span class="tag fix">개선</span> <strong>AGENTS.md KO 참조 추가</strong> — 리포지터리 지도, 폰트 경로, 린트 기준, KO 조판 규칙을 AGENTS.md에 통합했습니다.</li>
 </ol>
 
 <h3>호환성 변경 사항</h3>
 <ol class="changes">
-  <li><span class="tag breaking">Breaking</span> <strong>dist/kami.zip 패키지 구조 변경</strong> — NanumMyeongjo-Regular.ttf · Bold.ttf가 패키지에 포함됩니다. 기존 zip을 캐싱하는 배포 파이프라인은 최신 릴리즈로 업데이트해야 합니다. 상업용 폰트(TsangerJinKai02)는 여전히 패키지에서 제외됩니다.</li>
+  <li><span class="tag breaking">Breaking</span> <strong>dist/kami.zip 패키지 구조 변경</strong> — SourceHanSerifKR-Regular.otf · Bold.ttf가 패키지에 포함됩니다. 기존 zip을 캐싱하는 배포 파이프라인은 최신 릴리즈로 업데이트해야 합니다. 상업용 폰트(TsangerJinKai02)는 여전히 패키지에서 제외됩니다.</li>
 </ol>
 
 <div class="callout">
-  <strong>업그레이드 안내:</strong> 기존 Kami 사용자는 <code>bash scripts/ensure-fonts.sh</code>를 실행해 Nanum Myeongjo 폰트를 취득하세요. 이후 <code>python3 scripts/build.py --check</code>로 전체 템플릿 빌드를 검증합니다.
+  <strong>업그레이드 안내:</strong> 기존 Kami 사용자는 <code>bash scripts/ensure-fonts.sh</code>를 실행해 Source Han Serif K 폰트를 취득하세요. 이후 <code>python3 scripts/build.py --check</code>로 전체 템플릿 빌드를 검증합니다.
 </div>
 
 <!-- ========== 기술 세부 사항 ========== -->
 <h2>기술 세부 사항</h2>
 
 <h3>폰트 렌더링</h3>
-<p>모든 KO 템플릿은 <code>font-synthesis: none</code>을 body에 적용합니다. 이는 브라우저 및 WeasyPrint가 폰트 파일에 없는 Bold를 합성(faux bold)하는 것을 방지합니다. NanumMyeongjo Bold 파일이 명시적으로 번들되므로 합성 Bold 없이 진짜 Bold 글리프가 렌더링됩니다.</p>
+<p>모든 KO 템플릿은 <code>font-synthesis: none</code>을 body에 적용합니다. 이는 브라우저 및 WeasyPrint가 폰트 파일에 없는 Bold를 합성(faux bold)하는 것을 방지합니다. SourceHanSerifK Bold 파일이 명시적으로 번들되므로 합성 Bold 없이 진짜 Bold 글리프가 렌더링됩니다.</p>
 
 <h3>PNG 캡처</h3>
 <p>데모 PNG는 PyMuPDF(fitz)로 150 DPI 해상도로 캡처 후 Pillow로 1241×1754 캔버스에 패딩합니다. 슬라이드 데모(가로 A4)는 2페이지를 세로로 쌓아 동일한 캔버스 크기로 출력합니다.</p>
@@ -264,7 +264,7 @@
 <!-- ========== 감사의 말 ========== -->
 <div class="thanks">
   <div class="thanks-label">감사의 말</div>
-  Nanum Myeongjo를 SIL 오픈폰트 라이선스로 공개해 주신 네이버 폰트팀에 감사드립니다. KO 템플릿 파일럿 검토에 참여해 주신 커뮤니티 기여자 여러분께도 감사드립니다.
+  Source Han Serif K를 SIL 오픈폰트 라이선스로 공개해 주신 네이버 폰트팀에 감사드립니다. KO 템플릿 파일럿 검토에 참여해 주신 커뮤니티 기여자 여러분께도 감사드립니다.
 </div>
 
 <!-- ========== 푸터 ========== -->
