@@ -25,3 +25,4 @@ assets/examples/
 
 # OMC (oh-my-claudecode) local tooling state
 .omc/
+docs/
