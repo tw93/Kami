@@ -22,3 +22,6 @@ assets/examples/
 
 # Slides build artifact (moved into assets/examples/ by build.py)
 /output.pptx
+
+# OMC (oh-my-claudecode) local tooling state
+.omc/
