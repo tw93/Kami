@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     LONG DOCUMENT DEMO (KO) · parchment design system
+     한국어 편집 디자인 노트 — Nanum Myeongjo와 본문 조판
+     5-6 챕터 에디토리얼 에세이
+     목표: 7 ± 2 페이지
+     ================================================================== -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>한국어 편집 디자인 노트 — Nanum Myeongjo와 본문 조판</title>
+<meta name="author" content="Kami 편집팀">
+<meta name="description" content="한글 타이포그래피, 행 간격, 폰트 폴백 전략, Kami의 한국어 지원에 대한 에디토리얼 에세이">
+<meta name="keywords" content="한글, 타이포그래피, Nanum Myeongjo, Kami, 조판">
+<meta name="generator" content="Kami">
+<style>
+  /* Regular weight */
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* Bold weight */
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @page {
+    size: A4;
+    margin: 20mm 22mm 22mm 22mm;
+    background: #f5f4ed;
+
+    @top-right {
+      content: string(section-title);
+      font-family: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR",
+                   "Source Han Serif K", "AppleMyungjo", Georgia, serif;
+      font-size: 8pt;
+      color: #6b6a64;
+    }
+
+    @bottom-center {
+      content: counter(page) "  ·  한국어 편집 디자인 노트";
+      font-family: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR",
+                   "Source Han Serif K", "AppleMyungjo", Georgia, serif;
+      font-size: 9pt;
+      color: #6b6a64;
+    }
+  }
+
+  @page:first {
+    @top-right { content: ""; }
+    @bottom-center { content: ""; }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --near-black:#141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --border:    #e8e6dc;
+    --border-soft:#e5e3d8;
+    --tag-bg:    #E4ECF5;
+    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR", "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+    --sans: var(--serif);
+
+    --rhythm-module:  14pt;
+    --rhythm-section: 18pt;
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 20mm 22mm 22mm 22mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 10.5pt;
+    line-height: 1.55;
+    letter-spacing: 0.3pt;
+    widows: 3;
+    orphans: 3;
+    font-synthesis: none;
+  }
+
+  .sans {
+    font-family: var(--sans);
+  }
+
+  /* ========== COVER ========== */
+  .cover {
+    min-height: 240mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40mm 0 0 0;
+    break-after: page;
+  }
+  .cover-eyebrow {
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--brand);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    margin-bottom: 18pt;
+  }
+  .cover-title {
+    font-size: 36pt;
+    font-weight: 700;
+    color: var(--near-black);
+    line-height: 1.15;
+    letter-spacing: 0.3pt;
+    margin-bottom: 16pt;
+  }
+  .cover-sub {
+    font-family: var(--sans);
+    font-size: 14pt;
+    color: var(--olive);
+    line-height: 1.5;
+    max-width: 85%;
+    margin-bottom: 30pt;
+  }
+  .cover-meta {
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--stone);
+    line-height: 1.5;
+  }
+  .cover-meta strong {
+    color: var(--dark-warm);
+    font-weight: 700;
+  }
+
+  /* ========== TOC (목차) ========== */
+  .toc { break-after: page; }
+  .toc h2 {
+    font-size: 22pt;
+    font-weight: 700;
+    margin-bottom: var(--rhythm-module);
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+  }
+  .toc-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 6pt 0;
+    border-bottom: 0.3pt dotted var(--border);
+    font-size: 11pt;
+  }
+  .toc-item:last-of-type { border-bottom: none; }
+  .toc-num {
+    color: var(--brand);
+    font-weight: 700;
+    min-width: 30pt;
+  }
+  .toc-title {
+    flex: 1;
+    color: var(--near-black);
+    padding-left: 6pt;
+  }
+  .toc-page {
+    color: var(--stone);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ========== HEADINGS ========== */
+  h1 {
+    font-size: 22pt;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 10pt 0;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+    color: var(--near-black);
+    break-after: avoid;
+  }
+
+  h2 {
+    font-size: 16pt;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 24pt 0 8pt 0;
+    color: var(--near-black);
+    break-after: avoid;
+    string-set: section-title content();
+  }
+
+  h3 {
+    font-size: 13pt;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 18pt 0 6pt 0;
+    color: var(--dark-warm);
+    break-after: avoid;
+  }
+
+  .chapter-num {
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--brand);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    margin-bottom: 6pt;
+  }
+
+  /* ========== PARAGRAPHS ========== */
+  p {
+    margin: 0 0 10pt 0;
+    line-height: 1.55;
+    color: var(--near-black);
+    widows: 2;
+    orphans: 2;
+  }
+
+  .lead {
+    font-size: 12pt;
+    line-height: 1.55;
+    color: var(--dark-warm);
+    margin-bottom: var(--rhythm-module);
+  }
+
+  .hl { color: var(--brand); font-weight: 700; }
+  strong { font-weight: 700; }
+
+  /* ========== LISTS ========== */
+  ul, ol {
+    margin: 6pt 0 10pt 0;
+    padding-left: 20pt;
+    line-height: 1.55;
+  }
+  ul li::marker { color: var(--brand); }
+  ol li::marker { color: var(--brand); font-weight: 700; }
+
+  /* ========== QUOTE ========== */
+  blockquote, .quote {
+    border-left: 2pt solid var(--brand);
+    margin: 12pt 0;
+    padding: 4pt 0 4pt 16pt;
+    color: var(--olive);
+    line-height: 1.55;
+    break-inside: avoid;
+  }
+  blockquote .cite, .quote .cite {
+    display: block;
+    font-size: 9pt;
+    color: var(--stone);
+    margin-top: 4pt;
+  }
+
+  /* ========== CODE ========== */
+  code {
+    font-family: "JetBrains Mono", "D2Coding", "SF Mono", Consolas,
+                 "NanumMyeongjo", "Apple SD Gothic Neo", monospace;
+    font-size: 9pt;
+    background: var(--ivory);
+    padding: 1pt 4pt;
+    border-radius: 2pt;
+    color: var(--dark-warm);
+  }
+  pre {
+    font-family: "JetBrains Mono", "D2Coding", "SF Mono", Consolas,
+                 "NanumMyeongjo", "Apple SD Gothic Neo", monospace;
+    font-size: 9pt;
+    line-height: 1.5;
+    background: var(--ivory);
+    border-radius: 4pt;
+    padding: 10pt 14pt;
+    margin: 10pt 0;
+    white-space: pre-wrap;
+    color: var(--near-black);
+    break-inside: avoid;
+  }
+  pre code { background: transparent; padding: 0; font-size: inherit; }
+
+  /* ========== TABLE ========== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.5pt;
+    margin: 12pt 0;
+    break-inside: avoid;
+  }
+  table th {
+    text-align: left;
+    font-weight: 700;
+    color: var(--dark-warm);
+    padding: 6pt 8pt;
+    border-bottom: 1pt solid var(--border);
+    background: transparent;
+  }
+  table td {
+    padding: 5pt 8pt;
+    border-bottom: 0.3pt solid var(--border-soft);
+    vertical-align: top;
+  }
+  table.striped tbody tr:nth-child(even) td { background: var(--ivory); }
+
+  /* ========== CALLOUT ========== */
+  .callout {
+    background: var(--ivory);
+    border-left: 2pt solid var(--brand);
+    padding: 10pt 14pt;
+    border-radius: 3pt;
+    margin: 12pt 0;
+    line-height: 1.55;
+    break-inside: avoid;
+  }
+
+  .takeaway {
+    background: var(--ivory);
+    border-radius: 4pt;
+    padding: 10pt 14pt;
+    margin: 14pt 0;
+    break-inside: avoid;
+  }
+  .takeaway-label {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--brand);
+    letter-spacing: 0.5pt;
+    text-transform: uppercase;
+    margin-bottom: 4pt;
+  }
+
+  /* ========== TAG ========== */
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--brand);
+    font-family: var(--sans);
+    font-size: 9pt;
+    font-weight: 700;
+    padding: 1pt 6pt;
+    border-radius: 3pt;
+    margin-right: 4pt;
+  }
+
+  /* ========== CHAPTER BREAK ========== */
+  .chapter { break-before: page; }
+</style>
+</head>
+<body>
+
+<!-- ========== 표지 ========== -->
+<section class="cover">
+  <div>
+    <div class="cover-eyebrow">편집 디자인 노트 · Kami</div>
+    <div class="cover-title">한국어 편집 디자인 노트<br>— Nanum Myeongjo와 본문 조판</div>
+    <div class="cover-sub">한글 타이포그래피의 기초부터 Kami 한국어 지원의 설계 결정까지 — 실무 편집자를 위한 에디토리얼 에세이.</div>
+  </div>
+  <div class="cover-meta">
+    <strong>Kami 편집팀</strong><br>
+    V1.0  ·  2026.05.28<br>
+    Kami 프로젝트
+  </div>
+</section>
+
+<!-- ========== 목차 ========== -->
+<section class="toc">
+  <h2>목차</h2>
+  <div class="toc-item">
+    <span class="toc-num">01</span>
+    <span class="toc-title">한글 타이포그래피의 특성</span>
+    <span class="toc-page">03</span>
+  </div>
+  <div class="toc-item">
+    <span class="toc-num">02</span>
+    <span class="toc-title">행 간격과 글줄 설정</span>
+    <span class="toc-page">04</span>
+  </div>
+  <div class="toc-item">
+    <span class="toc-num">03</span>
+    <span class="toc-title">폰트 폴백 전략</span>
+    <span class="toc-page">05</span>
+  </div>
+  <div class="toc-item">
+    <span class="toc-num">04</span>
+    <span class="toc-title">Kami의 한국어 지원</span>
+    <span class="toc-page">06</span>
+  </div>
+  <div class="toc-item">
+    <span class="toc-num">05</span>
+    <span class="toc-title">맺음말: 조판은 언어를 닮는다</span>
+    <span class="toc-page">07</span>
+  </div>
+</section>
+
+<!-- ========== Chapter 01: 한글 타이포그래피 ========== -->
+<section class="chapter">
+  <div class="chapter-num">01 · Korean Typography</div>
+  <h1>한글 타이포그래피의 특성</h1>
+
+  <p class="lead">
+    한글은 자음과 모음을 모아쓰는 음절 단위 문자입니다. 이 구조는 라틴 알파벳과 근본적으로 다른 조판 원리를 요구합니다. <span class="hl">글자 하나하나가 정사각형에 가까운 프레임</span>에 담기기 때문에, 획의 두께와 여백의 균형이 가독성을 좌우합니다.
+  </p>
+
+  <h2>명조와 고딕의 선택</h2>
+  <p>한글 서체는 크게 명조(明朝)와 고딕(Gothic) 계열로 나뉩니다. 명조는 붓글씨의 획 변화를 계승한 세리프 서체로, 본문 장문에 적합합니다. 고딕은 단일 획 두께의 산세리프로, 제목과 UI에 널리 쓰입니다. Kami 한국어 템플릿은 <span class="hl">Nanum Myeongjo</span>를 기본 본문 서체로 채택했습니다. 네이버가 개발해 SIL 오픈폰트 라이선스로 배포하는 이 서체는 10pt 이하 소본문에서도 균형 잡힌 가독성을 유지합니다.</p>
+
+  <h2>획의 굵기와 대비</h2>
+  <p>한글 명조 서체에서 획 대비(stroke contrast)는 세로 획과 가로 획의 두께 차이를 의미합니다. Nanum Myeongjo는 적당한 대비를 유지해 화면 렌더링과 PDF 인쇄 모두에서 안정적인 모습을 보여줍니다. 지나치게 높은 획 대비는 저해상도 화면에서 획이 사라지는 현상(ink trap failure)을 일으키므로, 웹·PDF 겸용 조판에서는 중간 대비 서체가 안전합니다.</p>
+
+  <blockquote>
+    한글 조판에서 가장 중요한 것은 글자가 아닌 공간이다. 글자 사이, 단어 사이, 행 사이의 여백이 리듬을 만든다.
+    <span class="cite"> — 안상수, 『한글 디자인』, 1993</span>
+  </blockquote>
+
+  <h2>자간과 어간</h2>
+  <p>한글은 라틴 텍스트와 달리 자간(자소 간격)과 어간(어절 간격)을 별도로 제어하는 경우가 많습니다. Kami 템플릿에서는 <code>letter-spacing: 0.3pt</code>를 기본값으로 설정해 한글 특유의 조밀한 조판에서 약간의 숨을 줍니다. 자간을 과도하게 늘리면 음절의 덩어리감이 깨져 오히려 가독성이 떨어집니다.</p>
+</section>
+
+<!-- ========== Chapter 02: 행 간격 ========== -->
+<section class="chapter">
+  <div class="chapter-num">02 · Line Metrics</div>
+  <h1>행 간격과 글줄 설정</h1>
+
+  <p class="lead">
+    한글 본문의 행 간격(line-height)은 라틴 본문보다 넉넉하게 설정해야 합니다. 이는 한글 글리프가 라틴 글리프보다 수직 공간을 더 많이 차지하기 때문입니다.
+  </p>
+
+  <h2>권장 행 간격 값</h2>
+  <p>실무에서 검증된 한글 본문 행 간격 범위는 1.5 ~ 1.7입니다. Kami 한국어 템플릿은 <span class="hl">line-height: 1.55</span>를 기준값으로 채택했습니다. 이 값은 10~12pt 본문에서 과도한 여백 없이 충분한 호흡을 제공합니다. 제목(h1, h2)은 글자 크기가 크므로 1.2 ~ 1.3으로 좁혀 밀도 있는 느낌을 유지합니다.</p>
+
+  <table class="striped">
+    <thead>
+      <tr>
+        <th>요소</th>
+        <th>글자 크기</th>
+        <th>권장 행 간격</th>
+        <th>Kami 채택값</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>본문 (body)</td><td>10 ~ 12pt</td><td>1.5 ~ 1.7</td><td>1.55</td></tr>
+      <tr><td>리드 (lead)</td><td>12 ~ 14pt</td><td>1.45 ~ 1.6</td><td>1.55</td></tr>
+      <tr><td>h2 소제목</td><td>15 ~ 18pt</td><td>1.25 ~ 1.4</td><td>1.25</td></tr>
+      <tr><td>h1 대제목</td><td>20pt+</td><td>1.1 ~ 1.25</td><td>1.2</td></tr>
+      <tr><td>슬라이드 제목</td><td>34 ~ 48pt</td><td>1.05 ~ 1.2</td><td>1.15</td></tr>
+    </tbody>
+  </table>
+
+  <h2>위도우·고아 규칙</h2>
+  <p>단락이 페이지를 넘어갈 때, 마지막 줄 한 줄만 다음 페이지로 넘어가거나(widow) 첫 줄 한 줄만 이전 페이지에 남는(orphan) 현상은 독서 흐름을 방해합니다. Kami 한국어 템플릿은 CSS <code>widows: 3; orphans: 3;</code>을 바디에 적용해 최소 3줄이 함께 페이지를 넘도록 제어합니다. WeasyPrint 환경에서 이 규칙은 대부분의 경우 잘 작동하지만, 매우 짧은 단락에서는 예외가 발생할 수 있어 최종 검수가 필요합니다.</p>
+
+  <div class="callout">
+    행 간격은 서체 크기와 함께 설정해야 합니다. 같은 1.55라도 10pt에서와 14pt에서의 느낌은 다릅니다. 항상 실제 PDF로 확인하세요.
+  </div>
+</section>
+
+<!-- ========== Chapter 03: 폰트 폴백 ========== -->
+<section class="chapter">
+  <div class="chapter-num">03 · Font Fallback</div>
+  <h1>폰트 폴백 전략</h1>
+
+  <p class="lead">
+    한국어 문서는 단일 폰트 파일로 모든 글리프를 커버하기 어렵습니다. 한글 완성형 11,172자에 한자, 특수 기호, 라틴 문자가 혼재하는 경우가 많아 <span class="hl">다단계 폴백 체인</span> 설계가 필수입니다.
+  </p>
+
+  <h2>Kami KO 폴백 체인</h2>
+  <p>Kami 한국어 템플릿의 <code>--serif</code> 변수에 정의된 폴백 체인은 다음과 같습니다:</p>
+
+  <pre><code>--serif: "NanumMyeongjo",      /* 번들 폰트: 한글 주력 */
+         "Apple SD Gothic Neo",  /* macOS 시스템 한글 */
+         "Noto Serif KR",        /* 크로스 플랫폼 한글 */
+         "Source Han Serif K",   /* Adobe 한국어 세리프 */
+         "AppleMyungjo",         /* macOS 레거시 명조 */
+         Charter, Georgia,       /* 라틴 세리프 폴백 */
+         serif;                  /* 시스템 기본 세리프 */</code></pre>
+
+  <h2>번들 폰트 우선 원칙</h2>
+  <p>로컬 시스템에 폰트가 없을 경우를 대비해 Kami는 <span class="hl">NanumMyeongjo를 프로젝트에 직접 번들</span>합니다. <code>@font-face</code> 규칙에서 로컬 파일(<code>../fonts/</code>)을 1순위로, jsDelivr CDN URL을 2순위로 지정합니다. 이 이중 구조 덕분에 오프라인 환경과 WeasyPrint CLI 빌드 모두에서 폰트가 정상 렌더링됩니다.</p>
+
+  <h3>라틴 문자 처리</h3>
+  <p>한글 폰트에 포함된 라틴 글리프는 대개 한글 글리프에 비해 시각적 질감이 다릅니다. 혼용 문서에서는 라틴 부분이 어색하게 보일 수 있습니다. Kami는 이를 허용 오차로 간주하고, 라틴 전용 폰트를 별도 로드하지 않아 파일 크기를 최소화하는 방향을 택했습니다. 단, 코드 블록은 JetBrains Mono를 우선 사용하고 한글 주석이 있을 경우 Nanum Myeongjo로 폴백합니다.</p>
+
+  <div class="takeaway">
+    <div class="takeaway-label">핵심 원칙</div>
+    번들 폰트는 재현 가능한 빌드를 보장합니다. CDN 폴백은 배포 패키지 외부에서 폰트를 사용하는 팀을 위한 안전망입니다. 두 경로 모두 동일한 렌더링 결과를 목표로 합니다.
+  </div>
+</section>
+
+<!-- ========== Chapter 04: Kami 한국어 지원 ========== -->
+<section class="chapter">
+  <div class="chapter-num">04 · Kami KO Support</div>
+  <h1>Kami의 한국어 지원</h1>
+
+  <p class="lead">Kami v1.0은 9종의 한국어 전용 템플릿과 2종의 폰트 파일(Regular · Bold)로 한국어 편집 문서 생성 파이프라인을 완성했습니다.</p>
+
+  <h2>지원 템플릿 목록</h2>
+  <ul>
+    <li><strong>one-pager-ko</strong> — 단일 A4 제안서 / 요약서</li>
+    <li><strong>letter-ko</strong> — 공식 서한 / 추천서 / 메모</li>
+    <li><strong>resume-ko</strong> — 엄격한 2페이지 이력서</li>
+    <li><strong>long-doc-ko</strong> — 다중 A4 백서 / 기술 보고서</li>
+    <li><strong>changelog-ko</strong> — 버전 업데이트 로그 / 릴리즈 노트</li>
+    <li><strong>equity-report-ko</strong> — 주식 분석 리포트</li>
+    <li><strong>portfolio-ko</strong> — 제품 포트폴리오</li>
+    <li><strong>landing-page-ko</strong> — 제품 랜딩 / 마케팅 원페이지</li>
+    <li><strong>slides-weasy-ko</strong> — A4 가로 슬라이드 덱</li>
+  </ul>
+
+  <h2>빌드 파이프라인</h2>
+  <p>모든 한국어 템플릿은 표준 Kami 빌드 파이프라인과 완전히 호환됩니다. <code>scripts/build.py</code>는 <code>HTML_TEMPLATES</code> 레지스트리에 등록된 템플릿을 WeasyPrint로 PDF 변환하고, PyMuPDF로 PNG 캡처합니다. 한국어 데모 파일은 <code>assets/demos/demo-*-ko.html</code> 형식으로 명명되며, 동일한 파이프라인으로 처리됩니다.</p>
+
+  <h2>린트와 품질 관리</h2>
+  <p>Kami 린트 시스템은 한국어 템플릿에 대해 다음 항목을 자동 검사합니다: <span class="hl">@font-face 쌍(Regular + Bold) 존재 여부</span>, <code>html lang="ko"</code> 속성, <code>font-synthesis: none</code> 선언, 기본 토큰 변수(<code>--serif</code>, <code>--parchment</code>) 정의 여부. 이 네 가지 조건을 모두 충족해야 린트를 통과합니다.</p>
+
+  <div class="callout">
+    <strong>WeasyPrint와 CJK 폰트:</strong> WeasyPrint는 시스템 폰트 검색에서 일부 환경에서 CJK 폰트를 누락할 수 있습니다. <code>@font-face</code>로 명시적으로 지정한 폰트는 이 문제를 우회합니다. 번들 폰트 전략이 필수인 이유입니다.
+  </div>
+</section>
+
+<!-- ========== Chapter 05: 맺음말 ========== -->
+<section class="chapter">
+  <div class="chapter-num">05 · Closing Reflection</div>
+  <h1>맺음말: 조판은 언어를 닮는다</h1>
+
+  <p class="lead">
+    좋은 조판은 독자가 폰트와 행 간격을 의식하지 못하게 합니다. 텍스트가 자연스럽게 읽힐 때, 조판은 성공한 것입니다.
+  </p>
+
+  <h2>한글과 라틴의 공존</h2>
+  <p>현대 한국어 문서는 한글, 영어, 숫자, 특수 기호가 혼재합니다. 이 혼합 환경에서 단일 서체 패밀리로 모든 글리프를 완벽히 커버하는 것은 현실적으로 불가능합니다. Kami가 선택한 방향은 <span class="hl">한글을 최우선으로, 라틴은 체계적인 폴백으로</span> 처리하는 실용주의입니다. 완벽한 글리프 커버리지를 추구하다 파일 크기와 빌드 복잡도를 높이는 것보다, 주요 언어를 잘 처리하고 나머지는 시스템 폴백에 맡기는 접근이 더 지속 가능합니다.</p>
+
+  <h2>디자인 결정의 기록</h2>
+  <p>Kami의 모든 조판 결정은 <code>references/design.md</code>에 기록되어 있습니다. 행 간격 값 하나를 바꿀 때도 그 이유를 기록합니다. 이 기록은 미래의 기여자가 "왜 이 값인가?"라는 질문에 답을 찾을 수 있게 합니다. 조판 결정은 미적 판단이지만, 그 판단의 근거는 언어적·기술적 제약에서 나옵니다.</p>
+
+  <blockquote>
+    글꼴은 옷이다. 좋은 옷은 입는 사람을 돋보이게 하고, 옷 자체가 주목받지 않는다.
+    <span class="cite"> — 에릭 슈피커만, 『폰트에 대해』, 1993</span>
+  </blockquote>
+
+  <h2>앞으로의 과제</h2>
+  <p>Nanum Myeongjo는 ExtraBold 가중치가 없어, 굵은 디스플레이 제목에서 시각적 강도가 제한됩니다. 향후 <span class="hl">Nanum Myeongjo ExtraBold</span>가 공개된다면 Kami 템플릿에 즉시 통합할 계획입니다. 또한 한자(CJK Unified Ideographs) 포함 문서를 위한 별도 폴백 체인 가이드라인을 추가할 예정입니다. 한국어 편집 디자인은 계속 진화합니다.</p>
+
+  <div class="takeaway">
+    <div class="takeaway-label">Call to Action</div>
+    Kami 한국어 템플릿으로 문서를 만들어 보세요. 린트를 통과하고, PDF를 눈으로 확인하세요. 조판이 보이지 않을 때 조판이 성공한 것입니다.
+  </div>
+</section>
+
+</body>
+</html>
