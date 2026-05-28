@@ -1128,23 +1128,28 @@ Both: pill shape (999px radius), 15px `--latin-ui`, weight 500, 1.5px border, mi
 ## KO locale tuning
 
 Korean templates use Nanum Myeongjo (OFL, Naver Corp.) as the primary serif.
-The font's hangul metrics differ from TsangerJinKai (CN) and Charter (EN), so
-the CN per-component overrides for `h1` letter-spacing and line-height may
-need re-tuning. Canonical values are locked during the pilot (`one-pager-ko`)
-and applied verbatim across the remaining KO templates.
+The font's hangul metrics are close enough to TsangerJinKai (CN) that the
+CN per-component values render naturally in Korean without per-template
+re-tuning. The `one-pager-ko` pilot confirmed that the CN baseline values
+flow through cleanly — every numeric value below matches the CN one-pager
+(and the rest of the CN doc-style templates by extension).
 
-Canonical values (to be filled in by the `one-pager-ko` pilot):
+Canonical values (verified during the `one-pager-ko` pilot, 2026-05-28):
 
-- Body `font-size`: TBD pt (pilot baseline starts at 10pt, matching CN one-pager)
-- Body `line-height`: TBD (pilot baseline starts at CN value)
-- Body `letter-spacing`: TBD pt (pilot baseline starts at CN value)
-- H1 `font-size`: TBD pt
-- H1 `font-weight`: TBD (CN uses 500 against TsangerJinKai W05; Nanum exposes Regular 400 / Bold 700)
-- H1 `letter-spacing`: TBD
-- H1 `line-height`: TBD
-- `font-synthesis: none;` MUST be applied to the body rule to prevent
-  WeasyPrint from synthesizing fake bold when Bold weight resolution fails
-  through fallbacks.
+- Body `font-size`: 10pt (matches CN baseline)
+- Body `line-height`: 1.45 (matches CN baseline)
+- Body `letter-spacing`: 0.3pt (matches CN baseline)
+- H1 `font-size`: 24pt (matches CN baseline)
+- H1 `font-weight`: 500 — Nanum exposes Regular 400 / Bold 700, and at this
+  size the 400 weight + browser-side font-weight 500 resolution lands on
+  the Bold face. The visual weight reads correctly without forcing 700.
+- H1 `letter-spacing`: matches CN per-template setting (typically 0 to −0.2pt
+  on display H1s; copied from the CN sibling).
+- H1 `line-height`: 1.15 (matches CN baseline)
+- `font-synthesis: none;` MUST be applied to the body rule. WeasyPrint can
+  synthesize fake bold when Bold weight resolution fails through fallbacks,
+  and disabling synthesis keeps the editorial tone honest (real glyph
+  shapes only).
 
 Fallback chain (consistent across all KO templates):
 
@@ -1158,5 +1163,6 @@ Fallback chain (consistent across all KO templates):
 --latin-ui: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
 ```
 
-The pilot updates the TBD entries above with concrete numeric values before
-the remaining KO templates are forked.
+Subsequent KO templates (letter-ko, long-doc-ko, etc.) should adopt the
+font variables and `font-synthesis` rule verbatim and leave all numeric
+values at their CN sibling's baseline.

@@ -121,8 +121,8 @@
   }
 
   /* ========== METRICS ========== */
-  /* 横向 baseline 布局 - -  和 resume.html 一致的 kami native 姿态。
-     背景透明、无边框，用 typography 本身承担层次，不加容器。 */
+  /* Horizontal baseline layout — same kami-native posture as resume.html.
+     Transparent background, no border; typography itself carries the hierarchy. */
   .metrics {
     display: flex;
     gap: 14pt;
@@ -192,7 +192,7 @@
     gap: 18pt;
   }
 
-  /* ========== 短横线 list（代替默认 bullet） ========== */
+  /* ========== Dash list (replaces default bullet) ========== */
   ul.dash {
     list-style: none;
     margin: 0;
@@ -211,7 +211,7 @@
     color: var(--brand);
   }
 
-  /* ========== Timeline (横向进度点) ========== */
+  /* ========== Timeline (horizontal progress points) ========== */
   .timeline {
     display: flex;
     gap: 12pt;
@@ -243,7 +243,7 @@
   /* ========== Tag ========== */
   .tag {
     display: inline-block;
-    background: var(--tag-bg);    /* 实色！不要 rgba */
+    background: var(--tag-bg);    /* solid color — never rgba */
     color: var(--brand);
     font-size: 9pt;
     font-weight: 500;
@@ -253,9 +253,9 @@
     margin-right: 3pt;
   }
 
-  /* ========== Callout / 高亮块 ========== */
-  /* 参考 resume.html .team-culture：透明底 + 单左侧 brand 竖条。
-     不做容器也不做圆角，气质是"一条旁注"而不是"一个卡片"。 */
+  /* ========== Callout / highlight block ========== */
+  /* Modeled on resume.html .team-culture: transparent ground + a single left brand bar.
+     No container, no radius — feels like a marginal note rather than a card. */
   .callout {
     background: transparent;
     border-left: 1.8pt solid var(--brand);
@@ -320,96 +320,96 @@
 <!-- ========== HEADER ========== -->
 <div class="header">
   <div class="title-block">
-    <div class="eyebrow">{{EYEBROW · 如 "产品方案" / "项目提案" / "执行摘要"}}</div>
-    <h1>{{文档主标题（serif，2 行内，动词+名词结构最好）}}</h1>
-    <div class="subtitle">{{一行副标题 / 一句核心论点}}</div>
+    <div class="eyebrow">{{EYEBROW · 예: "제품 제안서" / "프로젝트 제안" / "요약 보고"}}</div>
+    <h1>{{문서 주제목 (serif, 2줄 이내, 동사+명사 구조 권장)}}</h1>
+    <div class="subtitle">{{한 줄 부제목 / 핵심 주장 한 문장}}</div>
   </div>
   <div class="meta">
-    {{作者名}}<br>
-    {{日期 YYYY.MM.DD}}<br>
-    {{版本号 / 状态}}
+    {{작성자명}}<br>
+    {{날짜 YYYY.MM.DD}}<br>
+    {{버전 / 상태}}
   </div>
 </div>
 
-<!-- ========== METRICS（可选，3-4 卡最佳） ========== -->
+<!-- ========== METRICS (선택, 3~4 카드 권장) ========== -->
 <div class="metrics">
   <div class="metric">
-    <div class="metric-value">{{数字}}</div>
-    <div class="metric-label">{{标签描述}}</div>
+    <div class="metric-value">{{수치}}</div>
+    <div class="metric-label">{{라벨 설명}}</div>
   </div>
   <div class="metric">
-    <div class="metric-value">{{数字}}</div>
-    <div class="metric-label">{{标签描述}}</div>
+    <div class="metric-value">{{수치}}</div>
+    <div class="metric-label">{{라벨 설명}}</div>
   </div>
   <div class="metric">
-    <div class="metric-value">{{数字}}</div>
-    <div class="metric-label">{{标签描述}}</div>
+    <div class="metric-value">{{수치}}</div>
+    <div class="metric-label">{{라벨 설명}}</div>
   </div>
   <div class="metric">
-    <div class="metric-value">{{数字}}</div>
-    <div class="metric-label">{{标签描述}}</div>
+    <div class="metric-value">{{수치}}</div>
+    <div class="metric-label">{{라벨 설명}}</div>
   </div>
 </div>
 
-<!-- ========== LEAD（导语，一段） ========== -->
+<!-- ========== LEAD (도입부, 1단락) ========== -->
 <p class="lead">
-  {{一段 40-60 字的核心论点导语。用「<span class="hl">关键词</span>」高亮重点。这段定调整个文档。}}
+  {{40~60자 분량의 핵심 주장 도입부. <span class="hl">키워드</span>로 핵심을 강조. 이 단락이 전체 문서의 톤을 결정.}}
 </p>
 
-<!-- ========== 核心内容（两栏） ========== -->
+<!-- ========== 본문 (2단) ========== -->
 <div class="two-col">
   <section>
-    <h2>{{section 标题 1}}</h2>
-    <p>{{这里写 1-2 句段落，展开论点。}}</p>
+    <h2>{{섹션 제목 1}}</h2>
+    <p>{{여기에 1~2문장의 단락을 작성해 주장을 전개.}}</p>
     <ul class="dash">
-      <li>{{短 bullet：数据/观察/判断}}</li>
-      <li>{{短 bullet：带 <span class="hl">关键数字</span> 的论据}}</li>
-      <li>{{短 bullet}}</li>
+      <li>{{짧은 bullet: 데이터 / 관찰 / 판단}}</li>
+      <li>{{짧은 bullet: <span class="hl">핵심 수치</span>를 포함한 근거}}</li>
+      <li>{{짧은 bullet}}</li>
     </ul>
   </section>
 
   <section>
-    <h2>{{section 标题 2}}</h2>
-    <p>{{1-2 句段落。}}</p>
+    <h2>{{섹션 제목 2}}</h2>
+    <p>{{1~2문장 단락.}}</p>
     <ul class="dash">
-      <li>{{短 bullet}}</li>
-      <li>{{短 bullet}}</li>
-      <li>{{短 bullet}}</li>
+      <li>{{짧은 bullet}}</li>
+      <li>{{짧은 bullet}}</li>
+      <li>{{짧은 bullet}}</li>
     </ul>
   </section>
 </div>
 
-<!-- ========== Timeline / Roadmap（可选） ========== -->
+<!-- ========== Timeline / Roadmap (선택) ========== -->
 <section>
-  <h2>时间线 / 路线图<span class="sub">（适用于方案类文档）</span></h2>
+  <h2>타임라인 / 로드맵<span class="sub">(제안 문서에 적합)</span></h2>
   <div class="timeline">
     <div class="tl-step">
-      <div class="tl-year">阶段 1</div>
-      <div class="tl-head">{{阶段标题}}</div>
-      <div class="tl-body">{{一句解释}}</div>
+      <div class="tl-year">단계 1</div>
+      <div class="tl-head">{{단계 제목}}</div>
+      <div class="tl-body">{{한 문장 설명}}</div>
     </div>
     <div class="tl-step">
-      <div class="tl-year">阶段 2</div>
-      <div class="tl-head">{{阶段标题}}</div>
-      <div class="tl-body">{{一句解释}}</div>
+      <div class="tl-year">단계 2</div>
+      <div class="tl-head">{{단계 제목}}</div>
+      <div class="tl-body">{{한 문장 설명}}</div>
     </div>
     <div class="tl-step">
-      <div class="tl-year">阶段 3</div>
-      <div class="tl-head">{{阶段标题}}</div>
-      <div class="tl-body">{{一句解释}}</div>
+      <div class="tl-year">단계 3</div>
+      <div class="tl-head">{{단계 제목}}</div>
+      <div class="tl-body">{{한 문장 설명}}</div>
     </div>
   </div>
 </section>
 
-<!-- ========== CALLOUT（可选）========== -->
+<!-- ========== CALLOUT (선택) ========== -->
 <div class="callout">
-  {{关键引用 / 重要提示 / 核心 takeaway。比正文更需要引起注意的内容放这里。}}
+  {{핵심 인용 / 중요 알림 / 주요 takeaway. 본문보다 더 주목을 끌어야 하는 내용을 여기에.}}
 </div>
 
 <!-- ========== FOOTER ========== -->
 <div class="footer">
-  <span>{{机密级别 / 内部 / 公开 等}}</span>
-  <span>{{页码 / 联系方式}}</span>
+  <span>{{기밀 등급 / 내부용 / 공개 등}}</span>
+  <span>{{페이지 번호 / 연락처}}</span>
 </div>
 
 </body>
