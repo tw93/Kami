@@ -1140,9 +1140,11 @@ Canonical values (verified during the `one-pager-ko` pilot, 2026-05-28):
 - Body `line-height`: 1.45 (matches CN baseline)
 - Body `letter-spacing`: 0.3pt (matches CN baseline)
 - H1 `font-size`: 24pt (matches CN baseline)
-- H1 `font-weight`: 500 — Nanum exposes Regular 400 / Bold 700, and at this
-  size the 400 weight + browser-side font-weight 500 resolution lands on
-  the Bold face. The visual weight reads correctly without forcing 700.
+- H1 `font-weight`: 700. CN uses 500 against TsangerJinKai W05, which the
+  CN templates treat as a Medium-Bold. Nanum exposes only Regular (400) and
+  Bold (700) — with `font-synthesis: none` in effect, any `font-weight: 500`
+  reference falls back to Regular and the emphasis disappears. KO templates
+  therefore use 700 everywhere CN uses 500.
 - H1 `letter-spacing`: matches CN per-template setting (typically 0 to −0.2pt
   on display H1s; copied from the CN sibling).
 - H1 `line-height`: 1.15 (matches CN baseline)
