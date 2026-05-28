@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     LONG DOCUMENT TEMPLATE (KO) · parchment design system
+     다중 A4 백서 / 기술 보고서 / 연간 결산 보고서
+     구조: 표지 -> 목차 -> 요약 -> 본문 챕터 -> 부록
+     변경 후 실행: python3 -c "from weasyprint import HTML; HTML('long-doc-ko.html').write_pdf('out.pdf')"
+     목표: 최대 9페이지
+     ================================================================== -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>{{문서 제목}}</title>
+<meta name="author" content="{{작성자}}">
+<meta name="description" content="{{요약}}">
+<meta name="keywords" content="{{키워드}}">
+<meta name="generator" content="Kami">
+<style>
+  /* Regular weight */
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* Bold weight */
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @page {
+    size: A4;
+    margin: 20mm 22mm 22mm 22mm;
+    background: #f5f4ed;
+
+    @top-right {
+      content: string(section-title);
+      font-family: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR",
+                   "Source Han Serif K", "AppleMyungjo", Georgia, serif;
+      font-size: 8pt;
+      color: #6b6a64;
+    }
+
+    @bottom-center {
+      content: counter(page) "  ·  {{문서 제목}}";
+      font-family: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR",
+                   "Source Han Serif K", "AppleMyungjo", Georgia, serif;
+      font-size: 9pt;
+      color: #6b6a64;
+    }
+  }
+
+  @page:first {
+    @top-right { content: ""; }
+    @bottom-center { content: ""; }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --near-black:#141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --border:    #e8e6dc;
+    --border-soft:#e5e3d8;
+    --tag-bg:    #E4ECF5;
+    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR", "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+    --sans: var(--serif);
+
+    --rhythm-module:  14pt;
+    --rhythm-section: 18pt;
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 20mm 22mm 22mm 22mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 10.5pt;
+    line-height: 1.55;
+    letter-spacing: 0.3pt;
+    widows: 3;
+    orphans: 3;
+    font-synthesis: none;
+  }
+
+  .sans {
+    font-family: var(--sans);
+  }
+
+  /* ========== COVER ========== */
+  .cover {
+    min-height: 240mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40mm 0 0 0;
+    break-after: page;
+  }
+  .cover-eyebrow {
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--brand);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    margin-bottom: 18pt;
+  }
+  .cover-title {
+    font-size: 36pt;
+    font-weight: 700;
+    color: var(--near-black);
+    line-height: 1.15;
+    letter-spacing: 0.3pt;
+    margin-bottom: 16pt;
+  }
+  .cover-sub {
+    font-family: var(--sans);
+    font-size: 14pt;
+    color: var(--olive);
+    line-height: 1.5;
+    max-width: 85%;
+    margin-bottom: 30pt;
+  }
+  .cover-meta {
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--stone);
+    line-height: 1.5;
+  }
+  .cover-meta strong {
+    color: var(--dark-warm);
+    font-weight: 700;
+  }
+
+  /* ========== TOC (목차) ========== */
+  .toc { break-after: page; }
+  .toc h2 {
+    font-size: 22pt;
+    font-weight: 700;
+    margin-bottom: var(--rhythm-module);
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+  }
+  .toc-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 6pt 0;
+    border-bottom: 0.3pt dotted var(--border);
+    font-size: 11pt;
+  }
+  .toc-item:last-of-type { border-bottom: none; }
+  .toc-num {
+    color: var(--brand);
+    font-weight: 700;
+    min-width: 30pt;
+  }
+  .toc-title {
+    flex: 1;
+    color: var(--near-black);
+    padding-left: 6pt;
+  }
+  .toc-page {
+    color: var(--stone);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ========== HEADINGS ========== */
+  h1 {
+    font-size: 22pt;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 10pt 0;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+    color: var(--near-black);
+    break-after: avoid;
+  }
+
+  h2 {
+    font-size: 16pt;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 24pt 0 8pt 0;
+    color: var(--near-black);
+    break-after: avoid;
+    string-set: section-title content();
+  }
+
+  h3 {
+    font-size: 13pt;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 18pt 0 6pt 0;
+    color: var(--dark-warm);
+    break-after: avoid;
+  }
+
+  .chapter-num {
+    font-family: var(--sans);
+    font-size: 10pt;
+    color: var(--brand);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    margin-bottom: 6pt;
+  }
+
+  /* ========== PARAGRAPHS ========== */
+  p {
+    margin: 0 0 10pt 0;
+    line-height: 1.55;
+    color: var(--near-black);
+    widows: 2;
+    orphans: 2;
+  }
+
+  .lead {
+    font-size: 12pt;
+    line-height: 1.55;
+    color: var(--dark-warm);
+    margin-bottom: var(--rhythm-module);
+  }
+
+  .hl { color: var(--brand); font-weight: 700; }
+  strong { font-weight: 700; }
+
+  /* ========== LISTS ========== */
+  ul, ol {
+    margin: 6pt 0 10pt 0;
+    padding-left: 20pt;
+    line-height: 1.55;
+  }
+  ul li::marker { color: var(--brand); }
+  ol li::marker { color: var(--brand); font-weight: 700; }
+
+  /* ========== QUOTE ========== */
+  blockquote, .quote {
+    border-left: 2pt solid var(--brand);
+    margin: 12pt 0;
+    padding: 4pt 0 4pt 16pt;
+    color: var(--olive);
+    line-height: 1.55;
+    break-inside: avoid;
+  }
+  blockquote .cite, .quote .cite {
+    display: block;
+    font-size: 9pt;
+    color: var(--stone);
+    margin-top: 4pt;
+  }
+
+  /* ========== CODE ========== */
+  /* Mono-first for Latin glyphs; Korean fallback via NanumMyeongjo so
+     Korean comments inside code blocks render without missing-glyph boxes. */
+  code {
+    font-family: "JetBrains Mono", "D2Coding", "SF Mono", Consolas,
+                 "NanumMyeongjo", "Apple SD Gothic Neo", monospace;
+    font-size: 9pt;
+    background: var(--ivory);
+    padding: 1pt 4pt;
+    border-radius: 2pt;
+    color: var(--dark-warm);
+  }
+  pre {
+    font-family: "JetBrains Mono", "D2Coding", "SF Mono", Consolas,
+                 "NanumMyeongjo", "Apple SD Gothic Neo", monospace;
+    font-size: 9pt;
+    line-height: 1.5;
+    background: var(--ivory);
+    border-radius: 4pt;
+    padding: 10pt 14pt;
+    margin: 10pt 0;
+    white-space: pre-wrap;
+    color: var(--near-black);
+    break-inside: avoid;
+  }
+  pre code { background: transparent; padding: 0; font-size: inherit; }
+
+  /* ========== TABLE (kami-table) ========== */
+  table, .kami-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.5pt;
+    margin: 12pt 0;
+    break-inside: avoid;
+  }
+  table th, .kami-table th {
+    text-align: left;
+    font-weight: 700;
+    color: var(--dark-warm);
+    padding: 6pt 8pt;
+    border-bottom: 1pt solid var(--border);
+    background: transparent;
+  }
+  table td, .kami-table td {
+    padding: 5pt 8pt;
+    border-bottom: 0.3pt solid var(--border-soft);
+    vertical-align: top;
+  }
+  table.compact th, .kami-table.compact th { padding: 3pt 6pt; font-size: 8pt; }
+  table.compact td, .kami-table.compact td { padding: 2pt 6pt; font-size: 8pt; line-height: 1.4; }
+  table.financial td:not(:first-child), .kami-table.financial td:not(:first-child) {
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+  table.financial th:not(:first-child), .kami-table.financial th:not(:first-child) { text-align: right; }
+  table.striped tbody tr:nth-child(even) td, .kami-table.striped tbody tr:nth-child(even) td {
+    background: var(--ivory);
+  }
+  table .total td, .kami-table .total td {
+    font-weight: 700; border-top: 1pt solid var(--brand); border-bottom: none; color: var(--near-black);
+  }
+
+  /* ========== CALLOUT ========== */
+  .callout {
+    background: var(--ivory);
+    border-left: 2pt solid var(--brand);
+    padding: 10pt 14pt;
+    border-radius: 3pt;
+    margin: 12pt 0;
+    line-height: 1.55;
+    break-inside: avoid;
+  }
+  .callout blockquote,
+  .callout .quote {
+    border-left: none;
+    padding-left: 0;
+    margin: 6pt 0;
+    color: var(--olive);
+  }
+  .callout blockquote:first-child,
+  .callout .quote:first-child { margin-top: 0; }
+  .callout blockquote:last-child,
+  .callout .quote:last-child  { margin-bottom: 0; }
+
+  .takeaway {
+    background: var(--ivory);
+    border-radius: 4pt;
+    padding: 10pt 14pt;
+    margin: 14pt 0;
+    break-inside: avoid;
+  }
+  .takeaway-label {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--brand);
+    letter-spacing: 0.5pt;
+    text-transform: uppercase;
+    margin-bottom: 4pt;
+  }
+
+  /* ========== TAG ========== */
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--brand);
+    font-family: var(--sans);
+    font-size: 9pt;
+    font-weight: 700;
+    padding: 1pt 6pt;
+    border-radius: 3pt;
+    margin-right: 4pt;
+  }
+
+  /* ========== FIGURE ========== */
+  figure {
+    margin: 14pt 0;
+    break-inside: avoid;
+  }
+  figure img {
+    max-width: 100%;
+    border-radius: 4pt;
+  }
+  figcaption {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--stone);
+    margin-top: 6pt;
+    text-align: center;
+  }
+
+  /* ========== EXECUTIVE SUMMARY ========== */
+  .exec-summary {
+    background: var(--ivory);
+    border-left: 1.4pt solid var(--brand);
+    border-radius: 6pt;
+    padding: 16pt 20pt;
+    margin: 14pt 0;
+    break-inside: avoid;
+  }
+  .exec-summary h2 {
+    margin-top: 0;
+    font-size: 13pt;
+  }
+
+  /* ========== CHAPTER BREAK ========== */
+  .chapter { break-before: page; }
+</style>
+</head>
+<body>
+
+<!-- ========== 표지 ========== -->
+<section class="cover">
+  <div>
+    <div class="cover-eyebrow">{{EYEBROW · 예: "기술 보고서" / "연간 결산" / "백서"}}</div>
+    <div class="cover-title">{{문서 주제목<br>두 줄도 가능}}</div>
+    <div class="cover-sub">{{부제목 — 이 문서가 무엇인지, 누구를 위한 것인지 한 문장으로}}</div>
+  </div>
+  <div class="cover-meta">
+    <strong>{{작성자 / 팀}}</strong><br>
+    {{버전 V1.0}}  ·  {{날짜 2026.04}}<br>
+    {{발행 기관}}
+  </div>
+</section>
+
+<!-- ========== 목차 ========== -->
+<section class="toc">
+  <h2>목차</h2>
+  <div class="toc-item">
+    <span class="toc-num">01</span>
+    <span class="toc-title">요약</span>
+    <span class="toc-page">03</span>
+  </div>
+  <div class="toc-item">
+    <span class="toc-num">02</span>
+    <span class="toc-title">배경 및 문제 정의</span>
+    <span class="toc-page">04</span>
+  </div>
+  <div class="toc-item">
+    <span class="toc-num">03</span>
+    <span class="toc-title">방법론 및 주요 발견</span>
+    <span class="toc-page">06</span>
+  </div>
+  <div class="toc-item">
+    <span class="toc-num">04</span>
+    <span class="toc-title">결론 및 제언</span>
+    <span class="toc-page">09</span>
+  </div>
+  <div class="toc-item">
+    <span class="toc-num">05</span>
+    <span class="toc-title">부록</span>
+    <span class="toc-page">11</span>
+  </div>
+</section>
+
+<!-- ========== Chapter 01: 요약 ========== -->
+<section class="chapter">
+  <div class="chapter-num">01 · Executive Summary</div>
+  <h1>요약</h1>
+
+  <p class="lead">
+    {{2-3문장의 핵심 논지 도입부. <span class="hl">키워드 하이라이트</span>로 독자의 주의를 끈다.
+    이 단락만 읽어도 문서 전체가 무엇을 말하는지 파악할 수 있어야 한다.}}
+  </p>
+
+  <h2>핵심 요점</h2>
+  <ul>
+    <li>{{요점 1: 한 문장, 수치화 가능한 결론}}</li>
+    <li>{{요점 2: 데이터 기반의 인사이트}}</li>
+    <li>{{요점 3: 향후 방향에 대한 판단}}</li>
+  </ul>
+
+  <div class="takeaway">
+    <div class="takeaway-label">이 문서가 답하는 질문</div>
+    {{이 문서의 핵심 질문 3가지를 의문문으로 나열. 독자가 계속 읽을 필요가 있는지 바로 판단하게 한다.}}
+  </div>
+</section>
+
+<!-- ========== Chapter 02: 배경 ========== -->
+<section class="chapter">
+  <div class="chapter-num">02 · Background</div>
+  <h1>배경 및 문제 정의</h1>
+
+  <p class="lead">
+    {{챕터 도입부: 이 챕터가 다루는 문제와 그 중요성. 1-2문장.}}
+  </p>
+
+  <h2>현황</h2>
+  <p>{{3-5줄 단락, 현재 상황을 서술한다. <span class="hl">구체적인 수치</span>를 형용사 대신 사용한다.}}</p>
+
+  <h2>핵심 문제</h2>
+  <p>{{구체적인 핵심 문제를 기술한다. 아래 callout으로 핵심 관찰을 강조할 수 있다:}}</p>
+
+  <div class="callout">
+    {{중요한 인용 또는 핵심 관찰. 본문과 약간 다른 어조로, 독자에게 호흡 공간을 준다.}}
+  </div>
+
+  <h2>측정 기준</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>항목</th>
+        <th>현재 수준</th>
+        <th>목표 수준</th>
+        <th>격차</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{항목 1}}</td>
+        <td>{{데이터}}</td>
+        <td>{{데이터}}</td>
+        <td>{{격차}}</td>
+      </tr>
+      <tr>
+        <td>{{항목 2}}</td>
+        <td>{{데이터}}</td>
+        <td>{{데이터}}</td>
+        <td>{{격차}}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ========== Chapter 03: 방법론 ========== -->
+<section class="chapter">
+  <div class="chapter-num">03 · Methodology</div>
+  <h1>방법론 및 주요 발견</h1>
+
+  <p class="lead">{{챕터 도입부}}</p>
+
+  <h2>연구 방법</h2>
+  <p>{{방법론을 기술한다. 코드 / 수식 예시를 포함할 수 있다:}}</p>
+
+  <pre><code class="language-python">def analyze(data):
+    """Transform raw data."""
+    return transform(data)</code></pre>
+
+  <h2>주요 발견</h2>
+
+  <h3>발견 1: {{제목}}</h3>
+  <p>{{한 단락 논술. <span class="hl">구체적인 수치 / 비율</span>을 포함한다.}}</p>
+
+  <h3>발견 2: {{제목}}</h3>
+  <p>{{한 단락 논술.}}</p>
+
+  <blockquote>
+    {{인용 — 사용자 인터뷰, 전문가 의견, 또는 문헌 인용}}
+    <span class="cite"> - {{출처 / 인물}}, {{날짜}}</span>
+  </blockquote>
+</section>
+
+<!-- ========== Chapter 04: 결론 ========== -->
+<section class="chapter">
+  <div class="chapter-num">04 · Conclusions</div>
+  <h1>결론 및 제언</h1>
+
+  <p class="lead">{{챕터 도입부: 결론을 한 문장으로 요약하고, 아래에서 제언을 전개한다.}}</p>
+
+  <h2>핵심 결론</h2>
+  <ol>
+    <li>{{결론 1}}</li>
+    <li>{{결론 2}}</li>
+    <li>{{결론 3}}</li>
+  </ol>
+
+  <h2>다음 단계 제언</h2>
+  <p>{{결론에 기반한 구체적이고 실행 가능한 제언.}}</p>
+
+  <div class="takeaway">
+    <div class="takeaway-label">Call to Action</div>
+    {{독자가 한 가지만 실행한다면 무엇인가? 월요일 아침에 바로 시작할 수 있을 만큼 구체적으로.}}
+  </div>
+</section>
+
+<!-- ========== Chapter 05: 부록 ========== -->
+<section class="chapter">
+  <div class="chapter-num">05 · Appendix</div>
+  <h1>부록</h1>
+
+  <h2>A. 참고 자료</h2>
+  <ul>
+    <li>{{참고 문헌 1}}</li>
+    <li>{{참고 문헌 2}}</li>
+  </ul>
+
+  <h2>B. 용어 설명</h2>
+  <p><strong>{{용어}}</strong>: {{정의}}</p>
+  <p><strong>{{용어}}</strong>: {{정의}}</p>
+
+  <h2>C. 감사의 말</h2>
+  <p>{{감사 단락}}</p>
+</section>
+
+</body>
+</html>
