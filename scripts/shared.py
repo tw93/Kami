@@ -133,6 +133,7 @@ HTML_TEMPLATES: dict[str, TemplateSpec] = {
 SCREEN_TEMPLATES: dict[str, str] = {
     "landing-page":    "landing-page.html",
     "landing-page-en": "landing-page-en.html",
+    "landing-page-ko": "landing-page-ko.html",
 }
 
 
