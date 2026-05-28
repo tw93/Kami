@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>일론 머스크 · 이력서</title>
+<style>
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Regular.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url("../fonts/NanumMyeongjo-Bold.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/NanumMyeongjo-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @page {
+    size: A4;
+    margin: 11mm 13mm 11mm 13mm;
+    background: #f5f4ed;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --sand:      #e8e6dc;
+    --border:    #e8e6dc;
+    --border-soft: #e5e3d8;
+    --near-black: #141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --brand-tint: #EEF2F7;
+    --brand-tint-strong: #E4ECF5;
+
+    --serif: "NanumMyeongjo", "Apple SD Gothic Neo", "Noto Serif KR",
+             "Source Han Serif K", "AppleMyungjo", Charter, Georgia, serif;
+    --sans: var(--serif);
+    --mono:  "JetBrains Mono", "SF Mono", "Fira Code",
+             Consolas, Monaco, monospace;
+  }
+
+  html, body { background: var(--parchment); }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 9.4pt;
+    line-height: 1.48;
+    letter-spacing: 0;
+    font-synthesis: none;
+  }
+
+  .serif { font-family: var(--serif); }
+  .mono  { font-family: var(--mono); }
+
+  a { color: var(--brand); text-decoration: none; }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 3mm;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+  }
+  .header > div:first-child { flex-shrink: 0; }
+  .name {
+    font-family: var(--serif);
+    font-size: 26pt;
+    font-weight: 700;
+    letter-spacing: -0.2pt;
+    color: var(--near-black);
+    line-height: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 3mm;
+    white-space: nowrap;
+  }
+  .alias {
+    font-size: 12.5pt;
+    font-weight: 400;
+    color: var(--stone);
+  }
+  .contact {
+    text-align: right;
+    font-size: 9pt;
+    color: var(--stone);
+    line-height: 1.5;
+  }
+  .contact .role {
+    color: var(--brand);
+    font-size: 10.5pt;
+    font-weight: 700;
+  }
+  .contact .sep { color: var(--border); margin: 0 0.4em; }
+  .contact a { color: var(--dark-warm); }
+  .contact .loc { color: var(--olive); font-weight: 700; }
+
+  /* METRICS */
+  .metrics { display: flex; gap: 7mm; margin-bottom: 6.5mm; }
+  .metric {
+    flex: 1;
+    padding: 1mm 0;
+    display: flex;
+    align-items: baseline;
+    gap: 2mm;
+    break-inside: avoid;
+  }
+  .metric-value {
+    font-family: var(--serif);
+    font-size: 14pt;
+    font-weight: 700;
+    color: var(--brand);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .metric-value .unit {
+    font-size: 10.5pt;
+    margin-left: 0.5mm;
+    font-weight: 700;
+    color: var(--brand);
+  }
+  .metric-label { font-size: 9pt; color: var(--olive); line-height: 1.2; }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: var(--serif);
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--near-black);
+    border-bottom: 0.5pt solid var(--border);
+    padding: 0 0 3pt 0;
+    margin: 7.5mm 0 3mm 0;
+    display: flex;
+    align-items: baseline;
+    gap: 2.5mm;
+  }
+  .section-title .sub {
+    margin-left: auto;
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 9pt;
+    color: var(--stone);
+    letter-spacing: 0.2pt;
+  }
+  section:first-of-type .section-title { margin-top: 0; }
+  .page-break > .section-title { margin-top: 0; }
+
+  /* SUMMARY */
+  .summary { font-size: 9.4pt; line-height: 1.50; color: var(--near-black); }
+  .summary .hl { color: var(--brand); }
+
+  /* TIMELINE */
+  .timeline { display: flex; gap: 7mm; margin-bottom: 6.5mm; }
+  .tl-step { flex: 1; padding: 0.8mm 0; break-inside: avoid; }
+  .tl-top {
+    display: flex; align-items: baseline; gap: 2mm;
+    margin-bottom: 0.6mm;
+  }
+  .tl-year {
+    font-family: var(--serif);
+    font-size: 11pt; font-weight: 700;
+    color: var(--brand); line-height: 1;
+  }
+  .tl-head {
+    font-size: 11pt; font-weight: 700;
+    color: var(--near-black);
+  }
+  .tl-body { font-size: 9pt; color: var(--olive); line-height: 1.45; }
+
+  /* PROJECTS */
+  .project {
+    padding: 2.5mm 0;
+    border-top: 0.4pt solid var(--border-soft);
+    break-inside: avoid;
+  }
+  .project:first-of-type {
+    border-top: 0.4pt solid var(--border);
+    padding-top: 2.5mm;
+  }
+  .proj-head {
+    display: flex; align-items: baseline;
+    gap: 2mm; margin-bottom: 0.9mm;
+  }
+  .proj-name {
+    font-family: var(--serif);
+    font-size: 11pt; font-weight: 700; color: var(--near-black);
+  }
+  .proj-kind { font-size: 11pt; color: var(--olive); }
+  .proj-role {
+    font-size: 9pt; color: var(--brand); font-weight: 700;
+    margin-left: auto; background: #EEF2F7;
+    padding: 0.4mm 1.6mm; border-radius: 2pt; letter-spacing: 0.3pt;
+    text-transform: uppercase;
+  }
+  .proj-lines { display: table; width: 100%; }
+  .proj-row { display: table-row; }
+  .proj-label {
+    display: table-cell; width: 16mm;
+    font-size: 9pt; color: var(--brand);
+    font-weight: 700; letter-spacing: 0.4pt;
+    text-transform: uppercase;
+    padding: 0.4mm 0 0.4mm 0; vertical-align: top;
+  }
+  .proj-text {
+    display: table-cell; font-size: 9.2pt;
+    color: var(--near-black); line-height: 1.45;
+    padding: 0 0 0.4mm 1mm;
+  }
+  .proj-text .hl { color: var(--brand); }
+
+  /* PAGE 2 FORCE BREAK */
+  .page-break { break-before: page; }
+
+  /* OPEN SOURCE */
+  .os-intro {
+    font-size: 9.4pt; line-height: 1.45;
+    color: var(--near-black);
+    margin: 1.6mm 0 2.4mm 0;
+    break-inside: avoid;
+  }
+  .os-intro .hl { color: var(--brand); }
+  .os-intro .strong { color: var(--near-black); font-weight: 700; }
+
+  .os-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 9mm; row-gap: 1.2mm;
+  }
+  .os-item {
+    display: flex; align-items: baseline;
+    gap: 2.5mm; padding: 1.2mm 0;
+    border-bottom: 0.3pt dotted var(--border);
+    break-inside: avoid;
+  }
+  .os-name {
+    font-family: var(--serif);
+    font-size: 10.5pt; font-weight: 700;
+    flex-shrink: 0; min-width: 18mm;
+  }
+  .os-name a { color: var(--brand); }
+  .os-desc { font-size: 9pt; color: var(--olive); line-height: 1.4; flex: 1; }
+  .os-star {
+    font-size: 9pt; color: var(--dark-warm);
+    font-weight: 700; white-space: nowrap;
+    flex-shrink: 0; min-width: 10mm; text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .os-star.big { color: var(--brand); font-size: 9.2pt; }
+
+  .os-highlight {
+    margin-top: 2.5mm;
+    padding: 1.8mm 3mm;
+    background: var(--brand-tint);
+    border-left: 1.4pt solid var(--brand);
+    border-radius: 2pt;
+    font-size: 9pt; line-height: 1.45;
+    color: var(--near-black);
+    break-inside: avoid;
+  }
+  .os-highlight .hl { color: var(--brand); }
+  .os-highlight .tag {
+    display: inline-block;
+    background: var(--brand); color: var(--ivory);
+    font-size: 9pt; font-weight: 700;
+    padding: 0.2mm 1.6mm; border-radius: 2pt;
+    margin-right: 1.5mm; letter-spacing: 0.5pt;
+    text-transform: uppercase;
+    transform: translateY(-0.2mm);
+  }
+
+  /* CONVICTIONS */
+  .convictions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3mm;
+    margin-top: 1.4mm;
+  }
+  .conv-card { padding: 0 2mm 0 0; break-inside: avoid; }
+  .conv-head {
+    font-family: var(--serif);
+    font-size: 10pt; font-weight: 700;
+    color: var(--near-black); margin-bottom: 1mm;
+    display: flex; align-items: baseline; gap: 2mm;
+  }
+  .conv-head .year {
+    color: var(--brand); font-weight: 700;
+    font-size: 9pt;
+    font-variant-numeric: tabular-nums;
+  }
+  .conv-body {
+    font-size: 9pt; color: var(--olive);
+    line-height: 1.45;
+  }
+  .conv-body .hl { color: var(--brand); }
+
+  /* IMPACT */
+  .handle-strip {
+    padding: 0; margin: 1.4mm 0 2mm 0;
+    display: flex; align-items: baseline; gap: 3.5mm;
+    break-inside: avoid;
+  }
+  .handle-strip .handle {
+    font-family: var(--serif);
+    font-size: 10pt; font-weight: 700; color: var(--brand);
+    flex-shrink: 0;
+  }
+  .handle-strip .follower { font-size: 9pt; color: var(--stone); flex-shrink: 0; font-variant-numeric: tabular-nums; }
+  .handle-strip .desc { font-size: 9pt; color: var(--olive); line-height: 1.45; flex: 1; }
+
+  .impact-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 6mm; }
+  .inf-block-title {
+    margin-top: 2.5mm;
+    font-family: var(--serif);
+    font-size: 10pt; font-weight: 700;
+    color: var(--near-black);
+    margin-bottom: 1.5mm; padding-bottom: 0.5mm;
+    border-bottom: 0.3pt dotted var(--border);
+    display: flex; align-items: baseline; gap: 2mm;
+  }
+  .inf-block-title .small {
+    font-family: var(--sans);
+    font-size: 9pt; color: var(--stone);
+    font-weight: 400;
+  }
+  .art-row {
+    padding: 1.8mm 0;
+    border-bottom: 0.3pt dotted var(--border-soft);
+  }
+  .talk-row {
+    display: flex; justify-content: space-between;
+    align-items: flex-start;
+    gap: 2mm; padding: 1.8mm 0;
+    border-bottom: 0.3pt dotted var(--border-soft);
+  }
+  .art-row:last-of-type, .talk-row:last-of-type { border-bottom: none; }
+  .art-header {
+    display: flex; align-items: baseline;
+    justify-content: space-between;
+    gap: 2mm;
+  }
+  .art-title, .talk-title {
+    font-size: 9.2pt; color: var(--near-black);
+    font-weight: 700; line-height: 1.4;
+    flex: 1 1 auto; min-width: 0;
+  }
+  .art-stats, .talk-venue {
+    font-size: 9pt; color: var(--stone);
+    line-height: 1.4; margin-top: 0.6mm;
+  }
+  .art-stats .em-brand { color: var(--brand); }
+  .art-date, .talk-date {
+    font-size: 9pt; color: var(--stone);
+    font-variant-numeric: tabular-nums;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  /* SKILLS */
+  .skill-row {
+    display: flex; gap: 3mm; padding: 1.8mm 0;
+    border-bottom: 0.3pt dotted var(--border);
+    align-items: baseline;
+  }
+  .skill-row:last-of-type { border-bottom: none; }
+  .skill-label {
+    font-size: 9pt; font-weight: 700;
+    color: var(--brand); letter-spacing: 0.5pt;
+    text-transform: uppercase;
+    width: 32mm; flex-shrink: 0;
+    line-height: 1.35;
+  }
+  .skill-body { font-size: 9.2pt; color: var(--near-black); line-height: 1.45; flex: 1; }
+  .skill-body .em-brand { color: var(--brand); }
+
+  /* EDUCATION */
+  .edu-row {
+    display: flex; justify-content: space-between;
+    align-items: baseline; padding: 1.8mm 0;
+  }
+  .edu-row .school {
+    font-family: var(--serif);
+    font-weight: 700; font-size: 11pt;
+  }
+  .edu-row .major { color: var(--olive); font-size: 9.4pt; }
+  .edu-row .date { color: var(--stone); font-variant-numeric: tabular-nums; font-size: 9pt; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ PAGE 1 ═══════════ -->
+
+<div class="header">
+  <div>
+    <div class="name serif">일론 머스크</div>
+  </div>
+  <div class="contact">
+    <span class="role">창업자 · 수석 엔지니어 · CEO</span>
+    <br>
+    <a href="https://x.com/elonmusk">x.com/elonmusk</a>
+    <span class="sep">·</span>
+    <a href="mailto:em@example.com">em@example.com</a>
+    <span class="sep">·</span>
+    <span class="loc">오스틴, TX</span>
+  </div>
+</div>
+
+<div class="metrics">
+  <div class="metric"><span class="metric-value serif">30<span class="unit">년</span></span><span class="metric-label">하드 테크 구축 경력</span></div>
+  <div class="metric"><span class="metric-value serif">6<span class="unit">개</span></span><span class="metric-label">창업 / 공동 창업 기업</span></div>
+  <div class="metric"><span class="metric-value serif">400<span class="unit">+</span></span><span class="metric-label">Falcon 발사 횟수</span></div>
+  <div class="metric"><span class="metric-value serif">700<span class="unit">만+</span></span><span class="metric-label">Tesla 차량 인도</span></div>
+</div>
+
+<section>
+  <div class="section-title">요약</div>
+  <div class="summary">
+    SpaceX, Tesla, xAI, Neuralink, The Boring Company, X의 창업자 겸 엔지니어. 30년간 제품이 어렵고 공급망이 물리적인 기업을 운영해 왔습니다. 장기 목표: 문명을 다행성 종으로 만들고, 지속 가능한 에너지와 이로운 AI를 실현합니다. 로켓 엔지니어링, 대량 생산, 자본 시장, 제1원칙 문제 분해에 깊은 전문성을 보유합니다.
+  </div>
+</section>
+
+<section>
+  <div class="section-title">경력<span class="sub">1995 - 현재 · 6개 기업, 재사용 로켓 하나, 대중 전기차 하나</span></div>
+
+  <div class="timeline">
+    <div class="tl-step">
+      <div class="tl-top"><div class="tl-year serif">1995</div><div class="tl-head">인터넷 시대</div></div>
+      <div class="tl-body">Zip2 → X.com → PayPal. 32세 이전에 인터넷 회사 두 곳을 매각했습니다.</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-top"><div class="tl-year serif">2002</div><div class="tl-head">우주 + 자동차</div></div>
+      <div class="tl-body">SpaceX, Tesla, SolarCity. 타인이 불가능하다고 했던 물리적 인프라를 구축했습니다.</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-top"><div class="tl-year serif">2023</div><div class="tl-head">AI 시대</div></div>
+      <div class="tl-body">xAI, Neuralink 확장, X 플랫폼 인수. AGI와 BCI에 베팅했습니다.</div>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="proj-head">
+      <span class="proj-name serif">SpaceX</span>
+      <span class="proj-kind">· 우주 발사 · 재사용 로켓</span>
+      <span class="proj-role">창업자</span>
+    </div>
+    <div class="proj-lines">
+      <div class="proj-row">
+        <div class="proj-label">역할</div>
+        <div class="proj-text">2002년 창업. 창립 첫날부터 CEO 겸 수석 엔지니어. 민간 기업 최초로 궤도 진입(2008), ISS 도킹(2012), 부스터 착륙(2015), 유인 비행(2020).</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">실행</div>
+        <div class="proj-text">추진제부터 항공전자까지 완전 수직 통합. Merlin과 Raptor 엔진 내제화. 12번의 착륙 실패를 거쳐 재사용 부스터 검증. 발사 빈도: 연 1회(2008) → 2~3일마다(2024).</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">성과</div>
+        <div class="proj-text">Falcon 9: <span class="hl">400회+ 발사</span>, 95%+ 재사용, 비용 10배 절감. Starlink: <span class="hl">위성 7,000기+</span>, 역대 최대 군집. 기업 가치 $3,500억(2024).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="proj-head">
+      <span class="proj-name serif">Tesla</span>
+      <span class="proj-kind">· EV · 에너지 · 자율주행</span>
+      <span class="proj-role">CEO</span>
+    </div>
+    <div class="proj-lines">
+      <div class="proj-row">
+        <div class="proj-label">역할</div>
+        <div class="proj-text">2004년 주요 투자자, 부도 직전인 2008년부터 CEO. 2대 자동차 프로젝트에서 세계 최고 가치의 자동차 회사로 성장시켰습니다.</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">실행</div>
+        <div class="proj-text">마스터 플랜 체계: 각 모델이 다음 모델을 자금 지원. 3개 대륙에 기가팩토리 4개 설립. FSD는 고정 릴리스가 아닌 지속적 소프트웨어로 출시. 배터리, 모터, 실리콘, 충전 수직 통합.</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">성과</div>
+        <div class="proj-text"><span class="hl">700만대+ 인도</span>(2023년 180만 대), EV 최초로 매출 총이익률 20% 돌파, 자동차 기업 최초로 시총 $1조 달성. 모든 주요 OEM이 Model 3 출시 5년 내에 EV 전환을 발표했습니다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="proj-head">
+      <span class="proj-name serif">xAI</span>
+      <span class="proj-kind">· 프런티어 AI · 파운데이션 모델</span>
+      <span class="proj-role">창업자</span>
+    </div>
+    <div class="proj-lines">
+      <div class="proj-row">
+        <div class="proj-label">역할</div>
+        <div class="proj-text">2023년 창업. 6개월 내에 Grok 출시, 파운데이션 모델 기업 중 가장 빠른 프로덕션 도달 사례 중 하나.</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">실행</div>
+        <div class="proj-text">개념 수립부터 훈련 시작까지 122일 만에 Colossus(H100 GPU 10만 개) 구축. Grok을 X에 직접 통합해 실시간 데이터 접근과 5억명+ 사용자에게 즉시 배포.</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">성과</div>
+        <div class="proj-text">Colossus <span class="hl">122일</span> 완공, 업계가 불가능하다고 한 속도. 18개월 내 Grok이 ChatGPT 수준 벤치마크 달성. xAI 기업 가치 $500억(2024).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="proj-head">
+      <span class="proj-name serif">Neuralink</span>
+      <span class="proj-kind">· 뇌-컴퓨터 인터페이스 · BCI 임플란트</span>
+      <span class="proj-role">창업자</span>
+    </div>
+    <div class="proj-lines">
+      <div class="proj-row">
+        <div class="proj-label">역할</div>
+        <div class="proj-text">2016년 고대역폭 BCI 개발을 위해 창업. N1 임플란트, 수술 로봇, 전극 배열 설계를 공동 주도합니다.</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">실행</div>
+        <div class="proj-text"><span class="hl">전극 1,024개</span> N1 칩과 정밀 수술 로봇 출시. 5년간의 영장류 실험 후 FDA 혁신 기기 지정 및 IDE 승인(2023).</div>
+      </div>
+      <div class="proj-row">
+        <div class="proj-label">성과</div>
+        <div class="proj-text">2024년 1월 첫 인간 이식, 30일 만에 완전한 커서 제어. <span class="hl">2024년 중반 두 번째 환자</span>, 언어 복원으로 확대. 기업 가치 $50억(2023). 장기 목표: 인간 인지와 AI의 고대역폭 공생.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════ PAGE 2 ═══════════ -->
+
+<section class="page-break">
+  <div class="section-title">주요 프로젝트 &amp; 공개 활동<span class="sub">1995 - 현재 · 6개 하드 테크 기업의 창업자 엔지니어</span></div>
+
+  <div class="os-intro">
+    <span class="hl">하드 테크 분야의 제1원칙 창업자.</span> 접근법: 물리학에서 시작해 모든 통념적 비용 가정을 의심하고, 공개적으로 프로토타이핑합니다. 공개 도달 범위: <span class="strong">X 팔로워 2억 1,400만 명 · GitHub 팔로워 125명</span>.
+  </div>
+
+  <div class="os-grid">
+    <div class="os-item">
+      <span class="os-name serif"><a href="https://spacex.com">SpaceX</a></span>
+      <span class="os-desc">발사 · Starlink · Starship</span>
+      <span class="os-star big">* $3,500억</span>
+    </div>
+    <div class="os-item">
+      <span class="os-name serif"><a href="https://tesla.com">Tesla</a></span>
+      <span class="os-desc">EV · 에너지 · FSD</span>
+      <span class="os-star big">* $9,000억</span>
+    </div>
+  </div>
+
+  <div class="os-highlight">
+    <span class="tag">전환점</span>2015년 12월 22일 착륙한 Falcon 9 부스터는 궤도급 로켓으로는 처음으로 회수 후 재비행에 성공한 사례였습니다. 로켓은 소모품이라는 업계의 통념은 24개월 안에 사라졌습니다.
+  </div>
+</section>
+
+<section>
+  <div class="section-title">판단력 &amp; 신념</div>
+  <div class="convictions">
+    <div class="conv-card">
+      <div class="conv-head"><span class="year">1999</span>온라인 뱅킹에 베팅</div>
+      <div class="conv-body">
+        소비자 온라인 뱅킹이 틈새 시장이던 시절 X.com을 창업했습니다. Confinity와의 합병이 PayPal이 되었고, eBay에 $15억에 매각한 수익을 2년 내에 SpaceX와 Tesla에 재투자했습니다.
+      </div>
+    </div>
+    <div class="conv-card">
+      <div class="conv-head"><span class="year">2008</span>부도 직전 Tesla CEO 취임</div>
+      <div class="conv-body">
+        2008년 금융위기 중, 파산 3주 전인 Tesla의 CEO에 취임했습니다. Model S를 위한 자금을 마련할 Mercedes 파트너십을 성사시켜 이후 모든 Tesla 제품의 토대를 마련했습니다.
+      </div>
+    </div>
+    <div class="conv-card">
+      <div class="conv-head"><span class="year">2015</span>재사용 부스터에 헌신</div>
+      <div class="conv-body">
+        이사회와 업계가 중단을 요구한 <span class="hl">12번의 연속 착륙 실패</span> 후에도 Falcon 9 재사용을 밀어붙였습니다. 13번째 시도에서 성공했고, 재사용성은 이제 업계 표준이 되었습니다.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">공개 영향력</div>
+
+  <div class="handle-strip">
+    <span class="handle serif">X · <a href="https://x.com/elonmusk" style="color: var(--brand);">@elonmusk</a></span>
+    <span class="follower">팔로워 2억 1,400만 명</span>
+    <span class="desc">2억 1,400만 팔로워를 향한 직접 채널. 엔지니어링 포스트, 발사 영상, 제품 힌트 하나하나가 몇 시간 안에 시장을 움직입니다.</span>
+  </div>
+
+  <div class="impact-grid">
+    <div>
+      <div class="inf-block-title">주요 기고문</div>
+      <div class="art-row">
+        <div class="art-header">
+          <a class="art-title" href="https://tesla.com/blog" style="text-decoration: none;">마스터 플랜 파트 2</a>
+          <span class="art-date">2016.07</span>
+        </div>
+        <div class="art-stats">Tesla 블로그, <span class="em-brand">4,000만+</span> 조회; 업계 전반의 EV 전략을 재정의했습니다.</div>
+      </div>
+      <div class="art-row">
+        <div class="art-header">
+          <a class="art-title" href="https://spacex.com" style="text-decoration: none;">엔지니어링에서의 제1원칙 사고</a>
+          <span class="art-date">2013.03</span>
+        </div>
+        <div class="art-stats">TED 강연 · youtube.com 560만 뷰</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="inf-block-title">초청 강연</div>
+      <div class="talk-row">
+        <div>
+          <div class="talk-title">인류를 다행성 종으로</div>
+          <div class="talk-venue">IAC 과달라하라 · 2016</div>
+        </div>
+        <div class="talk-date">2016.09</div>
+      </div>
+      <div class="talk-row">
+        <div>
+          <div class="talk-title">Starship과 화성</div>
+          <div class="talk-venue">Starbase Texas · 2024</div>
+        </div>
+        <div class="talk-date">2024.04</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">핵심 역량</div>
+  <div class="skill-row">
+    <div class="skill-label">로켓 · 엔진 설계</div>
+    <div class="skill-body">Merlin, Raptor, Starship 아키텍처 주도; <span class="em-brand">최초의 재사용 궤도 부스터</span>를 어느 조직보다 먼저 출시.</div>
+  </div>
+  <div class="skill-row">
+    <div class="skill-label">제조 · 확장</div>
+    <div class="skill-body">Tesla 프리몬트, 상하이, 베를린, 오스틴 공장 구축; SpaceX 조립 라인을 0에서 <span class="em-brand">연 100회+ 발사</span>로 확장.</div>
+  </div>
+  <div class="skill-row">
+    <div class="skill-label">자본 · 위기 관리</div>
+    <div class="skill-body">Tesla가 <span class="em-brand">부도 수주 전</span>일 때 Daimler 투자를 성사시킴; 여러 기업에서 5차례 준파산 위기를 극복.</div>
+  </div>
+  <div class="skill-row">
+    <div class="skill-label">공개 소통</div>
+    <div class="skill-body">X 팔로워 2억 1,400만 명; 발표 하나가 산하 기업들의 <span class="em-brand">S&amp;P 500 구성 종목</span> 주가를 일상적으로 움직입니다.</div>
+  </div>
+  <div class="skill-row">
+    <div class="skill-label">제1원칙 · 비용</div>
+    <div class="skill-body">로켓, 배터리, 터널 굴착에서 통념적 비용 가정을 의심함으로써 4개 산업에서 <span class="em-brand">10배 비용 절감</span>을 달성.</div>
+  </div>
+</section>
+
+<section style="break-inside: avoid;">
+  <div class="section-title">학력</div>
+  <div class="edu-row">
+    <div>
+      <span class="school serif">펜실베이니아 대학교</span>
+      <span class="major"> · 와튼 스쿨, 경제학 학사 · 물리학 학사</span>
+    </div>
+    <div class="date">1992 - 1997</div>
+  </div>
+</section>
+
+</body>
+</html>
