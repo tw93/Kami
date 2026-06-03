@@ -65,6 +65,7 @@ from stabilize import (  # noqa: E402
     run_for_target,
     tighten_section_gap,
 )
+from verify import RECOGNIZABLE_FALLBACK_FONT_MARKERS  # noqa: E402
 
 
 # --------------------------- helpers ---------------------------
@@ -222,6 +223,18 @@ def test_korean_templates_carry_resolvable_serif_name() -> None:
     check("Korean fallback stacks all carry Source Han Serif KR",
           not offenders,
           f"offenders: {'; '.join(offenders)}")
+
+
+def test_font_fallback_markers_recognize_pt_serif() -> None:
+    """macOS without Charter may render English fallbacks as PT Serif."""
+    embedded = {"DROIWJ+PT-Serif", "ZBEAAE+JetBrains-Mono"}
+    fallback_present = any(
+        marker in font for font in embedded
+        for marker in RECOGNIZABLE_FALLBACK_FONT_MARKERS
+    )
+    check("font fallback markers recognize PT-Serif",
+          fallback_present,
+          f"markers: {RECOGNIZABLE_FALLBACK_FONT_MARKERS}")
 
 
 def test_chinese_slides_mono_has_cjk_fallback() -> None:
@@ -893,6 +906,7 @@ def main() -> int:
     test_registry_consistency()
     test_chinese_html_templates_keep_single_serif_stack()
     test_korean_templates_carry_resolvable_serif_name()
+    test_font_fallback_markers_recognize_pt_serif()
     test_chinese_slides_mono_has_cjk_fallback()
     test_scan_file_skip_bug()
     test_scan_file_arrow_in_en()

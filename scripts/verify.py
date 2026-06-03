@@ -24,6 +24,21 @@ from shared import DIAGRAMS, EXAMPLES, TEMPLATES, load_checks_thresholds
 CN_PRIMARY_FONTS = {"TsangerJinKai02"}
 EN_PRIMARY_FONTS = {"Charter"}
 KO_PRIMARY_FONTS = {"Source-Han-Serif-K", "SourceHanSerifK"}
+RECOGNIZABLE_FALLBACK_FONT_MARKERS = (
+    "Georgia",
+    "Palatino",
+    "PT-Serif",
+    "PTSerif",
+    "TsangerJinKai",
+    "YuMincho",
+    "Hiragino",
+    "SourceHan",
+    "Noto",
+    "Charter",
+    "Songti",
+    "DejaVu",
+    "Liberation",
+)
 
 
 def show_fonts(pdf: Path) -> None:
@@ -143,8 +158,7 @@ def verify_target(
     embedded = _pdf_font_names(out)
     fallback_present = any(
         kw in font for font in embedded
-        for kw in ("Georgia", "Palatino", "TsangerJinKai", "YuMincho", "Hiragino",
-                   "SourceHan", "Noto", "Charter", "Songti", "DejaVu", "Liberation")
+        for kw in RECOGNIZABLE_FALLBACK_FONT_MARKERS
     )
 
     # Diagram templates are language-neutral and often rely on fallback stacks,

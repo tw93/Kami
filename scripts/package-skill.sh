@@ -31,7 +31,7 @@ awk '
   { print }
 ' "$MANIFEST" > "$FILTERED_MANIFEST"
 
-zip -q "$OUT" -@ < "$FILTERED_MANIFEST"
+zip -X -q "$OUT" -@ < "$FILTERED_MANIFEST"
 
 entries="$(zipinfo -1 "$OUT")"
 if forbidden_entries="$(printf '%s\n' "$entries" | grep -E "$PACKAGE_FORBIDDEN_RE")"; then

@@ -84,17 +84,17 @@ If a change touches `SKILL.md`, templates, scripts, references, or package input
 
 ## Step 2 · Pick the document type
 
-| User says | Document | CN template | EN template |
-|---|---|---|---|
-| "one-pager / 方案 / 执行摘要 / exec summary" | One-Pager | `one-pager.html` | `one-pager-en.html` |
-| "white paper / 白皮书 / 长文 / 年度总结 / technical report" | Long Doc | `long-doc.html` | `long-doc-en.html` |
-| "formal letter / 信件 / 辞职信 / 推荐信 / memo" | Letter | `letter.html` | `letter-en.html` |
-| "portfolio / 作品集 / case studies" | Portfolio | `portfolio.html` | `portfolio-en.html` |
-| "resume / CV / 简历 / 履歴書" | Resume | `resume.html` | `resume-en.html` |
-| "slides / PPT / deck / 演示" | Slides | `slides-weasy.html` | `slides-weasy-en.html` |
-| "个股研报 / equity report / 估值分析 / investment memo / 股票分析" | Equity Report | `equity-report.html` | `equity-report-en.html` |
-| "更新日志 / changelog / release notes / 版本记录" | Changelog | `changelog.html` | `changelog-en.html` |
-| "landing page / 落地页 / 官网 / product page / 产品页" | Landing Page | `landing-page.html` | `landing-page-en.html` |
+| User says | Document | CN template | EN template | KO template |
+|---|---|---|---|---|
+| "one-pager / 方案 / 执行摘要 / exec summary" | One-Pager | `one-pager.html` | `one-pager-en.html` | `one-pager-ko.html` |
+| "white paper / 白皮书 / 长文 / 年度总结 / technical report" | Long Doc | `long-doc.html` | `long-doc-en.html` | `long-doc-ko.html` |
+| "formal letter / 信件 / 辞职信 / 推荐信 / memo" | Letter | `letter.html` | `letter-en.html` | `letter-ko.html` |
+| "portfolio / 作品集 / case studies" | Portfolio | `portfolio.html` | `portfolio-en.html` | `portfolio-ko.html` |
+| "resume / CV / 简历 / 履歴書" | Resume | `resume.html` | `resume-en.html` | `resume-ko.html` |
+| "slides / PPT / deck / 演示" | Slides | `slides-weasy.html` | `slides-weasy-en.html` | `slides-weasy-ko.html` |
+| "个股研报 / equity report / 估值分析 / investment memo / 股票分析" | Equity Report | `equity-report.html` | `equity-report-en.html` | `equity-report-ko.html` |
+| "更新日志 / changelog / release notes / 版本记录" | Changelog | `changelog.html` | `changelog-en.html` | `changelog-ko.html` |
+| "landing page / 落地页 / 官网 / product page / 产品页" | Landing Page | `landing-page.html` | `landing-page-en.html` | `landing-page-ko.html` |
 
 > **Changelog vs. release notes**: The changelog template above is for styled document output. GitHub release notes are a separate deliverable; use `/write` with Release Note Template Mode.
 
@@ -104,7 +104,7 @@ If a change touches `SKILL.md`, templates, scripts, references, or package input
 
 > **Production product site mode**: If the user needs docs, help, releases, changelog, roadmap, legal pages, or more than two locales, treat it as a site system. Lock product category, real screenshot slots, locale list, companion files, long-content pages, and generator/check needs before filling templates. Keep project-specific release artifacts, payment providers, appcast rules, and private local paths out of Kami. See `references/design.md` Section 11 «Product site system».
 
-> Slides: default to `slides-weasy.html` / `slides-weasy-en.html` (WeasyPrint HTML → PDF). Use `slides.py` / `slides-en.py` only when the user explicitly requires an editable PPTX file. Use `assets/templates/marp/slides-marp(.md|.css)` only when the user explicitly asks for Marp / markdown slides / a deck that lives in a `.md` file.
+> Slides: default to `slides-weasy.html` / `slides-weasy-en.html` / `slides-weasy-ko.html` (WeasyPrint HTML → PDF). Use `slides.py` / `slides-en.py` only when the user explicitly requires an editable PPTX file. Use `assets/templates/marp/slides-marp(.md|.css)` only when the user explicitly asks for Marp / markdown slides / a deck that lives in a `.md` file.
 
 > Deck recipe: read design.md Section 8 before drafting slides. Sketch title sequence, evidence shape, and image slot before generating or cropping visuals. Keep audience copy separate from visual briefs. Marp-specific constraints live in design.md §8 «Marp variant».
 
@@ -263,7 +263,7 @@ Default to the WeasyPrint HTML path. Switch to pptx only if the user explicitly 
 
 | Path | Template | When |
 |---|---|---|
-| WeasyPrint HTML → PDF (default) | `slides-weasy.html` / `slides-weasy-en.html` | All cases unless PPTX or Marp is required |
+| WeasyPrint HTML → PDF (default) | `slides-weasy.html` / `slides-weasy-en.html` / `slides-weasy-ko.html` | All cases unless PPTX or Marp is required |
 | python-pptx → PPTX (fallback) | `slides.py` / `slides-en.py` | User explicitly requires editable PPTX |
 | Marp Markdown (variant) | `assets/templates/marp/slides-marp.md` (+ `slides-marp.css`) / `slides-marp-en.md` (+ `slides-marp-en.css`) | User explicitly asks for Marp, "markdown slides", or a `.md` deck. Shipped `.md` is a working demo of Kami Marp itself; copy it, swap content, keep the structure. Renders via local `marp` CLI; not bundled. |
 
@@ -475,22 +475,27 @@ Visual anomalies (tag double rectangle, font fallback, page break issues) -> `pr
 - JP Mincho-first stack: YuMincho -> Hiragino Mincho ProN -> Noto Serif CJK JP -> Source Han Serif JP -> TsangerJinKai02 -> serif
 - Visually verify line breaks, punctuation rhythm, and emphasis weight before shipping
 
+**Korean (best-effort)**
+- Dedicated `-ko` templates use Source Han Serif K Regular / Medium, with the real OTF family name `Source Han Serif KR` kept in every fallback stack
+- Fallback: Noto Serif KR / Apple SD Gothic Neo / AppleMyungjo / Charter / Georgia
+- The OTFs are OFL-licensed and tracked for local preview / CDN fallback, but excluded from Claude Desktop skill ZIPs to keep the package small
+
 **English**
 - Single serif: Charter (system-bundled, macOS/iOS), used for both headlines and body
 - No separate sans: `--sans: var(--serif)`, one font per page
 - Fallback: Georgia (cross-platform) / Palatino / Times New Roman
 
-Font files next to HTML with relative `@font-face` paths is the most stable setup. `scripts/package-skill.sh` excludes TsangerJinKai TTFs from the Claude Desktop ZIP, so the uploaded package stays ~4.3MB. Always upload that `package-skill.sh` output, never a hand-zipped checkout (the tracked TTFs make it ~40MB and Claude Desktop rejects the upload).
+Font files next to HTML with relative `@font-face` paths is the most stable setup. `scripts/package-skill.sh` excludes large CJK font files from the Claude Desktop ZIP, so the uploaded package stays under the 6MB package ceiling. Always upload that `package-skill.sh` output, never a hand-zipped checkout (the tracked CJK fonts make it too large and Claude Desktop rejects the upload).
 
 **Font auto-recovery (Claude Desktop)**
 
-Before building Chinese documents, ensure fonts are present. The script tries multiple CDN sources with retry and size validation:
+Before building Chinese or Korean documents, ensure fonts are present. The script tries multiple CDN sources with retry and size validation:
 
 ```bash
 bash scripts/ensure-fonts.sh
 ```
 
-It downloads to the XDG user font dir (`${XDG_DATA_HOME:-~/.local/share}/fonts/kami`, override with `KAMI_FONT_DIR`), **not** into the skill's `assets/fonts` -- that keeps the installed skill small so Claude Desktop never trips its size limit. fontconfig scans that dir by default, so WeasyPrint finds `TsangerJinKai02` there; online renders fall back to the jsDelivr `@font-face` URL. Run once before building. If all sources fail, the script suggests installing Source Han Serif SC as fallback.
+It downloads to the XDG user font dir (`${XDG_DATA_HOME:-~/.local/share}/fonts/kami`, override with `KAMI_FONT_DIR`), **not** into the skill's `assets/fonts` -- that keeps the installed skill small so Claude Desktop never trips its size limit. fontconfig scans that dir by default, so WeasyPrint finds `TsangerJinKai02` and `Source Han Serif K` there; online renders fall back to the jsDelivr `@font-face` URL. Run once before building. If all sources fail, the script prints per-language alternatives.
 
 ## Feedback protocol
 
