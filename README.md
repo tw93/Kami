@@ -167,11 +167,11 @@ Later I needed to present "The Agent You Don't Know: Principles, Architecture an
 
 - If kami helped you, [share it](https://twitter.com/intent/tweet?url=https://github.com/tw93/kami&text=Kami%20-%20A%20quiet%20design%20system%20for%20professional%20documents.) with friends or give it a star.
 - Got ideas or bugs? Open an issue or PR.
-- I have two cats, TangYuan and Coke. If you think kami delights your life, you can feed them <a href="https://cats.tw93.fun?name=Kami" target="_blank">canned food 🥩</a>.
 - You can also support me by getting [Mole for Mac](https://mole.fit), my paid app that deep cleans and speeds up your Mac.
+- I have two cats, TangYuan and Coke. If you think kami delights your life, you can feed them <a href="https://cats.tw93.fun?name=Kami" target="_blank">canned food 🥩</a>.
 
 <details>
-<summary>Thanks to everyone who has fed them 🥩</summary>
+<summary>These lovely people already did 🐱</summary>
 <br/>
 <a href="https://cats.tw93.fun?name=Kami"><img src="https://cdn.jsdelivr.net/gh/tw93/sponsors@main/assets/sponsors.svg" width="1000" loading="lazy" /></a>
 </details>
