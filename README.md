@@ -18,8 +18,20 @@ Part of a trilogy: [Kaku](https://github.com/tw93/Kaku) (書く) writes code, [W
 
 ## See it
 
+Eight real PDFs across templates and languages. Click any preview to open it.
+
 <table>
 <tr>
+  <td align="center" width="25%">
+    <a href="assets/demos/demo-musk-resume.pdf"><img src="assets/demos/demo-musk-resume.png" alt="Founder resume"></a>
+    <br><b>Resume</b> · English
+    <br><sub>Founder resume, 2 pages</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="assets/demos/demo-resume-ko.pdf"><img src="assets/demos/demo-resume-ko.png" alt="Korean resume"></a>
+    <br><b>Resume</b> · 한국어
+    <br><sub>개발자 이력서, 2페이지</sub>
+  </td>
   <td align="center" width="25%">
     <a href="assets/demos/demo-tesla.pdf"><img src="assets/demos/demo-tesla.png" alt="Tesla equity report"></a>
     <br><b>Equity Report</b> · 中文
@@ -30,10 +42,22 @@ Part of a trilogy: [Kaku](https://github.com/tw93/Kaku) (書く) writes code, [W
     <br><b>Slides</b> · English
     <br><sub>Agent keynote, 6 slides</sub>
   </td>
+</tr>
+<tr>
   <td align="center" width="25%">
-    <a href="assets/demos/demo-resume-ko.pdf"><img src="assets/demos/demo-resume-ko.png" alt="Korean resume"></a>
-    <br><b>Resume</b> · 한국어
-    <br><sub>개발자 이력서, 2페이지</sub>
+    <a href="assets/demos/demo-pake.pdf"><img src="assets/demos/demo-pake.png" alt="Pake product brief"></a>
+    <br><b>One-Pager</b> · English
+    <br><sub>Pake product brief, 1 page</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="assets/demos/demo-letter.pdf"><img src="assets/demos/demo-letter.png" alt="Recommendation letter"></a>
+    <br><b>Letter</b> · 中文
+    <br><sub>推荐信, 1 页</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="assets/demos/demo-changelog.pdf"><img src="assets/demos/demo-changelog.png" alt="Kami release notes"></a>
+    <br><b>Changelog</b> · English
+    <br><sub>Kami v2.0 release notes</sub>
   </td>
   <td align="center" width="25%">
     <a href="assets/demos/demo-kaku.pdf"><img src="assets/demos/demo-kaku.png" alt="Kaku portfolio"></a>
@@ -42,8 +66,6 @@ Part of a trilogy: [Kaku](https://github.com/tw93/Kaku) (書く) writes code, [W
   </td>
 </tr>
 </table>
-
-More demo PDFs: [Resume · English](assets/demos/demo-musk-resume.pdf) · [Resume · 한국어](assets/demos/demo-resume-ko.pdf) · [Equity Report · 中文](assets/demos/demo-tesla.pdf) · [Slides · English](assets/demos/demo-agent-slides.pdf) · [Portfolio · 日本語](assets/demos/demo-kaku.pdf)
 
 ## Landing Pages
 

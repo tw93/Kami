@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     LETTER · 中文 · parchment design system
+     A4 正式信件 / 推荐信
+     ================================================================== -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>推荐信 · 陈知远</title>
+<meta name="author" content="林川">
+<meta name="description" content="一封推荐工程师陈知远的正式推荐信。">
+<meta name="keywords" content="推荐信, 工程师, 正式信件">
+<meta name="generator" content="Kami">
+<style>
+  @font-face {
+    font-family: "TsangerJinKai02";
+    src: url("../fonts/TsangerJinKai02-W04.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W04.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "TsangerJinKai02";
+    src: url("../fonts/TsangerJinKai02-W05.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W05.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @page {
+    size: A4;
+    margin: 25mm 25mm 25mm 25mm;
+    background: #f5f4ed;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --near-black:#141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --ivory:     #faf9f5;
+    --border:    #e8e6dc;
+    --border-soft:#e5e3d8;
+    --serif: "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", Georgia, serif;
+    --sans: var(--serif);
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 25mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 11.5pt;
+    line-height: 1.55;
+    letter-spacing: 0.3pt;
+  }
+
+  .letterhead {
+    text-align: right;
+    margin-bottom: 30pt;
+    font-size: 10pt;
+    line-height: 1.55;
+    color: var(--olive);
+  }
+  .letterhead .sender-name {
+    font-size: 13pt;
+    font-weight: 500;
+    color: var(--near-black);
+    margin-bottom: 4pt;
+  }
+  .letterhead a {
+    color: var(--dark-warm);
+    text-decoration: none;
+  }
+
+  .date {
+    text-align: right;
+    font-size: 10.5pt;
+    color: var(--olive);
+    margin-bottom: 24pt;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .recipient {
+    margin-bottom: 24pt;
+    line-height: 1.5;
+  }
+  .recipient .to {
+    font-size: 10pt;
+    color: var(--stone);
+    letter-spacing: 0.5pt;
+    text-transform: uppercase;
+    margin-bottom: 3pt;
+  }
+  .recipient .name {
+    font-size: 12pt;
+    font-weight: 500;
+    color: var(--near-black);
+  }
+  .recipient .org {
+    font-size: 10.5pt;
+    color: var(--olive);
+  }
+
+  .subject {
+    margin-bottom: 24pt;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+  }
+  .subject .label {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--brand);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    margin-bottom: 3pt;
+  }
+  .subject .title {
+    font-size: 15pt;
+    font-weight: 500;
+    color: var(--near-black);
+    line-height: 1.3;
+  }
+
+  .salutation {
+    margin-bottom: 18pt;
+    font-size: 12pt;
+    color: var(--near-black);
+  }
+
+  .body-content p {
+    margin-bottom: 14pt;
+    text-align: justify;
+    text-justify: inter-ideograph;
+    line-height: 1.55;
+    text-indent: 2em;
+  }
+  .body-content p:first-child { text-indent: 2em; }
+  .body-content p.no-indent { text-indent: 0; }
+
+  .body-content .hl {
+    color: var(--brand);
+    font-weight: 500;
+  }
+
+  .closing {
+    margin-top: 30pt;
+    line-height: 1.55;
+  }
+  .closing .regards {
+    margin-bottom: 30pt;
+    color: var(--near-black);
+  }
+  .closing .signature {
+    font-size: 14pt;
+    font-weight: 500;
+    color: var(--near-black);
+    margin-bottom: 3pt;
+  }
+  .closing .signoff-meta {
+    font-size: 10pt;
+    color: var(--olive);
+  }
+
+  .attachments {
+    margin-top: 36pt;
+    padding-top: 10pt;
+    border-top: 0.5pt dotted var(--border);
+    font-size: 9.5pt;
+    color: var(--stone);
+    font-family: var(--sans);
+    line-height: 1.55;
+  }
+  .attachments .label {
+    color: var(--brand);
+    margin-right: 6pt;
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<div class="letterhead">
+  <div class="sender-name">林川</div>
+  <div>云栖科技 · 平台工程部 技术总监</div>
+  <div>010-8000 1234　·　<a href="mailto:linchuan@example.com">linchuan@example.com</a></div>
+</div>
+
+<div class="date">2026 年 6 月 14 日</div>
+
+<div class="recipient">
+  <div class="to">致</div>
+  <div class="name">招聘委员会</div>
+  <div class="org">星核实验室 · 研发中心</div>
+</div>
+
+<div class="subject">
+  <div class="label">关于</div>
+  <div class="title">推荐陈知远担任高级后端工程师</div>
+</div>
+
+<div class="salutation">尊敬的招聘委员会：</div>
+
+<div class="body-content">
+
+<p>
+我谨以诚挚的态度，推荐陈知远先生加入贵实验室研发团队。过去四年他在我负责的平台工程部任后端工程师，是少有的既能把架构想清楚、又能把代码写扎实的人。
+</p>
+
+<p>
+他最让我看重的，是在复杂系统中定位根因的能力。去年核心结算服务间歇性超时，多位工程师排查两周无果，是他坚持加日志、抓运行时证据，最终定位到一处连接池配置的边界问题，<span class="hl">将接口 P99 延迟从 1.8 秒降到 120 毫秒</span>。
+</p>
+
+<p>
+他也是一位可靠的协作者：主导的服务拆分横跨三个团队，既能写清楚设计文档说服评审，也愿在上线当晚守到最后一台机器迁移完成。我相信他的工程判断力与责任心，会让他在更具挑战的课题中迅速成长。如需了解更多细节，欢迎随时与我联系。
+</p>
+
+</div>
+
+<div class="closing">
+  <div class="regards">
+    此致<br>敬礼！
+  </div>
+
+  <div class="signature">林　川</div>
+  <div class="signoff-meta">
+    云栖科技 · 平台工程部 技术总监<br>
+    2026 年 6 月 14 日
+  </div>
+</div>
+
+<div class="attachments">
+  <span class="label">附件</span>
+  ① 陈知远个人简历　·　② 核心项目技术总结
+</div>
+
+</body>
+</html>

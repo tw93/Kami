@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     ONE-PAGER · English · parchment design system
+     Single A4 proposal / report / executive summary
+     ================================================================== -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pake · Product Brief</title>
+<meta name="author" content="Tw93">
+<meta name="description" content="Pake turns any webpage into a lightweight native desktop app, built on Rust and Tauri.">
+<meta name="keywords" content="Pake, Tauri, Rust, desktop app, webview">
+<meta name="generator" content="Kami">
+<style>
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 500; font-style: normal; }
+
+  @page {
+    size: A4;
+    margin: 15mm 18mm 15mm 18mm;
+    background: #f5f4ed;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --near-black:#141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --border:    #e8e6dc;
+    --border-soft:#e5e3d8;
+    --tag-bg:    #E4ECF5;
+
+    --serif: Charter, Georgia,
+             Palatino, "Times New Roman", serif;
+    --sans: var(--serif);
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 15mm 18mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 10pt;
+    line-height: 1.45;
+  }
+
+  .serif { font-family: var(--serif); }
+
+  .header {
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+    margin-bottom: 14pt;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20pt;
+  }
+  .title-block { flex: 1; }
+  .eyebrow {
+    font-size: 9pt;
+    color: var(--brand);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    margin-bottom: 4pt;
+    font-weight: 500;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: 26pt;
+    font-weight: 500;
+    color: var(--near-black);
+    line-height: 1.12;
+    letter-spacing: -0.3pt;
+    margin-bottom: 5pt;
+  }
+  .subtitle {
+    font-size: 11.5pt;
+    color: var(--olive);
+    line-height: 1.4;
+  }
+  .meta {
+    font-size: 9pt;
+    color: var(--stone);
+    text-align: right;
+    line-height: 1.5;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .brand-logo {
+    height: 44px;
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+    align-self: flex-start;
+  }
+
+  .metrics {
+    display: flex;
+    gap: 16pt;
+    margin-bottom: 18pt;
+    padding: 4pt 0 6pt 0;
+    border-bottom: 0.3pt dotted var(--border);
+  }
+  .metric {
+    flex: 1;
+    background: transparent;
+    padding: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 5pt;
+    break-inside: avoid;
+  }
+  .metric-value {
+    font-family: var(--serif);
+    font-size: 22pt;
+    font-weight: 500;
+    color: var(--brand);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    letter-spacing: -0.3pt;
+  }
+  .metric-label {
+    font-size: 9pt;
+    color: var(--olive);
+    line-height: 1.3;
+  }
+
+  section { margin-bottom: 18pt; break-inside: avoid; }
+  section:last-of-type { margin-bottom: 0; }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 16pt;
+    font-weight: 500;
+    color: var(--near-black);
+    margin-bottom: 6pt;
+  }
+  h2 .sub {
+    font-size: 9pt;
+    color: var(--stone);
+    font-weight: 400;
+    margin-left: 6pt;
+  }
+
+  p { margin-bottom: 6pt; line-height: 1.45; }
+  p:last-child { margin-bottom: 0; }
+
+  .lead {
+    font-size: 12.5pt;
+    line-height: 1.5;
+    color: var(--dark-warm);
+    margin-bottom: 14pt;
+  }
+
+  .hl { color: var(--brand); font-weight: 500; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18pt;
+  }
+
+  ul.dash {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul.dash li {
+    position: relative;
+    padding-left: 14pt;
+    margin-bottom: 4pt;
+    line-height: 1.45;
+  }
+  ul.dash li::before {
+    content: "\2013";
+    position: absolute;
+    left: 0;
+    color: var(--brand);
+  }
+
+  .timeline {
+    display: flex;
+    gap: 12pt;
+    margin-top: 6pt;
+  }
+  .tl-step { flex: 1; break-inside: avoid; }
+  .tl-year {
+    font-family: var(--serif);
+    font-size: 11pt;
+    font-weight: 500;
+    color: var(--brand);
+    margin-bottom: 2pt;
+    letter-spacing: 0.3pt;
+    text-transform: uppercase;
+  }
+  .tl-head {
+    font-size: 10pt;
+    font-weight: 500;
+    color: var(--near-black);
+    margin-bottom: 2pt;
+  }
+  .tl-body {
+    font-size: 9pt;
+    color: var(--olive);
+    line-height: 1.45;
+  }
+
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--brand);
+    font-size: 9pt;
+    font-weight: 500;
+    padding: 1pt 6pt;
+    border-radius: 3pt;
+    letter-spacing: 0.4pt;
+    text-transform: uppercase;
+    margin-right: 3pt;
+  }
+
+  table, .kami-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+    margin: 8pt 0;
+    break-inside: avoid;
+  }
+  table th, .kami-table th {
+    text-align: left;
+    font-weight: 500;
+    color: var(--dark-warm);
+    padding: 4pt 6pt;
+    border-bottom: 1pt solid var(--border);
+    background: transparent;
+  }
+  table td, .kami-table td {
+    padding: 3pt 6pt;
+    border-bottom: 0.3pt solid var(--border-soft);
+    vertical-align: top;
+  }
+
+  .callout {
+    background: transparent;
+    border-left: 1.8pt solid var(--brand);
+    padding: 4pt 0 4pt 14pt;
+    margin: 10pt 0;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: var(--olive);
+    break-inside: avoid;
+  }
+  .callout .hl, .callout .em-brand { color: var(--brand); }
+
+  .footer {
+    margin-top: 18pt;
+    padding-top: 6pt;
+    border-top: 0.3pt dotted var(--border);
+    font-size: 9pt;
+    color: var(--stone);
+    display: flex;
+    justify-content: space-between;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.3pt;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="title-block">
+    <div class="eyebrow">Product Brief</div>
+    <h1>Turn any webpage into a desktop app</h1>
+    <div class="subtitle">Pake packages a URL into a fast, native-feeling app, in one command.</div>
+  </div>
+  <div class="meta">
+    Tw93<br>
+    2026.06.14<br>
+    v3.0
+  </div>
+</div>
+
+<div class="metrics">
+  <div class="metric">
+    <div class="metric-value">38K<span style="font-size:13pt">+</span></div>
+    <div class="metric-label">GitHub stars</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">40<span style="font-size:13pt">×</span></div>
+    <div class="metric-label">smaller than Electron</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">3</div>
+    <div class="metric-label">platforms shipped</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">&lt;10<span style="font-size:13pt">s</span></div>
+    <div class="metric-label">to package an app</div>
+  </div>
+</div>
+
+<p class="lead">
+  Electron ships a whole browser with every app. Pake takes the opposite bet: lean on the system webview and write the shell in Rust, so the same web app becomes a desktop build that is <span class="hl">roughly 40× smaller</span> and starts in well under a second.
+</p>
+
+<div class="two-col">
+  <section>
+    <h2>Why Pake</h2>
+    <p>Most "wrap my site as an app" tools trade size and speed for convenience. Pake refuses the trade.</p>
+    <ul class="dash">
+      <li>Bundles around <span class="hl">5 MB</span>, against 100 MB+ for an equivalent Electron build.</li>
+      <li>Native shortcuts, immersive window, and ad-blocking baked in.</li>
+      <li>One CLI command, or a no-code GitHub Action, to ship.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>How it works</h2>
+    <p>A Tauri + Rust core drives the platform webview directly, with thin per-OS adapters.</p>
+    <ul class="dash">
+      <li>Rust shell handles windows, tray, and injection.</li>
+      <li>System webview renders the page, no Chromium copy.</li>
+      <li>One config maps URL, icon, and shortcuts to a build.</li>
+    </ul>
+  </section>
+</div>
+
+<section>
+  <h2>Roadmap<span class="sub">where the project is heading</span></h2>
+  <div class="timeline">
+    <div class="tl-step">
+      <div class="tl-year">Phase 1</div>
+      <div class="tl-head">One-command packaging</div>
+      <div class="tl-body">CLI turns any URL into macOS, Windows, and Linux builds.</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-year">Phase 2</div>
+      <div class="tl-head">No-code pipeline</div>
+      <div class="tl-body">GitHub Action builds apps without a local toolchain.</div>
+    </div>
+    <div class="tl-step">
+      <div class="tl-year">Phase 3</div>
+      <div class="tl-head">Deeper native bridge</div>
+      <div class="tl-body">Richer JS-to-system APIs while keeping the footprint tiny.</div>
+    </div>
+  </div>
+</section>
+
+<div class="callout">
+  The web already is the cross-platform runtime. Pake just removes the 95 MB of browser you were shipping to use it.
+</div>
+
+<div class="footer">
+  <span>Open source · MIT</span>
+  <span>github.com/tw93/Pake</span>
+</div>
+
+</body>
+</html>

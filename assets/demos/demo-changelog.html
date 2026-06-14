@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     CHANGELOG · English · parchment design system
+     1-2 page A4 release notes / version changelog
+     ================================================================== -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kami · v2.0 Release Notes</title>
+<meta name="author" content="Tw93">
+<meta name="description" content="Kami v2.0 release notes: nine templates, multilingual typography, and a stricter build pipeline.">
+<meta name="keywords" content="Kami, release notes, changelog, document generation">
+<meta name="generator" content="Kami">
+<style>
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 400; font-style: normal; }
+  @font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono.woff2") format("woff2"); font-weight: 500; font-style: normal; }
+
+  @page {
+    size: A4;
+    margin: 20mm 22mm 22mm 22mm;
+    background: #f5f4ed;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --near-black:#141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --border:    #e8e6dc;
+    --border-soft:#e5e3d8;
+    --tag-bg:    #E4ECF5;
+    --breaking-bg:#f0e0d8;
+    --breaking-fg:#8b4513;
+
+    --serif: Charter, Georgia,
+             Palatino, "Times New Roman", serif;
+    --sans: var(--serif);
+    --mono:  "JetBrains Mono", "SF Mono", "Fira Code",
+             Consolas, Monaco, monospace;
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 20mm 22mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 10.5pt;
+    line-height: 1.55;
+    widows: 3;
+    orphans: 3;
+  }
+
+  strong { font-weight: 500; }
+  .hl { color: var(--brand); font-weight: 500; }
+
+  .version-header {
+    text-align: center;
+    margin-bottom: 24pt;
+    padding-bottom: 16pt;
+    border-bottom: 0.5pt solid var(--border);
+  }
+  .version-logo {
+    font-family: var(--sans);
+    font-size: 14pt;
+    font-weight: 500;
+    color: var(--brand);
+    letter-spacing: 2pt;
+    text-transform: uppercase;
+    margin-bottom: 8pt;
+  }
+  .version-title {
+    font-family: var(--serif);
+    font-size: 30pt;
+    font-weight: 500;
+    color: var(--near-black);
+    line-height: 1.15;
+    letter-spacing: -0.5pt;
+    margin-bottom: 6pt;
+  }
+  .version-tagline {
+    font-size: 12pt;
+    color: var(--olive);
+    line-height: 1.5;
+  }
+  .version-date {
+    font-size: 10pt;
+    color: var(--stone);
+    margin-top: 6pt;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 16pt;
+    font-weight: 500;
+    color: var(--near-black);
+    margin: 20pt 0 8pt 0;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+    break-after: avoid;
+  }
+
+  h3 {
+    font-size: 13pt;
+    font-weight: 500;
+    color: var(--dark-warm);
+    margin: 14pt 0 4pt 0;
+    break-after: avoid;
+  }
+
+  p { margin: 0 0 8pt 0; line-height: 1.55; widows: 2; orphans: 2; }
+
+  ol.changes {
+    margin: 6pt 0 14pt 0;
+    padding-left: 24pt;
+    line-height: 1.55;
+  }
+  ol.changes li {
+    margin-bottom: 4pt;
+  }
+  ol.changes li::marker {
+    color: var(--brand);
+    font-weight: 500;
+  }
+
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--brand);
+    font-family: var(--sans);
+    font-size: 9pt;
+    font-weight: 500;
+    padding: 1pt 6pt;
+    border-radius: 3pt;
+    letter-spacing: 0.4pt;
+    text-transform: uppercase;
+    margin-right: 3pt;
+  }
+  .tag.breaking {
+    background: var(--breaking-bg);
+    color: var(--breaking-fg);
+  }
+
+  .callout {
+    background: var(--ivory);
+    border-left: 2pt solid var(--brand);
+    padding: 8pt 14pt;
+    border-radius: 3pt;
+    margin: 12pt 0;
+    line-height: 1.55;
+    break-inside: avoid;
+  }
+
+  .thanks {
+    margin-top: 16pt;
+    padding: 10pt 14pt;
+    background: var(--ivory);
+    border-left: 1.4pt solid var(--brand);
+    border-radius: 4pt;
+    font-size: 10pt;
+    line-height: 1.55;
+    break-inside: avoid;
+  }
+  .thanks-label {
+    font-family: var(--sans);
+    font-size: 9pt;
+    color: var(--brand);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 4pt;
+  }
+
+  .changelog-footer {
+    margin-top: 20pt;
+    padding-top: 8pt;
+    border-top: 0.3pt dotted var(--border);
+    font-size: 9pt;
+    color: var(--stone);
+    text-align: center;
+    line-height: 1.5;
+    font-variant-numeric: tabular-nums;
+  }
+</style>
+</head>
+<body>
+
+<div class="version-header">
+  <div class="version-logo">Kami</div>
+  <div class="version-title">v2.0 Parchment</div>
+  <div class="version-tagline">Nine templates, four languages, one constraint set, every output ready to ship.</div>
+  <div class="version-date">2026.06.14</div>
+</div>
+
+<h2>Changelog</h2>
+
+<h3>Breaking Changes</h3>
+<ol class="changes">
+  <li><span class="tag breaking">Breaking</span> Template registry moved to <span class="hl">scripts/shared.py</span>. Custom forks that patched <span class="hl">build.py</span> directly must re-point at the new <code>HTML_TEMPLATES</code> map.</li>
+  <li><span class="tag breaking">Breaking</span> Commercial CJK fonts are no longer bundled in <span class="hl">dist/kami.zip</span>. Run <code>scripts/ensure-fonts.sh</code> once to restore local preview paths.</li>
+</ol>
+
+<h3>Features</h3>
+<ol class="changes">
+  <li>Added the <span class="hl">Landing Page</span> template with five deployment companions (vercel, sitemap, robots, llms, llms-full).</li>
+  <li>Slides now ship three rendering paths: WeasyPrint HTML to PDF, editable PPTX via python-pptx, and a Markdown-first Marp variant.</li>
+  <li>Pygments syntax highlighting for code blocks, with a clean monochrome fallback when it is not installed.</li>
+  <li>Resume gained a <span class="hl">dense</span> variant that keeps five-plus project entries inside a strict two-page bound.</li>
+</ol>
+
+<h3>Fixes</h3>
+<ol class="changes">
+  <li>Tightened resume project spacing so company blocks no longer crowd against each other on page one.</li>
+  <li>Resolved CJK parenthesis wrapping that broke line rhythm in Chinese and Korean templates.</li>
+  <li>Cross-template token drift is now caught by <code>build.py --check</code> before packaging.</li>
+</ol>
+
+<div class="thanks">
+  <div class="thanks-label">Acknowledgements</div>
+  Built on WeasyPrint, Tauri, and the TsangerJinKai, Charter, and YuMincho type families. Thanks to everyone who filed visual-QA issues across the CJK rendering paths.
+</div>
+
+<div class="changelog-footer">
+  Kami (紙): good content deserves good paper.<br>
+  github.com/tw93/Kami
+</div>
+
+</body>
+</html>
