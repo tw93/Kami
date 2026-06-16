@@ -11,6 +11,7 @@ import contextlib
 import builtins
 import importlib.util
 import io
+import json
 import os
 import re
 import shutil
@@ -144,6 +145,26 @@ def test_codex_plugin_metadata_generated() -> None:
     )
     detail = (result.stdout + result.stderr).strip()
     check("Codex plugin metadata matches generator", result.returncode == 0, detail)
+
+
+def test_claude_plugin_marketplace_version_matches_version_file() -> None:
+    """Claude Code uses this version instead of falling back to a commit hash."""
+    version = (REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip()
+    marketplace_file = REPO_ROOT / ".claude-plugin" / "marketplace.json"
+    check("Claude plugin marketplace metadata exists", marketplace_file.exists())
+    if not marketplace_file.exists():
+        return
+
+    marketplace = json.loads(marketplace_file.read_text(encoding="utf-8"))
+    plugins = marketplace.get("plugins", [])
+    kami_plugin = next((plugin for plugin in plugins if plugin.get("name") == "kami"), None)
+    check("Claude plugin marketplace includes kami", kami_plugin is not None)
+    if not kami_plugin:
+        return
+
+    check("Claude plugin marketplace version matches VERSION",
+          kami_plugin.get("version") == version,
+          f"marketplace={kami_plugin.get('version')!r}, VERSION={version!r}")
 
 
 # --------------------------- shared registry ---------------------------
@@ -786,7 +807,6 @@ def test_marp_themes_token_synced() -> None:
     Locks the invariant AGENTS.md documents (tokens.py globs marp/*.css), so the
     Marp decks cannot silently drift even if that glob is later refactored away.
     """
-    import json
     from shared import TOKENS_FILE
     from tokens import CSS_VAR, ROOT_BLOCK
 
@@ -816,6 +836,7 @@ def test_marp_themes_token_synced() -> None:
 def main() -> int:
     test_dist_package_contents()
     test_codex_plugin_metadata_generated()
+    test_claude_plugin_marketplace_version_matches_version_file()
     test_registry_consistency()
     test_chinese_html_templates_keep_single_serif_stack()
     test_korean_templates_carry_resolvable_serif_name()

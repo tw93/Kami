@@ -8,6 +8,7 @@
   "plugins": [
     {
       "name": "kami",
+      "version": "1.7.4",
       "description": "Typeset professional documents: resumes, one-pagers, white papers, letters, portfolios, slide decks. Warm parchment, ink-blue accent, serif-led hierarchy.",
       "category": "documents",
       "source": "./",
