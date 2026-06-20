@@ -156,10 +156,10 @@
     margin: 5.8mm 0 2mm 0;
     display: flex;
     align-items: baseline;
+    justify-content: space-between;
     gap: 2.5mm;
   }
   .section-title .sub {
-    margin-left: auto;
     font-family: var(--sans);
     font-weight: 400;
     font-size: 9pt;
@@ -200,17 +200,16 @@
     padding-top: 1.6mm;
   }
   .proj-head {
-    display: flex; align-items: baseline;
-    gap: 2mm; margin-bottom: 0.9mm;
+    display: block; margin-bottom: 0.9mm;
   }
   .proj-name {
     font-family: var(--serif);
     font-size: 11pt; font-weight: 500; color: var(--near-black);
   }
-  .proj-kind { font-size: 11pt; color: var(--olive); }
+  .proj-kind { font-size: 11pt; color: var(--olive); margin-left: 1.5mm; }
   .proj-role {
     font-size: 9pt; color: var(--brand); font-weight: 500;
-    margin-left: auto; background: #EEF2F7;
+    float: right; background: #EEF2F7;
     padding: 0.4mm 1.6mm; border-radius: 2pt; letter-spacing: 0.3pt;
     text-transform: uppercase;
     white-space: nowrap;
