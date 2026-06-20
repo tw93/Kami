@@ -184,10 +184,10 @@
     margin: 5.8mm 0 1.7mm 0;
     display: flex;
     align-items: baseline;
+    justify-content: space-between;
     gap: 2mm;
   }
   .section-title .sub {
-    margin-left: auto;
     font-family: var(--serif);
     font-weight: 400;
     font-size: 9pt;
@@ -235,17 +235,16 @@
   }
   .project:first-of-type { padding-top: 1.2mm; }
   .proj-head {
-    display: flex; align-items: baseline;
-    gap: 2mm; margin-bottom: 0.75mm;
+    display: block; margin-bottom: 0.75mm;
   }
   .proj-name {
     font-family: var(--serif);
     font-size: 11pt; font-weight: 500; color: var(--near-black);
   }
-  .proj-kind { font-size: 11pt; color: var(--olive); }
+  .proj-kind { font-size: 11pt; color: var(--olive); margin-left: 1.5mm; }
   .proj-role {
     font-size: 9pt; color: var(--brand); font-weight: 500;
-    margin-left: auto; background: #EEF2F7;
+    float: right; background: #EEF2F7;
     padding: 0.4mm 1.2mm; border-radius: 2pt; letter-spacing: 0.05pt;
     white-space: nowrap;
   }
