@@ -181,6 +181,15 @@ Before drawing, always ask: **would a well-written paragraph teach the reader le
 
 When data fits multiple types, prefer the one that shows variance most clearly. Always embed inside a `<figure>` with a caption that states the insight, not just the data range.
 
+### Illustrations (host image model, not inline SVG)
+
+Inline diagrams above are vector SVGs you assemble by hand. For a standalone raster illustration, or a redraw of a figure, photo, or screenshot in the Kami look, delegate the drawing to the host's own image generation. Never call an external image API or require a key; rendering is the host's job.
+
+- If the running host can generate images (for example ChatGPT), apply the brief below and render the image directly.
+- If it cannot (Claude, Codex, most coding agents), output the brief as text so the user can paste it into any image model.
+
+Brief: warm parchment (`#f5f4ed`) background, never pure white; one accent only, ink blue (`#1B365D`); all else warm gray with a yellow-brown undertone, no other colors; thin single-line geometric strokes and simple flat icons; no gradients, drop shadows, or 3D; serif labels; generous whitespace, composed like a figure in a well-typeset report.
+
 ## Step 2.1 · Source and material pass
 
 Run this before distilling or filling content when the document depends on facts or materials outside the user's draft. Skip it only for personal drafts where the user already supplied everything needed.

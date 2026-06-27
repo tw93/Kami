@@ -26,6 +26,7 @@ python3 scripts/mermaid_normalize.py raw.svg -o clean.svg  # beautiful-mermaid S
 - 改 style 时同步更新 `references/design.md` 和模板 tokens，不要只改单点。
 - 加新模板：从最近的模板复制，对齐 `references/design.md`，加 demo 覆盖。
 - 不要在 docs / template 注释 / 脚本输出里用图形 emoji。脚本状态用 `OK:` / `ERROR:`。
+- 仓库 docs(`README.md`、`index*.html`、`llms.txt`、`AGENTS.md`、`CLAUDE.md` 等)和模板生成产物禁止 em dash(`—`,U+2014),用冒号 / 逗号 / 句号 / 括号代替。生成文档侧另见 `references/anti-patterns.md` #27。自检:`grep -rn '—' README.md llms.txt index*.html`(`references/anti-patterns.md` 内是教学反例,豁免)。
 - 模板**内联** CSS，不抽公共 partial。修 CSS 漂移时跨模板同步改，不要引入 build-time include。
 - 所有模板注册表都在 `scripts/shared.py`(`HTML_TEMPLATES` 文档 / `SCREEN_TEMPLATES` 浏览器 / `DIAGRAM_TEMPLATES` 图),build.py 从中派生。加删模板或图改这一处,不要分别改 build.py。
 - 不打包大体积商业字体到 `dist/kami.zip`，但模板要保留稳定的本机预览路径。
