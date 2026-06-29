@@ -28,9 +28,9 @@ Real PDFs from one constraint set, across templates and languages. Click any pre
     <br><sub>Founder resume, 2 pages</sub>
   </td>
   <td align="center" width="25%">
-    <a href="assets/demos/demo-resume-ko.pdf"><img src="assets/demos/demo-resume-ko.png" alt="Korean resume"></a>
-    <br><b>Resume</b> · 한국어
-    <br><sub>개발자 이력서, 2페이지</sub>
+    <a href="assets/demos/demo-kami-print.pdf"><img src="assets/demos/demo-kami-print.png" alt="Kami print one-pager"></a>
+    <br><b>One-Pager</b> · 中文
+    <br><sub>Kami 介绍 · 白底打印版</sub>
   </td>
   <td align="center" width="25%">
     <a href="assets/demos/demo-tesla.pdf"><img src="assets/demos/demo-tesla.png" alt="Tesla equity report"></a>
@@ -129,7 +129,7 @@ The file has YAML frontmatter for structured fields like name, role, email, bran
 
 Warm parchment canvas `#f5f4ed`, ink blue `#1B365D` as the sole accent, serif carries hierarchy, no hard shadows or flashy palettes. Not a UI framework; a constraint system for printed matter. Documents should read as composed pages, not dashboards.
 
-- **Templates.** Nine types: One-Pager, Long Doc, Letter, Portfolio, Resume, Slides, Equity Report, Changelog, and Landing Page, in EN, CN, and KO.
+- **Templates.** Eight document templates: One-Pager, Long Doc, Letter, Portfolio, Resume, Slides, Equity Report, and Changelog, plus a Landing Page system, in EN, CN, and KO.
 - **Diagrams.** Seventeen inline SVG types. Sequence, class, and ER can be authored from Mermaid text: [beautiful-mermaid](https://github.com/lukilabs/beautiful-mermaid) renders the SVG and `scripts/mermaid_normalize.py` re-themes it to the Kami palette and makes it WeasyPrint-safe, no Node bundled.
 - **Slides.** Three rendering paths: WeasyPrint HTML to PDF by default, python-pptx for editable PPTX on request, and a Marp variant in `assets/templates/marp/` for Markdown-first decks.
 - **Code.** Pygments-based syntax highlighting when `Pygments` is installed; without it, PDFs still render and code stays monochrome.
