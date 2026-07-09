@@ -450,16 +450,9 @@ If a body page (not cover, not last page) gets a SPARSE warning, treat it as a d
 
 ## Step 4.2 · Resume recruiter pass (resume only)
 
-Mechanical checks (`--check-placeholders`, `--check-resume-balance`, `--check-density`) validate structure and layout, not prose. A resume can pass all of them and still read broken. After filling and before building, reread every project card the way a recruiter would, against four points:
+Mechanical checks (`--check-placeholders`, `--check-resume-balance`, `--check-density`) validate structure and layout, not prose. A resume can pass all of them and still read broken. After filling and before building, reread every project card the way a recruiter would, against the row definitions in `references/resume-writing.md` ("What goes in each row"): Role carries your position in the project, not background alone; Actions are verb-led, one concrete approach per sentence; Impact reads as an outcome, not a restatement of the process. One cross-row check on top: no row repeats another row's information.
 
-| Row | Passes when |
-|---|---|
-| Role · 角色 | Says what the project was, why it existed, **and your position in it** — not background alone |
-| Actions · 动作 | Verb-led sentences, one concrete approach per sentence — not a comma-separated task dump |
-| Impact · 结果 | Reads as an outcome (deliverable, number, or scope), not a restatement of the process |
-| All three | No row repeats another row's information |
-
-Fix a failing row by rewriting from the source material. If the source cannot support a row (for example, no outcome fact exists), ask the user for the missing fact — do not pad and do not fall back to generic claims ("保障稳定运行", "improved efficiency").
+Fix a failing row by rewriting from the source material. If the source cannot support a row (for example, no outcome fact exists), ask the user for the missing fact. Do not pad, and do not fall back to generic claims ("保障稳定运行", "improved efficiency").
 
 This pass is internal: run it silently; surface it only when a row cannot be fixed without new information from the user.
 
