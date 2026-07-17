@@ -227,10 +227,10 @@ def check_all(verbose: bool) -> int:
 # semantic exception (the changelog breaking-change badge) is registered as the
 # --breaking-* tokens, so it lands in `allowed` and passes.
 #
-# Scope is deliberately narrow: editorial TEMPLATES/*.html only. Diagrams use
-# warm-gray chart ramps that are intentionally not tokens, and inline <svg>
-# charts carry their own fills -- both are skipped (diagrams by directory, svg
-# by block). :root blocks define the tokens themselves, so they are skipped too.
+# Scope covers editorial HTML templates and the self-contained Marp theme CSS.
+# Diagrams use warm-gray chart ramps that are intentionally not tokens, and
+# inline <svg> charts carry their own fills -- both are skipped (diagrams by
+# directory, svg by block). :root definitions are checked separately below.
 
 
 def _blank_block(text: str, regex: re.Pattern[str]) -> str:
@@ -305,7 +305,7 @@ def _root_token_findings(path: Path, allowed: set[str]) -> list[Finding]:
 def check_off_palette(verbose: bool = False) -> int:
     allowed = _load_token_values()
     screen_names = set(SCREEN_TEMPLATES.values())
-    targets = sorted(TEMPLATES.glob("*.html"))
+    targets = iter_template_files(include_marp_css=True)
     if not targets:
         print("ERROR: no templates found for off-palette scan (bad checkout?)")
         return 2

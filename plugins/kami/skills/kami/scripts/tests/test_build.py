@@ -66,6 +66,7 @@ from shared import (  # noqa: E402
     screen_targets,
 )
 import highlight as highlight_mod  # noqa: E402
+import lint as lint_mod  # noqa: E402
 from highlight import highlight_code_blocks  # noqa: E402
 from site_facts import (  # noqa: E402
     FULL_PUBLIC_FACT_FILES,
@@ -748,11 +749,44 @@ def test_root_token_findings_flags_off_palette_definition() -> None:
 
 
 def test_off_palette_repo_clean() -> None:
-    """The real editorial templates must carry no off-palette colors."""
+    """The real editorial templates and Marp themes must stay on-palette."""
     rc = silently(check_off_palette)
     check("check_off_palette passes on the real templates",
           rc == 0,
           f"check_off_palette returned {rc}")
+
+
+def test_check_off_palette_includes_marp_css() -> None:
+    """The repository-level guard must scan Marp CSS, not only HTML files."""
+    fixture = tempfile.NamedTemporaryFile(
+        mode="w",
+        suffix=".css",
+        dir=TEMPLATES / "marp",
+        delete=False,
+        encoding="utf-8",
+    )
+    fixture.write(".accent { color: #ff00aa; }\n")
+    fixture.close()
+    p = Path(fixture.name)
+    original_iter = lint_mod.iter_template_files
+    call_args: dict[str, bool] = {}
+
+    def fake_iter_template_files(**kwargs: bool) -> list[Path]:
+        call_args.update(kwargs)
+        return [p]
+
+    try:
+        lint_mod.iter_template_files = fake_iter_template_files
+        rc = silently(lint_mod.check_off_palette)
+        check("check_off_palette requests Marp CSS targets",
+              call_args == {"include_marp_css": True},
+              f"iterator arguments: {call_args}")
+        check("check_off_palette flags an off-palette color in Marp CSS",
+              rc == 1,
+              f"check_off_palette returned {rc}")
+    finally:
+        lint_mod.iter_template_files = original_iter
+        p.unlink(missing_ok=True)
 
 
 def test_check_update_script() -> None:
