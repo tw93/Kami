@@ -2596,6 +2596,84 @@ def test_coverage_rejects_substrings_and_hidden_text() -> None:
           f"ambiguous={self_closing_svg_ambiguous}")
 
 
+def test_visibility_resolves_document_custom_properties() -> None:
+    """Resolve only custom properties with one document-wide value."""
+    from checks import visible_html_evidence
+
+    visible_text, visible_ambiguous = visible_html_evidence(
+        "<style>:root { --ink: #504e49 } body { color: var(--ink) }</style>"
+        "<body>VISIBLE</body>",
+        fail_closed=True,
+    )
+    check("document custom property makes body text deterministic",
+          "VISIBLE" in visible_text and not visible_ambiguous,
+          f"text={visible_text!r} ambiguous={visible_ambiguous}")
+
+    template_results = []
+    for path in sorted(TEMPLATES.glob("*.html")):
+        raw = path.read_text(encoding="utf-8")
+        text, ambiguous = visible_html_evidence(raw, fail_closed=True)
+        template_results.append((path.name, bool(text.strip()), ambiguous, "<svg" in raw.lower()))
+    check("all shipped HTML templates expose visible text under fail-closed checks",
+          bool(template_results) and all(result[1] for result in template_results),
+          str([result for result in template_results if not result[1]]))
+    check("templates without SVG have deterministic visible text",
+          all(ambiguous is False for _, _, ambiguous, has_svg in template_results
+              if not has_svg),
+          str([result for result in template_results if not result[3] and result[2]]))
+
+    ambiguous_cases = [
+        '<style>:root{--ink:#000}.dark{--ink:transparent}p{color:var(--ink)}</style>'
+        '<div class="dark"><p>SECRET</p></div>',
+        '<style>:root{--ink:#000}@media print{:root{--ink:transparent}}'
+        'p{color:var(--ink)}</style><p>SECRET</p>',
+        '<style>@property --ink{syntax:"<color>";inherits:false;initial-value:transparent}'
+        ':root{--ink:#000}p{color:var(--ink)}</style><p>SECRET</p>',
+        '<style>:root{--ink:#000}p{color:var(--ink)}</style>'
+        '<p style="--ink:transparent">SECRET</p>',
+        '<style>:root{--ink:#000}p{color:var(--ink)}</style>'
+        '<p style=--ink:transparent>SECRET</p>',
+        '<style>:root{--ink:#000}p{color:var(--ink)}</style>'
+        "<p style='--ink:transparent'>SECRET</p>",
+        '<style>:root{--ink:#000}p{color:var(--ink)}</style>'
+        '<p style="--ink:trans&#112;arent">SECRET</p>',
+    ]
+    ambiguous_results = [
+        visible_html_evidence(raw, fail_closed=True) for raw in ambiguous_cases
+    ]
+    check("conflicting or registered custom properties remain fail-closed",
+          all("SECRET" not in text and ambiguous
+              for text, ambiguous in ambiguous_results),
+          repr(ambiguous_results))
+
+    hidden_cases = [
+        '<style>:root{--ink:transparent}p{color:var(--ink)}</style><p>SECRET</p>',
+        '<style>:root{--d:none}p{display:var(--d, block)}</style><p>SECRET</p>',
+    ]
+    hidden_results = [
+        visible_html_evidence(raw, fail_closed=True) for raw in hidden_cases
+    ]
+    check("resolved hiding custom properties exclude their text deterministically",
+          all("SECRET" not in text and not ambiguous
+              for text, ambiguous in hidden_results),
+          repr(hidden_results))
+
+    benign_cases = [
+        '<style>:root{--ink:#000}html{--ink:#000}p{color:var(--ink)}</style>'
+        '<p>SHOWN</p>',
+        '<style>:root{--base:#111;--ink:var(--base)}p{color:var(--ink)}</style>'
+        '<p>SHOWN</p>',
+        '<style>:root{--ink:#111}</style><p style="color:var(--ink)">SHOWN</p>',
+    ]
+    benign_results = [
+        visible_html_evidence(raw, fail_closed=True) for raw in benign_cases
+    ]
+    check("identical and nested custom properties remain visible",
+          all("SHOWN" in text and not ambiguous
+              for text, ambiguous in benign_results),
+          repr(benign_results))
+
+
 def test_coverage_checks_asset_attributes() -> None:
     from checks import visible_html_text
     from content import (

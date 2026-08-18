@@ -130,11 +130,90 @@ def _is_extreme_css_offset(value: str) -> bool:
     return abs(number) >= threshold
 
 
+class _DocumentStyleCollector(HTMLParser):
+    """Collect stylesheet bodies and decoded inline style attributes."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.style_blocks: list[str] = []
+        self.inline_styles: list[str] = []
+        self._style_parts: list[str] | None = None
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag.lower() == "style":
+            self._style_parts = []
+        self.inline_styles.extend(
+            value
+            for name, value in attrs
+            if name.lower() == "style" and value is not None
+        )
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag.lower() == "style" and self._style_parts is not None:
+            self.style_blocks.append("".join(self._style_parts))
+            self._style_parts = None
+
+    def handle_data(self, data: str) -> None:
+        if self._style_parts is not None:
+            self._style_parts.append(data)
+
+    def close(self) -> None:
+        super().close()
+        if self._style_parts is not None:
+            self.style_blocks.append("".join(self._style_parts))
+            self._style_parts = None
+
+
+def _document_custom_properties(raw: str) -> dict[str, str]:
+    """Return custom properties with one normalized value across the document.
+
+    The checker has no CSS cascade, so cross-block resolution is safe only
+    when every stylesheet and inline declaration agrees. ``@property`` can
+    supply inheritance and initial-value behavior, so it disables the table.
+    """
+    collector = _DocumentStyleCollector()
+    collector.feed(raw)
+    collector.close()
+
+    sources: list[str] = []
+    for block in collector.style_blocks:
+        clean = re.sub(r"/\*.*?\*/", "", block, flags=re.S)
+        clean = _decode_css_escapes(clean)
+        if re.search(r"@property\b", clean, flags=re.I):
+            return {}
+        sources.extend(
+            body for _, body in re.findall(r"([^{}]+)\{([^{}]*)\}", clean, flags=re.S)
+        )
+    for inline in collector.inline_styles:
+        clean = re.sub(r"/\*.*?\*/", "", inline, flags=re.S)
+        sources.append(_decode_css_escapes(clean))
+
+    seen: dict[str, str] = {}
+    conflicting: set[str] = set()
+    for source in sources:
+        for declaration in source.split(";"):
+            name, separator, value = declaration.partition(":")
+            if not separator:
+                continue
+            name = re.sub(r"\s+", "", name.lower())
+            if not name.startswith("--"):
+                continue
+            value = re.sub(r"!\s*important\s*$", "", value, flags=re.I)
+            value = re.sub(r"\s+", "", value.lower())
+            previous = seen.get(name)
+            if previous is None:
+                seen[name] = value
+            elif previous != value:
+                conflicting.add(name)
+    return {name: value for name, value in seen.items() if name not in conflicting}
+
+
 def _style_state(
     style: str,
     *,
     fail_closed: bool,
     replaced_element: bool = False,
+    custom_properties: dict[str, str] | None = None,
 ) -> tuple[bool, bool]:
     """Return ``(hidden, ambiguous)`` for a declaration block.
 
@@ -144,7 +223,9 @@ def _style_state(
     """
     clean = re.sub(r"/\*.*?\*/", "", style, flags=re.S)
     clean = _decode_css_escapes(clean)
-    properties: dict[str, tuple[str, bool]] = {}
+    properties: dict[str, tuple[str, bool]] = {
+        name: (value, False) for name, value in (custom_properties or {}).items()
+    }
     for declaration in clean.split(";"):
         name, separator, value = declaration.partition(":")
         if not separator:
@@ -325,9 +406,11 @@ def _style_hides(
     *,
     fail_closed: bool,
     replaced_element: bool = False,
+    custom_properties: dict[str, str] | None = None,
 ) -> bool:
     return _style_state(
         style,
+        custom_properties=custom_properties,
         fail_closed=fail_closed,
         replaced_element=replaced_element,
     )[0]
@@ -337,6 +420,7 @@ def _css_hidden_filters(
     raw: str,
     *,
     fail_closed: bool,
+    custom_properties: dict[str, str] | None = None,
 ) -> tuple[
     set[str], set[str], set[str], set[tuple[str, str | None]],
     set[str], set[str], set[str], set[tuple[str, str | None]], bool,
@@ -375,7 +459,11 @@ def _css_hidden_filters(
             ambiguous_tags.add("*")
             globally_ambiguous = True
         for selectors, body in re.findall(r"([^{}]+)\{([^{}]*)\}", clean, flags=re.S):
-            hides, body_ambiguous = _style_state(body, fail_closed=fail_closed)
+            hides, body_ambiguous = _style_state(
+                body,
+                fail_closed=fail_closed,
+                custom_properties=custom_properties,
+            )
             if not hides and not body_ambiguous:
                 continue
             class_store = ambiguous_classes if body_ambiguous else hidden_classes
@@ -503,8 +591,10 @@ class _HtmlVisibilityParser(HTMLParser):
         *,
         skip_tags: set[str],
         fail_closed: bool,
+        custom_properties: dict[str, str] | None = None,
     ) -> None:
         super().__init__(convert_charrefs=True)
+        self._custom_properties = custom_properties
         self._hidden_classes = hidden_classes
         self._hidden_ids = hidden_ids
         self._hidden_tags = hidden_tags
@@ -704,6 +794,7 @@ class _HtmlVisibilityParser(HTMLParser):
             attrs_map.get("style", ""),
             fail_closed=self._fail_closed,
             replaced_element=tag in self._REPLACED_TAGS,
+            custom_properties=self._custom_properties,
         )
         presentation_hidden, presentation_ambiguous = _style_state(
             presentation_style,
@@ -876,6 +967,7 @@ class _VisibleTextParser(_HtmlVisibilityParser):
         visibility_ambiguous: bool,
         *,
         fail_closed: bool,
+        custom_properties: dict[str, str] | None = None,
     ) -> None:
         super().__init__(
             hidden_classes,
@@ -889,6 +981,7 @@ class _VisibleTextParser(_HtmlVisibilityParser):
             visibility_ambiguous,
             skip_tags=self._SKIP_TAGS,
             fail_closed=fail_closed,
+            custom_properties=custom_properties,
         )
         self.parts: list[str] = []
 
@@ -905,9 +998,15 @@ def visible_html_evidence(
     *,
     fail_closed: bool = False,
 ) -> tuple[str, bool]:
+    custom_properties = _document_custom_properties(raw)
     parser = _VisibleTextParser(
-        *_css_hidden_filters(raw, fail_closed=fail_closed),
+        *_css_hidden_filters(
+            raw,
+            fail_closed=fail_closed,
+            custom_properties=custom_properties,
+        ),
         fail_closed=fail_closed,
+        custom_properties=custom_properties,
     )
     parser.feed(raw)
     if fail_closed and parser._ambiguous_markup:

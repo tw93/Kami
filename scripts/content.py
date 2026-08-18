@@ -25,6 +25,7 @@ from urllib.parse import unquote, urljoin, urlsplit
 from checks import (
     _HtmlVisibilityParser,
     _css_hidden_filters,
+    _document_custom_properties,
     visible_html_evidence,
     visible_html_text,
 )
@@ -142,6 +143,8 @@ class _HtmlAttributeParser(_HtmlVisibilityParser):
         ambiguous_tags: set[str],
         ambiguous_attrs: set[tuple[str, str | None]],
         visibility_ambiguous: bool,
+        *,
+        custom_properties: dict[str, str] | None = None,
     ) -> None:
         super().__init__(
             hidden_classes,
@@ -155,6 +158,7 @@ class _HtmlAttributeParser(_HtmlVisibilityParser):
             visibility_ambiguous,
             skip_tags=self._SKIP_TAGS,
             fail_closed=True,
+            custom_properties=custom_properties,
         )
         self.values: set[str] = set()
         self.base_href: str | None = None
@@ -478,7 +482,15 @@ def _contains_atomic(haystack: str, needle: str) -> bool:
 
 
 def html_resource_evidence(raw: str) -> tuple[set[str], bool]:
-    parser = _HtmlAttributeParser(*_css_hidden_filters(raw, fail_closed=True))
+    custom_properties = _document_custom_properties(raw)
+    parser = _HtmlAttributeParser(
+        *_css_hidden_filters(
+            raw,
+            fail_closed=True,
+            custom_properties=custom_properties,
+        ),
+        custom_properties=custom_properties,
+    )
     parser.feed(raw)
     if parser._ambiguous_markup:
         return set(), True
