@@ -1040,8 +1040,9 @@ def test_off_palette_repo_clean() -> None:
 
 def test_check_update_script() -> None:
     """check-update.sh notifies on a newer remote, stays silent when current,
-    throttles to once per day, and fails silently offline. It only reads a
-    version file and sends no data; KAMI_UPDATE_URL points it at a fixture."""
+    throttles through a local cache marker, and fails silently offline. It GETs
+    only a version file and uploads no document/task content; KAMI_UPDATE_URL
+    points it at a fixture."""
     script = REPO_ROOT / "scripts" / "check-update.sh"
     check("check-update.sh exists", script.exists())
     if not script.exists():
@@ -1077,6 +1078,26 @@ def test_check_update_script() -> None:
 
         rc, out = run(str(dp / "c4"), (dp / "nope").as_uri())
         check("check-update fails silently when offline", rc == 0 and out == "", out)
+
+        no_home_env = dict(os.environ, KAMI_UPDATE_URL=newer.as_uri())
+        no_home_env.pop("HOME", None)
+        no_home_env.pop("XDG_CACHE_HOME", None)
+        result = subprocess.run(
+            ["bash", str(script)], capture_output=True, text=True, env=no_home_env)
+        check("check-update is silent without a cache home",
+              result.returncode == 0 and result.stdout == "" and result.stderr == "",
+              result.stdout + result.stderr)
+
+        unwritable_cache_env = dict(
+            os.environ,
+            XDG_CACHE_HOME="/dev/null",
+            KAMI_UPDATE_URL=newer.as_uri(),
+        )
+        result = subprocess.run(
+            ["bash", str(script)], capture_output=True, text=True, env=unwritable_cache_env)
+        check("check-update is silent when the cache root is unusable",
+              result.returncode == 0 and result.stdout == "" and result.stderr == "",
+              result.stdout + result.stderr)
 
 
 def test_check_update_uses_codex_plugin_update_command() -> None:

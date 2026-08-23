@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Quiet daily update check for the installed kami skill.
 #
-# Reads the public VERSION file on the default branch and compares it to the
-# bundled VERSION. If a newer version exists, prints one line so the agent can
-# relay it. No data is ever sent (a plain read-only GET); any failure is silent;
-# the check runs at most once per day via a cache marker, so it never blocks work.
+# Writes a local daily cache marker, then GETs the public VERSION file on the
+# default branch and compares it to the bundled VERSION. If a newer version
+# exists, prints one line so the agent can relay it. It uploads no user document
+# or task content; any failure is silent, so the check never blocks work.
 set -u
 
 SKILL="kami"
@@ -33,11 +33,18 @@ esac
 # dated marker file rewritten in place, so the cache dir does not accumulate
 # a new empty update-checked-YYYY-MM-DD file every day.
 day="$(date +%F 2>/dev/null)" || exit 0
-cache_dir="${XDG_CACHE_HOME:-${HOME}/.cache}/${SKILL}"
+if [ -n "${XDG_CACHE_HOME:-}" ]; then
+  cache_root="${XDG_CACHE_HOME}"
+elif [ -n "${HOME:-}" ]; then
+  cache_root="${HOME}/.cache"
+else
+  exit 0
+fi
+cache_dir="${cache_root}/${SKILL}"
 marker="${cache_dir}/update-checked"
 [ "$(cat "${marker}" 2>/dev/null)" = "${day}" ] && exit 0
-mkdir -p "${cache_dir}" 2>/dev/null
-printf '%s' "${day}" > "${marker}" 2>/dev/null   # write first so an offline run does not retry all day
+mkdir -p "${cache_dir}" 2>/dev/null || exit 0
+printf '%s' "${day}" > "${marker}" 2>/dev/null || exit 0   # write first so an offline run does not retry all day
 rm -f "${cache_dir}"/update-checked-2* 2>/dev/null   # sweep legacy per-day markers
 
 command -v curl >/dev/null 2>&1 || exit 0

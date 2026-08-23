@@ -108,7 +108,7 @@ The ZIP is lightweight and contains a `kami/` skill folder. Large CJK fonts are 
 - Claude Desktop: download the latest [kami.zip](https://github.com/tw93/kami/releases/latest/download/kami.zip), click "..." on the skill card, choose Replace, upload
 - Generic agents: re-run the `npx skills add tw93/kami/plugins/kami -a universal -g -y` command, which overwrites the existing copy. Avoid `npx skills update` for now: it can mis-detect repo subpath installs while the repo root also has `SKILL.md` (vercel-labs/skills#1517).
 
-Kami also runs a quiet version check at most once a day and tells you in chat when a newer version is out; it only reads a public version file, sends no data, and is skipped when offline.
+Kami also runs a quiet version check at most once a day and tells you in chat when a newer version is out. It writes a marker in the local XDG cache directory, then GETs a public version file; it uploads no user document or task content and fails silently when offline or when no cache home is available.
 
 ## Use
 

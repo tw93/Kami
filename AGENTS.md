@@ -47,7 +47,8 @@ Only the entries whose role is not obvious from the filename:
   template and diagram counts across `index*.html`, `README.md`, `llms.txt`), wired
   into `build.py --check`.
 - `scripts/check-update.sh` - quiet daily update check invoked from `SKILL.md`;
-  read-only VERSION compare, silent on any failure.
+  writes a local cache marker, then GETs the public VERSION file at most once per
+  day. It uploads no user document or task content and stays silent on failure.
 - `assets/showcase/` - README and public-site screenshots only. `assets/demos/` -
   README showcase demos. `scripts/package-skill.sh` excludes both from the ZIP.
 - `assets/diagrams/src/*.mmd` - Mermaid source of the sequence / class / er diagrams.

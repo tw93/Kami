@@ -11,7 +11,7 @@ Good content deserves good paper. One design language across documents and landi
 
 Part of `Kaku · Waza · Kami` - Kaku writes code, Waza drills habits, **Kami delivers documents**.
 
-**Update check (non-blocking).** At the start of a task, run `bash scripts/check-update.sh`. It does a read-only version check at most once per day and prints one line when a newer kami is available; relay that line to the user, then continue. It sends no data, and fails silently when offline, sandboxed, or without `curl`. Never let it block the work.
+**Update check (non-blocking).** At the start of a task, run `bash scripts/check-update.sh`. On the first run each calendar day, it writes a marker under the local XDG cache directory and then performs one GET of Kami's public VERSION file. It uploads no user document or task content. When a newer Kami is available it prints one line; relay that line to the user, then continue. It fails silently when offline, sandboxed, or without `curl`, and must never block the work.
 
 ## Step 0 · Load brand profile (if exists)
 
