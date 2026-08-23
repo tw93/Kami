@@ -2618,8 +2618,9 @@ def test_coverage_rejects_substrings_and_hidden_text() -> None:
 
 
 def test_visibility_resolves_document_custom_properties() -> None:
-    """Resolve only custom properties with one document-wide value."""
+    """Resolve only unconditional custom properties inherited from the root."""
     from checks import visible_html_evidence
+    from content import html_resource_evidence
 
     visible_text, visible_ambiguous = visible_html_evidence(
         "<style>:root { --ink: #504e49 } body { color: var(--ink) }</style>"
@@ -2667,9 +2668,39 @@ def test_visibility_resolves_document_custom_properties() -> None:
               for text, ambiguous in ambiguous_results),
           repr(ambiguous_results))
 
+    scoped_cases = [
+        '<style>.theme{--d:block}p{display:var(--d,none)}</style>'
+        '<div class="theme"></div><p>SECRET</p>',
+        '<style>@media screen{:root{--d:block}}p{display:var(--d,none)}</style>'
+        '<p>SECRET</p>',
+        '<style>p{display:var(--d,none)}</style>'
+        '<div style="--d:block"></div><p>SECRET</p>',
+        '<style>.noop{--payload:"x; --ink:#000"}'
+        'p{color:var(--ink,transparent)}</style><p>SECRET</p>',
+        '<style>:root{--d:block}.hide{--junk:{x};--d:none}'
+        'p{display:var(--d)}</style><p class="hide">SECRET</p>',
+        '<style>:root{--INK:#000}p{color:var(--ink,transparent)}</style>'
+        '<p>SECRET</p>',
+    ]
+    scoped_results = [
+        visible_html_evidence(raw, fail_closed=True) for raw in scoped_cases
+    ]
+    check("scoped and malformed custom properties cannot expose hidden text",
+          all("SECRET" not in text for text, _ in scoped_results),
+          repr(scoped_results))
+
+    scoped_assets, _ = html_resource_evidence(
+        '<style>.theme{--d:block}img{display:var(--d,none)}</style>'
+        '<div class="theme"></div><img src="required.svg">'
+    )
+    check("scoped custom properties cannot expose hidden resources",
+          "required.svg" not in scoped_assets, repr(scoped_assets))
+
     hidden_cases = [
         '<style>:root{--ink:transparent}p{color:var(--ink)}</style><p>SECRET</p>',
         '<style>:root{--d:none}p{display:var(--d, block)}</style><p>SECRET</p>',
+        '<p style=\'display:none;--x:";display:block"\'>SECRET</p>',
+        '<p style="--HIDE:none;--hide:block;display:var(--HIDE)">SECRET</p>',
     ]
     hidden_results = [
         visible_html_evidence(raw, fail_closed=True) for raw in hidden_cases

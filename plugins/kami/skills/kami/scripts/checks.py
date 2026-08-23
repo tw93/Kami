@@ -164,48 +164,231 @@ class _DocumentStyleCollector(HTMLParser):
             self._style_parts = None
 
 
-def _document_custom_properties(raw: str) -> dict[str, str]:
-    """Return custom properties with one normalized value across the document.
+def _custom_property_names(css: str) -> list[str]:
+    """Return custom-property declarations while ignoring quoted text.
 
-    The checker has no CSS cascade, so cross-block resolution is safe only
-    when every stylesheet and inline declaration agrees. ``@property`` can
-    supply inheritance and initial-value behavior, so it disables the table.
+    This intentionally over-collects declarations from selectors and at-rules:
+    any declaration outside an unconditional root rule makes cross-rule
+    resolution unsafe. False positives therefore disable an optimization
+    instead of admitting hidden evidence.
+    """
+    names: list[str] = []
+    quote = ""
+    escaped = False
+    index = 0
+    while index < len(css):
+        char = css[index]
+        if escaped:
+            escaped = False
+            index += 1
+            continue
+        if char == "\\":
+            escaped = True
+            index += 1
+            continue
+        if quote:
+            if char == quote:
+                quote = ""
+            index += 1
+            continue
+        if char in {'"', "'"}:
+            quote = char
+            index += 1
+            continue
+        if css.startswith("--", index):
+            match = re.match(r"--[\w-]+", css[index:])
+            if match:
+                name = match.group(0)
+                end = index + len(name)
+                cursor = end
+                while cursor < len(css) and css[cursor].isspace():
+                    cursor += 1
+                if cursor < len(css) and css[cursor] == ":":
+                    names.append(name)
+                index = end
+                continue
+        index += 1
+    return names
+
+
+def _top_level_css_rules(css: str) -> list[tuple[str, str]] | None:
+    """Split a stylesheet into balanced top-level ``(prelude, body)`` rules."""
+    rules: list[tuple[str, str]] = []
+    start = 0
+    index = 0
+    quote = ""
+    escaped = False
+    paren_depth = 0
+    bracket_depth = 0
+    while index < len(css):
+        char = css[index]
+        if escaped:
+            escaped = False
+            index += 1
+            continue
+        if char == "\\":
+            escaped = True
+            index += 1
+            continue
+        if quote:
+            if char == quote:
+                quote = ""
+            index += 1
+            continue
+        if char in {'"', "'"}:
+            quote = char
+            index += 1
+            continue
+        if char == "(":
+            paren_depth += 1
+        elif char == ")":
+            if paren_depth == 0:
+                return None
+            paren_depth -= 1
+        elif char == "[":
+            bracket_depth += 1
+        elif char == "]":
+            if bracket_depth == 0:
+                return None
+            bracket_depth -= 1
+        elif char == ";" and paren_depth == 0 and bracket_depth == 0:
+            start = index + 1
+        elif char == "{" and paren_depth == 0 and bracket_depth == 0:
+            prelude = css[start:index].strip()
+            body_start = index + 1
+            depth = 1
+            inner_quote = ""
+            inner_escaped = False
+            index += 1
+            while index < len(css) and depth:
+                inner = css[index]
+                if inner_escaped:
+                    inner_escaped = False
+                elif inner == "\\":
+                    inner_escaped = True
+                elif inner_quote:
+                    if inner == inner_quote:
+                        inner_quote = ""
+                elif inner in {'"', "'"}:
+                    inner_quote = inner
+                elif inner == "{":
+                    depth += 1
+                elif inner == "}":
+                    depth -= 1
+                index += 1
+            if depth or inner_quote:
+                return None
+            rules.append((prelude, css[body_start:index - 1]))
+            start = index
+            paren_depth = 0
+            bracket_depth = 0
+            continue
+        elif char == "}" and paren_depth == 0 and bracket_depth == 0:
+            return None
+        index += 1
+    if quote or escaped or paren_depth or bracket_depth:
+        return None
+    return rules
+
+
+def _css_declarations(body: str) -> list[tuple[str, str]] | None:
+    """Parse a declaration block without splitting quoted or functional values."""
+    if "{" in body or "}" in body:
+        return None
+    parts: list[str] = []
+    start = 0
+    quote = ""
+    escaped = False
+    paren_depth = 0
+    bracket_depth = 0
+    for index, char in enumerate(body):
+        if escaped:
+            escaped = False
+            continue
+        if char == "\\":
+            escaped = True
+            continue
+        if quote:
+            if char == quote:
+                quote = ""
+            continue
+        if char in {'"', "'"}:
+            quote = char
+        elif char == "(":
+            paren_depth += 1
+        elif char == ")":
+            if paren_depth == 0:
+                return None
+            paren_depth -= 1
+        elif char == "[":
+            bracket_depth += 1
+        elif char == "]":
+            if bracket_depth == 0:
+                return None
+            bracket_depth -= 1
+        elif char == ";" and paren_depth == 0 and bracket_depth == 0:
+            parts.append(body[start:index])
+            start = index + 1
+    if quote or escaped or paren_depth or bracket_depth:
+        return None
+    parts.append(body[start:])
+
+    declarations: list[tuple[str, str]] = []
+    for part in parts:
+        name, separator, value = part.partition(":")
+        if not separator:
+            continue
+        declarations.append((re.sub(r"\s+", "", name), value.strip()))
+    return declarations
+
+
+def _document_custom_properties(raw: str) -> dict[str, str]:
+    """Return unconditional root properties safe to resolve across rules.
+
+    The checker has no CSS cascade. A property is reusable only when every
+    declaration is on an unconditional ``:root`` or ``html`` rule and every
+    value is identical. Scoped, conditional, inline, registered, or malformed
+    declarations disable that property instead of weakening fail-closed checks.
     """
     collector = _DocumentStyleCollector()
     collector.feed(raw)
     collector.close()
 
-    sources: list[str] = []
+    all_names: list[str] = []
+    root_values: dict[str, list[str]] = {}
     for block in collector.style_blocks:
         clean = re.sub(r"/\*.*?\*/", "", block, flags=re.S)
         clean = _decode_css_escapes(clean)
         if re.search(r"@property\b", clean, flags=re.I):
             return {}
-        sources.extend(
-            body for _, body in re.findall(r"([^{}]+)\{([^{}]*)\}", clean, flags=re.S)
-        )
+        all_names.extend(_custom_property_names(clean))
+        rules = _top_level_css_rules(clean)
+        if rules is None:
+            return {}
+        for selectors, body in rules:
+            roots = [selector.strip().lower() for selector in selectors.split(",")]
+            if not roots or any(selector not in {":root", "html"} for selector in roots):
+                continue
+            declarations = _css_declarations(body)
+            if declarations is None:
+                return {}
+            for name, value in declarations:
+                if not name.startswith("--"):
+                    continue
+                value = re.sub(r"!\s*important\s*$", "", value, flags=re.I).strip()
+                root_values.setdefault(name, []).append(value)
     for inline in collector.inline_styles:
         clean = re.sub(r"/\*.*?\*/", "", inline, flags=re.S)
-        sources.append(_decode_css_escapes(clean))
+        all_names.extend(_custom_property_names(_decode_css_escapes(clean)))
 
-    seen: dict[str, str] = {}
-    conflicting: set[str] = set()
-    for source in sources:
-        for declaration in source.split(";"):
-            name, separator, value = declaration.partition(":")
-            if not separator:
-                continue
-            name = re.sub(r"\s+", "", name.lower())
-            if not name.startswith("--"):
-                continue
-            value = re.sub(r"!\s*important\s*$", "", value, flags=re.I)
-            value = re.sub(r"\s+", "", value.lower())
-            previous = seen.get(name)
-            if previous is None:
-                seen[name] = value
-            elif previous != value:
-                conflicting.add(name)
-    return {name: value for name, value in seen.items() if name not in conflicting}
+    counts: dict[str, int] = {}
+    for name in all_names:
+        counts[name] = counts.get(name, 0) + 1
+    return {
+        name: values[0]
+        for name, values in root_values.items()
+        if counts.get(name) == len(values) and len(set(values)) == 1
+    }
 
 
 def _style_state(
@@ -223,17 +406,19 @@ def _style_state(
     """
     clean = re.sub(r"/\*.*?\*/", "", style, flags=re.S)
     clean = _decode_css_escapes(clean)
+    declarations = _css_declarations(clean)
+    if declarations is None:
+        return False, fail_closed
     properties: dict[str, tuple[str, bool]] = {
         name: (value, False) for name, value in (custom_properties or {}).items()
     }
-    for declaration in clean.split(";"):
-        name, separator, value = declaration.partition(":")
-        if not separator:
-            continue
-        name = re.sub(r"\s+", "", name.lower())
+    for name, value in declarations:
+        name = re.sub(r"\s+", "", name)
+        if not name.startswith("--"):
+            name = name.lower()
         important = re.search(r"!\s*important\s*$", value, flags=re.I) is not None
         value = re.sub(r"!\s*important\s*$", "", value, flags=re.I)
-        value = re.sub(r"\s+", "", value.lower())
+        value = re.sub(r"\s+", "", value)
         previous = properties.get(name)
         if previous is None or important or not previous[1]:
             properties[name] = (value, important)
@@ -244,7 +429,7 @@ def _style_state(
         if depth > 8:
             return "", True
         value = properties[name][0]
-        match = re.fullmatch(r"var\((--[\w-]+)(?:,(.*))?\)", value)
+        match = re.fullmatch(r"(?i:var)\((--[\w-]+)(?:,(.*))?\)", value)
         if not match:
             return value, False
         custom_name, fallback = match.groups()
@@ -259,8 +444,12 @@ def _style_state(
         finally:
             properties.pop(temporary_name, None)
 
-    display, display_ambiguous = resolved("display")
-    visibility, visibility_ambiguous = resolved("visibility")
+    def resolved_css(name: str) -> tuple[str, bool]:
+        value, ambiguous = resolved(name)
+        return value.lower(), ambiguous
+
+    display, display_ambiguous = resolved_css("display")
+    visibility, visibility_ambiguous = resolved_css("visibility")
     if fail_closed and (
         (display_ambiguous and "display" in properties)
         or (visibility_ambiguous and "visibility" in properties)
@@ -270,22 +459,22 @@ def _style_state(
         return True, False
     if visibility in {"hidden", "collapse"} or visibility.startswith("var("):
         return True, False
-    opacity, opacity_ambiguous = resolved("opacity")
+    opacity, opacity_ambiguous = resolved_css("opacity")
     if opacity_ambiguous and "opacity" in properties and fail_closed:
         return False, True
     if _is_zero_css_value(opacity):
         return True, False
-    font_size, font_size_ambiguous = resolved("font-size")
+    font_size, font_size_ambiguous = resolved_css("font-size")
     if font_size_ambiguous and "font-size" in properties and fail_closed:
         return False, True
     if _is_zero_css_value(font_size):
         return True, False
-    color, color_ambiguous = resolved("color")
+    color, color_ambiguous = resolved_css("color")
     if color_ambiguous and "color" in properties and fail_closed:
         return False, True
     if color == "transparent":
         return True, False
-    transform, transform_ambiguous = resolved("transform")
+    transform, transform_ambiguous = resolved_css("transform")
     if transform_ambiguous and "transform" in properties and fail_closed:
         return False, True
     if (
@@ -310,17 +499,17 @@ def _style_state(
     if fail_closed and "transform" in properties and "var(" in transform:
         return False, True
     for property_name in ("scale", "zoom"):
-        value, ambiguous = resolved(property_name)
+        value, ambiguous = resolved_css(property_name)
         if ambiguous and property_name in properties and fail_closed:
             return False, True
         if _is_zero_css_value(value):
             return True, False
-    content_visibility, content_visibility_ambiguous = resolved("content-visibility")
+    content_visibility, content_visibility_ambiguous = resolved_css("content-visibility")
     if content_visibility_ambiguous and "content-visibility" in properties and fail_closed:
         return False, True
     if content_visibility == "hidden":
         return True, False
-    filter_value, filter_ambiguous = resolved("filter")
+    filter_value, filter_ambiguous = resolved_css("filter")
     if filter_ambiguous and "filter" in properties and fail_closed:
         return False, True
     if re.search(r"opacity\((?:0+(?:\.0*)?|\.0+)(?:%)?\)", filter_value):
@@ -329,7 +518,7 @@ def _style_state(
         return False, True
     if fail_closed:
         for property_name in ("mask", "mask-image", "-webkit-mask", "-webkit-mask-image"):
-            value, ambiguous = resolved(property_name)
+            value, ambiguous = resolved_css(property_name)
             if property_name in properties and (ambiguous or value not in {"", "none"}):
                 return False, True
     if fail_closed:
@@ -338,20 +527,20 @@ def _style_state(
             "inset-block", "margin-top", "margin-right", "margin-bottom",
             "margin-left",
         ):
-            value, ambiguous = resolved(property_name)
+            value, ambiguous = resolved_css(property_name)
             if property_name not in properties:
                 continue
             if ambiguous:
                 return False, True
             if _is_extreme_css_offset(value):
                 return True, False
-    text_indent, text_indent_ambiguous = resolved("text-indent")
+    text_indent, text_indent_ambiguous = resolved_css("text-indent")
     if text_indent_ambiguous and "text-indent" in properties and fail_closed:
         return False, True
     if _is_extreme_css_offset(text_indent):
         return True, False
-    clip, clip_ambiguous = resolved("clip")
-    clip_path, clip_path_ambiguous = resolved("clip-path")
+    clip, clip_ambiguous = resolved_css("clip")
+    clip_path, clip_path_ambiguous = resolved_css("clip-path")
     if fail_closed and (
         (clip_ambiguous and "clip" in properties)
         or (clip_path_ambiguous and "clip-path" in properties)
@@ -365,11 +554,11 @@ def _style_state(
         return False, True
     if fail_closed and "clip-path" in properties and clip_path not in {"", "none"}:
         return False, True
-    width, width_ambiguous = resolved("width")
-    max_width, max_width_ambiguous = resolved("max-width")
-    height, height_ambiguous = resolved("height")
-    max_height, max_height_ambiguous = resolved("max-height")
-    overflow, overflow_ambiguous = resolved("overflow")
+    width, width_ambiguous = resolved_css("width")
+    max_width, max_width_ambiguous = resolved_css("max-width")
+    height, height_ambiguous = resolved_css("height")
+    max_height, max_height_ambiguous = resolved_css("max-height")
+    overflow, overflow_ambiguous = resolved_css("overflow")
     if fail_closed and (
         (width_ambiguous and "width" in properties)
         or (max_width_ambiguous and "max-width" in properties)
