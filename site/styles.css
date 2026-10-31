@@ -742,7 +742,6 @@
     color: var(--olive);
     font-family: var(--serif);
     font-size: 15px;
-    font-style: italic;
     line-height: 1.55;
     margin: 0;
   }
@@ -825,8 +824,6 @@
   }
   .decision th {
     font-size: 12px;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
     color: var(--stone);
     font-weight: 500;
     padding-top: 0;
@@ -1020,9 +1017,7 @@
     font-size: 12px;
     font-weight: 500;
     color: var(--brand);
-    letter-spacing: 0.3px;
     margin-bottom: 10px;
-    text-transform: uppercase;
   }
   .chart-caption {
     font-size: 12px;
@@ -1148,8 +1143,6 @@
     font-family: var(--sans);
     font-size: 12px;
     font-weight: 500;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
     color: var(--stone);
     padding-top: 2px;
   }

@@ -17,7 +17,7 @@ This is not a UI framework. It is a constraint system for print, designed to kee
 7. Letter-spacing: Chinese body 0.3pt for comfortable reading; English body 0; tracking only for short labels and overlines
 8. Tag backgrounds must be solid hex, never rgba (WeasyPrint renders a double rectangle)
 9. Surfaces are flat by default; whisper shadows are reserved for real floating screenshots, popovers, or overlays
-10. **No italic in print templates**. No `font-style: italic` in any PDF template or demo. Exception: landing page (screen-only) allows italic for captions, feature subtitles, and a closing tagline; these need not be poetic
+10. **No italic in print templates**. No `font-style: italic` in any PDF template or demo. Landing pages do not italicize captions, feature subtitles or taglines either; italic marks only a font face, syntax tokens or the author's own emphasis
 
 This system is a fusion of Anthropic's visual language and real Chinese / English resume iteration. Details below.
 
@@ -1259,7 +1259,7 @@ Below the phone breakpoint, the information diet reverses: images first, words s
 - Empty gallery: script exits cleanly; single-image gallery initializes caption/tab state without starting auto-rotate
 - Tabs: pill buttons 12px `--latin-ui`, active state uses brand-tint background
 - Click navigation: left half = previous, right half = next
-- Caption `.line`: italic serif, 14px olive. Short captions explaining each screenshot or adding useful context
+- Caption `.line`: upright serif, 14px olive. Short captions explaining each screenshot or adding useful context
 - Rapid switching keeps caption and tab state synchronized with the visible frame; test by clicking faster than the transition duration, not just once per panel
 
 ### Links
@@ -1349,7 +1349,7 @@ For card grids whose content is written text (article listings, changelog indexe
 
 - Two-column grid: 200px name + 1fr description, 36px gap, separated by border-soft hairlines
 - Feature name: 22px brand, weight 500
-- Optional subtitle: `<small>` below name, 13px olive, italic. One short line adding useful context to the feature name
+- Optional subtitle: `<small>` below name, 13px olive, upright. One short line adding useful context to the feature name
 - Description: 15px dark-warm, line-height 1.55
 - Tables stay editorial: no framed box, no tinted header bar, no vertical rules, no empty right gap. Content-sized columns, hairline row rules, a muted `--latin-ui` uppercase header. On phone, `display: block; overflow-x: auto` rather than cramming columns. A framed, tinted table adds weight without adding information.
 
@@ -1387,7 +1387,7 @@ No template ships this section; build it only from real, attributed quotes (name
 - Two-column flex: brand mark (icon + name + tagline) left, colophon (links + ethos) right
 - Mark icon: 56px rounded 8px
 - Links: middot separators live on `a:not(:last-child)::after`; anchors stay inline-block so wrapping never leaves a leading separator. Do not join the row with `&nbsp;`
-- Ethos: closing italic serif line, olive color, max-width 360px. The italic voice signals a personal sign-off
+- Ethos: closing upright serif line, olive color, max-width 360px. Its place at the end of the footer marks it as a personal sign-off
 - Tech credit, once. If the product builds on an upstream project or framework, credit it exactly once as a quiet footer line, never as a repeated selling point and never in the hero tagline. Grep the whole site for the upstream name and collapse it to this single instance; rewrite the hero around the product's own positioning. Hard facts that are not the credit (license, version) belong here too.
 - Collapses to single column below 880px
 

@@ -491,9 +491,9 @@ Run through before shipping every draft:
 
 A landing page is not a brochure. It is a conversion surface. Every element either builds trust or wastes attention.
 
-### Global: screen-only italic exception
+### Global: no italic on landing pages either
 
-Invariant #10 bans italic in print templates. Landing pages are screen-only, so gallery captions, feature subtitles, and footer ethos may use the limited italic treatment defined in `references/design.md`. Do not add new italic uses beyond those roles.
+Invariant #10 bans italic in print templates, and landing pages follow it too: gallery captions, feature subtitles and the footer ethos stay upright, separated by size, colour and position. Italic marks only a font face, syntax tokens or the author's own emphasis.
 
 ### Hero rules
 
