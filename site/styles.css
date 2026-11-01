@@ -463,10 +463,8 @@
   .tint .flag {
     font-size: 12px;
     font-weight: 500;
-    letter-spacing: 0.8px;
     color: var(--brand);
     margin-bottom: 8px;
-    text-transform: uppercase;
     display: block;
     height: 11px;
   }
@@ -737,6 +735,8 @@
   .tag.standard { background: #E4ECF5; border-radius: 4px; padding: 2px 8px; }
 
   /* Quote */
+  .code.doc-code { border: 0; border-radius: 4pt; }
+
   .quote {
     padding: 4px 0;
     color: var(--olive);

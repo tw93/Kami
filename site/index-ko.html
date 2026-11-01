@@ -375,8 +375,8 @@ codex plugin add kami@kami
     <h3 class="subhead">태그 배경색</h3>
     <p style="color: var(--olive); margin: 0 0 16px; line-height: 1.55;">등록된 솔리드 색상은 두 단계만 사용합니다. <code style="font-family:var(--mono);font-size:12px;background:#EEF2F7;color:var(--brand);padding:1px 5px;border-radius:2px">#EEF2F7</code>은 약한 표현, <code style="font-family:var(--mono);font-size:12px;background:#E4ECF5;color:var(--brand);padding:1px 5px;border-radius:2px">#E4ECF5</code>는 기본값입니다. 솔리드 hex는 WeasyPrint의 이중 사각형 문제도 막습니다.</p>
     <div class="tint-strip">
-      <div class="tint"><span class="flag">Recede</span><span class="sample" style="background:#EEF2F7">Tag sample</span><p class="opacity">Quiet</p><span class="hex">#EEF2F7</span></div>
-      <div class="tint default"><span class="flag">Default</span><span class="sample" style="background:#E4ECF5">Tag sample</span><p class="opacity">기본</p><span class="hex">#E4ECF5</span></div>
+      <div class="tint"><span class="flag">약하게</span><span class="sample" style="background:#EEF2F7">태그 예시</span><p class="opacity">차분하게</p><span class="hex">#EEF2F7</span></div>
+      <div class="tint default"><span class="flag">기본</span><span class="sample" style="background:#E4ECF5">태그 예시</span><p class="opacity">기본</p><span class="hex">#E4ECF5</span></div>
     </div>
   </section>
 
@@ -528,8 +528,8 @@ codex plugin add kami@kami
       </div>
       <div class="comp">
         <h3>코드 블록</h3>
-        <p class="hint">ivory bg + 4pt radius, no border</p>
-<pre class="code"><span class="c">// warmth from restraint, not from color</span>
+        <p class="hint">ivory 배경 + 4pt radius, 테두리 없음</p>
+<pre class="code doc-code"><span class="c">// 따뜻함은 색이 아니라 절제에서 나온다</span>
 canvas   = parchment; accent = <span class="k">ink_blue</span>
 palette  = <span class="k">warm_neutrals</span> − cool_grays
 document = <span class="k">serif</span> × hierarchy + generous_space
@@ -539,7 +539,7 @@ beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
         <h3>기본 카드</h3>
         <p class="hint">ivory 채움 하나 + 8px radius · 테두리와 그림자 없음</p>
         <div class="demo" style="background:var(--ivory); border-radius:8px; padding:18px 20px;">
-          <p style="font-family:var(--serif); font-weight:500; font-size:15px; margin:0 0 6px; color:var(--near-black);">Tesla Company Profile · One-Pager</p>
+          <p style="font-family:var(--serif); font-weight:500; font-size:15px; margin:0 0 6px; color:var(--near-black);">Tesla 회사 소개 · One-Pager</p>
           <p style="font-size:12px; color:var(--olive); margin:0 0 10px; line-height:1.5;">단일 A4 페이지 · 메트릭 카드 4개 + 본문 섹션 3개 + 타임라인</p>
           <div style="display:flex; gap:8px; flex-wrap:wrap;">
             <span class="tag calm">English</span>
@@ -637,11 +637,11 @@ beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
           <text x="80" y="77" text-anchor="middle" font-size="13" font-weight="600" fill="#1B365D">60%</text>
           <text x="80" y="92" text-anchor="middle" font-size="10" fill="#504e49">Primary</text>
           <rect x="150" y="46" width="10" height="10" rx="2" fill="#1B365D"/>
-          <text x="165" y="55" font-size="11" fill="#4d4c48">Core revenue · 60%</text>
+          <text x="165" y="55" font-size="11" fill="#4d4c48">주력 사업 · 60%</text>
           <rect x="150" y="72" width="10" height="10" rx="2" fill="#504e49"/>
-          <text x="165" y="81" font-size="11" fill="#4d4c48">Services · 25%</text>
+          <text x="165" y="81" font-size="11" fill="#4d4c48">서비스 · 25%</text>
           <rect x="150" y="98" width="10" height="10" rx="2" fill="#6b6a64"/>
-          <text x="165" y="107" font-size="11" fill="#4d4c48">Other · 15%</text>
+          <text x="165" y="107" font-size="11" fill="#4d4c48">기타 · 15%</text>
         </svg>
         <p class="chart-caption">매출 구조 분석, 3-6개 세그먼트 지원</p>
       </div>
@@ -660,8 +660,8 @@ beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
       <tr><td class="task">읽기 본문</td><td class="how">serif <code>400</code>, <code>9.5-10 pt</code>, line-height <code>1.55</code></td></tr>
       <tr><td class="task">숫자 강조</td><td class="how"><code>color: var(--brand)</code>, 볼드 아님</td></tr>
       <tr><td class="task">두 섹션 구분</td><td class="how">먼저 여백을 사용하고, 경계가 꼭 명확해야 할 때만 <code>0.5pt</code> 중성 전체 너비 헤어라인</td></tr>
-      <tr><td class="task">인용</td><td class="how">olive 텍스트 + 이탤릭 또는 들여쓰기, 측면 선 없음</td></tr>
-      <tr><td class="task">코드 표시</td><td class="how">Ivory bg + <code>4pt</code> radius + mono font, no border</td></tr>
+      <tr><td class="task">인용</td><td class="how">olive 텍스트, 측면 선 없음</td></tr>
+      <tr><td class="task">코드 표시</td><td class="how">ivory 배경 + <code>4pt</code> radius + mono 글꼴, 테두리 없음</td></tr>
       <tr><td class="task">기본 vs 보조</td><td class="how">기본: brand fill + ivory text; 보조: warm-sand + charcoal</td></tr>
       <tr><td class="task">특별 카드 표시</td><td class="how">더 명확한 레이블이나 은은한 배경색을 사용하고 강조 테두리는 추가하지 않음</td></tr>
       <tr><td class="task">섹션 시작</td><td class="how">Serif <code>500</code> · <code>15pt</code> · 크기 주도 계층, 장식 불필요</td></tr>

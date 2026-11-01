@@ -347,9 +347,9 @@ codex plugin add kami@kami
 
     <h3 class="subhead">強調色</h3>
     <div class="swatches">
-      <div class="swatch brand"><div class="chip" style="background:#1B365D"></div><div class="info"><p class="name">Ink Blue</p><p class="role">Primary color · CTA · labels · section overline</p><span class="hex">#1B365D</span></div></div>
-      <div class="swatch"><div class="chip" style="background:#2D5A8A"></div><div class="info"><p class="name">Ink Light</p><p class="role">Links on dark surfaces · lighter variant</p><span class="hex">#2D5A8A</span></div></div>
-      <div class="swatch"><div class="chip" style="background:#30302e"></div><div class="info"><p class="name" style="color:var(--deep-dark)">Dark Surface</p><p class="role">Dark theme container · warm charcoal</p><span class="hex">#30302E</span></div></div>
+      <div class="swatch brand"><div class="chip" style="background:#1B365D"></div><div class="info"><p class="name">Ink Blue</p><p class="role">メインカラー · CTA · ラベル · 章見出し</p><span class="hex">#1B365D</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#2D5A8A"></div><div class="info"><p class="name">Ink Light</p><p class="role">暗い背景のリンク · 明るめの派生色</p><span class="hex">#2D5A8A</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#30302e"></div><div class="info"><p class="name" style="color:var(--deep-dark)">Dark Surface</p><p class="role">暗いコンテナ · 暖かいチャコール</p><span class="hex">#30302E</span></div></div>
       <div class="swatch"><div class="chip" style="background:#b53333"></div><div class="info"><p class="name">Error</p><p class="role">エラーを示す深い赤</p><span class="hex">#B53333</span></div></div>
     </div>
 
@@ -364,8 +364,8 @@ codex plugin add kami@kami
     <h3 class="subhead">タグの背景色</h3>
     <p style="color: var(--olive); margin: 0 0 16px; line-height: 1.55;">登録済みの実色は 2 段階だけです。<code style="font-family:var(--mono);font-size:12px;background:#EEF2F7;color:var(--brand);padding:1px 5px;border-radius:2px">#EEF2F7</code> は控えめ、<code style="font-family:var(--mono);font-size:12px;background:#E4ECF5;color:var(--brand);padding:1px 5px;border-radius:2px">#E4ECF5</code> は既定。実色は WeasyPrint の二重矩形も防ぎます。</p>
     <div class="tint-strip">
-      <div class="tint"><span class="flag">Recede</span><span class="sample" style="background:#EEF2F7">Tag sample</span><p class="opacity">Quiet</p><span class="hex">#EEF2F7</span></div>
-      <div class="tint default"><span class="flag">Default</span><span class="sample" style="background:#E4ECF5">Tag sample</span><p class="opacity">既定</p><span class="hex">#E4ECF5</span></div>
+      <div class="tint"><span class="flag">控えめ</span><span class="sample" style="background:#EEF2F7">タグの例</span><p class="opacity">静か</p><span class="hex">#EEF2F7</span></div>
+      <div class="tint default"><span class="flag">既定</span><span class="sample" style="background:#E4ECF5">タグの例</span><p class="opacity">既定</p><span class="hex">#E4ECF5</span></div>
     </div>
   </section>
 
@@ -446,7 +446,7 @@ codex plugin add kami@kami
       <tr><td class="name">lg</td><td class="val">16-20 pt</td><td class="use">部品の間・カードの内側</td><td class="bar"><span style="width:48px"></span></td></tr>
       <tr><td class="name">xl</td><td class="val">24-32 pt</td><td class="use">節見出しの余白</td><td class="bar"><span style="width:72px"></span></td></tr>
       <tr><td class="name">2xl</td><td class="val">40-60 pt</td><td class="use">大きな節の間</td><td class="bar"><span style="width:140px"></span></td></tr>
-      <tr><td class="name">3xl</td><td class="val">80-120 pt</td><td class="use">Between long-doc chapters</td><td class="bar"><span style="width:240px"></span></td></tr>
+      <tr><td class="name">3xl</td><td class="val">80-120 pt</td><td class="use">長文の章と章の間</td><td class="bar"><span style="width:240px"></span></td></tr>
     </table>
 
     <h3 class="subhead">角丸</h3>
@@ -469,7 +469,7 @@ codex plugin add kami@kami
 
     <div class="comp-grid">
       <div class="comp">
-        <h3>Buttons</h3>
+        <h3>ボタン</h3>
         <p class="hint">塗り + 枠線 ・影なし ・角丸 8px</p>
         <div class="demo" style="display:flex; gap:10px; flex-wrap:wrap;">
           <span class="btn btn-primary">主要 CTA</span>
@@ -518,7 +518,7 @@ codex plugin add kami@kami
       <div class="comp">
         <h3>コードブロック</h3>
         <p class="hint">ivory 背景 + 4pt 角丸、枠線なし</p>
-<pre class="code"><span class="c">// 温かみは色数ではなく、抑制で作る</span>
+<pre class="code doc-code"><span class="c">// 温かみは色数ではなく、抑制で作る</span>
 canvas   = parchment; accent = <span class="k">ink_blue</span>
 palette  = <span class="k">warm_neutrals</span> − cool_grays
 document = <span class="k">serif</span> × hierarchy + generous_space
@@ -626,11 +626,11 @@ beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
           <text x="80" y="77" text-anchor="middle" font-size="13" font-weight="600" fill="#1B365D">60%</text>
           <text x="80" y="92" text-anchor="middle" font-size="10" fill="#504e49">Primary</text>
           <rect x="150" y="46" width="10" height="10" rx="2" fill="#1B365D"/>
-          <text x="165" y="55" font-size="11" fill="#4d4c48">Core revenue · 60%</text>
+          <text x="165" y="55" font-size="11" fill="#4d4c48">主力事業 · 60%</text>
           <rect x="150" y="72" width="10" height="10" rx="2" fill="#504e49"/>
-          <text x="165" y="81" font-size="11" fill="#4d4c48">Services · 25%</text>
+          <text x="165" y="81" font-size="11" fill="#4d4c48">サービス · 25%</text>
           <rect x="150" y="98" width="10" height="10" rx="2" fill="#6b6a64"/>
-          <text x="165" y="107" font-size="11" fill="#4d4c48">Other · 15%</text>
+          <text x="165" y="107" font-size="11" fill="#4d4c48">その他 · 15%</text>
         </svg>
         <p class="chart-caption">売上構成の内訳、3-6 セグメントに対応</p>
       </div>
@@ -649,7 +649,7 @@ beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
       <tr><td class="task">本文（可読重視）</td><td class="how">serif <code>400</code>、<code>9.5-10 pt</code>、行間 <code>1.55</code></td></tr>
       <tr><td class="task">数値を強調</td><td class="how"><code>color: var(--brand)</code> を使い、太字には頼らない</td></tr>
       <tr><td class="task">セクション分離</td><td class="how">まず余白。境界を明示する必要がある場合だけ <code>0.5pt</code> の中立色の全幅細線</td></tr>
-      <tr><td class="task">引用を置く</td><td class="how">olive テキスト + 斜体または字下げ。側線は使わない</td></tr>
+      <tr><td class="task">引用を置く</td><td class="how">olive テキスト。側線は使わない</td></tr>
       <tr><td class="task">コードを載せる</td><td class="how">ivory 背景 + <code>4pt</code> 角丸 + mono 書体、枠線なし</td></tr>
       <tr><td class="task">主ボタンと副ボタン</td><td class="how">主: brand 塗り + ivory 文字、副: warm-sand + charcoal</td></tr>
       <tr><td class="task">特別カードを示す</td><td class="how">明確なラベルかシンプルな塗りをひとつ使い、強調線は足さない</td></tr>

@@ -363,8 +363,8 @@ codex plugin add kami@kami
     <h3 class="subhead">标签底色</h3>
     <p style="color: var(--olive); margin: 0 0 16px; line-height: 1.55;">只用两档登记过的实色。<code style="font-family:var(--mono);font-size:12px;background:#EEF2F7;color:var(--brand);padding:1px 5px;border-radius:2px">#EEF2F7</code> 用于弱化，<code style="font-family:var(--mono);font-size:12px;background:#E4ECF5;color:var(--brand);padding:1px 5px;border-radius:2px">#E4ECF5</code> 是默认值。实色也能避开 WeasyPrint 的双层矩形问题。</p>
     <div class="tint-strip">
-      <div class="tint"><span class="flag">弱化</span><span class="sample" style="background:#EEF2F7">Tag sample</span><p class="opacity">Quiet</p><span class="hex">#EEF2F7</span></div>
-      <div class="tint default"><span class="flag">Default</span><span class="sample" style="background:#E4ECF5">Tag sample</span><p class="opacity">默认</p><span class="hex">#E4ECF5</span></div>
+      <div class="tint"><span class="flag">弱化</span><span class="sample" style="background:#EEF2F7">标签示例</span><p class="opacity">低调</p><span class="hex">#EEF2F7</span></div>
+      <div class="tint default"><span class="flag">默认</span><span class="sample" style="background:#E4ECF5">标签示例</span><p class="opacity">默认</p><span class="hex">#E4ECF5</span></div>
     </div>
   </section>
 
@@ -483,7 +483,7 @@ codex plugin add kami@kami
     <div class="comp-grid">
 
       <div class="comp">
-        <h3>Buttons</h3>
+        <h3>按钮</h3>
         <p class="hint">填色 + 边框 · 无阴影 · 8px 圆角</p>
         <div class="demo" style="display:flex; gap:10px; flex-wrap:wrap;">
           <span class="btn btn-primary">Primary CTA</span>
@@ -493,7 +493,7 @@ codex plugin add kami@kami
       </div>
 
       <div class="comp">
-        <h3>Tags · 两档</h3>
+        <h3>标签（两档）</h3>
         <p class="hint">实色 hex · 弱化或默认</p>
         <div class="demo" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
           <span class="tag calm">弱填充</span>
@@ -502,13 +502,13 @@ codex plugin add kami@kami
       </div>
 
       <div class="comp">
-        <h3>Quote</h3>
+        <h3>引用</h3>
         <p class="hint">olive 色 · 无侧边线</p>
         <blockquote class="quote">一千个 no 换一个 yes，宁可清淡，不可浓艳。</blockquote>
       </div>
 
       <div class="comp">
-        <h3>Metric</h3>
+        <h3>指标卡</h3>
         <p class="hint">serif 数字 + sans 标签 · tabular-nums</p>
         <div class="metrics demo">
           <div class="metric"><span class="metric-value">8</span><span class="metric-label">文档类型</span></div>
@@ -518,7 +518,7 @@ codex plugin add kami@kami
       </div>
 
       <div class="comp">
-        <h3>Section Title</h3>
+        <h3>章节标题</h3>
         <p class="hint">serif 500 · 15pt · 纯字号层级，无装饰</p>
         <div class="demo">
           <span class="sample-section-title">核心项目 · Selected Works</span>
@@ -536,9 +536,9 @@ codex plugin add kami@kami
       </div>
 
       <div class="comp">
-        <h3>Code Block</h3>
+        <h3>代码块</h3>
         <p class="hint">ivory 底、4pt 圆角、mono 字体，无边框</p>
-<pre class="code"><span class="c">// 暖米纸 · 一种克制的温度</span>
+<pre class="code doc-code"><span class="c">// 暖米纸 · 一种克制的温度</span>
 canvas   = parchment; accent = <span class="k">ink_blue</span>
 palette  = <span class="k">warm_neutrals</span> − cool_grays
 document = <span class="k">serif</span> × hierarchy + generous_space
@@ -675,7 +675,7 @@ beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
       <tr><td class="task">正文阅读</td><td class="how">serif <code>400</code>，<code>9.5-10 pt</code>，line-height <code>1.55</code></td></tr>
       <tr><td class="task">强调一个数字</td><td class="how"><code>color: var(--brand)</code>，不要粗体</td></tr>
       <tr><td class="task">分隔两段内容</td><td class="how">先用留白；只有边界必须明确时，才用一条 <code>0.5pt</code> 中性全宽细线</td></tr>
-      <tr><td class="task">引用某人的话</td><td class="how">olive 色 + 斜体或缩进，不加侧边线</td></tr>
+      <tr><td class="task">引用某人的话</td><td class="how">olive 色，不加侧边线</td></tr>
       <tr><td class="task">展示代码</td><td class="how">ivory 底 + <code>4pt</code> 圆角 + mono 字体，无边框</td></tr>
       <tr><td class="task">区分主次按钮</td><td class="how">Primary 品牌色填充 + ivory 字；Secondary warm-sand + charcoal</td></tr>
       <tr><td class="task">标注某张特殊卡片</td><td class="how">用更明确的标签或安静底色，不加强调边</td></tr>
