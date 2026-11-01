@@ -336,23 +336,11 @@
     border-top: 1px solid var(--border-soft);
   }
   .rules li {
-    display: grid;
-    grid-template-columns: 32px 1fr;
-    gap: 4px;
     padding: 18px 24px 18px 0;
     border-bottom: 1px solid var(--border-soft);
-    align-items: start;
   }
   .rules li:nth-child(odd) { padding-right: 32px; border-right: 1px solid var(--border-soft); padding-left: 0; }
   .rules li:nth-child(even) { padding-left: 32px; }
-  .rules .n {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: 20px;
-    color: var(--brand);
-    line-height: 1;
-    padding-top: 0;
-  }
   .rules p {
     margin: 0;
     font-size: 14px;
