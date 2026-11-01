@@ -735,7 +735,7 @@
   .tag.standard { background: #E4ECF5; border-radius: 4px; padding: 2px 8px; }
 
   /* Quote */
-  .code.doc-code { border: 0; border-radius: 4pt; }
+  .code.doc-code { background: var(--inline-code-bg); border: 0; border-radius: 4pt; padding: 10px 12px; }
 
   .quote {
     padding: 4px 0;
