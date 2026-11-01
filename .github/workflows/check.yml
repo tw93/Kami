@@ -6,6 +6,14 @@ on:
   pull_request:
   workflow_dispatch:
 
+# Only a pull request cancels its superseded run; every main push keeps its own
+# run because the release gate looks up the run for the exact released commit.
+# A main push gets its own group (run_id): a shared group would still drop a
+# pending run when a newer push queues behind it.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.ref || github.run_id }}
+  cancel-in-progress: true
+
 jobs:
   lint-and-test:
     name: lint and test
