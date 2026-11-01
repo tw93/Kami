@@ -37,6 +37,13 @@
     /* Slide-scale spacing */
     --slide-pad:    80px;
 
+    /* Desktop text ladder; phones (640px and below) keep the sizes in the last media block. */
+    --text-meta:    13px;
+    --text-body:    15px;
+    --text-lede:    16px;
+    --text-title:   21px;
+    --text-section: 32px;
+
     --serif: Charter, Georgia, "TsangerJinKai02", "Source Han Serif SC", "Source Han Serif CN", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", Palatino, serif;
     --sans: var(--serif);
     --mono: "JetBrains Mono", "Fira Code", "SF Mono", Consolas, Monaco, monospace;
@@ -83,7 +90,7 @@
     background: transparent;
     cursor: pointer;
     font: inherit;
-    font-size: 12px;
+    font-size: var(--text-meta);
     font-weight: 500;
     line-height: 1;
     transition: color 0.15s;
@@ -152,7 +159,7 @@
     padding: 0 8px;
     border-radius: 6px;
     color: var(--olive);
-    font-size: 12px;
+    font-size: var(--text-meta);
     line-height: 1;
     text-decoration: none;
     transition: color 0.15s, background 0.15s;
@@ -185,7 +192,7 @@
     background: var(--parchment);
     color: var(--near-black);
     font-family: var(--sans);
-    font-size: 14px;
+    font-size: var(--text-body);
     line-height: 1.55;
     letter-spacing: 0;
     -webkit-font-smoothing: antialiased;
@@ -227,7 +234,7 @@
   .hero-tokens span {
     display: flex;
     gap: 6px;
-    font-size: 13px;
+    font-size: var(--text-meta);
     color: var(--stone);
     font-variant-numeric: tabular-nums;
   }
@@ -241,7 +248,7 @@
     align-items: center;
     gap: 16px;
     font-family: var(--sans);
-    font-size: 12px;
+    font-size: var(--text-meta);
     font-weight: 500;
     letter-spacing: 1.2px;
     text-transform: uppercase;
@@ -283,7 +290,7 @@
   .hero .tagline {
     font-family: var(--serif);
     font-weight: 500;
-    font-size: 21px;
+    font-size: var(--text-title);
     line-height: 1.35;
     color: var(--olive);
     margin: 0;
@@ -295,7 +302,7 @@
   .section-title {
     font-family: var(--serif);
     font-weight: 500;
-    font-size: 32px;
+    font-size: var(--text-section);
     line-height: 1.2;
     color: var(--near-black);
     margin: 0;
@@ -305,7 +312,7 @@
   .section-lede {
     font-family: var(--serif);
     font-weight: 500;
-    font-size: 16px;
+    font-size: var(--text-lede);
     line-height: 1.55;
     color: var(--olive);
     margin: 14px 0 0;
@@ -314,7 +321,7 @@
   /* ---------- Manifesto ---------- */
   .manifesto {
     font-family: var(--serif);
-    font-size: 20px;
+    font-size: var(--text-title);
     line-height: 1.65;
     letter-spacing: 0.05em;
     color: var(--near-black);
@@ -343,13 +350,13 @@
   .rules li:nth-child(even) { padding-left: 32px; }
   .rules p {
     margin: 0;
-    font-size: 14px;
+    font-size: var(--text-body);
     line-height: 1.5;
     color: var(--dark-warm);
   }
   .rules code {
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: var(--text-meta);
     color: var(--dark-warm);
     background: var(--inline-code-bg);
     padding: 0 3px;
@@ -379,7 +386,7 @@
   .swatch .name {
     font-family: var(--serif);
     font-weight: 500;
-    font-size: 15px;
+    font-size: var(--text-body);
     color: var(--near-black);
     margin: 0;
     line-height: 1.25;
@@ -388,14 +395,14 @@
      rules/site.md «Line endings»); Chinese and Japanese keep normal breaking. */
   html[lang="ko"] body { word-break: keep-all; }
   .swatch .role {
-    font-size: 12px;
+    font-size: var(--text-meta);
     color: var(--olive);
     margin: 3px 0 6px;
     line-height: 1.4;
   }
   .swatch .hex {
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: var(--text-meta);
     color: var(--stone);
     letter-spacing: 0.4px;
   }
@@ -405,7 +412,7 @@
   .subhead {
     font-family: var(--serif);
     font-weight: 500;
-    font-size: 18px;
+    font-size: var(--text-lede);
     color: var(--dark-warm);
     margin: 40px 0 14px;
   }
@@ -425,7 +432,7 @@
   }
   .tint .sample {
     display: inline-block;
-    font-size: 12px;
+    font-size: var(--text-meta);
     font-weight: 500;
     color: var(--brand);
     padding: 2px 8px;
@@ -436,18 +443,18 @@
   }
   .tint .opacity {
     font-family: var(--serif);
-    font-size: 14px;
+    font-size: var(--text-meta);
     color: var(--olive);
     margin: 0 0 2px;
   }
   .tint .hex {
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: var(--text-meta);
     color: var(--stone);
   }
   .tint.default .opacity { color: var(--brand); }
   .tint .flag {
-    font-size: 12px;
+    font-size: var(--text-meta);
     font-weight: 500;
     color: var(--brand);
     margin-bottom: 8px;
@@ -473,7 +480,7 @@
   }
   .type-label {
     font-family: var(--serif);
-    font-size: 13px;
+    font-size: var(--text-meta);
     font-weight: 500;
     letter-spacing: 0;
     color: var(--stone);
@@ -568,18 +575,18 @@
   .family .role {
     font-family: var(--serif);
     font-weight: 500;
-    font-size: 18px;
+    font-size: var(--text-title);
     color: var(--near-black);
     margin: 0 0 4px;
   }
   .family .name {
-    font-size: 12px;
+    font-size: var(--text-meta);
     color: var(--olive);
     font-family: var(--mono);
     margin: 0 0 12px;
   }
   .family .use {
-    font-size: 12px;
+    font-size: var(--text-meta);
     color: var(--dark-warm);
     line-height: 1.55;
     margin: 0;
@@ -594,13 +601,13 @@
     text-align: left;
     padding: 14px 16px 14px 0;
     border-bottom: 1px solid var(--border-soft);
-    font-size: 14px;
+    font-size: var(--text-body);
     color: var(--dark-warm);
     vertical-align: middle;
   }
   .space-table th {
     font-family: var(--serif);
-    font-size: 13px;
+    font-size: var(--text-meta);
     font-weight: 500;
     letter-spacing: 0;
     color: var(--stone);
@@ -609,11 +616,11 @@
   .space-table td.name {
     font-family: var(--serif);
     font-weight: 500;
-    font-size: 15px;
+    font-size: var(--text-body);
     color: var(--near-black);
     width: 120px;
   }
-  .space-table td.val { font-family: var(--mono); font-size: 13px; color: var(--olive); width: 130px; }
+  .space-table td.val { font-family: var(--mono); font-size: var(--text-meta); color: var(--olive); width: 130px; }
   .space-table td.bar {
     width: 280px;
   }
@@ -623,7 +630,7 @@
     background: var(--border);
     border-radius: 2px;
   }
-  .space-table td.use { color: var(--olive); font-size: 13px; }
+  .space-table td.use { color: var(--olive); font-size: var(--text-meta); }
 
   /* radius row */
   .radii {
@@ -643,9 +650,9 @@
     border: 1px solid var(--border);
     margin-bottom: 8px;
   }
-  .radius .r { font-family: var(--mono); font-size: 12px; color: var(--dark-warm); }
+  .radius .r { font-family: var(--mono); font-size: var(--text-meta); color: var(--dark-warm); }
   .radius .r b { color: var(--brand); font-weight: 500; }
-  .radius .label { font-size: 12px; color: var(--olive); margin-top: 2px; }
+  .radius .label { font-size: var(--text-meta); color: var(--olive); margin-top: 2px; }
 
   /* ---------- Components ---------- */
   .comp-grid {
@@ -665,12 +672,12 @@
   .comp h3 {
     font-family: var(--serif);
     font-weight: 500;
-    font-size: 16px;
+    font-size: var(--text-lede);
     color: var(--near-black);
     margin: 0 0 4px;
   }
   .comp .hint {
-    font-size: 12px;
+    font-size: var(--text-meta);
     color: var(--stone);
     font-family: var(--mono);
     margin: 0 0 20px;
@@ -771,7 +778,7 @@
     border-radius: 6px;
     padding: 12px 14px;
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: var(--text-meta);
     line-height: 1.55;
     color: var(--near-black);
     margin: 0;
@@ -800,7 +807,7 @@
   .decision {
     width: 100%;
     border-collapse: collapse;
-    font-size: 14px;
+    font-size: var(--text-body);
   }
   .decision th, .decision td {
     padding: 12px 16px 12px 0;
@@ -809,7 +816,7 @@
     vertical-align: top;
   }
   .decision th {
-    font-size: 12px;
+    font-size: var(--text-meta);
     color: var(--stone);
     font-weight: 500;
     padding-top: 0;
@@ -817,14 +824,14 @@
   .decision td.task {
     font-family: var(--serif);
     font-weight: 500;
-    font-size: 14px;
+    font-size: var(--text-body);
     color: var(--near-black);
     width: 38%;
   }
   .decision td.how { color: var(--dark-warm); }
   .decision td.how code {
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: var(--text-meta);
     color: var(--dark-warm);
     background: var(--inline-code-bg);
     padding: 0 3px;
@@ -845,13 +852,13 @@
   }
   .demo-card .demo-title {
     font-family: var(--sans);
-    font-size: 14px;
+    font-size: var(--text-lede);
     font-weight: 500;
     color: var(--near-black);
     margin: 10px 0 0;
   }
   .demo-card .demo-desc {
-    font-size: 12px;
+    font-size: var(--text-meta);
     color: var(--olive);
     margin: 2px 0 0;
   }
@@ -870,13 +877,13 @@
   }
   .landing-card .demo-title {
     font-family: var(--sans);
-    font-size: 14px;
+    font-size: var(--text-lede);
     font-weight: 500;
     color: var(--near-black);
     margin: 10px 0 0;
   }
   .landing-card .demo-desc {
-    font-size: 12px;
+    font-size: var(--text-meta);
     color: var(--olive);
     margin: 2px 0 0;
   }
@@ -898,7 +905,7 @@
     gap: 18px;
     margin-top: 18px;
     font-family: var(--serif);
-    font-size: 14px;
+    font-size: var(--text-meta);
   }
   .doc-nav a {
     color: var(--stone);
@@ -912,7 +919,7 @@
   .prose li {
     font-family: var(--serif);
     font-weight: 400;
-    font-size: 16px;
+    font-size: var(--text-lede);
     line-height: 1.65;
     color: var(--olive);
   }
@@ -922,7 +929,7 @@
   .prose h3 {
     font-family: var(--serif);
     font-weight: 500;
-    font-size: 19px;
+    font-size: var(--text-lede);
     line-height: 1.3;
     letter-spacing: 0.2px;
     color: var(--near-black);
@@ -948,21 +955,21 @@
   }
   .prose code {
     font-family: var(--mono);
-    font-size: 13.5px;
+    font-size: var(--text-body);
     color: var(--dark-warm);
     background: var(--inline-code-bg);
     border-radius: 2px;
     padding: 0 3px;
   }
   .prose .note {
-    font-size: 14px;
+    font-size: var(--text-body);
     color: var(--stone);
   }
 
 @media (min-width: 980px) {
   html[lang="ja"] .section-lede.section-lede-nowrap {
     white-space: nowrap;
-    font-size: clamp(12.5px, 1.2vw, 14.5px);
+    font-size: var(--text-lede);
     line-height: 1.45;
     letter-spacing: 0;
   }
@@ -973,7 +980,7 @@
 
   html[lang="ja"] .demo-desc.demo-desc-nowrap {
     white-space: nowrap;
-    font-size: 12px;
+    font-size: var(--text-meta);
     letter-spacing: 0;
   }
 }
@@ -1000,13 +1007,13 @@
   }
   .chart-label {
     font-family: var(--sans);
-    font-size: 12px;
+    font-size: var(--text-meta);
     font-weight: 500;
     color: var(--brand);
     margin-bottom: 10px;
   }
   .chart-caption {
-    font-size: 12px;
+    font-size: var(--text-meta);
     color: var(--olive);
     margin: 8px 0 0;
     line-height: 1.4;
@@ -1015,7 +1022,7 @@
   /* Background text */
   .background-text {
     font-family: var(--serif);
-    font-size: 16px;
+    font-size: var(--text-lede);
     line-height: 1.6;
     color: var(--dark-warm);
   }
@@ -1031,14 +1038,14 @@
   }
   .faq-pair dt {
     font-family: var(--serif);
-    font-size: 16px;
+    font-size: var(--text-lede);
     font-weight: 600;
     color: var(--near-black);
     margin-bottom: 4px;
   }
   .faq-pair dd {
     font-family: var(--serif);
-    font-size: 15px;
+    font-size: var(--text-body);
     color: var(--dark-warm);
     line-height: 1.6;
     margin: 0;
@@ -1063,19 +1070,19 @@
   .footer .mark .wm-name {
     font-family: var(--serif);
     font-weight: 500;
-    font-size: 28px;
+    font-size: var(--text-title);
     color: var(--near-black);
     margin: 0;
     line-height: 1;
   }
   .footer .mark .wm-sub {
     font-family: var(--serif);
-    font-size: 14px;
+    font-size: var(--text-meta);
     color: var(--olive);
     margin: 4px 0 0;
   }
   .footer .colophon {
-    font-size: 12px;
+    font-size: var(--text-meta);
     color: var(--stone);
     line-height: 1.6;
     max-width: 420px;
@@ -1108,7 +1115,7 @@
   .anti-topic {
     font-family: var(--serif);
     font-weight: 500;
-    font-size: 15px;
+    font-size: var(--text-lede);
     line-height: 1.45;
     color: var(--near-black);
     margin: 0;
@@ -1122,12 +1129,12 @@
     grid-template-columns: 72px 1fr;
     column-gap: 16px;
     margin: 0;
-    font-size: 14px;
+    font-size: var(--text-body);
     line-height: 1.55;
   }
   .anti-line .cue {
     font-family: var(--sans);
-    font-size: 12px;
+    font-size: var(--text-meta);
     font-weight: 500;
     color: var(--stone);
     padding-top: 2px;
@@ -1135,9 +1142,10 @@
   .anti-line.never { color: var(--olive); }
   .anti-line.instead { color: var(--dark-warm); }
   .anti-line.instead .cue { color: var(--brand); }
+  section > p > code { font-size: var(--text-meta); }
   .anti code {
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: var(--text-meta);
     color: var(--dark-warm);
     background: var(--inline-code-bg);
     padding: 0 3px;
@@ -1154,10 +1162,8 @@
   .hero h1 { font-size: 46px; letter-spacing: -0.6px; margin-bottom: 10px; }
   .hero.doc h1 { font-size: 40px; }
   .hero h1 .cn { margin-left: 8px; }
-  .hero .tagline { font-size: 17px; }
   .hero-tokens { gap: 14px; margin-top: 14px; }
-  .section-title { font-size: 24px; }
-  .manifesto { font-size: 17px; line-height: 1.5; }
+  .manifesto { line-height: 1.5; }
   .subhead { font-size: 16px; margin: 28px 0 12px; }
 
   /* Grids: single column */
@@ -1191,7 +1197,6 @@
   /* Footer */
   .footer { flex-direction: column; align-items: flex-start; gap: 24px; }
   .footer .colophon { text-align: left; max-width: 100%; }
-  .footer .mark .wm-name { font-size: 22px; }
 
   /* Eyebrow */
   .eyebrow { gap: 8px; }
@@ -1261,6 +1266,24 @@
   .chart-label,
   .chart-caption,
   .decision th { font-size: 13px; }
+
+  /* Pre-ladder phone sizes for rules whose desktop size moved onto the ladder */
+  body { font-size: 14px; }
+  .section-title { font-size: 24px; }
+  .footer .mark .wm-name { font-size: 22px; }
+  .family .role { font-size: 18px; }
+  .tint .sample,
+  .code,
+  .rules code,
+  .anti code,
+  .decision td.how code,
+  section > p > code { font-size: 12px; }
+  .tint .opacity,
+  .decision,
+  .doc-nav { font-size: 14px; }
+  .anti-topic { font-size: 15px; }
+  .prose code { font-size: 13.5px; }
+  .prose h3 { font-size: 19px; }
 }
 
 /* Readers who ask the system for less motion get state changes without the
