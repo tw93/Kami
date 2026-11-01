@@ -1153,6 +1153,11 @@
   }
 
 @media (max-width: 768px) {
+  /* Tablet sizes as before the desktop ladder; phones are below. */
+  .hero .tagline { font-size: 17px; }
+  .section-title { font-size: 24px; }
+  .manifesto { font-size: 17px; line-height: 1.5; }
+  .footer .mark .wm-name { font-size: 22px; }
   /* Container + spacing */
   .page { padding: 48px 20px 64px; }
   section { margin-bottom: 48px; }
