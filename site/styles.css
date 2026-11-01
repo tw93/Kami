@@ -136,8 +136,7 @@
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transform: translateY(-4px);
-    transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s ease;
+    transition: opacity 0.16s ease, visibility 0.16s ease;
   }
   .lang-switch.is-open .lang-menu,
   .lang-switch:hover .lang-menu,
@@ -145,7 +144,6 @@
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transform: translateY(0);
   }
   .lang-menu a {
     min-height: 29px;
