@@ -9,7 +9,7 @@ HTML version: <https://kami.tw93.fun/contact>
 - **Bugs, template requests, and questions**: open an issue at <https://github.com/tw93/kami/issues>. This is the primary channel and the one with public history, so a question answered there helps the next person.
 - **Fixes and new templates**: pull requests are welcome at <https://github.com/tw93/kami/pulls>. Run `python3 scripts/build.py --check` before opening one; it covers template lint, design-token sync, and public-fact drift.
 - **Anything that should not be public**, including a security report: email the maintainer at <hitw93@gmail.com>, the same address published in the plugin manifests.
-- **Everything else**: [@HiTw93](https://x.com/HiTw93) on X, or the maintainer's site at <https://tw93.fun>.
+- **Everything else**: [@HiTw93](https://x.com/HiTw93) on 𝕏, or the maintainer's site at <https://tw93.fun>.
 
 I maintain Kami alongside other projects, so replies may take time. There is no paid support tier.
 
