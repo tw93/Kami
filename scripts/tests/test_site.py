@@ -140,9 +140,13 @@ def test_landing_page_ctas_wrap_on_phones() -> None:
     offenders = []
     for path in sorted(TEMPLATES.glob("landing-page*.html")):
         text = path.read_text(encoding="utf-8")
+        # Read the declarations, not the rule text, so sizing tweaks to the
+        # buttons (height, padding, min-width) do not trip the contract.
+        rows = re.findall(r"\.hero-cta \{([^}]*)\}", text)
+        pills = re.findall(r"\.hero-cta \.btn-primary,\s*\.hero-cta \.btn-ghost \{([^}]*)\}", text)
         if not (
-            ".hero-cta { flex-direction: row; flex-wrap: wrap;" in text
-            and ".hero-cta .btn-ghost { flex: 0 0 auto; white-space: nowrap; }" in text
+            any("flex-direction: row" in r and "flex-wrap: wrap" in r for r in rows)
+            and any("flex: 0 0 auto" in p and "white-space: nowrap" in p for p in pills)
         ):
             offenders.append(path.name)
     check("landing page CTAs wrap instead of truncating on phones",
