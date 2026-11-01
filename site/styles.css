@@ -38,7 +38,7 @@
     --slide-pad:    80px;
 
     /* Desktop text ladder; phones (640px and below) keep the sizes in the last media block. */
-    --text-meta:    13px;
+    --text-meta:    14px;
     --text-body:    15px;
     --text-lede:    16px;
     --text-title:   21px;
@@ -1300,4 +1300,15 @@
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Meta is 14px on desktop (maintainer 2026-11-01: 13 read small beside the
+   hero's tagline); phones keep the 13px meta of their own ladder. */
+@media (max-width: 640px) {
+  :root { --text-meta: 13px; }
+}
+/* CJK hero tagline on desktop: 20px, the ladder's one exception (maintainer
+   2026-11-01, from 16/18/20/21 drawn on mole.fit's Chinese home). */
+@media (min-width: 881px) {
+  html:is([lang^="zh"], [lang="ja"], [lang="ko"]) .hero .tagline { font-size: 20px; }
 }
