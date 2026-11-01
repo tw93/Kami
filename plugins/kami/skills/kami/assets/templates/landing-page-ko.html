@@ -867,13 +867,21 @@ footer.foot {
 @media (max-width: 480px) {
   .hero h1 { font-size: 56px; }
   .hero .tagline { font-size: 17px; }
-  .hero-cta { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .hero-cta { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 12px; }
   .btn-primary,
   .btn-ghost { min-width: 0; padding: 10px 24px; justify-content: center; }
-  /* The two hero buttons keep their label's width with 24px sides and wrap to a
-     second row when a long label does not fit; 44px tall, the touch minimum. */
+  /* The two hero buttons keep their label's width, 42px tall with 22px sides,
+     at least 128px wide and 12px apart, and wrap to a second row only when a
+     long label does not fit; under 375px the sides drop to 14. The quiet
+     button's hairline mixes 60% --line into ivory: 1px of --line is three
+     device pixels on a phone and reads heavy. */
   .hero-cta .btn-primary,
-  .hero-cta .btn-ghost { flex: 0 0 auto; white-space: nowrap; }
+  .hero-cta .btn-ghost { flex: 0 0 auto; min-width: 128px; height: 42px; padding: 0 22px; white-space: nowrap; }
+  .hero-cta .btn-ghost { border-color: color-mix(in srgb, var(--line) 60%, var(--ivory)); }
+  @media (max-width: 374px) {
+    .hero-cta .btn-primary,
+    .hero-cta .btn-ghost { min-width: 0; padding: 0 14px; }
+  }
   .gallery-caption {
     min-height: auto;
     flex-direction: column;
