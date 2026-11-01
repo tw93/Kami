@@ -6,7 +6,7 @@
   <a href="https://github.com/tw93/kami/stargazers"><img src="https://img.shields.io/github/stars/tw93/kami?style=flat-square" alt="Stars"></a>
   <a href="https://github.com/tw93/kami/releases"><img src="https://img.shields.io/github/v/tag/tw93/kami?label=version&style=flat-square" alt="Version"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License"></a>
-  <a href="https://twitter.com/HiTw93"><img src="https://img.shields.io/badge/follow-Tw93-red?style=flat-square&logo=Twitter" alt="Twitter"></a>
+  <a href="https://x.com/HiTw93"><img src="https://img.shields.io/badge/follow-Tw93-red?style=flat-square&logo=Twitter" alt="Twitter"></a>
 </div>
 
 ## 소개
@@ -181,7 +181,7 @@ Redraw this as a clean editorial diagram. Background: warm parchment (#f5f4ed), 
 ## 후원하기
 
 - 유료 Mac 정리 앱 [Mole for Mac](https://mole.fit)을 구매해 주시는 것이 가장 직접적인 후원입니다
-- Kami가 유용했다면 Star를 주시거나, [Twitter에 공유](https://twitter.com/intent/tweet?url=https://github.com/tw93/kami&text=Kami%20-%20A%20quiet%20design%20system%20for%20professional%20documents.)하거나, Issue와 PR을 남겨주세요
+- Kami가 유용했다면 Star를 주시거나, [Twitter에 공유](https://x.com/intent/tweet?url=https://github.com/tw93/kami&text=Kami%20-%20A%20quiet%20design%20system%20for%20professional%20documents.)하거나, Issue와 PR을 남겨주세요
 - 저에게는 탕위안(TangYuan)과 콜라(Coke)라는 두 마리의 고양이가 있는데, Kami가 도움이 되었다면 <a href="https://cats.tw93.fun?name=Kami" target="_blank">캔을 선물해 주세요 🥩</a>
 
 후원해 주신 분들 🐱

@@ -6,7 +6,7 @@
   <a href="https://github.com/tw93/kami/stargazers"><img src="https://img.shields.io/github/stars/tw93/kami?style=flat-square" alt="Stars"></a>
   <a href="https://github.com/tw93/kami/releases"><img src="https://img.shields.io/github/v/tag/tw93/kami?label=version&style=flat-square" alt="Version"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License"></a>
-  <a href="https://twitter.com/HiTw93"><img src="https://img.shields.io/badge/follow-Tw93-red?style=flat-square&logo=Twitter" alt="Twitter"></a>
+  <a href="https://x.com/HiTw93"><img src="https://img.shields.io/badge/follow-Tw93-red?style=flat-square&logo=Twitter" alt="Twitter"></a>
 </div>
 
 ## Warum Kami
@@ -182,7 +182,7 @@ Später stand ein Vortrag über KI-Agenten an. Das Dokument war fertig, aber ich
 ## Unterstützung
 
 - Die direkteste Unterstützung ist der Kauf meiner Mac-Bereinigungs-App [Mole for Mac](https://mole.fit)
-- Wenn Kami Ihnen geholfen hat, vergeben Sie einen Stern auf GitHub, [teilen Sie das Projekt](https://twitter.com/intent/tweet?url=https://github.com/tw93/kami&text=Kami%20-%20A%20quiet%20design%20system%20for%20professional%20documents.) oder beteiligen Sie sich per Issue und PR
+- Wenn Kami Ihnen geholfen hat, vergeben Sie einen Stern auf GitHub, [teilen Sie das Projekt](https://x.com/intent/tweet?url=https://github.com/tw93/kami&text=Kami%20-%20A%20quiet%20design%20system%20for%20professional%20documents.) oder beteiligen Sie sich per Issue und PR
 - Ich habe zwei Katzen, TangYuan und Coke, und wenn Kami Ihren Alltag bereichert hat, spendieren Sie ihnen gerne ein <a href="https://cats.tw93.fun?name=Kami" target="_blank">Dosenfutter 🥩</a>
 
 Diese freundlichen Menschen haben bereits gespendet 🐱

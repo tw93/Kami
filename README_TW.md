@@ -6,7 +6,7 @@
   <a href="https://github.com/tw93/kami/stargazers"><img src="https://img.shields.io/github/stars/tw93/kami?style=flat-square" alt="Stars"></a>
   <a href="https://github.com/tw93/kami/releases"><img src="https://img.shields.io/github/v/tag/tw93/kami?label=version&style=flat-square" alt="Version"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License"></a>
-  <a href="https://twitter.com/HiTw93"><img src="https://img.shields.io/badge/follow-Tw93-red?style=flat-square&logo=Twitter" alt="Twitter"></a>
+  <a href="https://x.com/HiTw93"><img src="https://img.shields.io/badge/follow-Tw93-red?style=flat-square&logo=Twitter" alt="Twitter"></a>
 </div>
 
 ## 簡介
@@ -181,7 +181,7 @@ Redraw this as a clean editorial diagram. Background: warm parchment (#f5f4ed), 
 ## 支持作者
 
 - 購買我做的 Mac 清理工具 [Mole for Mac](https://mole.fit)，是對我最直接的支持
-- 如果 Kami 幫到了你，歡迎給它一個 Star，[在 Twitter 分享](https://twitter.com/intent/tweet?url=https://github.com/tw93/kami&text=Kami%20-%20A%20quiet%20design%20system%20for%20professional%20documents.)，或提交 Issue 和 PR
+- 如果 Kami 幫到了你，歡迎給它一個 Star，[在 Twitter 分享](https://x.com/intent/tweet?url=https://github.com/tw93/kami&text=Kami%20-%20A%20quiet%20design%20system%20for%20professional%20documents.)，或提交 Issue 和 PR
 - 我有兩隻貓，湯圓和可樂，如果 Kami 讓你順手，歡迎<a href="https://cats.tw93.fun?name=Kami" target="_blank">請她們吃罐頭 🥩</a>
 
 這些可愛的朋友已經請過啦 🐱
