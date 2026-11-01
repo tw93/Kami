@@ -32,8 +32,9 @@ jobs:
 
   verify-render:
     name: render and verify
+    # No needs: lint takes about 15s and render reads none of its output, so
+    # waiting for it only delayed the long job.
     runs-on: ubuntu-latest
-    needs: lint-and-test
     steps:
       - uses: actions/checkout@v7
 
