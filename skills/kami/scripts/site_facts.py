@@ -60,7 +60,8 @@ SITE_VERSION_BADGE_FILES = (SITE_BASE_PAGE, *SITE_LOCALE_PAGES)
 # Anchored on the badge's own copy rather than a bare version pattern: these
 # pages also print the Claude Code minimum as "v2.1.142+", which a generic
 # `v\d+\.\d+\.\d+` judge would read as a stale Kami badge on every page.
-SITE_VERSION_BADGE = re.compile(r"Design System\s*·\s*v(\d+\.\d+\.\d+)")
+# The label is translated on each locale page, so the pattern lists every copy.
+SITE_VERSION_BADGE = re.compile(r"(?:Design System|设计系统|設計系統|デザインシステム|디자인 시스템)\s*·\s*v(\d+\.\d+\.\d+)")
 REDIRECT_SITE_FILE = "index-en.html"
 SITE_SURFACE_ABSENT = "__site_surface_absent__"
 
