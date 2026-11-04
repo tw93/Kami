@@ -1510,15 +1510,15 @@ All four share 96px side margins, a 30px meta line at the top and, except the co
 |---|---|---|
 | Cover | meta, title, an optional line of verse in the accent, a real photo | title 104px, max-width 7.3em so it wraps by itself; photo from 640px to 96px above the bottom, radius 20px, `object-position` moves the crop |
 | Text | heading, two or three paragraphs | heading 80px, body 44px at 1.75 (EN 1.5, KO 1.7) |
-| List | heading, two or three numbered items | numbers in Charter Bold 64px in the accent (the one bold in Kami: regular digits at this size read thinner than the text beside them), items 42px at 1.68 (EN 1.48, KO 1.65) |
+| List | heading, two to five numbered items | numbers in Charter Bold 64px in the accent (the one bold in Kami: regular digits at this size read thinner than the text beside them), items 42px at 1.68 (EN 1.48, KO 1.65) |
 | Shot | heading, one or two sentences, one real screenshot | screenshot full width, radius 20px |
 
 ### Copy
 
 - The cover headline is the post title, word for word. Never break it with `<br>`; to move a short last line, narrow the headline's `max-width`.
 - The author's text is used as written. A paragraph that ends on one to three characters gets `padding-right` on that paragraph until the line breaks elsewhere; the words never change.
-- One point per text card, two or three items per list card, grouped so the cards in a set carry similar weight. Split a card rather than shrink its type.
-- The cover needs a real photo or screenshot, never a stock image or a drawn interface.
+- One point per text card, two to five items per list card, grouped so the cards in a set carry similar weight. A card should read mostly full: one that ends above about two thirds of its height takes more of the author's own text (another item, another paragraph from the same post) or merges with its neighbour. Split a card rather than shrink its type.
+- The cover needs a real photo or screenshot, never a stock image or a drawn interface. The photo box is close to square (1050x924), so a landscape app screenshot loses its window edges to the crop: crop it yourself to that ratio around one complete piece of UI (a panel, a popover, a menu), or put the whole window on a screenshot card instead.
 
 ### Platforms
 

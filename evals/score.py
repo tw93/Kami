@@ -55,7 +55,7 @@ CONTRACTS: dict[str, tuple[str, int, int, list[str]]] = {
 }
 # Screen templates: HTML only, no PDF, so no page contract or PDF gates.
 HTML_ONLY = {"landing-page-en"}
-# Social cards are fixed 1242x1660 pages, often half empty by design: --deliver
+# Social cards are fixed 1242x1660 pages, not print pages: --deliver
 # replaces the density gate with card fit for them, and the score drops density.
 NO_DENSITY = {"social-cards-cn"}
 # Cases whose prompt asks for charts: minimum <svg data-kami-chart> count.

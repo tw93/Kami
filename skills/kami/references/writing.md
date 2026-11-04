@@ -370,7 +370,7 @@ and inline-code backticks before delivery, then run `python3 scripts/build.py
 
 **Rules**:
 1. The cover headline and the post title are the same sentence, and the footer of every card repeats it
-2. One point per card; list items two or three per card, grouped so neighbouring cards read equally full
+2. One point per card; list items two to five per card, grouped so neighbouring cards read equally full and each card mostly full
 3. The cover needs a real photo or screenshot; a set without one ships text cards only after the author agrees
 4. Keep firsthand experience, quoted advice and the author's conclusions apart; do not add a lesson at the end of each card
 5. For a product, show the product before the update: what it is, a real screenshot, then the changes
