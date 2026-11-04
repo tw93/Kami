@@ -845,7 +845,7 @@
     gap: 20px;
     align-items: start;
   }
-  .demo-card a img {
+  .demo-card img {
     width: 100%;
     border-radius: 8px;
     border: 1px solid var(--border);
@@ -897,7 +897,7 @@
     column-gap: 8px;
   }
   .landing-card > img,
-  .demo-grid.one-line .demo-card > a { flex: 0 0 100%; }
+  .demo-grid.one-line .demo-card > img { flex: 0 0 100%; }
   .landing-card .demo-title a { color: inherit; text-decoration: none; }
   .landing-card .demo-title a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
