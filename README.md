@@ -68,7 +68,7 @@ Sample PDFs in several formats and languages. Click any preview to open it.
 
 ## Social Cards
 
-The same paper, dyed a different color for Xiaohongshu and X. Eight papers, parchment, ink, olive, espresso, pine, teal, crimson and char, one per set. The four below come from my own products, with the text exactly as I posted it.
+Image cards for Instagram and X, in eight paper colors. The four below use what I posted about my own products. Click any card to see it full size.
 
 <table>
 <tr>
@@ -163,7 +163,7 @@ The defaults are a warm parchment background (`#f5f4ed`), ink-blue accents (`#1B
 - **Verification.** Content schemas check structure before layout; coverage checks look for content missing from the filled page. A structured brief records the audience and requirements, and page images support the final visual review.
 - **MCP.** A zero-dependency MCP server (`skills/kami/scripts/mcp_server.py`) exposes capability diagnosis, render, structured check, and screenshot tools, so any MCP-capable agent can drive Kami as an engine without loading the full skill prompt. Render only trusted local HTML: referenced file, HTTP, and HTTPS resources load with the MCP process's permissions.
 - **Print.** Parchment is the default canvas; an opt-in white-paper variant flips any document to a white background for home or office printers, keeping warm backgrounds in cards and tables. The [one-page Kami intro](site/assets/demos/demo-kami-print.pdf) (Chinese) is rendered with this variant; recipe in [production.md](skills/kami/references/production.md).
-- **Social cards.** Image cards for Xiaohongshu and X, one 1242x1660 page each, on eight papers that each carry a single accent, one paper per set. Delivery checks every card for text that outgrows it, runs onto the photo, or ends on a line of one or two characters. The author's words never change; line breaks are fixed with layout.
+- **Social cards.** Image cards for Instagram and X, one 1242x1660 page each, on eight papers that each carry a single accent, one paper per set. Delivery checks every card for text that outgrows it, runs onto the photo, or ends on a line of one or two characters. The author's words never change; line breaks are fixed with layout.
 
 Full spec: [design.md](skills/kami/references/design.md). Cheatsheet: [CHEATSHEET.md](skills/kami/CHEATSHEET.md).
 

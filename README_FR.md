@@ -68,7 +68,7 @@ Exemples de PDF en plusieurs formats et langues. Cliquez sur un aperçu pour l'o
 
 ## Cartes pour les réseaux sociaux
 
-Le même papier, teint d'une autre couleur, pour Xiaohongshu et X. Huit papiers, parchment, ink, olive, espresso, pine, teal, crimson et char, un par série. Les quatre ci-dessous viennent de mes propres produits, avec le texte tel que je l'ai publié.
+Des cartes image pour Instagram et X, en huit couleurs de papier. Les quatre ci-dessous reprennent ce que j'ai publié sur mes propres produits. Cliquez sur une carte pour la voir en grand.
 
 <table>
 <tr>
@@ -164,7 +164,7 @@ Les valeurs par défaut associent un fond parchemin chaleureux (`#f5f4ed`), des 
 - **Validation.** Des schémas de contenu valident la structure avant mise en page ; un contrôle de couverture s'assure qu'aucun point clé n'a été oublié. Un brief structuré consigne le public et les exigences, et des images des pages servent à la relecture visuelle finale.
 - **Serveur MCP.** Un serveur léger (`skills/kami/scripts/mcp_server.py`) expose des outils de diagnostic, de rendu, de vérification structurée et de capture d'écran, pour que tout agent compatible MCP pilote Kami sans charger le prompt complet du skill. Ne rendez que du HTML local de confiance : les fichiers et les ressources HTTP et HTTPS référencés sont chargés avec les droits du processus MCP.
 - **Impression.** Le parchemin est le fond par défaut ; une variante papier blanc permet d'adapter n'importe quel document aux imprimantes domestiques et de bureau, tout en conservant les teintes douces des encadrés et des tableaux. La [présentation de Kami sur une page](site/assets/demos/demo-kami-print.pdf) (en chinois) est rendue avec cette variante, la recette se trouve dans [production.md](skills/kami/references/production.md).
-- **Cartes pour les réseaux sociaux.** Des cartes image pour Xiaohongshu et X, une page de 1242x1660 chacune, sur huit papiers qui portent chacun une seule couleur d'accent, un papier par série. À la livraison, chaque carte est vérifiée : texte qui déborde, qui passe sur la photo ou qui finit sur une ligne d'un ou deux caractères. Le texte de l'auteur ne change jamais ; les retours à la ligne se règlent par la mise en page.
+- **Cartes pour les réseaux sociaux.** Des cartes image pour Instagram et X, une page de 1242x1660 chacune, sur huit papiers qui portent chacun une seule couleur d'accent, un papier par série. À la livraison, chaque carte est vérifiée : texte qui déborde, qui passe sur la photo ou qui finit sur une ligne d'un ou deux caractères. Le texte de l'auteur ne change jamais ; les retours à la ligne se règlent par la mise en page.
 
 Spécifications complètes : [design.md](skills/kami/references/design.md). Aide-mémoire : [CHEATSHEET.md](skills/kami/CHEATSHEET.md).
 
