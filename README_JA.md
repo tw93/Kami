@@ -66,6 +66,35 @@ Kami（紙、かみ）は日本語の「紙」に由来します。AI Agent に�
 </tr>
 </table>
 
+## SNS 画像
+
+小紅書と X 向けの画像カードです。1 枚 1242x1660、背景は 8 種類。下の 4 枚は自分のプロダクトから作り、テキストは投稿した原文のままです。
+
+<table>
+<tr>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-mole-en.jpg"><img src="site/assets/demos/demo-social-cards-mole-en.jpg" alt="Mole 表紙カード"></a>
+    <br><b>Mole</b>
+    <br><sub>表紙、ink</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-kaku-en.jpg"><img src="site/assets/demos/demo-social-cards-kaku-en.jpg" alt="Kaku リストカード"></a>
+    <br><b>Kaku</b>
+    <br><sub>リスト、pine</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-pake-en.jpg"><img src="site/assets/demos/demo-social-cards-pake-en.jpg" alt="Pake 本文カード"></a>
+    <br><b>Pake</b>
+    <br><sub>本文、crimson</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-miaoyan-en.jpg"><img src="site/assets/demos/demo-social-cards-miaoyan-en.jpg" alt="MiaoYan スクリーンショットカード"></a>
+    <br><b>MiaoYan</b>
+    <br><sub>スクリーンショット、char</sub>
+  </td>
+</tr>
+</table>
+
 ## インストール
 
 **Claude Code、Codex、Cursor、その他の Agent**

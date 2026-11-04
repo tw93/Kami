@@ -66,6 +66,35 @@ Kami（紙，かみ）在日文中意為「紙」，為 AI Agent 提供排版規
 </tr>
 </table>
 
+## 社群分享圖
+
+小紅書和 X 的配圖，每張 1242x1660，有八種底色可選，下面四張取自我的幾個產品，文字都是發過的原話。
+
+<table>
+<tr>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-mole-zh.jpg"><img src="site/assets/demos/demo-social-cards-mole-zh.jpg" alt="Mole 封面卡"></a>
+    <br><b>Mole</b>
+    <br><sub>封面，墨藍底</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-kaku-zh.jpg"><img src="site/assets/demos/demo-social-cards-kaku-zh.jpg" alt="Kaku 列表卡"></a>
+    <br><b>Kaku</b>
+    <br><sub>列表，松綠底</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-pake-zh.jpg"><img src="site/assets/demos/demo-social-cards-pake-zh.jpg" alt="Pake 正文卡"></a>
+    <br><b>Pake</b>
+    <br><sub>正文，磚紅底</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-miaoyan-zh.jpg"><img src="site/assets/demos/demo-social-cards-miaoyan-zh.jpg" alt="妙言截圖卡"></a>
+    <br><b>妙言</b>
+    <br><sub>截圖，炭黑底</sub>
+  </td>
+</tr>
+</table>
+
 ## 安裝
 
 **Claude Code、Codex、Cursor 與其他 Agent**

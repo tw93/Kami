@@ -66,6 +66,35 @@ Sample PDFs in several formats and languages. Click any preview to open it.
 </tr>
 </table>
 
+## Social Cards
+
+Image cards for Xiaohongshu and X, 1242x1660 each, in eight papers. The four below come from my own products, with the text exactly as I posted it.
+
+<table>
+<tr>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-mole-en.jpg"><img src="site/assets/demos/demo-social-cards-mole-en.jpg" alt="Mole cover card"></a>
+    <br><b>Mole</b>
+    <br><sub>Cover, ink paper</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-kaku-en.jpg"><img src="site/assets/demos/demo-social-cards-kaku-en.jpg" alt="Kaku list card"></a>
+    <br><b>Kaku</b>
+    <br><sub>List, pine paper</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-pake-en.jpg"><img src="site/assets/demos/demo-social-cards-pake-en.jpg" alt="Pake text card"></a>
+    <br><b>Pake</b>
+    <br><sub>Text, crimson paper</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-miaoyan-en.jpg"><img src="site/assets/demos/demo-social-cards-miaoyan-en.jpg" alt="MiaoYan screenshot card"></a>
+    <br><b>MiaoYan</b>
+    <br><sub>Screenshot, char paper</sub>
+  </td>
+</tr>
+</table>
+
 ## Install
 
 **Claude Code, Codex, Cursor, and other agents**

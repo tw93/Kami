@@ -66,6 +66,35 @@ Kami(紙, 카미)는 일본어로 '종이'를 뜻합니다. AI Agent에게 조�
 </tr>
 </table>
 
+## 소셜 카드
+
+샤오훙수와 X용 이미지 카드입니다. 한 장에 1242x1660, 배경은 8가지입니다. 아래 네 장은 제 제품에서 만들었고, 글은 게시한 원문 그대로입니다.
+
+<table>
+<tr>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-mole-en.jpg"><img src="site/assets/demos/demo-social-cards-mole-en.jpg" alt="Mole 표지 카드"></a>
+    <br><b>Mole</b>
+    <br><sub>표지, ink</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-kaku-en.jpg"><img src="site/assets/demos/demo-social-cards-kaku-en.jpg" alt="Kaku 목록 카드"></a>
+    <br><b>Kaku</b>
+    <br><sub>목록, pine</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-pake-en.jpg"><img src="site/assets/demos/demo-social-cards-pake-en.jpg" alt="Pake 본문 카드"></a>
+    <br><b>Pake</b>
+    <br><sub>본문, crimson</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-miaoyan-en.jpg"><img src="site/assets/demos/demo-social-cards-miaoyan-en.jpg" alt="MiaoYan 스크린샷 카드"></a>
+    <br><b>MiaoYan</b>
+    <br><sub>스크린샷, char</sub>
+  </td>
+</tr>
+</table>
+
 ## 설치
 
 **Claude Code, Codex, Cursor 및 기타 에이전트**

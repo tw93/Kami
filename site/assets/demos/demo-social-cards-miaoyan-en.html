@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Kami">
+<title>MiaoYan</title>
+<meta name="author" content="Tw93">
+<style>
+  @page {
+    size: 1242px 1660px;
+    margin: 0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment:  #f5f4ed;
+    --near-black: #141413;
+    --brand:      #1B365D;
+    --stone:      #6b6a64;
+
+    /* Social palettes, mirrored from references/social-palettes.json. */
+    --social-parchment-line: #d1d0ca;
+    --social-ink-bg:         #1B365D;
+    --social-ink-fg:         #f3f1e8;
+    --social-ink-accent:     #b9c6d8;
+    --social-ink-muted:      #8e9db3;
+    --social-ink-line:       #3e5473;
+    --social-olive-bg:       #2b3326;
+    --social-olive-fg:       #ece8da;
+    --social-olive-accent:   #bdb38c;
+    --social-olive-muted:    #9a9883;
+    --social-olive-line:     #4a5043;
+    --social-espresso-bg:    #3a2a20;
+    --social-espresso-fg:    #f2e9dc;
+    --social-espresso-accent:#d9b48a;
+    --social-espresso-muted: #a8957f;
+    --social-espresso-line:  #57493e;
+    --social-pine-bg:        #1c3a29;
+    --social-pine-fg:        #eef0e6;
+    --social-pine-accent:    #b5cfa4;
+    --social-pine-muted:     #8fa593;
+    --social-pine-line:      #3e5747;
+    --social-teal-bg:        #134857;
+    --social-teal-fg:        #eef2ef;
+    --social-teal-accent:    #a8d0cf;
+    --social-teal-muted:     #8fb0b4;
+    --social-teal-line:      #36636f;
+    --social-crimson-bg:     #5a1f17;
+    --social-crimson-fg:     #f4ebe2;
+    --social-crimson-accent: #e6bca6;
+    --social-crimson-muted:  #bd968a;
+    --social-crimson-line:   #734037;
+    --social-char-bg:        #1e1d1b;
+    --social-char-fg:        #f2f0ea;
+    --social-char-accent:    #d4c4a0;
+    --social-char-muted:     #a8a49a;
+    --social-char-line:      #403f3c;
+
+    --serif: Charter, Georgia, Palatino, serif;
+    --sans:  var(--serif);
+  }
+
+  /* Default paper: Kami parchment with the ink-blue accent. Another paper is
+     one class on <body>, which recolors the same four roles. */
+  body { font-family: var(--serif); color: var(--near-black); }
+  body.paper-ink .card { background: var(--social-ink-bg); color: var(--social-ink-fg); }
+  body.paper-ink .meta, body.paper-ink .foot { color: var(--social-ink-muted); }
+  body.paper-ink .poem, body.paper-ink .item .n, body.paper-ink .body strong { color: var(--social-ink-accent); }
+  body.paper-ink .foot { border-top-color: var(--social-ink-line); }
+  body.paper-olive .card { background: var(--social-olive-bg); color: var(--social-olive-fg); }
+  body.paper-olive .meta, body.paper-olive .foot { color: var(--social-olive-muted); }
+  body.paper-olive .poem, body.paper-olive .item .n, body.paper-olive .body strong { color: var(--social-olive-accent); }
+  body.paper-olive .foot { border-top-color: var(--social-olive-line); }
+  body.paper-espresso .card { background: var(--social-espresso-bg); color: var(--social-espresso-fg); }
+  body.paper-espresso .meta, body.paper-espresso .foot { color: var(--social-espresso-muted); }
+  body.paper-espresso .poem, body.paper-espresso .item .n, body.paper-espresso .body strong { color: var(--social-espresso-accent); }
+  body.paper-espresso .foot { border-top-color: var(--social-espresso-line); }
+  body.paper-pine .card { background: var(--social-pine-bg); color: var(--social-pine-fg); }
+  body.paper-pine .meta, body.paper-pine .foot { color: var(--social-pine-muted); }
+  body.paper-pine .poem, body.paper-pine .item .n, body.paper-pine .body strong { color: var(--social-pine-accent); }
+  body.paper-pine .foot { border-top-color: var(--social-pine-line); }
+  body.paper-teal .card { background: var(--social-teal-bg); color: var(--social-teal-fg); }
+  body.paper-teal .meta, body.paper-teal .foot { color: var(--social-teal-muted); }
+  body.paper-teal .poem, body.paper-teal .item .n, body.paper-teal .body strong { color: var(--social-teal-accent); }
+  body.paper-teal .foot { border-top-color: var(--social-teal-line); }
+  body.paper-crimson .card { background: var(--social-crimson-bg); color: var(--social-crimson-fg); }
+  body.paper-crimson .meta, body.paper-crimson .foot { color: var(--social-crimson-muted); }
+  body.paper-crimson .poem, body.paper-crimson .item .n, body.paper-crimson .body strong { color: var(--social-crimson-accent); }
+  body.paper-crimson .foot { border-top-color: var(--social-crimson-line); }
+  body.paper-char .card { background: var(--social-char-bg); color: var(--social-char-fg); }
+  body.paper-char .meta, body.paper-char .foot { color: var(--social-char-muted); }
+  body.paper-char .poem, body.paper-char .item .n, body.paper-char .body strong { color: var(--social-char-accent); }
+  body.paper-char .foot { border-top-color: var(--social-char-line); }
+  /* Light text on a dark paper rasterizes thinner than the browser previews it,
+     so every dark paper sets its text in W05. */
+  body[class*="paper-"]:not(.paper-parchment) { font-weight: 500; }
+
+  /* One card = one page = one image, exactly 1242 x 1660. Content that grows
+     into the footer is reported by --deliver («card fit»): split the card,
+     never shrink the type. */
+  .card {
+    width: 1242px;
+    height: 1660px;
+    padding: 120px 96px 84px;
+    background: var(--parchment);
+    color: var(--near-black);
+    position: relative;
+    break-after: page;
+  }
+  .card:last-child { break-after: auto; }
+
+  .meta {
+    font-size: 30px;
+    line-height: 1.4;
+    letter-spacing: 1.2px;
+    color: var(--stone);
+  }
+
+  /* Cover headline: the post title, wrapping by itself. Narrow max-width
+     (not <br>) to move a short last line. */
+  h1 {
+    max-width: 10em;
+    margin-top: 72px;
+    font-size: 104px;
+    font-weight: 500;
+    line-height: 1.28;
+    letter-spacing: 1px;
+  }
+  .poem {
+    margin-top: 48px;
+    font-size: 46px;
+    line-height: 1.4;
+    letter-spacing: 0.5px;
+    color: var(--brand);
+  }
+  .photo {
+    position: absolute;
+    left: 96px;
+    right: 96px;
+    top: 640px;
+    bottom: 96px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 60%;
+  }
+
+  h2 {
+    margin-top: 56px;
+    font-size: 80px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0;
+  }
+  .body {
+    margin-top: 44px;
+    font-size: 44px;
+    line-height: 1.5;
+  }
+  .body strong { font-weight: 500; color: var(--brand); }
+
+  .item {
+    display: flex;
+    margin-top: 48px;
+  }
+  .item .n {
+    flex: 0 0 120px;
+    font-family: Charter, Georgia, var(--serif);
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--brand);
+  }
+  .item p {
+    flex: 1;
+    font-size: 42px;
+    line-height: 1.48;
+  }
+
+  .shot {
+    margin-top: 56px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .shot img { display: block; width: 100%; }
+
+  .foot {
+    position: absolute;
+    left: 96px;
+    right: 96px;
+    bottom: 84px;
+    padding-top: 30px;
+    border-top: 1px solid var(--social-parchment-line);
+    font-size: 28px;
+    line-height: 1.4;
+    color: var(--stone);
+  }
+</style>
+</head>
+<body class="paper-char">
+
+<section class="card">
+  <div class="meta">Tw93 Open Source Family</div>
+  <h2>MiaoYan</h2>
+  <p class="body">It just shipped its biggest update to date, introducing Split View for side-by-side Markdown editing and live preview, with smooth bidirectional scroll sync.</p>
+  <div class="shot"><img src="images/miaoyan-split-en.jpg" alt="MiaoYan split view"></div>
+  <div class="foot">github.com/tw93/MiaoYan</div>
+</section>
+
+</body>
+</html>

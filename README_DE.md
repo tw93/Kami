@@ -66,6 +66,35 @@ Beispiel-PDFs in verschiedenen Formaten und Sprachen. Klicken Sie auf eine Vorsc
 </tr>
 </table>
 
+## Social-Media-Karten
+
+Bildkarten für Xiaohongshu und X, je 1242x1660, auf acht Papieren. Die vier unten stammen aus meinen eigenen Produkten, der Text ist so, wie ich ihn gepostet habe.
+
+<table>
+<tr>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-mole-en.jpg"><img src="site/assets/demos/demo-social-cards-mole-en.jpg" alt="Mole-Titelkarte"></a>
+    <br><b>Mole</b>
+    <br><sub>Titel, ink</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-kaku-en.jpg"><img src="site/assets/demos/demo-social-cards-kaku-en.jpg" alt="Kaku-Listenkarte"></a>
+    <br><b>Kaku</b>
+    <br><sub>Liste, pine</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-pake-en.jpg"><img src="site/assets/demos/demo-social-cards-pake-en.jpg" alt="Pake-Textkarte"></a>
+    <br><b>Pake</b>
+    <br><sub>Text, crimson</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-miaoyan-en.jpg"><img src="site/assets/demos/demo-social-cards-miaoyan-en.jpg" alt="MiaoYan-Screenshotkarte"></a>
+    <br><b>MiaoYan</b>
+    <br><sub>Screenshot, char</sub>
+  </td>
+</tr>
+</table>
+
 ## Installation
 
 **Claude Code, Codex, Cursor und andere Agenten**

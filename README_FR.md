@@ -66,6 +66,35 @@ Exemples de PDF en plusieurs formats et langues. Cliquez sur un aperçu pour l'o
 </tr>
 </table>
 
+## Cartes pour les réseaux sociaux
+
+Des cartes image pour Xiaohongshu et X, 1242x1660 chacune, sur huit papiers. Les quatre ci-dessous viennent de mes propres produits, avec le texte tel que je l'ai publié.
+
+<table>
+<tr>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-mole-en.jpg"><img src="site/assets/demos/demo-social-cards-mole-en.jpg" alt="Carte de couverture Mole"></a>
+    <br><b>Mole</b>
+    <br><sub>Couverture, ink</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-kaku-en.jpg"><img src="site/assets/demos/demo-social-cards-kaku-en.jpg" alt="Carte liste Kaku"></a>
+    <br><b>Kaku</b>
+    <br><sub>Liste, pine</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-pake-en.jpg"><img src="site/assets/demos/demo-social-cards-pake-en.jpg" alt="Carte texte Pake"></a>
+    <br><b>Pake</b>
+    <br><sub>Texte, crimson</sub>
+  </td>
+  <td align="center" width="25%">
+    <a href="site/assets/demos/demo-social-cards-miaoyan-en.jpg"><img src="site/assets/demos/demo-social-cards-miaoyan-en.jpg" alt="Carte capture MiaoYan"></a>
+    <br><b>MiaoYan</b>
+    <br><sub>Capture, char</sub>
+  </td>
+</tr>
+</table>
+
 ## Installation
 
 **Claude Code, Codex, Cursor et autres agents**
