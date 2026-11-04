@@ -127,7 +127,7 @@ Kami 每天最多检查一次新版本，有新版就在对话里提一句，检
 
 默认采用温暖的浅米色底（`#f5f4ed`）、油墨蓝强调色（`#1B365D`）和衬线字体。模板依靠字号层级与留白节奏区分标题、正文与标注，这些默认值都可以按你的品牌调整。
 
-- **模板体系**：8 种文档模板（一页纸、长文档、信件、作品集、简历、幻灯片、研报、更新日志）加一套落地页，都有中、英、韩三个版本，Kami 会按你写作的语言选对应版本
+- **模板体系**：9 种文档模板（一页纸、长文档、信件、作品集、简历、幻灯片、研报、更新日志、社交卡片）加一套落地页，都有中、英、韩三个版本，Kami 会按你写作的语言选对应版本
 - **图表**：18 种行内原生 SVG 图表，包括单独成页的系统全景架构图，时序图、类图与实体关系图可直接写 Mermaid 源码，由 [beautiful-mermaid](https://github.com/lukilabs/beautiful-mermaid) 渲染为 SVG，再通过 `skills/kami/scripts/mermaid_normalize.py` 重着色为 Kami 配色并适配 WeasyPrint，无需本地安装 Node 环境
 - **幻灯片**：默认用 WeasyPrint 把 HTML 转成 PDF，需要时通过 python-pptx 导出可二次编辑的 PPTX，Markdown 优先的演示稿用 `skills/kami/assets/templates/marp/` 下的 Marp 方案
 - **代码高亮**：安装 Pygments 后自动支持语法着色，未安装时依然可正常生成纯黑灰代码块

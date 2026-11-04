@@ -36,11 +36,11 @@ How an agent should call Kami: install the skill (below), fill the template HTML
 
 ## What ships
 
-Eight document templates: one-pager, letter, long document, portfolio, resume, slides, equity report, changelog. Each exists in Chinese, English, and Korean variants where the typography differs.
+Nine document templates: one-pager, letter, long document, portfolio, resume, slides, equity report, changelog, social cards. Each exists in Chinese, English, and Korean variants where the typography differs.
 
 Eighteen inline SVG diagram types: architecture, architecture board, flowchart, quadrant, bar chart, line chart, donut chart, state machine, timeline, swimlane, tree, layer stack, venn, candlestick, waterfall, sequence, class, ER.
 
-Nine content schemas under `references/schemas/`: changelog, equity-report, landing-page, letter, long-doc, one-pager, portfolio, resume, slides. Each one states the structure and the quality bar for its document type.
+Ten content schemas under `references/schemas/`: changelog, equity-report, landing-page, letter, long-doc, one-pager, portfolio, resume, slides, social-cards. Each one states the structure and the quality bar for its document type.
 
 ## Agent interfaces
 

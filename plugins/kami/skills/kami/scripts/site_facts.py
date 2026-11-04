@@ -24,6 +24,7 @@ from shared import (
     REPO_ROOT,
     ROOT,
     SITE_ROOT,
+    content_schema_types,
     kami_version,
     public_document_template_count,
     public_document_template_kinds,
@@ -80,7 +81,23 @@ _TEMPLATE_COUNT_WORDS = {
         r"八种文档模板",
         r"八種文件範本",
     ),
+    9: (
+        r"\bNine document template",
+        r"九种文档模板",
+        r"九種文件範本",
+    ),
 }
+
+_NUMBER_WORDS = {w: i for i, w in enumerate(
+    "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen".split())}
+# "nine JSON content schemas", "Ten schemas live under": the count a page states
+# for references/schemas, which the template count check does not cover.
+_SCHEMA_COUNT = re.compile(r"\b(\d+|" + "|".join(_NUMBER_WORDS) + r")\s+(?:JSON\s+)?(?:content\s+)?schemas\b", re.I)
+
+
+def _schema_counts(text: str) -> list[int]:
+    return [int(m) if m.isdigit() else _NUMBER_WORDS[m.lower()] for m in _SCHEMA_COUNT.findall(text)]
+
 
 def _normalize(text: str) -> str:
     return html.unescape(text)
@@ -224,6 +241,7 @@ def site_fact_issues(files: Mapping[str, str] | None = None) -> list[str]:
 
     template_count = public_document_template_count()
     diagram_count = len(DIAGRAM_TEMPLATES)
+    schema_count = len(content_schema_types())
 
     for rel in FULL_PUBLIC_FACT_FILES:
         raw = texts.get(rel)
@@ -270,6 +288,10 @@ def site_fact_issues(files: Mapping[str, str] | None = None) -> list[str]:
             issues.append(f"{rel}: missing public document template count {template_count}")
         if not _contains_diagram_count(text, diagram_count):
             issues.append(f"{rel}: missing diagram count {diagram_count}")
+        stale_schemas = sorted({n for n in _schema_counts(text) if n != schema_count})
+        if stale_schemas:
+            issues.append(f"{rel}: says {', '.join(map(str, stale_schemas))} content schemas, "
+                          f"references/schemas has {schema_count}")
 
     redirect = texts.get(REDIRECT_SITE_FILE)
     if redirect is None:

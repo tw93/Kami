@@ -25,9 +25,13 @@ from shared import (
     SCREEN_TEMPLATES,
     TEMPLATES,
     TOKENS_FILE,
+    SOCIAL_PAPER_ROLES,
+    is_social_cards,
     iter_template_files,
+    load_social_palettes,
     rel_to_root,
     resolve_input,
+    social_palette_values,
 )
 from tokens import ROOT_BLOCK, parse_root_vars
 from diagram_geometry import scan_geometry
@@ -112,6 +116,9 @@ def scan_text(raw_text: str, path: Path, line_offset: int = 0,
     # gradients may use alpha, and CJK screen copy has a documented 1.65
     # line-height ceiling instead of the print ceiling of 1.55.
     is_screen = path.name in set(SCREEN_TEMPLATES.values()) if screen is None else screen
+    # Social cards are phone images read at 42-44px, not print pages: their
+    # body type is set at 1.68-1.75, so they get their own ceiling.
+    is_social = is_social_cards(path, raw_text)
 
     def line_for(offset: int) -> int:
         return line_offset + text.count("\n", 0, offset) + 1
@@ -175,7 +182,7 @@ def scan_text(raw_text: str, path: Path, line_offset: int = 0,
                                         "to (U+2192) in English template; use 'to' or '->' per patterns Section 2"))
 
         for match in LINE_HEIGHT_VALUE.finditer(raw):
-            ceiling = 1.65 if is_screen and not is_en else 1.55
+            ceiling = 1.8 if is_social else 1.65 if is_screen and not is_en else 1.55
             if float(match.group(1)) > ceiling:
                 findings.append(Finding(path, line_offset + i, "line-height-too-loose",
                                         f"{match.group(0)} exceeds {ceiling:.2f} ceiling"))
@@ -349,6 +356,42 @@ def _root_token_findings(path: Path, allowed: set[str]) -> list[Finding]:
     return findings
 
 
+def _allowed_for(path: Path, allowed: set[str], text: str | None = None) -> set[str]:
+    """The palette a file answers to: social-card files add the social papers."""
+    return allowed | social_palette_values() if is_social_cards(path, text) else allowed
+
+
+def _social_palette_findings(path: Path) -> list[Finding]:
+    """A social-cards template mirrors references/social-palettes.json exactly.
+
+    Every paper except the default parchment (which reuses the print tokens)
+    needs its five --social-<paper>-<role> tokens and a `body.paper-<paper>`
+    rule; parchment needs its footer line and print tokens that match.
+    """
+    raw = path.read_text(encoding="utf-8", errors="replace")
+    found = {k: v.lower() for k, v in parse_root_vars(raw).items()}
+    findings: list[Finding] = []
+
+    def miss(message: str) -> None:
+        findings.append(Finding(path, 1, "social-palette", message))
+
+    print_roles = {"bg": "--parchment", "fg": "--near-black", "accent": "--brand", "muted": "--stone"}
+    for name, paper in load_social_palettes().items():
+        roles = ("line",) if name == "parchment" else SOCIAL_PAPER_ROLES
+        for role in roles:
+            token = f"--social-{name}-{role}"
+            expected = paper[role].lower()
+            if found.get(token) != expected:
+                miss(f"{token} should be {expected} (social-palettes.json), got {found.get(token)}")
+        if name == "parchment":
+            for role, token in print_roles.items():
+                if found.get(token) != paper[role].lower():
+                    miss(f"parchment {role}: {token} should be {paper[role].lower()}, got {found.get(token)}")
+        elif not re.search(rf"body\.paper-{name}\b", raw):
+            miss(f"no body.paper-{name} rule for paper {name}")
+    return findings
+
+
 def check_off_palette(verbose: bool = False) -> int:
     allowed = _load_token_values()
     screen_names = set(SCREEN_TEMPLATES.values())
@@ -358,9 +401,12 @@ def check_off_palette(verbose: bool = False) -> int:
         return 2
     findings: list[Finding] = []
     for p in targets:
-        file_findings = _off_palette_findings(p, allowed)
+        file_allowed = _allowed_for(p, allowed)
+        file_findings = _off_palette_findings(p, file_allowed)
         if p.name not in screen_names:
-            file_findings.extend(_root_token_findings(p, allowed))
+            file_findings.extend(_root_token_findings(p, file_allowed))
+        if p.name.startswith("social-cards"):
+            file_findings.extend(_social_palette_findings(p))
         findings.extend(file_findings)
         if verbose:
             print(f"scanned {p.relative_to(ROOT)}: {len(file_findings)} off-palette finding(s)")
@@ -376,7 +422,9 @@ def check_off_palette(verbose: bool = False) -> int:
         print("ERROR: no demo HTML found under site/assets/demos (incomplete repository scan)")
         return 2
     for p in demo_targets:
-        file_findings = _off_palette_findings(p, demo_allowed)
+        file_findings = _off_palette_findings(p, _allowed_for(p, demo_allowed))
+        if p.name.startswith("demo-social-cards"):
+            file_findings.extend(_social_palette_findings(p))
         findings.extend(file_findings)
         if verbose:
             print(f"scanned {p.relative_to(SITE_ROOT.parent)}: {len(file_findings)} off-palette finding(s)")
@@ -515,7 +563,7 @@ def check_style(paths: list[str], screen: bool | None = None) -> int:
         scanned += 1
         rel = rel_to_root(path)
         findings = scan_file(path, screen=screen)
-        findings.extend(_off_palette_findings(path, allowed))
+        findings.extend(_off_palette_findings(path, _allowed_for(path, allowed)))
         findings.extend(_emphasis_container_findings(path))
         if not findings:
             print(f"OK: {rel}: no style drift")

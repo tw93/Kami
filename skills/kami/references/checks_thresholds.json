@@ -21,5 +21,12 @@
   },
   "visual": {
     "dpi": 110
+  },
+  "social_cards": {
+    "image_dpi": 96,
+    "footer_gap_px": 40,
+    "photo_gap_px": 24,
+    "orphan_max_chars": 3,
+    "orphan_max_words": 1
   }
 }

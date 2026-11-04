@@ -51,9 +51,13 @@ CONTRACTS: dict[str, tuple[str, int, int, list[str]]] = {
     "equity-report-charts-en": ("report", 1, 3, ["$412M", "$538M", "$701M", "61%", "27%", "12%", "$46", "Overweight"]),
     "portfolio-cn": ("portfolio", 1, 0, ["沈知行", "潮声", "37%", "2.4", "织页", "120", "归途", "4.6"]),
     "landing-page-en": ("index", 0, 0, ["Ledgerly", "$12", "14-day", "1,800", "40%", "CSV"]),
+    "social-cards-cn": ("cards", 3, 6, ["我写代码的 6 个习惯", "验收标准", "十次有九次", "三个月后", "便签"]),
 }
 # Screen templates: HTML only, no PDF, so no page contract or PDF gates.
 HTML_ONLY = {"landing-page-en"}
+# Social cards are fixed 1242x1660 pages, often half empty by design: --deliver
+# replaces the density gate with card fit for them, and the score drops density.
+NO_DENSITY = {"social-cards-cn"}
 # Cases whose prompt asks for charts: minimum <svg data-kami-chart> count.
 MIN_CHARTS = {"equity-report-charts-en": 2}
 CHART_SVG = re.compile(r"<svg\b[^>]*\bdata-kami-chart\b", re.I)
@@ -196,7 +200,8 @@ def score_run(case: str, run: dict) -> dict:
         "fonts": _quiet(check_fonts, [str(pdf)])[0] == 0,
         "residue": _quiet(check_markdown_residue, [str(pdf)])[0] == 0,
     })
-    _density(row, pdf)
+    if case not in NO_DENSITY:
+        _density(row, pdf)
     if case == "resume-cn":
         # Same verdict as --deliver: a shortfall the source cannot fill is a
         # reported data gap, not a layout failure.

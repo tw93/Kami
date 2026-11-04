@@ -279,6 +279,32 @@ def test_catalog_lists_pptx_for_slides() -> None:
           str(slide.get("encodingFormat")))
 
 
+def test_catalog_lists_every_public_document_template() -> None:
+    from build_metadata import DOCUMENT_TEMPLATE_NOTES, build_catalog_feed
+    from shared import public_document_template_kinds
+
+    catalog = json.loads(build_catalog_feed(SKILL_ROOT))
+    listed = {entry["item"].get("identifier") for entry in catalog["itemListElement"]}
+    kinds = public_document_template_kinds()
+    check("the catalog notes every public document template",
+          set(DOCUMENT_TEMPLATE_NOTES) == kinds,
+          f"missing={sorted(kinds - set(DOCUMENT_TEMPLATE_NOTES))} "
+          f"extra={sorted(set(DOCUMENT_TEMPLATE_NOTES) - kinds)}")
+    check("the catalog feed lists every public document template",
+          kinds <= listed, str(sorted(kinds - listed)))
+
+
+def test_site_schema_count_matches_the_schemas() -> None:
+    from shared import content_schema_types
+    from site_facts import _schema_counts
+
+    count = len(content_schema_types())
+    check("schema count sentences are read",
+          _schema_counts("ships nine JSON content schemas. Ten schemas live under") == [9, 10])
+    check("a page stating a stale schema count is caught",
+          count not in _schema_counts(f"ships {count - 1} content schemas"))
+
+
 def test_check_update_script() -> None:
     """check-update.sh notifies on a newer remote, stays silent when current,
     throttles through a local cache marker, and fails silently offline. It GETs

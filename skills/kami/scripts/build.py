@@ -7,7 +7,7 @@ Thin CLI shell. Implementation lives in:
   - tokens.py  (sync_check)
   - site_facts.py (check_site_facts)
   - verify.py  (verify_all, show_fonts, font checks)
-  - checks.py  (check_placeholders, check_markdown_residue, check_orphans, check_density, check_resume_balance, check_rhythm)
+  - checks.py  (check_placeholders, check_markdown_residue, check_orphans, check_density, check_resume_balance, check_rhythm, check_card_fit, check_card_orphans)
   - content.py (check_content)
   - html_visibility.py (shared HTML/CSS evidence for content and residue checks)
   - visual.py  (check_visual)
@@ -31,6 +31,8 @@ Usage:
     python3 scripts/build.py --check-density       # warn on pages with >25% trailing whitespace
     python3 scripts/build.py --check-density path/to/doc.pdf
     python3 scripts/build.py --check-resume-balance path/to/resume.pdf
+    python3 scripts/build.py --check-card-fit path/to/cards.pdf      # social cards: text under the footer or on the photo
+    python3 scripts/build.py --check-card-orphans path/to/cards.pdf  # social cards: paragraphs ending on 1-3 characters
     python3 scripts/build.py --check-rhythm       # warn on monotonous slide sequences
     python3 scripts/build.py --check-rhythm slides slides-en
     python3 scripts/build.py --check-content content.json            # content IR schema validation
@@ -51,6 +53,8 @@ from pathlib import Path
 from chart import check_charts
 from chart import main as chart_main
 from checks import (
+    check_card_fit,
+    check_card_orphans,
     check_density,
     check_markdown_residue,
     check_orphans,
@@ -234,6 +238,8 @@ def main(argv: list[str]) -> int:
         "--check-orphans": check_orphans,
         "--check-density": check_density,
         "--check-resume-balance": check_resume_balance,
+        "--check-card-fit": check_card_fit,
+        "--check-card-orphans": check_card_orphans,
         "--check-placeholders": check_placeholders,
         "--check-markdown": check_markdown_residue,
         "--check-content": check_content,

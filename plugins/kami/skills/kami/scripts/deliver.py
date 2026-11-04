@@ -10,6 +10,8 @@ the part an agent drops, so this module owns it:
     render the PDF next to the HTML through the shared render pipeline
     PDF    page contract, resume balance, fonts, Markdown residue,
            density, orphans, page images for the perceptual pass
+           (social cards: one page per card, card fit and card orphans in
+           place of density and orphans, images at the platform's pixel size)
 
 It ends with one verdict line. ERROR items block delivery; WARN items are
 judgment calls to look at in the page images; GAP lines are `[DATA NEEDED]`
@@ -28,6 +30,8 @@ from pathlib import Path
 
 from chart import check_charts, find_charts
 from checks import (
+    check_card_fit,
+    check_card_orphans,
     check_density,
     check_markdown_residue,
     check_orphans,
@@ -41,9 +45,16 @@ from math_render import MathRenderError, _latex_spans
 from math_render import main as math_main
 from optional_deps import MissingDepError
 from render import render_pdf
-from shared import HTML_TEMPLATES, SCREEN_TEMPLATES, TEMPLATES, resolve_input
+from shared import (
+    HTML_TEMPLATES,
+    SCREEN_TEMPLATES,
+    TEMPLATES,
+    is_social_cards,
+    load_checks_thresholds,
+    resolve_input,
+)
 from verify import check_fonts
-from visual import REVIEW_CHECKLIST, render_pages, visual_output_dir
+from visual import CARD_REVIEW_CHECKLIST, REVIEW_CHECKLIST, render_pages, visual_output_dir
 
 # Content IR type names that differ from the template family name.
 _IR_TO_FAMILY = {"slides": "slides-weasy"}
@@ -53,6 +64,8 @@ _CSS_COMMENT = re.compile(r"/\*.*?\*/", re.S)
 _SELECTOR = re.compile(r"([^{}@;]+)\{")
 _GAP = re.compile(r"\[DATA NEEDED[^\]]*\]")
 _TAG = re.compile(r"<[^>]+>")
+_CARD = re.compile(r"<section\b[^>]*\bclass=[\"'][^\"']*\bcard\b", re.I)
+_HTML_COMMENT = re.compile(r"<!--.*?-->", re.S)
 
 
 def _selectors(html: str) -> set[str]:
@@ -180,6 +193,12 @@ def deliver(args: list[str], result: dict | None = None) -> int:
         except (json.JSONDecodeError, OSError):
             pass  # check_content below reports the malformed IR
     detected, _ = detect_template(raw)
+    # A card set keeps one paper's rules and drops the other seven, which can
+    # pull the selector overlap under the threshold; its palette tokens still
+    # name it, and missing it would run the print gates at the print dpi.
+    if not ir_type and (not detected or family(detected) != "social-cards") \
+            and is_social_cards(html_path, raw):
+        detected = "social-cards"
     fam = family(ir_type) if ir_type else (family(detected) if detected else None)
     screen = fam == "landing-page"
 
@@ -252,12 +271,23 @@ def deliver(args: list[str], result: dict | None = None) -> int:
                     report.line("WARN", "resume balance", thin)
                 else:
                     report.check("resume balance", check_resume_balance, [str(pdf)])
+            social = fam == "social-cards"
+            if social:
+                cards = len(_CARD.findall(_HTML_COMMENT.sub("", raw)))
+                report.line("OK" if cards == pages else "ERROR", "one page per card",
+                            f"{cards} card(s), {pages} page(s)"
+                            + ("" if cards == pages else "; a card that outgrew 1660px spilled over, split it"))
             report.check("fonts", check_fonts, [str(pdf)])
             report.check("markdown residue (pdf)", check_markdown_residue, [str(pdf)])
-            report.check("density", check_density, [str(pdf)], warn_only=True)
-            report.check("orphans", check_orphans, [str(pdf)], warn_only=True)
+            if social:
+                report.check("card fit", check_card_fit, [str(pdf)])
+                report.check("card orphans", check_card_orphans, [str(pdf)], warn_only=True)
+            else:
+                report.check("density", check_density, [str(pdf)], warn_only=True)
+                report.check("orphans", check_orphans, [str(pdf)], warn_only=True)
+            dpi = int(load_checks_thresholds()["social_cards"]["image_dpi"]) if social else None
             try:
-                pages_png = render_pages(pdf)
+                pages_png = render_pages(pdf, dpi=dpi)
                 report.line("OK", "page images", f"{visual_output_dir(pdf).name}/ ({len(pages_png)} image(s))")
             except MissingDepError as exc:
                 print(f"ERROR: {exc}")
@@ -267,6 +297,7 @@ def deliver(args: list[str], result: dict | None = None) -> int:
 
     for gap in gaps:
         print(f"GAP:   {gap}")
+    checklist = CARD_REVIEW_CHECKLIST if fam == "social-cards" else REVIEW_CHECKLIST
     result.update({
         "html": str(html_path),
         "template": detected,
@@ -274,7 +305,7 @@ def deliver(args: list[str], result: dict | None = None) -> int:
         "checks": report.items,
         "gaps": gaps,
         "page_images": [str(p) for p in pages_png],
-        "review_checklist": list(REVIEW_CHECKLIST) if pages_png else [],
+        "review_checklist": list(checklist) if pages_png else [],
     })
     if rendered_pdf is not None:
         result["pdf"] = str(rendered_pdf)
@@ -287,6 +318,6 @@ def deliver(args: list[str], result: dict | None = None) -> int:
     result.update({"ready": not report.errors, "verdict": verdict})
     if pages_png:
         print("Next: view every page image against this checklist, fix what you see, re-run --deliver:")
-        for item in REVIEW_CHECKLIST:
+        for item in checklist:
             print(f"  - {item}")
     return 1 if report.errors else 0

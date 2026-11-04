@@ -128,7 +128,7 @@ Erstellen Sie `~/.config/kami/brand.md`, um Identität, Standardwerte und Layout
 
 Standardmäßig verwendet Kami einen warmen Pergamenthintergrund (`#f5f4ed`), tintenblaue Akzente (`#1B365D`) und Serifenschriften. Hierarchien entstehen durch Schriftgröße und Weißraum. Alle Vorgaben lassen sich an das eigene Markendesign anpassen.
 
-- **Vorlagen.** Acht Dokumentvorlagen: One-Pager, Ausführliches Dokument, Brief, Portfolio, Lebenslauf, Präsentationsfolien, Finanzbericht und Changelog, plus ein Landing-Page-System, jeweils auf Chinesisch, Englisch und Koreanisch. Kami wählt die passende Variante anhand der Sprache, in der Sie schreiben.
+- **Vorlagen.** Neun Dokumentvorlagen: One-Pager, Ausführliches Dokument, Brief, Portfolio, Lebenslauf, Präsentationsfolien, Finanzbericht, Changelog und Social Cards, plus ein Landing-Page-System, jeweils auf Chinesisch, Englisch und Koreanisch. Kami wählt die passende Variante anhand der Sprache, in der Sie schreiben.
 - **Diagramme.** 18 Inline-SVG-Typen, inklusive architektonischer Übersichtskarten. Sequenz-, Klassen- und ER-Diagramme können aus Mermaid-Syntax generiert werden: [beautiful-mermaid](https://github.com/lukilabs/beautiful-mermaid) rendert das SVG, und `skills/kami/scripts/mermaid_normalize.py` passt es an die Kami-Farbpalette an und macht es WeasyPrint-tauglich, ganz ohne Node.
 - **Präsentationen.** Drei Rendering-Pfade: Standardmäßig WeasyPrint HTML zu PDF, python-pptx für bearbeitbare PPTX-Dateien auf Anfrage und eine Marp-Variante in `skills/kami/assets/templates/marp/` für Markdown-Folien.
 - **Quellcode.** Pygments-Syntax-Highlighting bei installierter Bibliothek; ohne Pygments bleiben Codeblöcke monochrom und sauber lesbar.

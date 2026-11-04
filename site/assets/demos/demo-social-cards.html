@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<!-- Kami demo: social-cards.html filled with a published Xiaohongshu set, paper-espresso -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Kami">
+<title>我的 10 条人生最佳实践</title>
+<meta name="author" content="Tw93">
+<style>
+  @font-face {
+    font-family: "TsangerJinKai02";
+    src: url("../fonts/TsangerJinKai02-W04.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W04.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "TsangerJinKai02";
+    src: url("../fonts/TsangerJinKai02-W05.ttf") format("truetype"),
+       url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W05.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @page {
+    size: 1242px 1660px;
+    margin: 0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment:  #f5f4ed;
+    --near-black: #141413;
+    --brand:      #1B365D;
+    --stone:      #6b6a64;
+
+    /* Social palettes, mirrored from references/social-palettes.json. */
+    --social-parchment-line: #d1d0ca;
+    --social-ink-bg:         #1B365D;
+    --social-ink-fg:         #f3f1e8;
+    --social-ink-accent:     #b9c6d8;
+    --social-ink-muted:      #8e9db3;
+    --social-ink-line:       #3e5473;
+    --social-olive-bg:       #2b3326;
+    --social-olive-fg:       #ece8da;
+    --social-olive-accent:   #bdb38c;
+    --social-olive-muted:    #9a9883;
+    --social-olive-line:     #4a5043;
+    --social-espresso-bg:    #3a2a20;
+    --social-espresso-fg:    #f2e9dc;
+    --social-espresso-accent:#d9b48a;
+    --social-espresso-muted: #a8957f;
+    --social-espresso-line:  #57493e;
+    --social-pine-bg:        #1c3a29;
+    --social-pine-fg:        #eef0e6;
+    --social-pine-accent:    #b5cfa4;
+    --social-pine-muted:     #8fa593;
+    --social-pine-line:      #3e5747;
+    --social-teal-bg:        #134857;
+    --social-teal-fg:        #eef2ef;
+    --social-teal-accent:    #a8d0cf;
+    --social-teal-muted:     #8fb0b4;
+    --social-teal-line:      #36636f;
+    --social-crimson-bg:     #5a1f17;
+    --social-crimson-fg:     #f4ebe2;
+    --social-crimson-accent: #e6bca6;
+    --social-crimson-muted:  #bd968a;
+    --social-crimson-line:   #734037;
+    --social-char-bg:        #1e1d1b;
+    --social-char-fg:        #f2f0ea;
+    --social-char-accent:    #d4c4a0;
+    --social-char-muted:     #a8a49a;
+    --social-char-line:      #403f3c;
+
+    /* Latin letters and digits in Charter, Chinese falls through to TsangerJinKai02. */
+    --serif: Charter, Georgia, "TsangerJinKai02", "Source Han Serif SC", "Source Han Serif CN", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", "STSong", serif;
+    --sans:  var(--serif);
+  }
+
+  /* Default paper: Kami parchment with the ink-blue accent. Another paper is
+     one class on <body>, which recolors the same four roles. */
+  body { font-family: var(--serif); color: var(--near-black); }
+  body.paper-ink .card { background: var(--social-ink-bg); color: var(--social-ink-fg); }
+  body.paper-ink .meta, body.paper-ink .foot { color: var(--social-ink-muted); }
+  body.paper-ink .poem, body.paper-ink .item .n, body.paper-ink .body strong { color: var(--social-ink-accent); }
+  body.paper-ink .foot { border-top-color: var(--social-ink-line); }
+  body.paper-olive .card { background: var(--social-olive-bg); color: var(--social-olive-fg); }
+  body.paper-olive .meta, body.paper-olive .foot { color: var(--social-olive-muted); }
+  body.paper-olive .poem, body.paper-olive .item .n, body.paper-olive .body strong { color: var(--social-olive-accent); }
+  body.paper-olive .foot { border-top-color: var(--social-olive-line); }
+  body.paper-espresso .card { background: var(--social-espresso-bg); color: var(--social-espresso-fg); }
+  body.paper-espresso .meta, body.paper-espresso .foot { color: var(--social-espresso-muted); }
+  body.paper-espresso .poem, body.paper-espresso .item .n, body.paper-espresso .body strong { color: var(--social-espresso-accent); }
+  body.paper-espresso .foot { border-top-color: var(--social-espresso-line); }
+  body.paper-pine .card { background: var(--social-pine-bg); color: var(--social-pine-fg); }
+  body.paper-pine .meta, body.paper-pine .foot { color: var(--social-pine-muted); }
+  body.paper-pine .poem, body.paper-pine .item .n, body.paper-pine .body strong { color: var(--social-pine-accent); }
+  body.paper-pine .foot { border-top-color: var(--social-pine-line); }
+  body.paper-teal .card { background: var(--social-teal-bg); color: var(--social-teal-fg); }
+  body.paper-teal .meta, body.paper-teal .foot { color: var(--social-teal-muted); }
+  body.paper-teal .poem, body.paper-teal .item .n, body.paper-teal .body strong { color: var(--social-teal-accent); }
+  body.paper-teal .foot { border-top-color: var(--social-teal-line); }
+  body.paper-crimson .card { background: var(--social-crimson-bg); color: var(--social-crimson-fg); }
+  body.paper-crimson .meta, body.paper-crimson .foot { color: var(--social-crimson-muted); }
+  body.paper-crimson .poem, body.paper-crimson .item .n, body.paper-crimson .body strong { color: var(--social-crimson-accent); }
+  body.paper-crimson .foot { border-top-color: var(--social-crimson-line); }
+  body.paper-char .card { background: var(--social-char-bg); color: var(--social-char-fg); }
+  body.paper-char .meta, body.paper-char .foot { color: var(--social-char-muted); }
+  body.paper-char .poem, body.paper-char .item .n, body.paper-char .body strong { color: var(--social-char-accent); }
+  body.paper-char .foot { border-top-color: var(--social-char-line); }
+  /* Light text on a dark paper rasterizes thinner than the browser previews it,
+     so every dark paper sets its text in W05. */
+  body[class*="paper-"]:not(.paper-parchment) { font-weight: 500; }
+
+  /* One card = one page = one image, exactly 1242 x 1660. Content that grows
+     into the footer is reported by --deliver («card fit»): split the card,
+     never shrink the type. */
+  .card {
+    width: 1242px;
+    height: 1660px;
+    padding: 120px 96px 84px;
+    background: var(--parchment);
+    color: var(--near-black);
+    position: relative;
+    break-after: page;
+  }
+  .card:last-child { break-after: auto; }
+
+  .meta {
+    font-size: 30px;
+    line-height: 1.4;
+    letter-spacing: 1.2px;
+    color: var(--stone);
+  }
+
+  /* Cover headline: the post title, wrapping by itself. Narrow max-width
+     (not <br>) to move a short last line. */
+  h1 {
+    max-width: 7.3em;
+    margin-top: 72px;
+    font-size: 104px;
+    font-weight: 500;
+    line-height: 1.28;
+    letter-spacing: 1px;
+  }
+  .poem {
+    margin-top: 48px;
+    font-size: 46px;
+    line-height: 1.4;
+    letter-spacing: 5.5px;
+    color: var(--brand);
+  }
+  .photo {
+    position: absolute;
+    left: 96px;
+    right: 96px;
+    top: 640px;
+    bottom: 96px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 60%;
+  }
+
+  h2 {
+    margin-top: 56px;
+    font-size: 80px;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 3px;
+  }
+  .body {
+    margin-top: 44px;
+    font-size: 44px;
+    line-height: 1.75;
+  }
+  .body strong { font-weight: 500; color: var(--brand); }
+
+  .item {
+    display: flex;
+    margin-top: 48px;
+  }
+  .item .n {
+    flex: 0 0 120px;
+    font-family: Charter, Georgia, var(--serif);
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--brand);
+  }
+  .item p {
+    flex: 1;
+    font-size: 42px;
+    line-height: 1.68;
+  }
+
+  .shot {
+    margin-top: 56px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .shot img { display: block; width: 100%; }
+
+  .foot {
+    position: absolute;
+    left: 96px;
+    right: 96px;
+    bottom: 84px;
+    padding-top: 30px;
+    border-top: 1px solid var(--social-parchment-line);
+    font-size: 28px;
+    line-height: 1.4;
+    color: var(--stone);
+  }
+</style>
+</head>
+<body class="paper-espresso">
+
+<section class="card cover">
+  <div class="meta">Tw93 · 2026</div>
+  <h1>我的 10 条人生最佳实践</h1>
+  <p class="poem">勸君莫惜金縷衣，勸君惜取少年時</p>
+  <div class="photo"><img src="images/social-cards-cover.jpg" alt="手里拿着的一杯冰咖啡"></div>
+</section>
+
+<section class="card">
+  <div class="meta">Tw93 · 2026</div>
+  <h2>为啥写这个</h2>
+  <p class="body">昨天有一个小伙伴私信问我，自己计算机专业，感觉现在 AI 可以完全代替他们的作业和论文，问我这个行业还有没有前景，以及对未来的一些建议。</p>
+  <p class="body">我在想假如我回到大四的那一年，我会怎么做让自己未来之路少踩坑，走得顺一点，当然自己见识浅薄有限，欢迎交流。</p>
+  <div class="foot">我的 10 条人生最佳实践</div>
+</section>
+
+<section class="card">
+  <div class="meta">我的 10 条人生最佳实践</div>
+  <h2>第 1 到 2 条</h2>
+  <div class="item"><div class="n">01</div><p>肯定还是会选择计算机方向，然后选择自己最感兴趣的子方向，借助 AI 协作极大放大这一块的效果，好比一毕业就有一种带团队干活的感觉。</p></div>
+  <div class="item"><div class="n">02</div><p>选择北上深杭这样技术氛围好，科技行业多的城市，假如学历和技术足够厉害，就去北京清华以南北大以东学院路以西大钟寺以北这个区域内找一个合适的AI 公司工作，这样对于 AI 大模型的敏锐度会远高于其他的地方。</p></div>
+  <div class="foot">我的 10 条人生最佳实践</div>
+</section>
+
+<section class="card">
+  <div class="meta">我的 10 条人生最佳实践</div>
+  <h2>第 3 到 4 条</h2>
+  <div class="item"><div class="n">03</div><p>工作时候，快速完成工作，愿意投资好的 AI  Token 帮助自己快速做好事情，对于自己感兴趣的项目做到 150%的效果，对于不感兴趣的项目做到80分合格但是效率最高，不浪费时间，这样才有时间去学习更多的东西，非常积极的拥抱新事物，愿意花钱投资最好 AI 的使用。</p></div>
+  <div class="item"><div class="n">04</div><p>把工资的一半拿来投资 VOO、QQQ，当做定投，当然也可以选择自己极度看好的一两个科技公司，比如英伟达、苹果以及未来的要上市的 Anthropic，不碰任何 A 股、港股，不投机。</p></div>
+  <div class="foot">我的 10 条人生最佳实践</div>
+</section>
+
+<section class="card">
+  <div class="meta">我的 10 条人生最佳实践</div>
+  <h2>第 5 到 7 条</h2>
+  <div class="item"><div class="n">05</div><p style="padding-right: 60px">更早的时候找到自己的另一半，不要拖到工作几年以后，多看另一半处理问题时候的能力和耐心，在意你的感受，乐观，出什么事情都站到你这边的那个。</p></div>
+  <div class="item"><div class="n">06</div><p>不要借钱任何人包括亲戚、同学、老乡，借钱会让年轻的你心情不好，不要炫耀自己赚了多少钱，也不乱花钱，先让自己的第一桶金能够到你感觉即使2年不工作也可以过得很舒服的地步。</p></div>
+  <div class="item"><div class="n">07</div><p>保持持续学习，持续交流，持续创造一些好玩的东西给到社区、圈子、推特，不逐利的去做自己的 GitHub、X 等账号，形成自己的个人品牌，永远抱着用户是好人的心态去提供服务。</p></div>
+  <div class="foot">我的 10 条人生最佳实践</div>
+</section>
+
+<section class="card">
+  <div class="meta">我的 10 条人生最佳实践</div>
+  <h2>第 8 到 10 条</h2>
+  <div class="item"><div class="n">08</div><p>专业工作之外，培养自己的兴趣点，可以去上一些课，不管是摄影、乐器、运动甚至是跑步骑行这种，这样会让你工作之外，不会太无聊，也会让你可以多出去走走。</p></div>
+  <div class="item"><div class="n">09</div><p>身体健康永远放到第一位，睡眠很重要，一定不要熬夜，不要久坐，多喝水，多走走挺好的，以及工作不要干太猛，别一鼓作气再而衰，把自己可以工作的战线拉得更长一点。</p></div>
+  <div class="item"><div class="n">10</div><p>最终尽早找到自己让自己不上班的自由之路，可以工作但是可以不上班，通过自己的兴趣、专业、特长、学习去赚钱，并持续的在这个过程提高自己，很高兴的把钱赚了。</p></div>
+  <div class="foot">我的 10 条人生最佳实践</div>
+</section>
+
+</body>
+</html>

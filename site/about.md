@@ -8,9 +8,9 @@ HTML version: <https://kami.tw93.fun/about>
 
 Kami uses a warm parchment background (`#f5f4ed`), ink-blue accents (`#1B365D`), serif fonts, and consistent spacing. These defaults help keep headings, text, tables, and diagrams readable across document types.
 
-Documents render through HTML to PDF or PNG, while slide decks also have an editable PPTX path. Eight document templates cover the common cases: one-pager, letter, long document, portfolio, resume, slides, equity report, and changelog. Eighteen inline SVG diagram types cover the pictures those documents need, from architecture and flowchart to candlestick and Venn. A separate landing-page template applies the same restraint to a product page.
+Documents render through HTML to PDF or PNG, while slide decks also have an editable PPTX path. Nine document templates cover the common cases: one-pager, letter, long document, portfolio, resume, slides, equity report, changelog, and social cards. Eighteen inline SVG diagram types cover the pictures those documents need, from architecture and flowchart to candlestick and Venn. A separate landing-page template applies the same restraint to a product page.
 
-Kami also checks content and layout. Kami ships nine JSON content schemas and a set of checks that look for the failures agents actually produce: unfilled placeholders, markdown syntax leaking into the render, a line orphaned at a page break, a page that ends a third empty, a deck where six slides in a row share one layout.
+Kami also checks content and layout. Kami ships ten JSON content schemas and a set of checks that look for the failures agents actually produce: unfilled placeholders, markdown syntax leaking into the render, a line orphaned at a page break, a page that ends a third empty, a deck where six slides in a row share one layout.
 
 ## Customization and scope
 

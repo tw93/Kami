@@ -126,7 +126,7 @@ DELIVER_GATE_RULES = {
     "orphans": "pdf.orphans",
 }
 DELIVER_ONLY_GATES = {"render", "page contract", "page target", "resume balance", "page images",
-                      "screen template"}
+                      "screen template", "one page per card", "card fit", "card orphans"}
 
 TOOLS = [
     {

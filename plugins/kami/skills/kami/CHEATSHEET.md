@@ -5,10 +5,10 @@ One-page quick reference. Scan before filling a template or tweaking a detail. F
 ## Ten invariants
 
 1. Default page background `#f5f4ed` (parchment); the white-paper print variant is an explicit exception
-2. Single accent: ink-blue `#1B365D`
+2. Single accent: ink-blue `#1B365D`; social cards pick one paper from `references/social-palettes.json`, each with one accent
 3. All grays **warm-toned** (yellow-brown undertone), no cool blue-gray
 4. One serif font per page (headings + body). `--sans` is a CSS alias for the same family; introduce a real sans only for genuinely UI-style chrome
-5. Serif weights 400 body / 500 headings, no bold
+5. Serif weights 400 body / 500 headings, no bold (social-card list numerals are the one Charter Bold)
 6. Line-height: headlines 1.1-1.3 / dense 1.4-1.45 / reading 1.5-1.55
 7. Letter-spacing: Chinese body with TsangerJinKai 0.1-0.2pt (dense layouts may push to 0.3pt); English body 0; small labels and all-caps overlines get +0.2-1pt
 8. Tag backgrounds solid hex, no rgba (WeasyPrint double-rectangle bug)
@@ -289,7 +289,7 @@ Usage: extract the `<svg>` block from the HTML file and paste into the template'
 
 ## Verification checks
 
-Finish every filled document with one command: `python3 scripts/build.py --deliver filled.html content.json`. It runs placeholders, strict math (rendered to MathJax SVG in place), Markdown residue, template style, content coverage, the PDF render, page contract, resume balance, fonts, density, and orphans, exports page images, and ends in READY or NOT READY. Fix every ERROR, re-run, then view every page image against the printed checklist.
+Finish every filled document with one command: `python3 scripts/build.py --deliver filled.html content.json`. It runs placeholders, strict math (rendered to MathJax SVG in place), Markdown residue, template style, content coverage, the PDF render, page contract, resume balance, fonts, density, and orphans (card fit and card orphans for social cards), exports page images, and ends in READY or NOT READY. Fix every ERROR, re-run, then view every page image against the printed checklist.
 
 Validate the content IR before layout with `python3 scripts/build.py --check-content content.json` (schemas in `references/schemas/`). `python3 scripts/build.py --verify [target]` is the maintainer check for the source templates themselves, which intentionally keep `{{...}}` fields.
 
@@ -312,6 +312,7 @@ Full quality bars in `references/writing.md`. The single most important rule for
 | One-Pager     | Metrics are the headline; if the 4 cards don't tell the story, the metrics are wrong |
 | Letter        | First paragraph states purpose in one sentence                                       |
 | Changelog     | One sentence per change, verb-led, user-facing language                              |
+| Social Cards  | The author's words unchanged; layout fixes every short line, never a rewrite         |
 
 
 ## Per-page font size strategy (Resume two-page)

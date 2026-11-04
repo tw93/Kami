@@ -364,6 +364,19 @@ and inline-code backticks before delivery, then run `python3 scripts/build.py
 
 ---
 
+### Social Cards
+
+**Core rule**: the cards carry the author's words unchanged. Layout absorbs every fit problem; copy edits are the author's call, not a fix for a short line.
+
+**Rules**:
+1. The cover headline and the post title are the same sentence, and the footer of every card repeats it
+2. One point per card; list items two or three per card, grouped so neighbouring cards read equally full
+3. The cover needs a real photo or screenshot; a set without one ships text cards only after the author agrees
+4. Keep firsthand experience, quoted advice and the author's conclusions apart; do not add a lesson at the end of each card
+5. For a product, show the product before the update: what it is, a real screenshot, then the changes
+
+---
+
 ## Page density (multi-page documents)
 
 Applies to slides-weasy, long-doc, portfolio, equity-report, and changelog. Resume, one-pager, and letter have their own length contracts. The most common draft defect in a generated multi-page document is content split too thin, so several pages never fill.

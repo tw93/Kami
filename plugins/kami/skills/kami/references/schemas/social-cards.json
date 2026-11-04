@@ -1,0 +1,42 @@
+{
+  "$comment": "Social cards content contract: only the words and images the cards show. A set of 1242x1660 images for Xiaohongshu or X. The platform goes in brief.target.surface (xiaohongshu: up to 18 cards, title counted in 字; x: at most 4 cards, headline and key evidence inside the centre 1242x1242 crop). The paper is the class on <body> (references/social-palettes.json), not content. The cover headline is the post title, word for word, and the cover carries a real photo or screenshot. The author's text is used as written: a short last line is fixed with layout, never by rewording. Two or three list items per card, one point per text card.",
+  "type": "object",
+  "required": ["title", "cards"],
+  "properties": {
+    "title": {
+      "$comment": "The post title. The cover headline and every footer repeat it unchanged.",
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 60
+    },
+    "cards": {
+      "$comment": "In order. The first card is the cover: title plus image. A card with paragraphs is a text card, with items a list card, with heading and image a screenshot card.",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 18,
+      "items": {
+        "type": "object",
+        "properties": {
+          "heading": { "type": "string", "minLength": 1, "maxLength": 40 },
+          "paragraphs": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 3,
+            "items": { "type": "string", "minLength": 2, "maxLength": 400 }
+          },
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 3,
+            "items": { "type": "string", "minLength": 2, "maxLength": 300 }
+          },
+          "image": {
+            "$comment": "Path to the real photo or screenshot. Never a stock image or a mocked interface.",
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

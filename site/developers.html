@@ -50,7 +50,7 @@
       </span>
     </div>
     <h1>Developers</h1>
-    <p class="tagline">Use the local MCP server, nine content schemas, and CLI checks to render and review documents.</p>
+    <p class="tagline">Use the local MCP server, ten content schemas, and CLI checks to render and review documents.</p>
     <nav class="doc-nav" aria-label="Site sections">
       <a href="./developers" aria-current="page">Developers</a>
       <a href="./about">About</a>
@@ -110,7 +110,7 @@ claude mcp add kami -- python3 &lt;checkout&gt;/skills/kami/scripts/mcp_server.p
       <h2 class="section-title">Content schemas</h2>
       <p class="section-lede">Each document type has a JSON schema that states its structure and its quality bar. Fill the schema first, lay out second.</p>
     </div>
-    <p>Nine schemas live under <code>references/schemas/</code>: changelog, equity-report, landing-page, letter, long-doc, one-pager, portfolio, resume, slides. A new <code>content.json</code> also carries a <code>brief</code> with audience, job, output contract, target, preserve boundary, evidence, and acceptance checks; older IR files remain valid. Validate the content object before layout, then check how much of it actually reached the page:</p>
+    <p>Ten schemas live under <code>references/schemas/</code>: changelog, equity-report, landing-page, letter, long-doc, one-pager, portfolio, resume, slides, social-cards. A new <code>content.json</code> also carries a <code>brief</code> with audience, job, output contract, target, preserve boundary, evidence, and acceptance checks; older IR files remain valid. Validate the content object before layout, then check how much of it actually reached the page:</p>
 <pre class="code code-wrap">python3 scripts/build.py --check-content content.json
 python3 scripts/build.py --check-content content.json filled.html</pre>
     <p>The second form reports coverage: fields that exist in the content object but never made it into the document are the most common failure in agent-generated layouts, and can be easy to miss in a quick review.</p>
@@ -145,7 +145,7 @@ python3 scripts/build.py --check-content content.json filled.html</pre>
       <li><a href="./developers/llms.txt">/developers/llms.txt</a> - the developer surface on its own, for agents that only need the integration facts.</li>
       <li><a href="./.well-known/agent-skills/index.json">/.well-known/agent-skills/index.json</a> - Agent Skills discovery index, with a SHA-256 digest of the skill file it points to.</li>
       <li><a href="./.well-known/mcp/server-card.json">/.well-known/mcp/server-card.json</a> - MCP server card: version, protocol version, transport, and tool list.</li>
-      <li><a href="./feeds/catalog.jsonld">/feeds/catalog.jsonld</a> - JSON-LD catalog of all 8 document templates and 18 diagram types, indexed by <a href="./schemamap.xml">/schemamap.xml</a>.</li>
+      <li><a href="./feeds/catalog.jsonld">/feeds/catalog.jsonld</a> - JSON-LD catalog of all 9 document templates and 18 diagram types, indexed by <a href="./schemamap.xml">/schemamap.xml</a>.</li>
       <li><a href="./SKILL.md">/SKILL.md</a> - the skill definition itself, served as <code>text/markdown</code>.</li>
       <li><a href="./sitemap.xml">/sitemap.xml</a> and <a href="./robots.txt">/robots.txt</a> - crawl surface and the AI crawler policy.</li>
     </ul>

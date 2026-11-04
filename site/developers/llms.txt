@@ -32,7 +32,7 @@ Reach for Kami when a user wants a finished document whose appearance matters: r
 - https://kami.tw93.fun/index.md (homepage as Markdown)
 - https://kami.tw93.fun/.well-known/agent-skills/index.json
 - https://kami.tw93.fun/.well-known/mcp/server-card.json
-- https://kami.tw93.fun/feeds/catalog.jsonld (8 document templates, 18 diagram types)
+- https://kami.tw93.fun/feeds/catalog.jsonld (9 document templates, 18 diagram types)
 - https://kami.tw93.fun/schemamap.xml
 - https://kami.tw93.fun/SKILL.md
 

@@ -50,7 +50,7 @@ How an agent should call Kami: install the skill, fill the matching content sche
 - MCP client: `claude mcp add kami -- python3 <checkout>/skills/kami/scripts/mcp_server.py`
 
 ## Templates
-- 8 document template types: One-pager, Letter, Resume, Long document, Portfolio, Slides, Equity report, Changelog
+- 9 document template types: One-pager, Letter, Resume, Long document, Portfolio, Slides, Equity report, Changelog, Social cards
 - 18 diagram types: architecture, architecture board, flowchart, quadrant, bar chart, line chart, donut chart, state machine, timeline, swimlane, tree, layer stack, venn, candlestick, waterfall, sequence, class, ER
 
 ## Agent Interfaces

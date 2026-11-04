@@ -1,0 +1,11 @@
+{
+  "$comment": "Papers for the social-cards template only. Documents keep the single-accent print palette in tokens.json; these values are allowed in social-cards*.html and demo-social-cards*.html and nowhere else. Each paper is one background, one text color, one accent, one muted color and one footer rule (text mixed 16% into the background). Contrast on its background: text >= 8.8:1, accent >= 6:1, muted >= 4.3:1 (every muted use is 28px or larger). The template mirrors these as --social-<paper>-<role>; --check fails on drift.",
+  "parchment": {"source": "Kami", "bg": "#f5f4ed", "fg": "#141413", "accent": "#1B365D", "muted": "#6b6a64", "line": "#d1d0ca"},
+  "ink":       {"source": "Kami ink blue, Mole navy", "bg": "#1B365D", "fg": "#f3f1e8", "accent": "#b9c6d8", "muted": "#8e9db3", "line": "#3e5473"},
+  "olive":     {"source": "21 AI Coding rules set", "bg": "#2b3326", "fg": "#ece8da", "accent": "#bdb38c", "muted": "#9a9883", "line": "#4a5043"},
+  "espresso":  {"source": "Life practices set, Hina brown", "bg": "#3a2a20", "fg": "#f2e9dc", "accent": "#d9b48a", "muted": "#a8957f", "line": "#57493e"},
+  "pine":      {"source": "Kaku and MiaoYan green", "bg": "#1c3a29", "fg": "#eef0e6", "accent": "#b5cfa4", "muted": "#8fa593", "line": "#3e5747"},
+  "teal":      {"source": "Yado teal", "bg": "#134857", "fg": "#eef2ef", "accent": "#a8d0cf", "muted": "#8fb0b4", "line": "#36636f"},
+  "crimson":   {"source": "Pake red", "bg": "#5a1f17", "fg": "#f4ebe2", "accent": "#e6bca6", "muted": "#bd968a", "line": "#734037"},
+  "char":      {"source": "MiaoYan night", "bg": "#1e1d1b", "fg": "#f2f0ea", "accent": "#d4c4a0", "muted": "#a8a49a", "line": "#403f3c"}
+}

@@ -5,7 +5,7 @@
   "name": "Kami template catalog",
   "description": "Every document template and diagram type Kami ships, plus the content schema types an agent can validate against before layout.",
   "url": "https://kami.tw93.fun/developers",
-  "numberOfItems": 26,
+  "numberOfItems": 27,
   "itemListElement": [
     {
       "@type": "ListItem",
@@ -169,6 +169,27 @@
           "ko",
           "zh-CN",
           "en"
+        ],
+        "encodingFormat": [
+          "text/html",
+          "application/pdf"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "item": {
+        "@type": "CreativeWork",
+        "@id": "https://kami.tw93.fun/#template-social-cards",
+        "identifier": "social-cards",
+        "name": "Social Cards",
+        "description": "1242x1660 image cards for Xiaohongshu or X, in eight papers.",
+        "genre": "document template",
+        "inLanguage": [
+          "zh-CN",
+          "en",
+          "ko"
         ],
         "encodingFormat": [
           "text/html",
@@ -481,6 +502,7 @@
     "content-schema:one-pager",
     "content-schema:portfolio",
     "content-schema:resume",
-    "content-schema:slides"
+    "content-schema:slides",
+    "content-schema:social-cards"
   ]
 }

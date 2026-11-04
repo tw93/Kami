@@ -1,6 +1,6 @@
 ---
 name: kami
-description: 'Typeset professional documents with Kami templates: resumes, one-pagers, white papers, letters, portfolios, and slide decks. Use when asked to 做 PDF / 排版 / 简历 / 一页纸 / PPT / slides, or to create a Kami landing page. Not for auditing or restyling an existing product site.'
+description: 'Typeset professional documents with Kami templates: resumes, one-pagers, white papers, letters, portfolios, slide decks, and social media cards. Use when asked to 做 PDF / 排版 / 简历 / 一页纸 / PPT / slides / 小红书配图, or to create a Kami landing page. Not for auditing or restyling an existing product site.'
 ---
 
 # kami · 紙
@@ -30,7 +30,7 @@ Route by the artifact's current state:
 | New document or substantial restructuring | **New document** | Lock the contract, write `content.json` with `brief` + `content`, then fill and deliver |
 | Text replacement, translation, or factual correction in an existing artifact | **Content-only** | Preserve CSS and layout unless the new copy proves a fit defect |
 | User supplies a render or screenshot and rejects how it looks | **Visual repair** | Treat the render as the brief; follow «Feedback protocol» |
-| Standalone generated illustration, cover, social card, or redraw | **Generated asset** | Lock the semantic brief before pixels (`references/diagrams.md` section 11); preserve accepted parts across iterations |
+| Standalone generated illustration, cover, or redraw | **Generated asset** | Lock the semantic brief before pixels (`references/diagrams.md` section 11); preserve accepted parts across iterations |
 
 Use the nearest existing template and check. Do not add a template, shared CSS layer, dependency, script flag, or optional mode unless the request cannot be met without it.
 
@@ -59,6 +59,7 @@ Japanese, Korean, and other languages need a visual pass on the page images befo
 | "个股研报 / equity report / 估值分析 / investment memo / 股票分析" | Equity Report | `equity-report.html` | `equity-report-en.html` | `equity-report-ko.html` |
 | "更新日志 / changelog / release notes / 版本记录" | Changelog | `changelog.html` | `changelog-en.html` | `changelog-ko.html` |
 | "landing page / 落地页 / 官网 / product page / 产品页" | Landing Page | `landing-page.html` | `landing-page-en.html` | `landing-page-ko.html` |
+| "小红书配图 / 社交卡片 / X 配图 / 推特图 / social cards / carousel" | Social Cards | `social-cards.html` | `social-cards-en.html` | `social-cards-ko.html` |
 
 When two cells both fit, decide from the signals before asking:
 
@@ -73,6 +74,7 @@ When two cells both fit, decide from the signals before asking:
 | Metrics dashboard plus thesis plus price or risk view | equity-report |
 | Version-by-version release facts | changelog |
 | Product showcase, pricing, screenshots, FAQ for a browser | landing-page |
+| A set of 3:4 images for a social feed, one point per image | social-cards |
 
 Ask only in cases like "1.5 pages of career story, heavy visuals" (resume or portfolio?) or "2 pages of exec summary with metric tiles" (one-pager or equity-report?).
 
@@ -81,6 +83,7 @@ Ask only in cases like "1.5 pages of career story, heavy visuals" (resume or por
 - **Diagrams inside a document** come from `assets/diagrams/` (eighteen types), not a template. `references/diagrams.md` section 1 picks the type; extract the `<svg>` block into a `<figure>`. The same file owns architecture boards, diagrams maintained in the user's repo, and generated raster illustrations.
 - **Charts from data** (pick and embed them without asking) are generated, never drawn by hand: write the numbers as a spec and run `python3 scripts/build.py --chart spec.json -o chart.svg` (`references/diagrams.md` section 9).
 - **Slides**: read `references/deck-preflight.md` before drafting.
+- **Social cards**: one `<section class="card">` per 1242x1660 image and one paper for the set, set on `<body>` (`references/design.md` Section 13). The cover headline is the post title and the cover carries a real photo or screenshot; the author's text stays as written, and a short last line is fixed with layout, not by rewording. `--deliver` writes each card at its pixel size.
 
 ## 2 · Sources, materials, and content
 
@@ -129,6 +132,7 @@ Read the lowest tier that covers the task. The templates already carry every tok
 | Resume | + `references/resume-writing.md` |
 | Slides, long-doc, portfolio, equity-report, changelog | + `references/writing.md` «Page density» |
 | Slides | + `references/deck-preflight.md` and the `references/design.md` section 8 «Deck Recipe» it points to |
+| Social cards | + `references/design.md` section 13 «Social Cards» |
 | Diagram | `references/diagrams.md`; `references/mermaid.md` when the source is Mermaid text |
 | Company, product, market, or branded subject | `references/writing.md` sections 5-6 |
 | Rendering bug, font issue, overflow | `references/production.md` Part 4 (and the design spec if CSS is the cause) |
@@ -165,7 +169,7 @@ One command finishes a document. Run it from the document's directory, fix every
 python3 scripts/build.py --deliver filled.html content.json
 ```
 
-It checks the HTML (placeholders, strict math rendered in place, Markdown residue, generated charts against their data, template style, content coverage), renders the PDF next to it, then checks the PDF (page contract, resume balance, the font that actually drew CJK text, residue, density, orphans) and exports page images. `WARN` lines point at where to look, not at failures. `GAP` lines are the `[DATA NEEDED]` markers you must report.
+It checks the HTML (placeholders, strict math rendered in place, Markdown residue, generated charts against their data, template style, content coverage), renders the PDF next to it, then checks the PDF (page contract, resume balance, the font that actually drew CJK text, residue, density, orphans; for social cards one page per card, card fit and card orphans) and exports page images. `WARN` lines point at where to look, not at failures. `GAP` lines are the `[DATA NEEDED]` markers you must report.
 
 Then do the part no script can: open every page image and walk the printed checklist. One hit means a whole-document sweep for that class of issue. Fix the three most visible defects per round, re-run `--deliver`, and stop after three rounds; list what is still wrong rather than looping. If the host cannot view images, send the image paths and the checklist to the user instead of skipping the pass. A missing CJK serif shows no fallback boxes, only a heavier, flatter page, which is why the font gate exists; never call a CJK document visually verified without it.
 

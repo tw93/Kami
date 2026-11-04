@@ -11,7 +11,7 @@
 
 ## Why
 
-Kami (紙, かみ) means "paper" in Japanese. It gives AI agents layout rules and templates for PDF, PNG, and editable PowerPoint output, with eight built-in document templates and a product landing page.
+Kami (紙, かみ) means "paper" in Japanese. It gives AI agents layout rules and templates for PDF, PNG, and editable PowerPoint output, with nine built-in document templates and a product landing page.
 
 As the delivery piece of the trilogy, Kami works alongside [Kaku](https://github.com/tw93/Kaku) (書く), built for writing code, and [Waza](https://github.com/tw93/Waza) (技), built around engineering habits, so technical work is not only logically rigorous but also visually compelling.
 
@@ -127,7 +127,7 @@ Create `~/.config/kami/brand.md` to persist identity, brand, defaults, and writi
 
 The defaults are a warm parchment background (`#f5f4ed`), ink-blue accents (`#1B365D`), and serif fonts. Templates use type size and spacing to separate titles, body text, and notes. You can adjust the defaults for your brand.
 
-- **Templates.** Eight document templates: One-Pager, Long Doc, Letter, Portfolio, Resume, Slides, Equity Report, and Changelog, plus a Landing Page system, in EN, CN, and KO. Kami picks the right variant based on the language you write in.
+- **Templates.** Nine document templates: One-Pager, Long Doc, Letter, Portfolio, Resume, Slides, Equity Report, Changelog, and Social Cards, plus a Landing Page system, in EN, CN, and KO. Kami picks the right variant based on the language you write in.
 - **Diagrams.** Eighteen inline SVG types, including a report-scale architecture board. Sequence, class, and ER can be authored from Mermaid text: [beautiful-mermaid](https://github.com/lukilabs/beautiful-mermaid) renders the SVG and `skills/kami/scripts/mermaid_normalize.py` re-themes it to the Kami palette and makes it WeasyPrint-safe, no Node bundled.
 - **Slides.** Three rendering paths: WeasyPrint HTML to PDF by default, python-pptx for editable PPTX on request, and a Marp variant in `skills/kami/assets/templates/marp/` for Markdown-first decks.
 - **Code.** Pygments-based syntax highlighting when `Pygments` is installed; without it, PDFs still render and code stays monochrome.

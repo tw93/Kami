@@ -35,7 +35,7 @@ from shared import (
 
 
 def test_registry_consistency() -> None:
-    check("HTML_TEMPLATES has 24 entries", len(HTML_TEMPLATES) == 24,
+    check("HTML_TEMPLATES has 27 entries", len(HTML_TEMPLATES) == 27,
           f"got {len(HTML_TEMPLATES)}")
     check("SCREEN_TARGETS has 3 entries", len(SCREEN_TARGETS) == 3,
           f"got {len(SCREEN_TARGETS)}")

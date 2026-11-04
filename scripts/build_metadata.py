@@ -242,7 +242,8 @@ def build_claude_marketplace(version: str) -> dict:
 SKILL_WHEN_TO_USE = (
     "Use when a user asks for a finished document whose appearance matters: a "
     "resume, one-pager, letter, portfolio, long report, slide deck, equity "
-    "report, changelog, or a landing page. Kami fills an HTML "
+    "report, changelog, a set of Xiaohongshu or X image cards, or a landing "
+    "page. Kami fills an HTML "
     "template and exports PDF or PNG, with editable PPTX for slides, then reviews "
     "the result with deterministic and perceptual checks. Skip it when the "
     "user only wants the text."
@@ -259,6 +260,7 @@ DOCUMENT_TEMPLATE_NOTES = {
     "slides": ("Slides", "Deck rendered to PDF, with an editable PPTX fallback."),
     "equity-report": ("Equity Report", "Company or stock analysis with data tables."),
     "changelog": ("Changelog", "Release notes grouped by version."),
+    "social-cards": ("Social Cards", "1242x1660 image cards for Xiaohongshu or X, in eight papers."),
 }
 
 DIAGRAM_NOTES = {

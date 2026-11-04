@@ -455,8 +455,8 @@ slides-en keeps the one LLM fidelity judge, which has passed every run on its de
 `evals/score.py` then applies Kami's own gates to each kept run workspace (page
 contract, atomic facts in the PDF text, fonts, density, residue, style, resume
 balance, generated chart count), which the harness cannot run itself; it is
-read-only unless given `--write`, which saves `gate-scores.json`. One suite run is 9
-cases, 18 document builds at `--runs 2`, at roughly $1-3 each.
+read-only unless given `--write`, which saves `gate-scores.json`. One suite run is 10
+cases, 20 document builds at `--runs 2`, at roughly $1-3 each.
 
 - Run it after any change to `SKILL.md`, a reference the tier table routes to, a
   template, or a gate an agent relies on, and compare against the previous run on the
@@ -533,7 +533,9 @@ drift out of it:
   Latin serif ends the stack walk for characters it lacks, which sends each ideograph
   to fontconfig separately and splits words across two faces inside inline SVG
   (`production.md` pitfall #4.1). The `-en` templates are the deliberate exception:
-  they are Latin documents, so `Charter` stays first there.
+  they are Latin documents, so `Charter` stays first there. The `social-cards`
+  templates are the other: they carry no inline SVG, and their Latin letters and
+  digits are set in Charter the way the published card sets were.
 - The commercial TsangerJinKai02 files never ship inside the skill package, so a
   sandboxed install has no primary CJK serif and falls through the chain. Keep the
   chain wide (Source Han Serif SC and CN, Noto Serif CJK SC and Noto Serif SC, Songti

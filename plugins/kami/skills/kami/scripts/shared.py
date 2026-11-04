@@ -4,6 +4,7 @@ from __future__ import annotations
 import functools
 import json
 import os
+import re
 import sys
 from pathlib import Path
 from typing import Any, NamedTuple
@@ -32,6 +33,7 @@ TEMPLATES = ROOT / "assets" / "templates"
 DIAGRAMS = ROOT / "assets" / "diagrams"
 EXAMPLES = ROOT / "assets" / "examples"
 TOKENS_FILE = ROOT / "references" / "tokens.json"
+SOCIAL_PALETTES_FILE = ROOT / "references" / "social-palettes.json"
 CHECKS_THRESHOLDS_FILE = ROOT / "references" / "checks_thresholds.json"
 SCHEMAS_DIR = ROOT / "references" / "schemas"
 
@@ -138,6 +140,10 @@ HTML_TEMPLATES: dict[str, TemplateSpec] = {
     # Slides (WeasyPrint default)
     "slides-weasy":    TemplateSpec("slides-weasy.html",    0),
     "slides-weasy-en": TemplateSpec("slides-weasy-en.html", 0),
+    # Social cards: one 1242x1660 page per image; 18 is Xiaohongshu's image cap
+    "social-cards":    TemplateSpec("social-cards.html",    18),
+    "social-cards-en": TemplateSpec("social-cards-en.html", 18),
+    "social-cards-ko": TemplateSpec("social-cards-ko.html", 18),
 }
 
 SCREEN_TEMPLATES: dict[str, str] = {
@@ -194,6 +200,7 @@ PUBLIC_DOCUMENT_TEMPLATE_KINDS = {
     "slides",
     "equity-report",
     "changelog",
+    "social-cards",
 }
 
 
@@ -279,6 +286,40 @@ def iter_template_files(
 def kami_version() -> str:
     """Return the canonical Kami version from the tracked VERSION file."""
     return (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+
+
+# Social cards are images, not print pages: their papers live in
+# references/social-palettes.json and are allowed only in social-card files.
+# A filled card set keeps the template's --social-* tokens, which is how
+# a renamed output is still recognised.
+SOCIAL_PAPER_ROLES = ("bg", "fg", "accent", "muted", "line")
+SOCIAL_FINGERPRINT = re.compile(r"--social-[a-z]+-(?:bg|fg|accent|muted|line)\s*:")
+
+
+@functools.lru_cache(maxsize=1)
+def load_social_palettes() -> dict[str, dict[str, str]]:
+    data = json.loads(SOCIAL_PALETTES_FILE.read_text(encoding="utf-8"))
+    return {name: paper for name, paper in data.items() if not name.startswith("$")}
+
+
+def social_palette_values() -> set[str]:
+    return {
+        paper[role].lower()
+        for paper in load_social_palettes().values()
+        for role in SOCIAL_PAPER_ROLES
+    }
+
+
+def is_social_cards(path: Path, text: str | None = None) -> bool:
+    """True for the social-cards templates, their demos, and filled card sets."""
+    if path.name.startswith(("social-cards", "demo-social-cards")):
+        return True
+    if text is None:
+        try:
+            text = path.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            return False
+    return bool(SOCIAL_FINGERPRINT.search(text))
 
 
 @functools.lru_cache(maxsize=1)

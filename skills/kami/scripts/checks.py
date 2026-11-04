@@ -6,6 +6,8 @@ Splits out from build.py:
   - check_density:      scan rendered PDFs for pages with too much trailing whitespace.
   - check_resume_balance: scan resume PDFs for exact two-page balance.
   - check_rhythm:       scan slides Python source for monotonous deck sequences.
+  - check_card_fit:     scan social-card PDFs for text running into the footer or photo.
+  - check_card_orphans: scan social-card PDFs for paragraphs ending on 1-3 characters.
 
 Density scanning uses a parchment-aware pixel sweep. The hot path is
 vectorized with NumPy when available and falls back to a pure-Python loop.
@@ -663,3 +665,153 @@ def check_rhythm(targets: list[str]) -> int:
             print(f"OK: {name}: rhythm ok ({len(seq)} slides, max run {max_run})")
 
     return 0 if failures == 0 else 1
+
+
+# ---------- social cards ----------
+#
+# A social card is one fixed 1242x1660 page. Content that outgrows it either
+# runs under the footer or spills onto an extra page (which --deliver also
+# counts against the cards); nothing else in the pipeline notices either.
+# These read the PDF geometry: the footer rule is the wide filled box near the
+# bottom of the page (WeasyPrint draws the border-top as a filled rectangle),
+# the cover photo is the image block. The generic orphan gate misses CJK
+# paragraphs split into one text block per line and flags a two-line cover
+# headline, so card sets get their own paragraph-aware check.
+
+_PX = 0.75  # PDF points per CSS px
+
+
+def _card_lines(page) -> list[tuple[float, float, float, float, str, float]]:
+    """Every text line on the page as (x0, y0, y1, size, text, x1), in px, top to bottom."""
+    lines = []
+    for block in page.get_text("dict")["blocks"]:
+        for line in block.get("lines", []):
+            spans = [s for s in line["spans"] if s["text"].strip()]
+            if not spans:
+                continue
+            x0, y0, x1, y1 = line["bbox"]
+            lines.append((x0 / _PX, y0 / _PX, y1 / _PX, round(spans[-1]["size"] / _PX),
+                          "".join(s["text"] for s in spans).strip(), x1 / _PX))
+    return sorted(lines, key=lambda ln: (ln[1], ln[0]))
+
+
+def _card_images(page) -> list[tuple[float, float]]:
+    """Top and bottom (px) of every image block on the page."""
+    return [(b["bbox"][1] / _PX, b["bbox"][3] / _PX)
+            for b in page.get_text("dict")["blocks"] if b.get("type") == 1]
+
+
+def _card_footer_y(page) -> float | None:
+    """Top of the footer rule in px, or None on a card without a footer (the cover)."""
+    width, height = page.rect.width, page.rect.height
+    tops = [d["rect"].y0 for d in page.get_drawings()
+            if d.get("fill") is not None
+            and d["rect"].width > width * 0.6
+            and d["rect"].y0 > height * 0.7
+            and d["rect"].height < height * 0.2]
+    return min(tops) / _PX if tops else None
+
+
+def card_fit_issues(page, gap_px: int, photo_gap_px: int, *, cover: bool = False) -> list[str]:
+    """`cover` is the first card, which may be a text-only cover without a footer."""
+    lines = _card_lines(page)
+    footer = _card_footer_y(page)
+    issues: list[str] = []
+    if footer is not None:
+        above = [ln for ln in lines if ln[1] < footer]
+        below = [ln for ln in lines if ln[1] >= footer]
+        foot_size = min((ln[3] for ln in below), default=0)
+        runover = [ln for ln in below if ln[3] > foot_size]
+        if runover:
+            issues.append(f"text runs under the footer: \"{runover[0][4][:16]}\"")
+        bottoms = [ln[2] for ln in above] + [bottom for top, bottom in _card_images(page) if top < footer]
+        if bottoms and not runover:
+            gap = footer - max(bottoms)
+            if gap < gap_px:
+                issues.append(f"{gap:.0f}px between the content and the footer, needs {gap_px}px")
+    images = _card_images(page)
+    if footer is None and not images and not cover:
+        issues.append("no footer and no photo: the card spilled onto a second page, split it")
+    for top, bottom in images:
+        # Text running into the photo, or set inside it, within photo_gap_px of its top.
+        over = [ln for ln in lines if ln[1] < bottom and ln[2] + photo_gap_px > top]
+        if over:
+            issues.append(f"text sits on the photo: \"{over[0][4][:16]}\"")
+    return issues
+
+
+_CARD_CJK = re.compile(r"[\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af\uf900-\ufaff]")
+
+
+def card_orphans(page, max_chars: int, max_words: int = 1) -> list[str]:
+    """Last lines of 1-3 characters (CJK) or a single word (Latin), paragraph by paragraph.
+
+    MuPDF splits a wrapped CJK paragraph into one block per line, so lines are
+    regrouped: the same type size and left edge, at most 1.9 line heights apart,
+    and the line before ran wide (a wrapped line fills the measure; the list
+    numbers 01, 02 stacked one above the other do not).
+    """
+    paragraphs: list[list[tuple[float, float, float, float, str, float]]] = []
+    for ln in _card_lines(page):
+        for para in reversed(paragraphs):
+            last = para[-1]
+            if (last[3] == ln[3] and abs(last[0] - ln[0]) < 4
+                    and 0 < ln[1] - last[1] < ln[3] * 1.9
+                    and last[5] - last[0] > ln[3] * 4):
+                para.append(ln)
+                break
+        else:
+            paragraphs.append([ln])
+    found = []
+    for para in paragraphs:
+        tail = re.sub(r"\s", "", para[-1][4])
+        short = (len(tail) <= max_chars if _CARD_CJK.search(tail)
+                 else len(para[-1][4].split()) <= max_words)
+        if len(para) > 1 and short:
+            found.append(f"\"{tail}\" ends \"{para[0][4][:12]}\"")
+    return found
+
+
+def _scan_cards(paths: list[str], label: str, scan) -> int:
+    try:
+        fitz = require_pymupdf()
+    except MissingDepError as exc:
+        print(f"ERROR: {exc}")
+        return 2
+    if not paths:
+        print(f"ERROR: usage: {label} cards.pdf [more.pdf ...]")
+        return 2
+    total = failed = 0
+    for raw in paths:
+        path = resolve_input(raw)
+        if not path.exists():
+            print(f"ERROR: {raw}: not found")
+            failed += 1
+            continue
+        with fitz.open(str(path)) as doc:
+            for index, page in enumerate(doc, start=1):
+                for issue in scan(page, index == 1):
+                    print(f"  {rel_to_root(path)} card {index}: {issue}")
+                    total += 1
+    if failed:
+        return 2
+    if total:
+        print(f"\n{total} finding(s)")
+        return 1
+    print(f"OK: {len(paths)} card set(s), nothing to fix")
+    return 0
+
+
+def check_card_fit(paths: list[str]) -> int:
+    """CLI: --check-card-fit cards.pdf. Text under the footer or on the photo."""
+    cfg = load_checks_thresholds()["social_cards"]
+    return _scan_cards(paths, "--check-card-fit", lambda page, first: card_fit_issues(
+        page, int(cfg["footer_gap_px"]), int(cfg["photo_gap_px"]), cover=first))
+
+
+def check_card_orphans(paths: list[str]) -> int:
+    """CLI: --check-card-orphans cards.pdf. Fix with padding-right, never by rewording."""
+    cfg = load_checks_thresholds()["social_cards"]
+    return _scan_cards(paths, "--check-card-orphans",
+                       lambda page, first: card_orphans(page, int(cfg["orphan_max_chars"]),
+                                                        int(cfg["orphan_max_words"])))

@@ -35,6 +35,15 @@ REVIEW_CHECKLIST = (
     "subtraction: no decorative ticks, short rules, or side accents; every visible rule separates data, regions, relationships, or state",
 )
 
+# Card sets are one point per fixed-size page, so a half-empty card is right
+# and the print density and page-break lines would push an agent to pad it.
+CARD_REVIEW_CHECKLIST = tuple(
+    item for item in REVIEW_CHECKLIST if not item.startswith(("density:", "page breaks:"))
+) + (
+    "cards: one point or two to three items per card, similar weight across the set, "
+    "space at a card's foot is fine; split a crowded card, never shrink its type",
+)
+
 MIN_DPI = 36
 MAX_DPI = 300
 MAX_PAGES = 200

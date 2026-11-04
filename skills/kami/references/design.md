@@ -9,11 +9,11 @@ This is not a UI framework. It is a constraint system for print, designed to kee
 **The ten invariants** (each has a real cost, think before overriding):
 
 1. Default page background parchment `#f5f4ed`; the white-paper print variant in production.md is the explicit exception
-2. Single accent, no second chromatic color: ink-blue `#1B365D` for documents; a product website takes the product's own color (Section 11 «Accent on a product site»)
+2. Single accent, no second chromatic color: ink-blue `#1B365D` for documents; a product website takes the product's own color (Section 11 «Accent on a product site»); a social card set takes one paper, each with its own single accent (Section 13)
 3. All grays warm-toned (yellow-brown undertone), no cool blue-grays
 4. One serif family per page for headlines and body. Add a distinct sans only for genuine UI chrome
-5. Serif weight locked at 500, no bold
-6. Line-heights: tight headlines 1.1-1.3, dense body 1.4-1.45, reading body 1.5-1.55
+5. Serif weight locked at 500, no bold; the one exception is the social-card list numerals in Charter Bold (Section 13)
+6. Line-heights: tight headlines 1.1-1.3, dense body 1.4-1.45, reading body 1.5-1.55; social cards read at arm's length on a phone and go up to 1.75 (Section 13)
 7. Letter-spacing: Chinese body 0.3pt for comfortable reading; English body 0; tracking only for short labels and overlines
 8. Tag backgrounds must be solid hex, never rgba (WeasyPrint renders a double rectangle)
 9. Surfaces are flat by default; whisper shadows are reserved for real floating screenshots, popovers, or overlays
@@ -34,7 +34,7 @@ Anthropic's `frontend-design` skill lists "a warm cream background with a high-c
 - **Concentric corners.** A rounded shape inside another shares its centre: inner radius = outer radius - the inset between them. Radius follows role (page card, floating layer, row, tag), so a new radius means a new role.
 - **Outline-only buttons.** A button needs a readable fill; do not replace it with a warning-like outline. The filled screen buttons below and Section 11's quiet secondary buttons keep their specified neutral hairlines. Borders otherwise mark region edges, not every row or control.
 
-When a brief or brand profile asks for a different direction, follow it (`references/brand-profile.md`); when it asks for a look Kami does not do (dark, futurist, saturated multi-color), say so instead of bending the system.
+When a brief or brand profile asks for a different direction, follow it (`references/brand-profile.md`); when it asks for a look Kami does not do (dark documents, futurist, saturated multi-color), say so instead of bending the system. The dark papers in Section 13 belong to social cards only.
 
 ---
 
@@ -1478,6 +1478,56 @@ derivations to static hex, so derived shades (e.g. `#dad9d3`) stay warm and neve
 introduce cool grays. PDF supports flowchart / state / sequence / class / ER;
 `xychart-beta` is browser-only (it uses `<style>` class selectors WeasyPrint will
 not apply). Full pipeline and rationale in `references/mermaid.md`.
+
+## 13. Social Cards
+
+Template: `social-cards.html` (`-en`, `-ko`). Images for Xiaohongshu and X: each `<section class="card">` is one 1242x1660 (3:4) page, and `--deliver` exports every page at exactly that pixel size, ready to upload.
+
+### Papers
+
+A social card is the one surface where the page color changes, because the set has to sit next to its cover photo in a feed. A set uses one paper, written as one class on `<body>`; no class means parchment. Each paper is a background, a text color, one accent, a muted color and a footer rule, recorded in `references/social-palettes.json`, mirrored as `--social-<paper>-<role>` in the template, and checked for drift by `--check`. The off-palette lint allows these values only in social-card files, so they never leak into a document.
+
+| Paper | Background | Accent | Comes from |
+|---|---|---|---|
+| parchment (default) | `#f5f4ed` | `#1B365D` | Kami |
+| ink | `#1B365D` | `#b9c6d8` | Kami ink blue, Mole navy |
+| olive | `#2b3326` | `#bdb38c` | the 21 AI Coding rules set |
+| espresso | `#3a2a20` | `#d9b48a` | the life practices set, Hina brown |
+| pine | `#1c3a29` | `#b5cfa4` | Kaku and MiaoYan green |
+| teal | `#134857` | `#a8d0cf` | Yado teal |
+| crimson | `#5a1f17` | `#e6bca6` | Pake red |
+| char | `#1e1d1b` | `#d4c4a0` | MiaoYan night |
+
+- Pick the paper the cover photo sits with: espresso for a warm drink or wood, ink or teal for sky and water, pine or olive for plants, char for screenshots with dark UI. A product's own set takes the paper made from its color.
+- Text on every paper reaches 8.8:1, the accent 6:1, the muted color 4.3:1 at 28px and up.
+- On a dark paper all text is set in W05 (500). Light text on a dark ground rasterizes thinner than a browser previews it, and W04 there reads a weight lighter than the approved sets.
+
+### Card kinds
+
+All four share 96px side margins, a 30px meta line at the top and, except the cover, a 28px footer: a one-pixel rule with the title under it, the footer box ending 84px above the bottom.
+
+| Card | Content | Geometry |
+|---|---|---|
+| Cover | meta, title, an optional line of verse in the accent, a real photo | title 104px, max-width 7.3em so it wraps by itself; photo from 640px to 96px above the bottom, radius 20px, `object-position` moves the crop |
+| Text | heading, two or three paragraphs | heading 80px, body 44px at 1.75 (EN 1.5, KO 1.7) |
+| List | heading, two or three numbered items | numbers in Charter Bold 64px in the accent (the one bold in Kami: regular digits at this size read thinner than the text beside them), items 42px at 1.68 (EN 1.48, KO 1.65) |
+| Shot | heading, one or two sentences, one real screenshot | screenshot full width, radius 20px |
+
+### Copy
+
+- The cover headline is the post title, word for word. Never break it with `<br>`; to move a short last line, narrow the headline's `max-width`.
+- The author's text is used as written. A paragraph that ends on one to three characters gets `padding-right` on that paragraph until the line breaks elsewhere; the words never change.
+- One point per text card, two or three items per list card, grouped so the cards in a set carry similar weight. Split a card rather than shrink its type.
+- The cover needs a real photo or screenshot, never a stock image or a drawn interface.
+
+### Platforms
+
+- Xiaohongshu: up to 18 images. The title limit is 20 字, and digits, Latin letters and spaces count for less than one each, so measure in the publishing field rather than by string length.
+- X: at most four images. Keep the headline and the key evidence inside the centre 1242x1242 crop the timeline shows, and keep the post under 280 weighted characters (a URL counts as 23) so it does not fold.
+
+### Checks
+
+`--deliver` recognizes a card set from its stylesheet, its `--social-*` tokens (a set that kept only its own paper's rules), or `"type": "social-cards"` in the content IR, and replaces the print-page gates: one page per card (a card that outgrows 1660px spills onto a second page), card fit (40px between the last text and the footer rule, no text over the photo) and card orphans (a paragraph ending on one to three characters, or on a single word in Latin text, as a warning). It skips density and the generic orphan gate, which read a two-line cover title as an orphan.
 
 ## KO locale tuning
 

@@ -1,6 +1,6 @@
 # Kami for developers and agents
 
-Use the local MCP server, nine content schemas, and CLI checks to render and review documents.
+Use the local MCP server, ten content schemas, and CLI checks to render and review documents.
 
 HTML version: <https://kami.tw93.fun/developers>
 
@@ -47,7 +47,7 @@ The server card, including protocol version and tool list, is published at </.we
 
 ## Content schemas
 
-Nine schemas live under `references/schemas/`: changelog, equity-report, landing-page, letter, long-doc, one-pager, portfolio, resume, slides. Each states the structure and the quality bar for its type. A new `content.json` also carries a `brief` with audience, job, output contract, target, preserve boundary, evidence, and acceptance checks; older IR files remain valid. Fill the schema first, lay out second.
+Ten schemas live under `references/schemas/`: changelog, equity-report, landing-page, letter, long-doc, one-pager, portfolio, resume, slides, social-cards. Each states the structure and the quality bar for its type. A new `content.json` also carries a `brief` with audience, job, output contract, target, preserve boundary, evidence, and acceptance checks; older IR files remain valid. Fill the schema first, lay out second.
 
 ```
 python3 scripts/build.py --check-content content.json
@@ -77,7 +77,7 @@ The second form reports coverage: fields that exist in the content object but ne
 - [/developers/llms.txt](https://kami.tw93.fun/developers/llms.txt) - the developer surface on its own.
 - [/.well-known/agent-skills/index.json](https://kami.tw93.fun/.well-known/agent-skills/index.json) - Agent Skills discovery index, with a SHA-256 digest of the skill file it points to.
 - [/.well-known/mcp/server-card.json](https://kami.tw93.fun/.well-known/mcp/server-card.json) - MCP server card.
-- [/feeds/catalog.jsonld](https://kami.tw93.fun/feeds/catalog.jsonld) - JSON-LD catalog of all 8 document templates and 18 diagram types, indexed by [/schemamap.xml](https://kami.tw93.fun/schemamap.xml).
+- [/feeds/catalog.jsonld](https://kami.tw93.fun/feeds/catalog.jsonld) - JSON-LD catalog of all 9 document templates and 18 diagram types, indexed by [/schemamap.xml](https://kami.tw93.fun/schemamap.xml).
 - [/SKILL.md](https://kami.tw93.fun/SKILL.md) - the skill definition itself, served as `text/markdown`.
 - [/sitemap.xml](https://kami.tw93.fun/sitemap.xml) and [/robots.txt](https://kami.tw93.fun/robots.txt) - crawl surface and AI crawler policy.
 
