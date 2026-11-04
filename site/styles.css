@@ -887,6 +887,16 @@
     color: var(--olive);
     margin: 2px 0 0;
   }
+  /* Social and landing cards: the name and its description share one line */
+  .landing-card,
+  .demo-grid.one-line .demo-card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: 8px;
+  }
+  .landing-card > a,
+  .demo-grid.one-line .demo-card > a { flex: 0 0 100%; }
 
   /* ---------- Prose pages: developers, about, contact, privacy ---------- */
   .hero.doc h1 {
