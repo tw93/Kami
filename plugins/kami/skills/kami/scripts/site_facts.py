@@ -99,6 +99,44 @@ def _schema_counts(text: str) -> list[int]:
     return [int(m) if m.isdigit() else _NUMBER_WORDS[m.lower()] for m in _SCHEMA_COUNT.findall(text)]
 
 
+# A count stated before the localized "document templates" in any README locale.
+# Only README.md is a full fact file, so the locale intros once kept "8" after
+# the registry reached 9 (2026-11-04).
+_LOCALE_COUNT_WORDS = {
+    **_NUMBER_WORDS,
+    **{w: i for i, w in enumerate("零一二三四五六七八九十", 0)},
+    "acht": 8, "neun": 9, "zehn": 10, "huit": 8, "neuf": 9, "dix": 10,
+}
+_README_TEMPLATE_COUNT = re.compile(
+    r"(\d+|[A-Za-zéû]+|[零一二三四五六七八九十])\s*"
+    r"(?:(?:built-in\s+)?document templates?\b|种文档模板|種文件範本|種類の文書テンプレート"
+    r"|(?:종|가지)의?\s*문서 템플릿|Dokumentvorlagen|modèles de documents)",
+    re.I,
+)
+
+
+def _readme_template_counts(text: str) -> list[int]:
+    counts = []
+    for word in _README_TEMPLATE_COUNT.findall(text):
+        key = word if word.isdigit() else word.lower()
+        if key.isdigit():
+            counts.append(int(key))
+        elif key in _LOCALE_COUNT_WORDS:
+            counts.append(_LOCALE_COUNT_WORDS[key])
+    return counts
+
+
+def readme_count_issues() -> list[str]:
+    expected = public_document_template_count()
+    issues = []
+    for path in sorted(REPO_ROOT.glob("README*.md")):
+        stale = sorted({n for n in _readme_template_counts(path.read_text(encoding="utf-8")) if n != expected})
+        if stale:
+            issues.append(f"{path.name}: says {', '.join(map(str, stale))} document templates, "
+                          f"the registry has {expected}")
+    return issues
+
+
 def _normalize(text: str) -> str:
     return html.unescape(text)
 
@@ -292,6 +330,9 @@ def site_fact_issues(files: Mapping[str, str] | None = None) -> list[str]:
         if stale_schemas:
             issues.append(f"{rel}: says {', '.join(map(str, stale_schemas))} content schemas, "
                           f"references/schemas has {schema_count}")
+
+    if files is None:
+        issues.extend(readme_count_issues())
 
     redirect = texts.get(REDIRECT_SITE_FILE)
     if redirect is None:

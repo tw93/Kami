@@ -11,7 +11,7 @@
 
 ## Warum Kami
 
-Kami (紙, かみ) bedeutet auf Japanisch „Papier“. Es bietet KI-Agenten Layoutregeln und Vorlagen zur Erstellung von PDFs, PNGs und bearbeitbaren PowerPoint-Dateien, inklusive acht Dokumentvorlagen und einer Produkt-Landing-Page.
+Kami (紙, かみ) bedeutet auf Japanisch „Papier“. Es bietet KI-Agenten Layoutregeln und Vorlagen zur Erstellung von PDFs, PNGs und bearbeitbaren PowerPoint-Dateien, inklusive neun Dokumentvorlagen und einer Produkt-Landing-Page.
 
 Als abschließender Teil der Trilogie für die Dokumentenbereitstellung ergänzt Kami das auf Code fokussierte [Kaku](https://github.com/tw93/Kaku) (書く) und das auf Engineering-Gewohnheiten ausgerichtete [Waza](https://github.com/tw93/Waza) (技), damit technische Ergebnisse nicht nur präzise, sondern auch visuell überzeugend sind.
 
@@ -68,7 +68,7 @@ Beispiel-PDFs in verschiedenen Formaten und Sprachen. Klicken Sie auf eine Vorsc
 
 ## Social-Media-Karten
 
-Bildkarten für Xiaohongshu und X, je 1242x1660, auf acht Papieren. Die vier unten stammen aus meinen eigenen Produkten, der Text ist so, wie ich ihn gepostet habe.
+Dasselbe Papier, nur anders eingefärbt, für Xiaohongshu und X. Acht Papiere, parchment, ink, olive, espresso, pine, teal, crimson und char, eines pro Serie. Die vier unten stammen aus meinen eigenen Produkten, der Text ist so, wie ich ihn gepostet habe.
 
 <table>
 <tr>
@@ -164,6 +164,7 @@ Standardmäßig verwendet Kami einen warmen Pergamenthintergrund (`#f5f4ed`), ti
 - **Prüfschritte.** Content-Schemas validieren die Dokumentstruktur vor dem Rendern; Abdeckungsprüfungen stellen sicher, dass alle Fakten auf der Seite landen. Ein strukturiertes Briefing hält Zielgruppe und Anforderungen fest, und Seitenbilder dienen der abschließenden visuellen Prüfung.
 - **MCP-Server.** Ein schlanker Server (`skills/kami/scripts/mcp_server.py`) stellt Werkzeuge für Diagnose, Rendering, strukturierte Prüfung und Screenshots bereit, sodass jeder MCP-fähige Agent Kami direkt ansteuern kann, ohne den vollständigen Skill-Prompt zu laden. Rendern Sie nur vertrauenswürdiges lokales HTML: referenzierte Dateien sowie HTTP- und HTTPS-Ressourcen werden mit den Rechten des MCP-Prozesses geladen.
 - **Druckversion.** Pergament ist der Standard; eine optionale Weißpapier-Variante stellt den Hintergrund für Heim- und Bürodrucker auf reines Weiß um, während Tabellen und Karten ihre sanften Töne behalten. Der [einseitige Kami-Überblick](site/assets/demos/demo-kami-print.pdf) (Chinesisch) wurde mit dieser Variante gerendert, das Vorgehen steht in [production.md](skills/kami/references/production.md).
+- **Social-Media-Karten.** Bildkarten für Xiaohongshu und X, je eine Seite mit 1242x1660, auf acht Papieren mit jeweils einer Akzentfarbe, ein Papier pro Serie. Bei der Ausgabe wird jede Karte auf Text geprüft, der über die Karte oder das Foto läuft oder auf einer Zeile mit ein, zwei Zeichen endet. Der Text des Autors bleibt unverändert; Umbrüche löst das Layout.
 
 Vollständige Spezifikation: [design.md](skills/kami/references/design.md). Spickzettel: [CHEATSHEET.md](skills/kami/CHEATSHEET.md).
 

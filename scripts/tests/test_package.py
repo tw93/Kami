@@ -305,6 +305,19 @@ def test_site_schema_count_matches_the_schemas() -> None:
           count not in _schema_counts(f"ships {count - 1} content schemas"))
 
 
+def test_readme_locales_state_the_template_count() -> None:
+    from site_facts import _readme_template_counts, readme_count_issues
+
+    stale = ["内置 8 种文档模板", "內建 8 種文件範本", "inklusive acht Dokumentvorlagen",
+             "avec huit modèles de documents", "with eight built-in document templates",
+             "8 種類の文書テンプレート", "8종의 문서 템플릿"]
+    check("every locale's template count sentence is read",
+          all(_readme_template_counts(t) == [8] for t in stale),
+          str({t: _readme_template_counts(t) for t in stale}))
+    check("every README locale states the registry's template count", not readme_count_issues(),
+          str(readme_count_issues()))
+
+
 def test_check_update_script() -> None:
     """check-update.sh notifies on a newer remote, stays silent when current,
     throttles through a local cache marker, and fails silently offline. It GETs
