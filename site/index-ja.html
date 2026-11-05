@@ -235,7 +235,7 @@
   <section>
     <div class="section-head">
       <h2 class="section-title">SNS 画像</h2>
-      <p class="section-lede">X と Instagram 向けの画像カードで、背景は 8 色から選べます。下の 4 枚は自分のプロダクトについて投稿した原文で作りました。カードをクリックすると大きく表示されます。</p>
+      <p class="section-lede">X と Instagram 向けの画像カードで、背景は 8 色から選べます。下の 4 枚は自分のプロダクトについて投稿した原文で作りました。</p>
     </div>
     <div class="demo-grid one-line">
       <div class="demo-card">
@@ -295,7 +295,7 @@
 <pre class="code code-wrap"><span class="c"># Claude Code、Codex、Cursor など各エージェント</span>
 npx skills add tw93/kami -a claude-code codex cursor -g -y
 
-<span class="c"># Claude Code プラグイン (v2.1.142+)</span>
+<span class="c"># Claude Code プラグイン、v2.1.142 以降</span>
 /plugin marketplace add tw93/kami
 /plugin install kami@kami
 
@@ -422,7 +422,7 @@ codex plugin add kami@kami
       </div>
     </div>
 
-    <h3 class="subhead">スケール（印刷 pt、画面 px = pt x 1.33）</h3>
+    <h3 class="subhead">スケール · 画面 px = pt x 1.33</h3>
     <div class="type-grid">
       <div class="type-row">
         <div class="type-label">Display</div>
@@ -677,7 +677,7 @@ beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
     <table class="decision">
       <tr><th>場面</th><th>処方</th></tr>
       <tr><td class="task">大きな見出し</td><td class="how">serif <code>500</code>、サイズで階層化、行間 <code>1.10-1.30</code></td></tr>
-      <tr><td class="task">本文（可読重視）</td><td class="how">serif <code>400</code>、<code>9.5-10 pt</code>、行間 <code>1.55</code></td></tr>
+      <tr><td class="task">本文の可読性</td><td class="how">serif <code>400</code>、<code>9.5-10 pt</code>、行間 <code>1.55</code></td></tr>
       <tr><td class="task">数値を強調</td><td class="how"><code>color: var(--brand)</code> を使い、太字には頼らない</td></tr>
       <tr><td class="task">セクション分離</td><td class="how">まず余白。境界を明示する必要がある場合だけ <code>0.5pt</code> の中立色の全幅細線</td></tr>
       <tr><td class="task">引用を置く</td><td class="how">olive テキスト。側線は使わない</td></tr>
@@ -716,7 +716,7 @@ beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
         <p class="anti-topic">合成ボールド</p>
         <div class="anti-pair">
           <p class="anti-line never"><span class="cue">避ける</span><span>見出しへの <code>font-weight: 600</code> 以上の合成ボールド。線が潰れて可読性と品位が落ちます。</span></p>
-          <p class="anti-line instead"><span class="cue">推奨</span><span>本文 400、見出し 500（実フォント W05）。強調が必要ならサイズ、余白、ink blue の文字で対応します。</span></p>
+          <p class="anti-line instead"><span class="cue">推奨</span><span>本文 400、見出し 500 は実フォントの W05。強調が必要ならサイズ、余白、ink blue の文字で対応します。</span></p>
         </div>
       </div>
       <div class="anti-row">

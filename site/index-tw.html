@@ -66,22 +66,22 @@
       {
         "@type": "Question",
         "name": "Kami 是什麼？",
-        "acceptedAnswer": { "@type": "Answer", "text": "Kami 為 AI 提供文件範本與排版規則，也能為 Claude Design、GPT Canvas 等圖像工具提供排版參考。" }
+        "acceptedAnswer": { "@type": "Answer", "text": "Kami 是給 AI 用的一套文件範本與排版規則，Claude Design、GPT Canvas 這類設計工具也可以拿它當排版參考。" }
       },
       {
         "@type": "Question",
         "name": "Kami 能生成什麼？",
-        "acceptedAnswer": { "@type": "Answer", "text": "Kami 提供九種文件範本、中英韓產品介紹頁系統和 18 種可嵌入的 SVG 圖表，文件可匯出為 PDF 或 PNG，簡報另有可編輯的 PPTX 輸出。" }
+        "acceptedAnswer": { "@type": "Answer", "text": "九種文件範本、中英韓官網範本和 18 種 SVG 圖表，文件可以匯出 PDF 或 PNG，簡報還能匯出可編輯的 PPTX。" }
       },
       {
         "@type": "Question",
         "name": "可以換成自己的品牌風格嗎？",
-        "acceptedAnswer": { "@type": "Answer", "text": "可以，直接告訴 Agent 品牌色、字體與版式偏好，或提供品牌設定，Kami 的預設樣式始終以這次要求為準。" }
+        "acceptedAnswer": { "@type": "Answer", "text": "可以，把品牌色、字體和版式偏好直接告訴 Agent，或者給一份品牌設定，都以你的要求為準。" }
       },
       {
         "@type": "Question",
         "name": "Kami 支援哪些語言？",
-        "acceptedAnswer": { "@type": "Answer", "text": "英文與中文支援最完整，日文與韓文會依字體和排版逐份調整，交付前再檢查一遍效果。預設字體分別為 Charter、TsangerJinKai02、YuMincho 和 Source Han Serif K。" }
+        "acceptedAnswer": { "@type": "Answer", "text": "英文和中文支援得最完整，日文和韓文會按各自的字體和排版習慣調整，交付前再檢查一遍，預設字體依次是 Charter、TsangerJinKai02、YuMincho 和 Source Han Serif K。" }
       }
     ]
   }
@@ -191,12 +191,12 @@
       </span>
     </div>
     <h1>Kami<span class="cn">紙</span></h1>
-    <p class="tagline">好內容，值得好版面。Kami 為 AI 提供文件範本與排版規則，用來製作履歷、報告、簡報和產品介紹頁。</p>
+    <p class="tagline">好內容，值得好版面。Kami 給 AI 一套文件範本與排版規則，履歷、報告、簡報和產品官網都能做。</p>
     <div class="hero-tokens">
       <span><b>Canvas</b>#f5f4ed</span>
       <span><b>Accent</b>#1B365D</span>
       <span><b>Serif</b>TsangerJinKai / Charter</span>
-      <span><b>Sans</b>= Serif （一頁一字體）</span>
+      <span><b>Sans</b>= Serif，一頁一種字體</span>
     </div>
   </header>
 
@@ -204,7 +204,7 @@
   <section>
     <div class="section-head">
       <h2 class="section-title">輸出樣本</h2>
-      <p class="section-lede">告訴 Claude 需要什麼文件，下面是一頁紙、報告、履歷和簡報的實際成果。相同的需求也能<a href="https://github.com/tw93/kami#beyond-documents" style="color:var(--brand); text-decoration:none; font-weight:500;">交給繪圖模型</a>，README 提供提示詞與範例。</p>
+      <p class="section-lede">告訴 Claude 要什麼文件就行，下面是財報、履歷、一頁紙和簡報的實際輸出，同樣的要求也能<a href="https://github.com/tw93/kami#beyond-documents" style="color:var(--brand); text-decoration:none; font-weight:500;">交給繪圖模型</a>，README 裡有提示詞和示例。</p>
     </div>
     <div class="demo-grid">
       <div class="demo-card">
@@ -234,7 +234,7 @@
   <section>
     <div class="section-head">
       <h2 class="section-title">社群分享圖</h2>
-      <p class="section-lede">Instagram 和 Threads 的配圖，有八種底色可選，下面四張用的是我幾個產品發過的原話，點開可以看大圖。</p>
+      <p class="section-lede">小紅書和 X 的配圖，有八種底色可選，下面四張用的是我幾個產品發過的原話。</p>
     </div>
     <div class="demo-grid one-line">
       <div class="demo-card">
@@ -289,12 +289,12 @@
   <section>
     <div class="section-head">
       <h2 class="section-title">安裝與使用</h2>
-      <p class="section-lede">直接告訴 Claude「幫我做一份履歷」或「幫我排版一份白皮書」，Kami 就會自動啟用，不必輸入斜線指令。</p>
+      <p class="section-lede">裝好後直接對 Claude 說「幫我做一份履歷」或「幫我排版一份白皮書」，Kami 會自己接手，不用輸斜線指令。</p>
     </div>
 <pre class="code code-wrap"><span class="c"># Claude Code、Codex、Cursor 及其他 Agent</span>
 npx skills add tw93/kami -a claude-code codex cursor -g -y
 
-<span class="c"># Claude Code 外掛 (v2.1.142+)</span>
+<span class="c"># Claude Code 外掛，需要 v2.1.142 以上</span>
 /plugin marketplace add tw93/kami
 /plugin install kami@kami
 
@@ -314,19 +314,19 @@ codex plugin add kami@kami
     <dl class="faq">
       <div class="faq-pair">
         <dt>Kami 是什麼？</dt>
-        <dd>Kami 為 AI 提供文件範本與排版規則，也能為 Claude Design、GPT Canvas 等圖像工具提供排版參考。</dd>
+        <dd>Kami 是給 AI 用的一套文件範本與排版規則，Claude Design、GPT Canvas 這類設計工具也可以拿它當排版參考。</dd>
       </div>
       <div class="faq-pair">
         <dt>能生成什麼？</dt>
-        <dd>Kami 提供九種文件範本、中英韓產品介紹頁系統和 18 種可嵌入的 SVG 圖表，文件可匯出為 PDF 或 PNG，簡報另有可編輯的 PPTX 輸出。</dd>
+        <dd>九種文件範本、中英韓官網範本和 18 種 SVG 圖表，文件可以匯出 PDF 或 PNG，簡報還能匯出可編輯的 PPTX。</dd>
       </div>
       <div class="faq-pair">
         <dt>可以換成自己的品牌風格嗎？</dt>
-        <dd>可以，直接告訴 Agent 品牌色、字體與版式偏好，或提供品牌設定，Kami 的預設樣式始終以這次要求為準。</dd>
+        <dd>可以，把品牌色、字體和版式偏好直接告訴 Agent，或者給一份品牌設定，都以你的要求為準。</dd>
       </div>
       <div class="faq-pair">
         <dt>支援哪些語言？</dt>
-        <dd>英文與中文支援最完整，日文與韓文會依字體和排版逐份調整，交付前再檢查一遍效果。預設字體分別為 Charter、TsangerJinKai02、YuMincho 和 Source Han Serif K。</dd>
+        <dd>英文和中文支援得最完整，日文和韓文會按各自的字體和排版習慣調整，交付前再檢查一遍，預設字體依次是 Charter、TsangerJinKai02、YuMincho 和 Source Han Serif K。</dd>
       </div>
     </dl>
   </section>
@@ -347,16 +347,16 @@ codex plugin add kami@kami
     <div class="section-head">
       <h2 class="section-title">設計原則</h2>
     </div>
-    <p class="manifesto">預設使用暖米色背景、<em>墨藍色</em>重點色和襯線字體，透過字級與間距區分標題和內文，也提供方便列印的白底版本，卡片與表格保留暖色背景。</p>
+    <p class="manifesto">預設是暖米色的紙、<em>墨藍色</em>的強調色和襯線字體，標題和內文靠字級和間距分開，列印時可以換白底，卡片和表格還保留暖色。</p>
     <ul class="rules">
-      <li><p>頁面背景 parchment <code>#f5f4ed</code>，列印版本可使用白底</p></li>
-      <li><p>強調色只有墨藍色 <code>#1B365D</code>，不引入第二種彩色</p></li>
-      <li><p>灰色使用偏黃褐的暖色調，禁止冷藍灰</p></li>
-      <li><p>標題與內文使用同一套襯線字體，介面控制項可另用無襯線字體</p></li>
-      <li><p>內文使用字重 400，標題使用 500，不用合成粗體</p></li>
-      <li><p>行距三檔：緊湊標題 1.1-1.3 / 密排 1.4-1.45 / 閱讀 1.5-1.55</p></li>
-      <li><p>Tag 背景必須實色 hex，禁止 rgba（WeasyPrint 雙層矩形 bug）</p></li>
-      <li><p>預設保持平面；只給真正浮起的截圖、彈層或懸浮介面保留極輕陰影</p></li>
+      <li><p>頁面底色是 parchment <code>#f5f4ed</code>，列印時可以用白底</p></li>
+      <li><p>只有一種強調色，墨藍色 <code>#1B365D</code></p></li>
+      <li><p>灰色都偏暖，帶一點黃褐，不用冷藍灰</p></li>
+      <li><p>標題和內文用同一套襯線字體，介面控制項可以用無襯線</p></li>
+      <li><p>內文字重 400，標題 500，不用合成粗體</p></li>
+      <li><p>行距分三檔，標題 1.1-1.3，密排 1.4-1.45，閱讀 1.5-1.55</p></li>
+      <li><p>標籤底色只用實色 hex，rgba 在 WeasyPrint 裡會畫出雙層矩形</p></li>
+      <li><p>預設是平的，只有真正浮起來的截圖和彈層才加一層很輕的陰影</p></li>
     </ul>
   </section>
 
@@ -364,15 +364,15 @@ codex plugin add kami@kami
   <section>
     <div class="section-head">
       <h2 class="section-title">暖調克制</h2>
-      <p class="section-lede">只用一種重點色搭配暖灰色，墨藍色面積不超過頁面的 5%。</p>
+      <p class="section-lede">一種強調色配暖灰，墨藍色不超過頁面面積的 5%。</p>
     </div>
 
     <h3 class="subhead">畫布</h3>
     <div class="swatches">
-      <div class="swatch"><div class="chip" style="background:#f5f4ed"></div><div class="info"><p class="name">Parchment</p><p class="role">頁面底色，也是整套設計的溫度來源</p><span class="hex">#F5F4ED</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#f5f4ed"></div><div class="info"><p class="name">Parchment</p><p class="role">頁面底色</p><span class="hex">#F5F4ED</span></div></div>
       <div class="swatch"><div class="chip" style="background:#faf9f5"></div><div class="info"><p class="name">Ivory</p><p class="role">卡片 · 浮起容器</p><span class="hex">#FAF9F5</span></div></div>
-      <div class="swatch"><div class="chip" style="background:#e8e6dc"></div><div class="info"><p class="name">Warm Sand</p><p class="role">按鈕底色 · 互動面</p><span class="hex">#E8E6DC</span></div></div>
-      <div class="swatch dark"><div class="chip" style="background:#141413"></div><div class="info"><p class="name" style="color:var(--deep-dark)">Deep Dark</p><p class="role">深色主題頁面底，不取純黑，略帶橄欖色</p><span class="hex">#141413</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#e8e6dc"></div><div class="info"><p class="name">Warm Sand</p><p class="role">按鈕底色 · 可點區域</p><span class="hex">#E8E6DC</span></div></div>
+      <div class="swatch dark"><div class="chip" style="background:#141413"></div><div class="info"><p class="name" style="color:var(--deep-dark)">Deep Dark</p><p class="role">深色頁面的底，略帶橄欖色，不是純黑</p><span class="hex">#141413</span></div></div>
     </div>
 
     <h3 class="subhead">主調</h3>
@@ -380,7 +380,7 @@ codex plugin add kami@kami
       <div class="swatch brand"><div class="chip" style="background:#1B365D"></div><div class="info"><p class="name">Ink Blue</p><p class="role">主色 · CTA · 標籤 · 章節標題</p><span class="hex">#1B365D</span></div></div>
       <div class="swatch"><div class="chip" style="background:#2D5A8A"></div><div class="info"><p class="name">Ink Light</p><p class="role">深色底的連結色</p><span class="hex">#2D5A8A</span></div></div>
       <div class="swatch"><div class="chip" style="background:#30302e"></div><div class="info"><p class="name" style="color:var(--deep-dark)">Dark Surface</p><p class="role">深色容器 · 暖炭灰</p><span class="hex">#30302E</span></div></div>
-      <div class="swatch"><div class="chip" style="background:#b53333"></div><div class="info"><p class="name">Error</p><p class="role">錯誤，暖紅不刺眼</p><span class="hex">#B53333</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#b53333"></div><div class="info"><p class="name">Error</p><p class="role">錯誤提示，偏暖的紅</p><span class="hex">#B53333</span></div></div>
     </div>
 
     <h3 class="subhead">中性</h3>
@@ -392,7 +392,7 @@ codex plugin add kami@kami
     </div>
 
     <h3 class="subhead">標籤底色</h3>
-    <p style="color: var(--olive); margin: 0 0 16px; line-height: 1.55;">只用兩檔登記過的實色。<code style="font-family:var(--mono);background:#EEF2F7;color:var(--brand);padding:1px 5px;border-radius:2px">#EEF2F7</code> 用於弱化，<code style="font-family:var(--mono);background:#E4ECF5;color:var(--brand);padding:1px 5px;border-radius:2px">#E4ECF5</code> 是預設值。實色也能避開 WeasyPrint 的雙層矩形問題。</p>
+    <p style="color: var(--olive); margin: 0 0 16px; line-height: 1.55;">只用兩檔實色，<code style="font-family:var(--mono);background:#EEF2F7;color:var(--brand);padding:1px 5px;border-radius:2px">#EEF2F7</code> 用來弱化，<code style="font-family:var(--mono);background:#E4ECF5;color:var(--brand);padding:1px 5px;border-radius:2px">#E4ECF5</code> 是預設，實色也能避開 WeasyPrint 的雙層矩形。</p>
     <div class="tint-strip">
       <div class="tint"><span class="flag">弱化</span><span class="sample" style="background:#EEF2F7">標籤示例</span><p class="opacity">低調</p><span class="hex">#EEF2F7</span></div>
       <div class="tint default"><span class="flag">預設</span><span class="sample" style="background:#E4ECF5">標籤示例</span><p class="opacity">預設</p><span class="hex">#E4ECF5</span></div>
@@ -403,7 +403,7 @@ codex plugin add kami@kami
   <section>
     <div class="section-head">
       <h2 class="section-title">字體系統</h2>
-      <p class="section-lede">標題與內文使用同一套襯線字體，程式碼使用等寬字體。</p>
+      <p class="section-lede">標題和內文用同一套襯線字體，程式碼用等寬字體。</p>
     </div>
 
     <div class="family-grid">
@@ -411,22 +411,22 @@ codex plugin add kami@kami
         <p class="glyph">紙 Aa</p>
         <p class="role">Serif · 標題 + 正文</p>
         <p class="name">TsangerJinKai02 / Charter</p>
-        <p class="use">承擔標題、正文、引語與數字強調，中文取倉耳今楷，英文取 Charter。</p>
+        <p class="use">標題、內文、引語和要強調的數字都用它，中文是倉耳今楷，英文是 Charter。</p>
       </div>
       <div class="family mono">
         <p class="glyph">&lt;/&gt;</p>
         <p class="role">Mono · 程式碼</p>
         <p class="name">JetBrains Mono</p>
-        <p class="use">用於程式碼區塊、版本號、hex 值與等寬數字，字級較正文低一檔。</p>
+        <p class="use">用在程式碼區塊、版本號、hex 值和需要等寬的數字上，比內文小一檔。</p>
       </div>
     </div>
 
-    <h3 class="subhead">層級（印刷品 pt · 螢幕 px ≈ pt × 1.33）</h3>
+    <h3 class="subhead">層級 · 螢幕 px ≈ pt × 1.33</h3>
     <div class="type-grid">
 
       <div class="type-row">
         <div class="type-label">Display</div>
-        <div class="type-sample display">高品質文件讀起來<br>清晰、穩定、有餘韻</div>
+        <div class="type-sample display">好內容<br>值得好版面</div>
         <div class="type-specs"><b>36-48 pt</b><br>weight 500<br>line 1.10</div>
       </div>
       <div class="type-row">
@@ -446,12 +446,12 @@ codex plugin add kami@kami
       </div>
       <div class="type-row">
         <div class="type-label">Body Lead</div>
-        <div class="type-sample lede">面向印刷文件的約束系統，目標是穩定、清晰、易讀。</div>
+        <div class="type-sample lede">一套給印刷文件用的排版規則，先求好讀。</div>
         <div class="type-specs"><b>11 pt</b><br>weight 400<br>line 1.55</div>
       </div>
       <div class="type-row">
         <div class="type-label">Body</div>
-        <div class="type-sample body">墨藍色全文件不超過 5% 面積，超過就從克制變成堆砌；所有灰色都有暖黃底色，R ≈ G > B 是基本規律。</div>
+        <div class="type-sample body">墨藍色不超過整份文件面積的 5%，多了就顯得堆，灰色都帶一點暖黃，R ≈ G > B。</div>
         <div class="type-specs"><b>9.5-10 pt</b><br>weight 400<br>line 1.55</div>
       </div>
       <div class="type-row">
@@ -477,7 +477,7 @@ codex plugin add kami@kami
   <section>
     <div class="section-head">
       <h2 class="section-title">節奏與形</h2>
-      <p class="section-lede">基本單位為 4pt，內容較多時縮小頁面邊界，正式信函等文件則適當留寬。</p>
+      <p class="section-lede">以 4pt 為單位，內容多時收窄頁邊距，正式信件這類文件留寬一些。</p>
     </div>
 
     <table class="space-table">
@@ -501,14 +501,14 @@ codex plugin add kami@kami
     </div>
 
     <h3 class="subhead">深度</h3>
-    <p style="color: var(--olive); margin: 0; line-height: 1.55;">預設保持平面。優先用留白、安靜底色，或一條中性細線建立層級；只有真正浮起的截圖、彈層和懸浮介面才使用極輕陰影。</p>
+    <p style="color: var(--olive); margin: 0; line-height: 1.55;">預設是平的，層級先靠留白、安靜的底色或一條中性細線拉開，只有真正浮起來的截圖和彈層才加很輕的陰影。</p>
   </section>
 
   <!-- ============ 06 COMPONENTS ============ -->
   <section>
     <div class="section-head">
       <h2 class="section-title">原子元件</h2>
-      <p class="section-lede">用於常見文件排版的基本元件。</p>
+      <p class="section-lede">常見文件裡會用到的幾種基礎元件。</p>
     </div>
 
     <div class="comp-grid">
@@ -560,8 +560,8 @@ codex plugin add kami@kami
         <h3>純文字列表</h3>
         <p class="hint">用間距形成節奏 · 不加符號</p>
         <ul class="plain-list demo">
-          <li>暖米紙底，列印版本可使用白底</li>
-          <li>墨藍色點綴，不引第二色</li>
+          <li>暖米色紙底，列印時可用白底</li>
+          <li>墨藍色點綴，不加第二種顏色</li>
           <li>襯線字體區分層級</li>
         </ul>
       </div>
@@ -569,7 +569,7 @@ codex plugin add kami@kami
       <div class="comp">
         <h3>程式碼區塊</h3>
         <p class="hint">4pt 圓角、mono 字體，無邊框</p>
-<pre class="code doc-code"><span class="c">// 暖米紙 · 一種克制的溫度</span>
+<pre class="code doc-code"><span class="c">// 暖米紙，一種強調色</span>
 canvas   = parchment; accent = <span class="k">ink_blue</span>
 palette  = <span class="k">warm_neutrals</span> − cool_grays
 document = <span class="k">serif</span> × hierarchy + generous_space
@@ -597,7 +597,7 @@ beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
   <section>
     <div class="section-head">
       <h2 class="section-title">內聯圖表</h2>
-      <p class="section-lede">提供十八種可嵌入的 SVG 圖表，涵蓋架構、流程和資料，告訴 Claude 需要哪種圖就能加入文件，配色與字體保持一致。</p>
+      <p class="section-lede">十八種 SVG 圖表，架構圖、流程圖和資料圖都有，告訴 Claude 要哪種圖就會畫進文件，配色和字體跟內文一致。</p>
     </div>
     <div class="chart-showcase">
       <!-- Architecture mini -->
@@ -698,21 +698,21 @@ beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
   <section>
     <div class="section-head">
       <h2 class="section-title">決策速查</h2>
-      <p class="section-lede">根據用途選擇元件，表中未列出的情況參考前面的設計原則。</p>
+      <p class="section-lede">按要做的事找對應做法，表裡沒有的就回到上面的設計原則。</p>
     </div>
     <table class="decision">
       <tr><th>要做什麼</th><th>怎麼做</th></tr>
       <tr><td class="task">大標題</td><td class="how">serif <code>500</code>，字級按層級，line-height <code>1.10-1.30</code></td></tr>
       <tr><td class="task">正文閱讀</td><td class="how">serif <code>400</code>，<code>9.5-10 pt</code>，line-height <code>1.55</code></td></tr>
       <tr><td class="task">強調一個數字</td><td class="how"><code>color: var(--brand)</code>，不要粗體</td></tr>
-      <tr><td class="task">分隔兩段內容</td><td class="how">先用留白；只有邊界必須明確時，才用一條 <code>0.5pt</code> 中性全寬細線</td></tr>
+      <tr><td class="task">分隔兩段內容</td><td class="how">先用留白，邊界必須明確時才加一條 <code>0.5pt</code> 的中性細線</td></tr>
       <tr><td class="task">引用某人的話</td><td class="how">olive 色，不加側邊線</td></tr>
       <tr><td class="task">展示程式碼</td><td class="how">ivory 底 + <code>4pt</code> 圓角 + mono 字體，無邊框</td></tr>
-      <tr><td class="task">區分主次按鈕</td><td class="how">Primary 品牌色填充 + ivory 字；Secondary warm-sand + charcoal</td></tr>
+      <tr><td class="task">區分主次按鈕</td><td class="how">Primary 品牌色填充 + ivory 字，Secondary warm-sand + charcoal</td></tr>
       <tr><td class="task">標註某張特殊卡片</td><td class="how">用更明確的標籤或安靜底色，不加強調邊</td></tr>
       <tr><td class="task">章節開始</td><td class="how">serif <code>500</code> · <code>15pt</code> · 純字級層級，無額外裝飾</td></tr>
       <tr><td class="task">文件封面</td><td class="how">單頁 Display 字級 + 右對齊作者/日期 + 大量留白</td></tr>
-      <tr><td class="task">展示關鍵數字</td><td class="how">基線一行排開，透明不做容器 + serif 大數字（墨藍色） + sans 小標籤</td></tr>
+      <tr><td class="task">展示關鍵數字</td><td class="how">沿基線排成一行，不加容器，墨藍色的 serif 大數字配 sans 小標籤</td></tr>
     </table>
   </section>
 
@@ -720,14 +720,14 @@ beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
   <section>
     <div class="section-head">
       <h2 class="section-title">反面示例</h2>
-      <p class="section-lede">破例可以，但理由要足夠清楚。</p>
+      <p class="section-lede">最常見的幾個問題和對應的做法。</p>
     </div>
 
     <div class="anti">
       <div class="anti-row">
         <p class="anti-topic">頁面底色</p>
         <div class="anti-pair">
-          <p class="anti-line never"><span class="cue">忌</span><span>頁面背景用 <code>#ffffff</code> 純白或 <code>#f3f4f6</code> 冷灰，會讓版面變硬，也削弱 Kami 的暖米紙氣質。</span></p>
+          <p class="anti-line never"><span class="cue">忌</span><span>頁面背景用 <code>#ffffff</code> 純白或 <code>#f3f4f6</code> 冷灰，版面會顯得硬，也沒了紙的感覺。</span></p>
           <p class="anti-line instead"><span class="cue">宜</span><span>預設使用暖米色 <code>#f5f4ed</code>，白底列印版除外，列印時把 <code>@page background</code> 也設為同色，避免白邊。</span></p>
         </div>
       </div>
@@ -742,14 +742,14 @@ beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
         <p class="anti-topic">合成粗體</p>
         <div class="anti-pair">
           <p class="anti-line never"><span class="cue">忌</span><span>標題用 <code>font-weight: 600</code> 或更粗的合成 bold，筆畫容易變糊，版面也會顯得粗重。</span></p>
-          <p class="anti-line instead"><span class="cue">宜</span><span>正文 400，標題 500（真實 W05 字重）；需要更強存在感時，用字級、間距或墨藍色文字，不靠合成粗體。</span></p>
+          <p class="anti-line instead"><span class="cue">宜</span><span>內文 400，標題用真實的 W05 字重 500，要更醒目就加大字級、拉開間距或用墨藍色，不靠合成粗體。</span></p>
         </div>
       </div>
       <div class="anti-row">
         <p class="anti-topic">陰影</p>
         <div class="anti-pair">
           <p class="anti-line never"><span class="cue">忌</span><span>box-shadow 硬投影 <code>0 2px 8px rgba(0,0,0,0.3)</code> 觀感偏硬，印刷時也容易發黑。</span></p>
-          <p class="anti-line instead"><span class="cue">宜</span><span>預設保持平面，用留白、安靜底色或中性細線建立層級；極輕陰影只留給真正浮起的介面和截圖。</span></p>
+          <p class="anti-line instead"><span class="cue">宜</span><span>預設是平的，層級靠留白、安靜的底色或中性細線，很輕的陰影只留給真正浮起來的介面和截圖。</span></p>
         </div>
       </div>
     </div>
