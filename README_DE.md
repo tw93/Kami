@@ -172,22 +172,32 @@ Vollständige Spezifikation: [design.md](skills/kami/references/design.md). Spic
 
 <table>
 <tr>
-  <td align="center" width="25%" valign="top">
-    <a href="https://kami.tw93.fun"><img src="site/assets/showcase/kami-landing.png" alt="Kami Landing Page" height="150"></a>
-    <br><b>Kami</b> · Landing Page
-    <br><sub>Design-System-Startseite</sub>
+  <td align="center" width="33%" valign="top">
+    <a href="https://pake.run"><img src="site/assets/showcase/pake-landing-en.png" alt="Pake Landing Page" height="150"></a>
+    <br><b>Pake</b> · Landing Page
+    <br><sub>Websites als Desktop-Apps</sub>
   </td>
-  <td align="center" width="25%" valign="top">
-    <a href="https://mole.fit"><img src="site/assets/showcase/mole-landing.png" alt="Mole Landing Page" height="150"></a>
+  <td align="center" width="33%" valign="top">
+    <a href="https://miaoyan.app"><img src="site/assets/showcase/miaoyan-landing-en.png" alt="MiaoYan Landing Page" height="150"></a>
+    <br><b>MiaoYan</b> · Landing Page
+    <br><sub>Leichtes Markdown-Notizbuch</sub>
+  </td>
+  <td align="center" width="33%" valign="top">
+    <a href="https://mole.fit"><img src="site/assets/showcase/mole-landing-en.png" alt="Mole Landing Page" height="150"></a>
     <br><b>Mole</b> · Landing Page
-    <br><sub>macOS System-Dienstprogramm</sub>
+    <br><sub>Mac-Bereinigung und Systemtool</sub>
   </td>
-  <td align="center" width="25%" valign="top">
+</tr>
+</table>
+
+<table>
+<tr>
+  <td align="center" width="50%" valign="top">
     <img src="site/assets/illustrations/travel-spatialvla.png" alt="SpatialVLA Architekturdiagramm" height="150">
     <br><b>Architekturzeichnung</b> · Englisch
     <br><sub>SpatialVLA Schema-Neuzeichnung</sub>
   </td>
-  <td align="center" width="25%" valign="top">
+  <td align="center" width="50%" valign="top">
     <img src="site/assets/illustrations/travel-tesla-optimus.png" alt="Tesla Optimus Patentübersicht" height="150">
     <br><b>Patent-Layout</b> · Chinesisch
     <br><sub>Tesla Optimus Patentzeichnung</sub>

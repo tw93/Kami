@@ -171,22 +171,32 @@ Kami 每天最多检查一次新版本，有新版就在对话里提一句，检
 
 <table>
 <tr>
-  <td align="center" width="25%" valign="top">
-    <a href="https://kami.tw93.fun"><img src="site/assets/showcase/kami-landing.png" alt="Kami 落地页" height="150"></a>
-    <br><b>Kami</b> · 产品落地页
-    <br><sub>设计系统官方网站</sub>
+  <td align="center" width="33%" valign="top">
+    <a href="https://pake.run"><img src="site/assets/showcase/pake-landing-zh.png" alt="Pake 官网" height="150"></a>
+    <br><b>Pake</b> · 官网
+    <br><sub>网页打包成桌面应用</sub>
   </td>
-  <td align="center" width="25%" valign="top">
-    <a href="https://mole.fit"><img src="site/assets/showcase/mole-landing.png" alt="Mole 落地页" height="150"></a>
-    <br><b>Mole</b> · 产品落地页
-    <br><sub>macOS 系统清理工具</sub>
+  <td align="center" width="33%" valign="top">
+    <a href="https://miaoyan.app"><img src="site/assets/showcase/miaoyan-landing-zh.png" alt="妙言官网" height="150"></a>
+    <br><b>妙言</b> · 官网
+    <br><sub>轻灵的 Markdown 笔记本</sub>
   </td>
-  <td align="center" width="25%" valign="top">
+  <td align="center" width="33%" valign="top">
+    <a href="https://mole.fit"><img src="site/assets/showcase/mole-landing-zh.png" alt="Mole 官网" height="150"></a>
+    <br><b>Mole</b> · 官网
+    <br><sub>Mac 清理和系统工具</sub>
+  </td>
+</tr>
+</table>
+
+<table>
+<tr>
+  <td align="center" width="50%" valign="top">
     <img src="site/assets/illustrations/travel-spatialvla.png" alt="SpatialVLA 架构重绘" height="150">
     <br><b>架构图重绘</b> · 英文
     <br><sub>SpatialVLA 论文图 1 重构</sub>
   </td>
-  <td align="center" width="25%" valign="top">
+  <td align="center" width="50%" valign="top">
     <img src="site/assets/illustrations/travel-tesla-optimus.png" alt="Tesla Optimus 专利图" height="150">
     <br><b>专利图排版</b> · 中文
     <br><sub>Tesla Optimus 专利图一览</sub>

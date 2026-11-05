@@ -171,22 +171,32 @@ Kami は一日に一度だけ静かにバージョンを確認し、新しいリ
 
 <table>
 <tr>
-  <td align="center" width="25%" valign="top">
-    <a href="https://kami.tw93.fun"><img src="site/assets/showcase/kami-landing.png" alt="Kami ページ" height="150"></a>
-    <br><b>Kami</b> · ランディングページ
-    <br><sub>デザインシステム公式サイト</sub>
+  <td align="center" width="33%" valign="top">
+    <a href="https://pake.run"><img src="site/assets/showcase/pake-landing-en.png" alt="Pake ページ" height="150"></a>
+    <br><b>Pake</b> · ランディングページ
+    <br><sub>Web サイトをアプリに</sub>
   </td>
-  <td align="center" width="25%" valign="top">
-    <a href="https://mole.fit"><img src="site/assets/showcase/mole-landing.png" alt="Mole ページ" height="150"></a>
+  <td align="center" width="33%" valign="top">
+    <a href="https://miaoyan.app"><img src="site/assets/showcase/miaoyan-landing-en.png" alt="MiaoYan ページ" height="150"></a>
+    <br><b>MiaoYan</b> · ランディングページ
+    <br><sub>Markdown ノート</sub>
+  </td>
+  <td align="center" width="33%" valign="top">
+    <a href="https://mole.fit"><img src="site/assets/showcase/mole-landing-en.png" alt="Mole ページ" height="150"></a>
     <br><b>Mole</b> · ランディングページ
-    <br><sub>macOS システムクリーナー</sub>
+    <br><sub>Mac クリーナー</sub>
   </td>
-  <td align="center" width="25%" valign="top">
+</tr>
+</table>
+
+<table>
+<tr>
+  <td align="center" width="50%" valign="top">
     <img src="site/assets/illustrations/travel-spatialvla.png" alt="SpatialVLA 構成図" height="150">
     <br><b>構成図再描画</b> · 英語
     <br><sub>SpatialVLA 論文図 1 再構成</sub>
   </td>
-  <td align="center" width="25%" valign="top">
+  <td align="center" width="50%" valign="top">
     <img src="site/assets/illustrations/travel-tesla-optimus.png" alt="Tesla Optimus 特許図" height="150">
     <br><b>特許図レイアウト</b> · 中国語
     <br><sub>Tesla Optimus 特許図面一覧</sub>

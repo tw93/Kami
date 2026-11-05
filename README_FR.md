@@ -172,22 +172,32 @@ Spécifications complètes : [design.md](skills/kami/references/design.md). Aide
 
 <table>
 <tr>
-  <td align="center" width="25%" valign="top">
-    <a href="https://kami.tw93.fun"><img src="site/assets/showcase/kami-landing.png" alt="Landing page Kami" height="150"></a>
-    <br><b>Kami</b> · landing page
-    <br><sub>Site officiel du design system</sub>
+  <td align="center" width="33%" valign="top">
+    <a href="https://pake.run"><img src="site/assets/showcase/pake-landing-en.png" alt="Landing page Pake" height="150"></a>
+    <br><b>Pake</b> · landing page
+    <br><sub>Des sites web en apps de bureau</sub>
   </td>
-  <td align="center" width="25%" valign="top">
-    <a href="https://mole.fit"><img src="site/assets/showcase/mole-landing.png" alt="Landing page Mole" height="150"></a>
+  <td align="center" width="33%" valign="top">
+    <a href="https://miaoyan.app"><img src="site/assets/showcase/miaoyan-landing-en.png" alt="Landing page MiaoYan" height="150"></a>
+    <br><b>MiaoYan</b> · landing page
+    <br><sub>Carnet Markdown léger</sub>
+  </td>
+  <td align="center" width="33%" valign="top">
+    <a href="https://mole.fit"><img src="site/assets/showcase/mole-landing-en.png" alt="Landing page Mole" height="150"></a>
     <br><b>Mole</b> · landing page
-    <br><sub>Utilitaire système macOS</sub>
+    <br><sub>Nettoyage et outils système pour Mac</sub>
   </td>
-  <td align="center" width="25%" valign="top">
+</tr>
+</table>
+
+<table>
+<tr>
+  <td align="center" width="50%" valign="top">
     <img src="site/assets/illustrations/travel-spatialvla.png" alt="Schéma d'architecture SpatialVLA" height="150">
     <br><b>Architecture</b> · Anglais
     <br><sub>Schéma redessiné SpatialVLA</sub>
   </td>
-  <td align="center" width="25%" valign="top">
+  <td align="center" width="50%" valign="top">
     <img src="site/assets/illustrations/travel-tesla-optimus.png" alt="Brevet Tesla Optimus" height="150">
     <br><b>Schéma brevet</b> · Chinois
     <br><sub>Schéma du brevet Tesla Optimus</sub>

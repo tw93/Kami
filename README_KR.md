@@ -171,22 +171,32 @@ Kami는 하루에 최대 한 번 조용히 버전을 확인하고, 새 릴리스
 
 <table>
 <tr>
-  <td align="center" width="25%" valign="top">
-    <a href="https://kami.tw93.fun"><img src="site/assets/showcase/kami-landing.png" alt="Kami 랜딩 페이지" height="150"></a>
-    <br><b>Kami</b> · 랜딩 페이지
-    <br><sub>디자인 시스템 공식 사이트</sub>
+  <td align="center" width="33%" valign="top">
+    <a href="https://pake.run"><img src="site/assets/showcase/pake-landing-en.png" alt="Pake 랜딩 페이지" height="150"></a>
+    <br><b>Pake</b> · 랜딩 페이지
+    <br><sub>웹사이트를 데스크톱 앱으로</sub>
   </td>
-  <td align="center" width="25%" valign="top">
-    <a href="https://mole.fit"><img src="site/assets/showcase/mole-landing.png" alt="Mole 랜딩 페이지" height="150"></a>
+  <td align="center" width="33%" valign="top">
+    <a href="https://miaoyan.app"><img src="site/assets/showcase/miaoyan-landing-en.png" alt="MiaoYan 랜딩 페이지" height="150"></a>
+    <br><b>MiaoYan</b> · 랜딩 페이지
+    <br><sub>가벼운 Markdown 노트</sub>
+  </td>
+  <td align="center" width="33%" valign="top">
+    <a href="https://mole.fit"><img src="site/assets/showcase/mole-landing-en.png" alt="Mole 랜딩 페이지" height="150"></a>
     <br><b>Mole</b> · 랜딩 페이지
-    <br><sub>macOS 시스템 클리너</sub>
+    <br><sub>Mac 정리와 시스템 도구</sub>
   </td>
-  <td align="center" width="25%" valign="top">
+</tr>
+</table>
+
+<table>
+<tr>
+  <td align="center" width="50%" valign="top">
     <img src="site/assets/illustrations/travel-spatialvla.png" alt="SpatialVLA 구조도" height="150">
     <br><b>구조도 재구성</b> · 영어
     <br><sub>SpatialVLA 논문 다이어그램 1</sub>
   </td>
-  <td align="center" width="25%" valign="top">
+  <td align="center" width="50%" valign="top">
     <img src="site/assets/illustrations/travel-tesla-optimus.png" alt="Tesla Optimus 특허도" height="150">
     <br><b>특허도 배치</b> · 중국어
     <br><sub>Tesla Optimus 특허 도면 일람</sub>

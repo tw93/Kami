@@ -171,22 +171,32 @@ Full spec: [design.md](skills/kami/references/design.md). Cheatsheet: [CHEATSHEE
 
 <table>
 <tr>
-  <td align="center" width="25%" valign="top">
-    <a href="https://kami.tw93.fun"><img src="site/assets/showcase/kami-landing.png" alt="Kami landing page" height="150"></a>
-    <br><b>Kami</b> · landing page
-    <br><sub>Design system homepage</sub>
+  <td align="center" width="33%" valign="top">
+    <a href="https://pake.run"><img src="site/assets/showcase/pake-landing-en.png" alt="Pake landing page" height="150"></a>
+    <br><b>Pake</b> · landing page
+    <br><sub>Websites as desktop apps</sub>
   </td>
-  <td align="center" width="25%" valign="top">
-    <a href="https://mole.fit"><img src="site/assets/showcase/mole-landing.png" alt="Mole landing page" height="150"></a>
+  <td align="center" width="33%" valign="top">
+    <a href="https://miaoyan.app"><img src="site/assets/showcase/miaoyan-landing-en.png" alt="MiaoYan landing page" height="150"></a>
+    <br><b>MiaoYan</b> · landing page
+    <br><sub>Light Markdown notebook</sub>
+  </td>
+  <td align="center" width="33%" valign="top">
+    <a href="https://mole.fit"><img src="site/assets/showcase/mole-landing-en.png" alt="Mole landing page" height="150"></a>
     <br><b>Mole</b> · landing page
-    <br><sub>macOS system utility</sub>
+    <br><sub>Mac cleaner and system tool</sub>
   </td>
-  <td align="center" width="25%" valign="top">
+</tr>
+</table>
+
+<table>
+<tr>
+  <td align="center" width="50%" valign="top">
     <img src="site/assets/illustrations/travel-spatialvla.png" alt="SpatialVLA architecture redraw" height="150">
     <br><b>Architecture redraw</b> · English
     <br><sub>SpatialVLA Figure 1, schematic</sub>
   </td>
-  <td align="center" width="25%" valign="top">
+  <td align="center" width="50%" valign="top">
     <img src="site/assets/illustrations/travel-tesla-optimus.png" alt="Tesla Optimus patent overview" height="150">
     <br><b>Evidence layout</b> · 中文
     <br><sub>Tesla Optimus 专利图一览</sub>
