@@ -66,12 +66,12 @@
       {
         "@type": "Question",
         "name": "Kamiとは？",
-        "acceptedAnswer": { "@type": "Answer", "text": "Kami は AI 向けの文書テンプレートと組版ルール集です。Claude Design や GPT Canvas などの画像生成ツールにも、レイアウトの指示として使えます。" }
+        "acceptedAnswer": { "@type": "Answer", "text": "Kami は AI 向けの文書テンプレートと組版ルール集です。Claude Design や GPT Canvas などのデザインツールにも、レイアウトの指示として使えます。" }
       },
       {
         "@type": "Question",
         "name": "どんなドキュメントを作れますか？",
-        "acceptedAnswer": { "@type": "Answer", "text": "Kamiには9種類のドキュメントテンプレート、多言語ランディングページ、18種類のインラインSVG図表があり、ドキュメントはPDFまたはPNGに書き出せ、スライドは編集可能なPPTXにも対応します。" }
+        "acceptedAnswer": { "@type": "Answer", "text": "Kami には 9 種類のドキュメントテンプレート、多言語ランディングページ、18 種類のインライン SVG 図表があります。ドキュメントは PDF または PNG に書き出せ、スライドは編集可能な PPTX にも対応します。" }
       },
       {
         "@type": "Question",
@@ -195,7 +195,7 @@
     <div class="hero-tokens">
       <span><b>背景色</b>#f5f4ed</span>
       <span><b>Accent</b>#1B365D</span>
-      <span><b>Serif</b>JP Mincho / Tsanger fallback</span>
+      <span><b>Serif</b>YuMincho / TsangerJinKai</span>
       <span><b>Sans</b>= Serif (一頁一書体)</span>
     </div>
   </header>
@@ -205,7 +205,7 @@
     <div class="section-head">
       <h2 class="section-title">出力サンプル</h2>
       <p class="section-lede section-lede-nowrap">Claude に依頼して作った、一枚資料、レポート、履歴書、スライドの例です。</p>
-      <p class="section-lede" style="margin-top:6px;">同じ指示は <a href="https://github.com/tw93/kami#beyond-documents" style="color:var(--brand); text-decoration:none; font-weight:500;">画像生成モデル</a> にも渡せます。サンプル画像とコピーして使えるプロンプトは README に置いています。</p>
+      <p class="section-lede" style="margin-top:6px;">同じ指示は<a href="https://github.com/tw93/kami#beyond-documents" style="color:var(--brand); text-decoration:none; font-weight:500;">画像生成モデル</a>にも渡せます。サンプル画像とコピーして使えるプロンプトは README に置いています。</p>
     </div>
     <div class="demo-grid">
       <div class="demo-card">
@@ -290,7 +290,7 @@
   <section>
     <div class="section-head">
       <h2 class="section-title">インストールと使い方</h2>
-      <p class="section-lede">Claude に「履歴書を作って」「発表用スライドを作って」と伝えると、Kami が自動で使われます。スラッシュコマンドは不要です。</p>
+      <p class="section-lede">Claude に「履歴書を作って」「発表用スライドを作って」と伝えると、Kami が自動で呼び出されます。スラッシュコマンドは不要です。</p>
     </div>
 <pre class="code code-wrap"><span class="c"># Claude Code、Codex、Cursor など各エージェント</span>
 npx skills add tw93/kami -a claude-code codex cursor -g -y
@@ -313,8 +313,8 @@ codex plugin add kami@kami
       <h2 class="section-title">設計の背景</h2>
     </div>
     <div class="background-text">
-      <p>米国株投資が好きで、Claude にリサーチレポートを書かせる場面が多いです。出力はいつも既定のドキュメント風で、灰色で平板、セッションごとにレイアウトが変わる。構成は追いづらく書式は古臭く、読み続ける気になれませんでした。書体、配色、余白をひとつずつ直していき、読んでいて心地よいページに仕上げました。</p>
-      <p>その後「あなたの知らない Agent：原理、アーキテクチャとエンジニアリング実践」の発表をすることになりました。すでに原稿があったのでスライドを一から作る気にならず、Claude Design で自分のスタイルのまま組版し、何度も調整を繰り返して、ようやく納得のいく仕上がりになりました。その後、SVG 図表を加え、配色と余白を揃えました。普段作る文書にも使うようになり、テンプレートとルールをまとめたものが Kami です。</p>
+      <p>米国株投資が好きで、Claude にリサーチレポートを書かせる場面が多いです。出力はいつも既定のドキュメント風で、灰色で平板、セッションごとにレイアウトも変わっていました。構成は追いづらく書式は古臭く、読み続ける気になれませんでした。書体、配色、余白をひとつずつ直していき、読んでいて心地よいページに仕上げました。</p>
+      <p>その後「あなたの知らない Agent：原理、アーキテクチャとエンジニアリング実践」の発表をすることになりました。すでに原稿があったのでスライドを一から作る気にならず、Claude Design で自分のスタイルのまま組版し、何度も調整を繰り返して、ようやく納得のいく仕上がりになりました。その過程で SVG 図表を加え、配色と余白を揃えました。普段作る文書にも使うようになり、テンプレートとルールをまとめたものが Kami です。</p>
     </div>
   </section>
 
@@ -386,8 +386,8 @@ codex plugin add kami@kami
       <div class="family serif">
         <p class="glyph">Aa</p>
         <p class="role">Serif · 見出し + 本文</p>
-        <p class="name">JP Mincho / TsangerJinKai02</p>
-        <p class="use">見出し、本文、引用、数値強調に使用。日本語は明朝体を優先し、TsangerJinKai02 は CJK 書体の代替 として扱います。</p>
+        <p class="name">YuMincho / TsangerJinKai02</p>
+        <p class="use">見出し、本文、引用、数値強調に使用。日本語は明朝体を優先し、TsangerJinKai02 は CJK 書体の代替として扱います。</p>
       </div>
       <div class="family mono">
         <p class="glyph">Aa 01</p>
@@ -689,7 +689,7 @@ beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
         <p class="anti-topic">タグの色</p>
         <div class="anti-pair">
           <p class="anti-line never"><span class="cue">避ける</span><span>タグへの <code>rgba(27,54,93,0.18)</code>。WeasyPrint で文字領域と余白領域の不透明度がずれ、二重矩形が出ます。</span></p>
-          <p class="anti-line instead"><span class="cue">推奨</span><span>登録済みの既定タグ色 <code>#E4ECF5</code>。描画が安定し、色ぶれを防げます。</span></p>
+          <p class="anti-line instead"><span class="cue">推奨</span><span>既定のタグ色 <code>#E4ECF5</code>。描画が安定し、色ぶれを防げます。</span></p>
         </div>
       </div>
       <div class="anti-row">
@@ -717,11 +717,11 @@ beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
     <dl class="faq">
       <div class="faq-pair">
         <dt>Kamiとは？</dt>
-        <dd>Kami は AI 向けの文書テンプレートと組版ルール集です。Claude Design や GPT Canvas などの画像生成ツールにも、レイアウトの指示として使えます。</dd>
+        <dd>Kami は AI 向けの文書テンプレートと組版ルール集です。Claude Design や GPT Canvas などのデザインツールにも、レイアウトの指示として使えます。</dd>
       </div>
       <div class="faq-pair">
         <dt>どんなドキュメントを作れますか？</dt>
-        <dd>Kamiには9種類のドキュメントテンプレート、多言語ランディングページ、18種類のインラインSVG図表があり、ドキュメントはPDFまたはPNGに書き出せ、スライドは編集可能なPPTXにも対応します。</dd>
+        <dd>Kami には 9 種類のドキュメントテンプレート、多言語ランディングページ、18 種類のインライン SVG 図表があります。ドキュメントは PDF または PNG に書き出せ、スライドは編集可能な PPTX にも対応します。</dd>
       </div>
       <div class="faq-pair">
         <dt>ブランドのスタイルに合わせられますか？</dt>
@@ -740,7 +740,7 @@ beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
       <img src="assets/images/logo.svg" width="56" height="56" alt="Kami">
       <div>
         <p class="wm-name">Kami 紙</p>
-        <p class="wm-sub">よい内容には、よい版面を。</p>
+        <p class="wm-sub">よい内容には、よい版面を</p>
       </div>
     </div>
     <div class="colophon">

@@ -68,7 +68,7 @@
         "name": "Kami란 무엇인가요?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Kami는 AI를 위한 문서 템플릿과 편집 지침 모음입니다. Claude Design이나 GPT Canvas 같은 이미지 생성 도구에 레이아웃 지침으로 전달할 수도 있습니다."
+          "text": "Kami는 AI를 위한 문서 템플릿과 편집 지침 모음입니다. Claude Design이나 GPT Canvas 같은 디자인 도구에 레이아웃 지침으로 전달할 수도 있습니다."
         }
       },
       {
@@ -207,7 +207,7 @@
     <div class="hero-tokens">
       <span><b>배경색</b>#f5f4ed</span>
       <span><b>Accent</b>#1B365D</span>
-      <span><b>Serif</b>Charter / TsangerJinKai</span>
+      <span><b>Serif</b>Charter / Source Han Serif K</span>
       <span><b>Sans</b>= Serif (페이지당 단일 폰트)</span>
     </div>
   </header>
@@ -246,7 +246,7 @@
   <section>
     <div class="section-head">
       <h2 class="section-title">소셜 카드</h2>
-      <p class="section-lede">인스타그램과 스레드용 이미지 카드이고, 배경은 8가지 색에서 고를 수 있습니다. 아래 네 장은 제 제품에 대해 올린 글을 그대로 썼습니다.</p>
+      <p class="section-lede">인스타그램과 X용 이미지 카드이고, 배경은 8가지 색에서 고를 수 있습니다. 아래 네 장은 제 제품에 대해 올린 글을 그대로 썼습니다.</p>
     </div>
     <div class="demo-grid one-line">
       <div class="demo-card">
@@ -324,7 +324,7 @@ codex plugin add kami@kami
       <h2 class="section-title">디자인 기원</h2>
     </div>
     <div class="background-text">
-      <p>저는 미국 주식에 투자하며 항상 Claude에게 리서치 리포트를 작성해 달라고 합니다. 매번 출력물은 같은 기본 문서 모양이었습니다: 회색이고, 평면적이며, 세션마다 레이아웃이 달랐습니다. 구조를 파악하기 어렵고, 서식은 구식이었으며, 페이지의 어떤 것도 계속 읽고 싶게 만들지 못했습니다. 그래서 타이포그래피, 팔레트, 간격을 하나의 규칙씩 고쳐나가기 시작했고, 결국 리포트는 제가 실제로 즐길 수 있는 페이지가 되었습니다.</p>
+      <p>저는 미국 주식 투자를 좋아해서 Claude에게 리서치 보고서를 자주 맡깁니다. 하지만 결과물은 매번 회색 톤에 밋밋한 기본 문서였고, 세션마다 레이아웃도 제각각이었습니다. 구조는 한눈에 들어오지 않고 서식은 낡아 보여 더 읽고 싶은 마음이 들지 않았습니다. 그래서 글꼴, 색상, 간격을 규칙 하나하나 다듬어 나갔고, 결국 제가 즐겨 읽는 보고서가 되었습니다.</p>
       <p>나중에 "당신이 모르는 에이전트: 원칙, 아키텍처, 엔지니어링 실무"를 발표해야 했습니다. 이미 문서가 있었고 슬라이드를 처음부터 만들고 싶지 않아서, Claude Design으로 제 스타일에 맞게 레이아웃을 잡고 여러 차례 수정하여 만족스러운 수준에 도달했습니다. 그 과정에서 인라인 SVG 차트를 넣고 색상과 간격을 정리했습니다. 평소 만드는 문서에도 적용하면서 템플릿과 규칙을 모았고, 그렇게 Kami가 되었습니다.</p>
     </div>
   </section>
@@ -336,12 +336,12 @@ codex plugin add kami@kami
     </div>
     <p class="manifesto">기본 배경은 따뜻한 종이색이며 <em>잉크 블루</em>로 강조합니다. 세리프 글꼴을 사용하고 글자 크기와 여백으로 제목과 본문을 구분합니다. 인쇄용 흰색 배경을 선택해도 카드와 표에는 은은한 배경색이 남습니다.</p>
     <ul class="rules">
-      <li><p>페이지 배경은 양피지 <code>#f5f4ed</code>, 순백은 절대 사용하지 않음</p></li>
+      <li><p>페이지 배경은 양피지 <code>#f5f4ed</code>, 흰색 인쇄용 변형은 예외</p></li>
       <li><p>강조색은 잉크 블루 <code>#1B365D</code> 하나만; 두 번째 유채색 없음</p></li>
       <li><p>모든 회색은 따뜻한 색조, 황갈색 기반; 차가운 청회색 사용 금지</p></li>
       <li><p>제목과 본문은 하나의 세리프로 통일하고, 실제 UI 요소에만 별도 산세리프 사용</p></li>
       <li><p>세리프 본문은 400, 제목은 500. 합성 볼드 사용 금지</p></li>
-      <li><p>세 가지 행간 기준: 타이트 제목 1.1-1.3 / 밀집 1.4-1.45 / 읽기 1.5-1.55</p></li>
+      <li><p>세 가지 행간 기준: 제목 1.1-1.3 / 조밀한 본문 1.4-1.45 / 읽기용 본문 1.5-1.55</p></li>
       <li><p>태그 배경은 반드시 솔리드 hex; rgba 금지, WeasyPrint 이중 사각형 버그</p></li>
       <li><p>표면은 기본적으로 평평하게 두고, 실제로 떠 있는 스크린샷이나 팝오버에만 아주 옅은 그림자를 사용</p></li>
     </ul>
@@ -397,14 +397,14 @@ codex plugin add kami@kami
       <div class="family serif">
         <p class="glyph">Aa</p>
         <p class="role">Serif · 제목 + 본문</p>
-        <p class="name">Charter / TsangerJinKai02</p>
-        <p class="use">제목, 본문, 풀 인용, 숫자 강조에 사용됩니다. 영문은 Charter, 중문은 TsangerJinKai02를 사용합니다.</p>
+        <p class="name">Charter / Source Han Serif K</p>
+        <p class="use">제목, 본문, 발췌 인용, 숫자 강조에 사용됩니다. 영문은 Charter, 한국어는 Source Han Serif K를 사용합니다.</p>
       </div>
       <div class="family mono">
         <p class="glyph">Aa 01</p>
         <p class="role">Mono · 코드</p>
         <p class="name">JetBrains Mono</p>
-        <p class="use">코드 블록, 버전 번호, hex 값, 표형 숫자.</p>
+        <p class="use">코드 블록, 버전 번호, hex 값, 고정폭 숫자.</p>
       </div>
     </div>
 
@@ -532,7 +532,7 @@ codex plugin add kami@kami
         <h3>일반 목록</h3>
         <p class="hint">간격으로 리듬 형성 · 기호 없음</p>
         <ul class="plain-list demo">
-          <li>따뜻한 양피지, 순백은 절대 아님</li>
+          <li>따뜻한 양피지, 흰색 인쇄용 변형은 예외</li>
           <li>잉크 블루 강조색, 두 번째 색상 없음</li>
           <li>세리프가 권위를 담당</li>
         </ul>
@@ -685,7 +685,7 @@ beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
   <section>
     <div class="section-head">
       <h2 class="section-title">피해야 할 것</h2>
-      <p class="section-lede">예외는 허용되지만, 이유는 명시적이어야 합니다.</p>
+      <p class="section-lede">예외는 허용되지만, 그 이유가 분명해야 합니다.</p>
     </div>
 
     <div class="anti">
@@ -700,7 +700,7 @@ beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
         <p class="anti-topic">태그 색상</p>
         <div class="anti-pair">
           <p class="anti-line never"><span class="cue">지양</span><span>태그의 <code>rgba(27,54,93,0.18)</code>. WeasyPrint는 패딩과 글리프 영역을 다른 불투명도로 렌더링하여 이중 사각형을 만듭니다.</span></p>
-          <p class="anti-line instead"><span class="cue">권장</span><span>등록된 기본 태그 색상 <code>#E4ECF5</code>. 렌더링이 깔끔하게 유지되고 색상이 안정적입니다.</span></p>
+          <p class="anti-line instead"><span class="cue">권장</span><span>기본 태그 색상 <code>#E4ECF5</code>. 렌더링이 깔끔하게 유지되고 색상이 안정적입니다.</span></p>
         </div>
       </div>
       <div class="anti-row">
@@ -728,7 +728,7 @@ beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
     <dl class="faq">
       <div class="faq-pair">
         <dt>Kami란 무엇인가요?</dt>
-        <dd>Kami는 AI를 위한 문서 템플릿과 편집 지침 모음입니다. Claude Design이나 GPT Canvas 같은 이미지 생성 도구에 레이아웃 지침으로 전달할 수도 있습니다.</dd>
+        <dd>Kami는 AI를 위한 문서 템플릿과 편집 지침 모음입니다. Claude Design이나 GPT Canvas 같은 디자인 도구에 레이아웃 지침으로 전달할 수도 있습니다.</dd>
       </div>
       <div class="faq-pair">
         <dt>무엇을 만들 수 있나요?</dt>
@@ -751,7 +751,7 @@ beauty   = constraints × <span class="k">intention</span> ÷ noise</pre>
       <img src="assets/images/logo.svg" width="56" height="56" alt="Kami">
       <div>
         <p class="wm-name">Kami 紙</p>
-        <p class="wm-sub">좋은 내용은 읽기 좋은 문서로.</p>
+        <p class="wm-sub">좋은 내용은 읽기 좋은 문서로</p>
       </div>
     </div>
     <div class="colophon">
