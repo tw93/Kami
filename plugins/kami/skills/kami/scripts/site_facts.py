@@ -144,10 +144,11 @@ def _normalize(text: str) -> str:
 def _contains_template_count(text: str, expected: int) -> bool:
     patterns = [
         rf"\b{expected} document template",
-        rf"{expected}种文档模板",
-        rf"{expected}種文件範本",
-        rf"{expected}種類のドキュメントテンプレート",
-        rf"{expected}가지 문서 템플릿",
+        # CJK copy may space a numeral from the word after it (ja: 9 種類, 2026-11-05).
+        rf"{expected}\s*种文档模板",
+        rf"{expected}\s*種文件範本",
+        rf"{expected}\s*種類のドキュメントテンプレート",
+        rf"{expected}\s*가지 문서 템플릿",
         *_TEMPLATE_COUNT_WORDS.get(expected, ()),
     ]
     return any(re.search(pattern, text, re.IGNORECASE) for pattern in patterns)
