@@ -573,7 +573,7 @@
     align-items: center;
   }
   .family.serif .glyph { font-family: var(--serif); }
-  .family.mono .glyph { font-family: var(--mono); font-weight: 500; font-size: 64px; }
+  .family.mono .glyph { font-family: var(--mono); font-weight: 400; letter-spacing: 0; }
   .family .role {
     font-family: var(--serif);
     font-weight: 500;
@@ -1233,7 +1233,6 @@
   html[lang="zh-CN"] .type-sample.display { font-size: 28px; letter-spacing: 0.3px; }
   html[lang="ja"] .type-sample.display { font-size: 26px; letter-spacing: 0.2px; }
   .family .glyph { font-size: 48px; }
-  .family .glyph.mono { font-size: 40px; }
 
   /* Footer */
   .footer { flex-direction: column; align-items: flex-start; gap: 24px; }
