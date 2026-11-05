@@ -275,7 +275,7 @@
   .hero h1 {
     font-family: var(--serif);
     font-weight: 500;
-    font-size: 106px;
+    font-size: 84px;
     line-height: 1.05;
     letter-spacing: -1.2px;
     margin: 0 0 14px;
@@ -488,7 +488,7 @@
   }
   .type-specs {
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: var(--text-meta);
     color: var(--olive);
     line-height: 1.6;
     text-align: right;
@@ -1182,14 +1182,13 @@
   .hero .tagline { font-size: 17px; }
   .section-title { font-size: 24px; }
   .manifesto { font-size: 17px; line-height: 1.5; }
-  .footer .mark .wm-name { font-size: 22px; }
   /* Container + spacing */
   .page { padding: 48px 20px 64px; }
   section { margin-bottom: 48px; }
   .section-head { margin-bottom: 20px; }
 
   /* Typography scale */
-  .hero h1 { font-size: 46px; letter-spacing: -0.6px; margin-bottom: 10px; }
+  .hero h1 { font-size: 64px; letter-spacing: -0.6px; margin-bottom: 10px; }
   .hero.doc h1 { font-size: 40px; }
   .hero h1 .cn { margin-left: 8px; }
   .hero-tokens { gap: 14px; margin-top: 14px; }
@@ -1297,23 +1296,22 @@
   .chart-caption,
   .decision th { font-size: 13px; }
 
-  /* Pre-ladder phone sizes for rules whose desktop size moved onto the ladder */
-  body { font-size: 14px; }
+  /* Headings: section titles 24, card heads at the body size */
   .section-title { font-size: 24px; }
-  .footer .mark .wm-name { font-size: 22px; }
-  .family .role { font-size: 18px; }
+  .family .role,
+  .anti-topic { font-size: 16px; }
+
+  /* Code one rung under the text around it: 15 in 16px prose, 13 beside
+     15px rows and in code blocks */
+  section > p > code,
+  .prose code { font-size: 15px; }
   .tint .sample,
   .code,
   .rules code,
   .anti code,
   .decision td.how code,
-  section > p > code { font-size: 12px; }
   .tint .opacity,
-  .decision,
-  .doc-nav { font-size: 14px; }
-  .anti-topic { font-size: 15px; }
-  .prose code { font-size: 13.5px; }
-  .prose h3 { font-size: 19px; }
+  .doc-nav { font-size: 13px; }
 }
 
 /* Readers who ask the system for less motion get state changes without the
