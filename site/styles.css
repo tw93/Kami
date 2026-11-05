@@ -851,6 +851,13 @@
     border-radius: 8px;
     border: 1px solid var(--border);
   }
+  /* Sample documents are parchment sheets on a parchment page: a deeper
+     hairline and a whisper shadow give them an edge (C of three rendered,
+     2026-11-05; the 1px --border alone left them blended into the page) */
+  .demo-grid:not(.one-line) .demo-card img {
+    border-color: #dedbcf;
+    box-shadow: 0 1px 3px rgba(20, 19, 19, 0.06), 0 12px 28px -8px rgba(20, 19, 19, 0.12);
+  }
   .demo-card .demo-title {
     font-family: var(--sans);
     font-size: var(--text-lede);
