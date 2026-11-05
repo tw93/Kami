@@ -254,12 +254,14 @@ def test_card_orphans_skip_list_numbers_and_catch_one_word() -> None:
                     for i in (1, 2, 3))
     lists = (f'<section class="card"><div class="meta">Kami</div><h2>Rules</h2>{items}'
              f'<div class="foot">Kami</div></section>')
+    # The break is forced: a measure-driven wrap depended on Charter, and on a runner without it the
+    # fallback face fit the whole line in 330px, so the one-word case never wrapped there.
     def tail(text: str) -> str:
         return (f'<section class="card"><div class="meta">Kami</div><h2>Tail</h2>'
-                f'<p class="body" style="width: 330px">{text}</p><div class="foot">Kami</div></section>')
+                f'<p class="body">{text}</p><div class="foot">Kami</div></section>')
     with tempfile.TemporaryDirectory() as tmp:
-        _, pdf = _render_cards(tmp, "orphans", lists + tail("aaaaaa bbbbbb cccccc")
-                               + tail("aaaaaa bbbbbb cc dd"))
+        _, pdf = _render_cards(tmp, "orphans", lists + tail("aaaaaa bbbbbb cccccc<br>dddddd")
+                               + tail("aaaaaa bbbbbb cccccc<br>dd ee"))
         with fitz.open(str(pdf)) as doc:
             found = [card_orphans(page, 3, 1) for page in doc]
     check("orphans: three cards, three pages", len(found) == 3, str(found))
