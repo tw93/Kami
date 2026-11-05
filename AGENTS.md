@@ -102,6 +102,9 @@ Only the entries whose role is not obvious from the filename:
   gates (orphans, density, resume balance), rendered and judged by `test_corpus.py`.
   Before changing a value in `checks_thresholds.json`, run it and read the per-gate
   `CORPUS:` line; a fixture that flips is the cost of the change, not noise.
+  A rendered test that needs a line break forces it (`<br>`) instead of relying on
+  font metrics: CI's Ubuntu has no Charter, the fallback fit a whole 330px line, and
+  the Latin orphan test never passed on CI from `6b47277` until `ca66959`.
 - `scripts/mermaid_normalize.py` - re-themes a beautiful-mermaid SVG to the Kami
   palette and makes it WeasyPrint-safe. Pure Python, no Node, ships in the package.
 - `scripts/mcp_server.py` - zero-dependency MCP stdio server exposing
