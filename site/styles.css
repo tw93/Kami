@@ -33,6 +33,9 @@
 
     --border:       #e8e6dc;
     --border-soft:  #e5e3d8;
+    /* Edge for light surfaces sitting on the parchment page: sample documents,
+       colour swatches, radius boxes (2026-11-05; --border blended into the page) */
+    --edge:         #dedbcf;
 
     /* Slide-scale spacing */
     --slide-pad:    80px;
@@ -216,7 +219,7 @@
   .page {
     max-width: 1120px;
     margin: 0 auto;
-    padding: 88px 64px 120px;
+    padding: 88px 64px 64px;
   }
 
   /* ---------- Hero ---------- */
@@ -371,14 +374,14 @@
     margin-bottom: 28px;
   }
   .swatch {
-    border: 1px solid var(--border);
+    border: 1px solid var(--edge);
     border-radius: 8px;
     background: var(--ivory);
     overflow: hidden;
   }
   .swatch .chip {
     height: 96px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--edge);
   }
   .swatch .info {
     padding: 12px 14px 14px;
@@ -647,12 +650,21 @@
     width: 72px;
     height: 72px;
     background: var(--ivory);
-    border: 1px solid var(--border);
+    border: 1px solid var(--edge);
     margin-bottom: 8px;
   }
   .radius .r { font-family: var(--mono); font-size: var(--text-meta); color: var(--dark-warm); }
   .radius .r b { color: var(--brand); font-weight: 500; }
   .radius .label { font-size: var(--text-meta); color: var(--olive); margin-top: 2px; }
+
+  /* Radii and depth share one row so neither leaves half the column empty */
+  .shape-pair {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 72px;
+    align-items: start;
+  }
+  .shape-pair .depth p { color: var(--olive); margin: 18px 0 0; line-height: 1.55; max-width: 480px; }
 
   /* ---------- Components ---------- */
   .comp-grid {
@@ -854,7 +866,7 @@
      hairline and a whisper shadow give them an edge (C of three rendered,
      2026-11-05; the 1px --border alone left them blended into the page) */
   .demo-grid:not(.one-line) .demo-card img {
-    border-color: #dedbcf;
+    border-color: var(--edge);
     box-shadow: 0 1px 3px rgba(20, 19, 19, 0.06), 0 12px 28px -8px rgba(20, 19, 19, 0.12);
   }
   .demo-card .demo-title {
@@ -1182,7 +1194,7 @@
   .section-title { font-size: 24px; }
   .manifesto { font-size: 17px; line-height: 1.5; }
   /* Container + spacing */
-  .page { padding: 48px 20px 64px; }
+  .page { padding: 48px 20px 40px; }
   section { margin-bottom: 48px; }
   .section-head { margin-bottom: 20px; }
 
@@ -1237,6 +1249,8 @@
   .comp { padding: 20px 16px 16px; }
   .family { padding: 20px 16px 16px; }
   .radius .box { width: 56px; height: 56px; }
+  .shape-pair { grid-template-columns: minmax(0, 1fr); }
+  .shape-pair .depth p { margin-top: 0; }
 }
 
 /* Phone text ladder, shared with the other product sites: body 16, secondary
