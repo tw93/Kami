@@ -441,18 +441,12 @@
     margin-left: -1px;
     margin-bottom: 10px;
   }
-  .tint .opacity {
-    font-family: var(--serif);
-    font-size: var(--text-meta);
-    color: var(--olive);
-    margin: 0 0 2px;
-  }
   .tint .hex {
+    display: block;
     font-family: var(--mono);
     font-size: var(--text-meta);
     color: var(--stone);
   }
-  .tint.default .opacity { color: var(--brand); }
   .tint .flag {
     font-size: var(--text-meta);
     font-weight: 500;
@@ -465,34 +459,39 @@
   /* ---------- Type ---------- */
   .type-grid {
     display: grid;
-    grid-template-columns: 180px minmax(0, 1fr) 160px;
-    column-gap: 40px;
+    grid-template-columns: 220px minmax(0, 1fr) 160px;
+    column-gap: 0;
     row-gap: 0;
     border-top: 1px solid var(--border-soft);
   }
   .type-row {
     display: contents;
   }
+  /* No column gap, so each row's rule runs unbroken across the three cells */
   .type-row > * {
-    padding: 22px 0;
+    padding: 18px 0;
     border-bottom: 1px solid var(--border-soft);
     align-self: stretch;
   }
+  /* The cell fills its column so the rule stays whole; padding keeps
+     running samples near 540px wide instead of a max-width on the cell */
+  .type-grid .type-row > .type-sample { max-width: none; padding-right: max(40px, calc(100% - 540px)); }
   .type-label {
     font-family: var(--serif);
     font-size: var(--text-meta);
     font-weight: 500;
     letter-spacing: 0;
     color: var(--stone);
-    padding-top: 22px;
+    padding-top: 18px;
   }
+  /* Settled sizes read in the text face with tabular figures, not mono */
   .type-specs {
-    font-family: var(--mono);
     font-size: var(--text-meta);
+    font-variant-numeric: tabular-nums;
     color: var(--olive);
-    line-height: 1.6;
+    line-height: 1.45;
     text-align: right;
-    padding-top: 22px;
+    padding-top: 18px;
   }
   .type-specs b { color: var(--dark-warm); font-weight: 500; }
   .type-sample.display {
@@ -627,7 +626,8 @@
   .bar span {
     display: block;
     height: 4px;
-    background: var(--border);
+    background: var(--stone);
+    opacity: 0.5;
     border-radius: 2px;
   }
   .space-table td.use { color: var(--olive); font-size: var(--text-meta); }
@@ -679,7 +679,6 @@
   .comp .hint {
     font-size: var(--text-meta);
     color: var(--stone);
-    font-family: var(--mono);
     margin: 0 0 20px;
   }
   .comp .demo { margin-bottom: 4px; flex: 1; }
@@ -1208,6 +1207,7 @@
   .type-grid { grid-template-columns: 1fr; row-gap: 0; }
   .type-row { display: block; padding: 16px 0; border-bottom: 1px solid var(--border-soft); }
   .type-row > * { border-bottom: none; padding: 4px 0; }
+  .type-row > .type-sample { padding-right: 0; }
   .family-grid { grid-template-columns: 1fr; }
   .comp-grid { grid-template-columns: 1fr; }
   .anti-row { grid-template-columns: 1fr; row-gap: 10px; padding: 16px 0; }
@@ -1310,7 +1310,6 @@
   .rules code,
   .anti code,
   .decision td.how code,
-  .tint .opacity,
   .doc-nav { font-size: 13px; }
 }
 
