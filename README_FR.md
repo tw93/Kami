@@ -132,14 +132,17 @@ Kami vérifie discrètement la disponibilité d'une nouvelle version au plus une
 
 ### Langues prises en charge
 
-L'anglais et le chinois bénéficient du support le plus complet. Le japonais et le coréen utilisent des polices de substitution dédiées et des ajustements de mise en page, chaque document étant vérifié avant livraison. Chaque langue utilise une seule police serif sur toute la page, le français comme l'anglais en Charter ; les conditions des polices figurent dans [Licence](#licence) :
+L'anglais et le chinois bénéficient du support le plus complet. Le japonais et le coréen utilisent des polices de substitution dédiées et des ajustements de mise en page, chaque document étant vérifié avant livraison. Chaque langue utilise une seule police sur toute la page, le français comme l'anglais en Charter ; les conditions des polices figurent dans [Licence](#licence) :
 
-| Langue | Niveau de prise en charge | Police serif par défaut |
+| Langue | Niveau de prise en charge | Police par défaut |
 | :--- | :--- | :--- |
 | **Anglais** | Complet | Charter |
-| **Chinois** (简体 / 繁體) | Complet | TsangerJinKai02 (仓耳今楷) |
+| **Chinois** (简体) | Complet | TsangerJinKai02 (仓耳今楷) |
+| **Chinois** (繁體) | Complet | Source Han Serif TC (思源宋體) |
 | **Japonais** (日本語) | Polices de secours & vérification | YuMincho (游明朝) |
 | **Coréen** (한국어) | Polices de secours & vérification | Source Han Serif K (본명조) |
+
+TsangerJinKai02 est une police Kai (écriture régulière), pas une serif Song, et sa ponctuation est plus étroite qu'un caractère. Le chinois traditionnel centre sa ponctuation : les PDF et les pages web utilisent donc Source Han Serif TC, puis Noto Serif CJK TC, Songti TC ou PMingLiU si elle n'est pas installée ; les présentations PPTX modifiables et Marp gardent TsangerJinKai02.
 
 Le skill se déclenche automatiquement à partir de requêtes formulées en langage naturel, sans commande spéciale. Exemples de requêtes :
 

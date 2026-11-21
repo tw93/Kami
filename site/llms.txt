@@ -9,7 +9,7 @@
 
 
 ## What is Kami
-Kami gives AI agents templates and layout rules for documents and landing pages. It includes one-pagers, resumes, portfolios, slides, long documents, letters, equity reports, and changelogs. Defaults include a warm parchment background (#f5f4ed), ink-blue accents (#1B365D), and Charter/TsangerJinKai serif fonts. A white-background option is available for printing.
+Kami gives AI agents templates and layout rules for documents and landing pages. It includes one-pagers, resumes, portfolios, slides, long documents, letters, equity reports, and changelogs. Defaults include a warm parchment background (#f5f4ed), ink-blue accents (#1B365D), and Charter for Latin text, TsangerJinKai for Simplified Chinese, and Source Han Serif TC for Traditional Chinese. A white-background option is available for printing.
 
 Kami installs into the agent that uses it and runs on that machine. There is no hosted Kami API, no account, and no API key: the integration surface is a local MCP server, JSON content schemas, and CLI checks.
 

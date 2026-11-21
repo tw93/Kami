@@ -132,14 +132,17 @@ Kami prüft höchstens einmal täglich im Hintergrund auf neue Versionen und inf
 
 ### Unterstützte Sprachen
 
-Englisch und Chinesisch bieten die umfassendste Unterstützung. Japanisch und Koreanisch nutzen sprachspezifische Font-Fallbacks und angepasste Layouts, wobei jedes Ergebnis vor der Ausgabe geprüft wird. Jede Sprache verwendet auf der ganzen Seite eine einzige Serifenschrift, Deutsch wie Englisch in Charter; die Schriftlizenzen stehen unter [Lizenz](#lizenz):
+Englisch und Chinesisch bieten die umfassendste Unterstützung. Japanisch und Koreanisch nutzen sprachspezifische Font-Fallbacks und angepasste Layouts, wobei jedes Ergebnis vor der Ausgabe geprüft wird. Jede Sprache verwendet auf der ganzen Seite eine einzige Schrift, Deutsch wie Englisch in Charter; die Schriftlizenzen stehen unter [Lizenz](#lizenz):
 
-| Sprache | Unterstützungsstufe | Standard-Serifenschrift |
+| Sprache | Unterstützungsstufe | Standardschrift |
 | :--- | :--- | :--- |
 | **Englisch** | Vollständig | Charter |
-| **Chinesisch** (简体 / 繁體) | Vollständig | TsangerJinKai02 (仓耳今楷) |
+| **Chinesisch** (简体) | Vollständig | TsangerJinKai02 (仓耳今楷) |
+| **Chinesisch** (繁體) | Vollständig | Source Han Serif TC (思源宋體) |
 | **Japanisch** (日本語) | Font-Fallbacks & Layoutprüfung | YuMincho (游明朝) |
 | **Koreanisch** (한국어) | Font-Fallbacks & Layoutprüfung | Source Han Serif K (본명조) |
+
+TsangerJinKai02 ist eine Kai-Schrift (Regelschrift), keine Song-Serifenschrift, und ihre Satzzeichen sind schmaler als ein Zeichen. Traditionelles Chinesisch setzt Satzzeichen mittig, daher verwenden PDF und Webseiten Source Han Serif TC und, falls sie nicht installiert ist, Noto Serif CJK TC, Songti TC oder PMingLiU; bearbeitbare PPTX- und Marp-Folien behalten TsangerJinKai02.
 
 Der Skill wird automatisch durch natürliche Sprache aktiviert, ohne dass ein Schrägstrich-Befehl erforderlich ist. Beispielanfragen nach Sprache:
 

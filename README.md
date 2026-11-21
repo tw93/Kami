@@ -132,14 +132,17 @@ Kami also runs a quiet version check at most once a day and tells you in chat wh
 
 ### Supported Languages
 
-English and Chinese have the most complete support. Japanese and Korean use language-specific font fallbacks and layout adjustments, with each output checked before delivery. Each language uses a single serif font for the whole page, with font terms under [License](#license):
+English and Chinese have the most complete support. Japanese and Korean use language-specific font fallbacks and layout adjustments, with each output checked before delivery. Each language uses a single typeface for the whole page, with font terms under [License](#license):
 
-| Language | Support Level | Default Serif Font |
+| Language | Support Level | Default Font |
 | :--- | :--- | :--- |
 | **English** | Complete | Charter |
-| **Chinese** (简体 / 繁體) | Complete | TsangerJinKai02 (仓耳今楷) |
+| **Chinese** (简体) | Complete | TsangerJinKai02 (仓耳今楷) |
+| **Chinese** (繁體) | Complete | Source Han Serif TC (思源宋體) |
 | **Japanese** (日本語) | Font fallbacks & layout check | YuMincho (游明朝) |
 | **Korean** (한국어) | Font fallbacks & layout check | Source Han Serif K (본명조) |
+
+TsangerJinKai02 is a Kai face, not a Song serif, and its punctuation is narrower than one character. Traditional Chinese centers its punctuation, so PDF and web output use Source Han Serif TC, falling back to Noto Serif CJK TC, Songti TC or PMingLiU when it is not installed; editable PPTX and Marp decks keep TsangerJinKai02.
 
 The skill auto-triggers from natural requests, no slash command needed. Example prompts by language:
 

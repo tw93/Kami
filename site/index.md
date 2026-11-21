@@ -3,7 +3,7 @@
 Kami gives AI agents templates and layout rules for documents and landing pages. It includes one-pagers, resumes, portfolios, slide decks, long reports, letters, equity reports, and changelogs. Documents export to PDF or PNG; slides also support editable PPTX.
 
 
-The default style uses a warm parchment canvas (`#f5f4ed`), a single ink-blue accent (`#1B365D`), serif fonts and clear heading levels (Charter for Latin, TsangerJinKai for Chinese), and consistent spacing. An opt-in white-paper variant renders the same document on a white background for home and office printers while keeping warm backgrounds in cards and tables.
+The default style uses a warm parchment canvas (`#f5f4ed`), a single ink-blue accent (`#1B365D`), Charter for Latin text, TsangerJinKai for Simplified Chinese, Source Han Serif TC for Traditional Chinese, clear heading levels, and consistent spacing. An opt-in white-paper variant renders the same document on a white background for home and office printers while keeping warm backgrounds in cards and tables.
 
 Kami runs entirely on the machine that installs it. There is no hosted Kami API, no account, and no key to obtain. Everything below is a local command or a static file on this site.
 
