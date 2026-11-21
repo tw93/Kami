@@ -39,6 +39,7 @@ Use the nearest existing template and check. Do not add a template, shared CSS l
 | User language | HTML templates | Slides (PDF default) | Slides (PPTX, only when an editable deck is requested) | Slides (Marp) |
 |---|---|---|---|---|
 | Chinese (primary) | `*.html` | `slides-weasy.html` | `slides.py` | `slides-marp.md` |
+| Traditional Chinese | `*.html` with `<html lang="zh-Hant">` (or `zh-TW`, `zh-HK`): the render swaps in a Ming face with centered punctuation | `slides-weasy.html`, same `lang` | `slides.py` (keeps TsangerJinKai02) | `slides-marp.md` (keeps TsangerJinKai02) |
 | English | `*-en.html` | `slides-weasy-en.html` | `slides-en.py` | `slides-marp-en.md` |
 | Japanese (best-effort) | `*.html`, JP Mincho first | `slides-weasy.html` | `slides.py` | `slides-marp.md` |
 | Korean | `*-ko.html` | `slides-weasy-ko.html` | `slides-en.py` only if PPTX is required | `slides-marp.md` |

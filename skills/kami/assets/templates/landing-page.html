@@ -117,6 +117,17 @@
   --shot-bg: #141318;
 }
 
+/* Traditional Chinese pages: TsangerJinKai02 has only mainland punctuation
+   (bottom-left, narrower than a character), so a Ming face whose punctuation
+   is centered and full width leads. PDF output gets the same swap in render.py. */
+:root:lang(zh-Hant), :root:lang(zh-TW), :root:lang(zh-HK), :root:lang(zh-MO) {
+  --serif: "Source Han Serif TC", "Noto Serif CJK TC", "Noto Serif TC", "Songti TC",
+           "PMingLiU", "TsangerJinKai02", Georgia, serif;
+  --mono:  "JetBrains Mono", "SF Mono", Consolas,
+           "Source Han Serif TC", "Noto Serif CJK TC", "Noto Serif TC", "Songti TC",
+           "PMingLiU", "TsangerJinKai02", monospace;
+}
+
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 

@@ -147,6 +147,8 @@ font-family: "JetBrains Mono", "SF Mono", "Fira Code",
 
 Any font-family that may render Chinese or Japanese must include a CJK fallback, including `@page` footer text, `pre`, `code`, and SVG labels. A pure mono stack can render missing glyph boxes in WeasyPrint.
 
+TsangerJinKai02 is a Kai face, not a Song serif, and its punctuation is narrower than one character and set in the mainland position. Traditional Chinese documents keep the Chinese stacks above with `<html lang="zh-Hant">`, and the render leads them with Source Han Serif TC and other Ming faces whose punctuation is centered (`production.md` Part 1).
+
 ### Size scale (pt for print A4, px for screen)
 
 **Print:**

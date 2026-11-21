@@ -73,6 +73,8 @@ font-family: "Source Han Serif K", "Source Han Serif KR",
              "Apple SD Gothic Neo", Charter, Georgia, serif;
 ```
 
+**Traditional Chinese** uses the Chinese templates with the root set to `<html lang="zh-Hant">` (or `zh-TW`, `zh-HK`, `zh-MO`). TsangerJinKai02 draws mainland punctuation only: the comma and full stop sit bottom-left in a cell about 0.68em wide, and the font has no `locl` forms for Taiwan or Hong Kong, where those marks are centered and one character wide. For such a root, `render_pdf` (`scripts/hant.py`) leads every stack that names TsangerJinKai02 with `Source Han Serif TC, Noto Serif CJK TC, Noto Serif TC, Songti TC, PMingLiU` and keeps TsangerJinKai02 behind them. The swap happens at render time because WeasyPrint draws inline SVG labels without the document stylesheet, so a `:lang()` rule never reaches them; it inserts the names unquoted for the reason in pitfall 4.1. `landing-page.html` does the swap with a `:lang()` rule, since browsers do apply the stylesheet to inline SVG. None of these faces ship with Kami: macOS has Songti TC, Windows has PMingLiU, Linux gets Noto Serif CJK TC from `fonts-noto-cjk`. The editable PPTX and Marp paths still set TsangerJinKai02.
+
 **Font fallback affects page count**. Any font swap requires re-running the page-count check. If output overflows, first confirm the intended font actually loaded. If it did, edit content using pitfall "Hard-limit overflow"; spacing comes later and font size is the last resort.
 
 **Claude Desktop skill ZIPs do not bundle large CJK font files**: `TsangerJinKai02-W04.ttf`, `TsangerJinKai02-W05.ttf`, `SourceHanSerifKR-Regular.otf`, and `SourceHanSerifKR-Medium.otf` can make Claude.ai / Desktop skill upload or execution time out. The ZIP you upload must be the `scripts/package-skill.sh` output under the 6MB package ceiling, never a hand-zipped checkout. `package-skill.sh` excludes those large font files. Templates still keep local-first and jsDelivr fallback `@font-face` paths.
@@ -641,7 +643,12 @@ fontconfig prefers (`Hiragino-Mincho` for some, `Songti-SC` for others).
 
 **Fix**: in SVG `text` rules, put the CJK families first and let Latin faces
 trail. `@font-face` fonts do resolve inside inline SVG, so `TsangerJinKai02`
-leading the stack draws both scripts from one family:
+leading the stack draws both scripts from one family. The walk stops at the
+first family for a missing font too: WeasyPrint's SVG renderer tries only the
+first family of a quoted list (verified on 68.1 and 70.0), so `"Source Han Serif TC",
+"Songti TC"` on a machine without Source Han Serif TC never reaches Songti TC. An unquoted list (`Source Han Serif TC, Songti TC,
+serif`) is split and walked, which is why `scripts/hant.py` writes its names
+unquoted:
 
 ```css
 /* wrong: CJK after Latin, splits per glyph */
