@@ -76,25 +76,38 @@ def root_lang(html_text: str) -> str | None:
     return None
 
 
+def root_attrs(html_text: str) -> dict[str, str]:
+    """Lowercased attribute names of the root `<html>` tag mapped to their values."""
+    for token in _TOKEN.finditer(html_text):
+        if (token.group("name") or "").lower() != "html":
+            continue
+        found: dict[str, str] = {}
+        for attr in _ATTR_PART.finditer(token.group("attrs")):
+            value = attr.group("qv") if attr.group("q") else attr.group("bare")
+            found[attr.group("key").lower()] = value or ""
+        return found
+    return {}
+
+
 def is_traditional(html_text: str) -> bool:
     return is_traditional_tag(root_lang(html_text))
 
 
-def _lead(text: str) -> str:
-    # Keep the pass idempotent: a stack that already leads with the Ming faces
-    # (its trailing TsangerJinKai02 is unquoted) is protected from a second swap.
+def _lead(text: str, stack: str = _HANT_STACK) -> str:
+    # Keep the pass idempotent: a stack that already leads with the replacement
+    # faces (its trailing TsangerJinKai02 is unquoted) is protected from a second swap.
     marker = "\0hant\0"
-    text = text.replace(_HANT_STACK, marker)
-    return _STACK_ENTRY.sub(_HANT_STACK, text).replace(marker, _HANT_STACK)
+    text = text.replace(stack, marker)
+    return _STACK_ENTRY.sub(stack, text).replace(marker, stack)
 
 
-def _lead_attrs(attrs: str) -> str:
+def _lead_attrs(attrs: str, stack: str = _HANT_STACK) -> str:
     def one(attr: re.Match[str]) -> str:
         if attr.group("key").lower() not in ("style", "font-family") or not attr.group("eq"):
             return attr.group(0)
         if attr.group("q"):
             q = attr.group("q")
-            return f"{attr.group('key')}{attr.group('eq')}{q}{_lead(attr.group('qv'))}{q}"
+            return f"{attr.group('key')}{attr.group('eq')}{q}{_lead(attr.group('qv'), stack)}{q}"
         return attr.group(0)
     return _ATTR_PART.sub(one, attrs)
 
@@ -103,19 +116,27 @@ def use_traditional_fonts(html_text: str) -> str:
     """Lead TsangerJinKai02 stacks with Traditional Chinese Ming faces."""
     if not is_traditional(html_text):
         return html_text
+    return lead_stacks(html_text, _HANT_STACK)
 
+
+def lead_stacks(html_text: str, stack: str, style_tune=None) -> str:
+    """Put `stack` in front of every TsangerJinKai02 entry in font declarations.
+
+    `style_tune`, when given, maps each `<style>` body (after the swap) to a
+    retuned body, for the few non-font values a replacement face needs.
+    """
     def token(match: re.Match[str]) -> str:
         if match.group("raw"):
             if match.group("raw").lower() != "style":
                 return match.group(0)
             whole = match.group(0)
             start, end = match.start("body") - match.start(), match.end("body") - match.start()
-            return whole[:start] + _lead(match.group("body")) + whole[end:]
+            return whole[:start] + (style_tune or str)(_lead(match.group("body"), stack)) + whole[end:]
         if match.group("name"):
             whole = match.group(0)
             attrs = match.group("attrs")
             start = match.start("attrs") - match.start()
-            return whole[:start] + _lead_attrs(attrs) + whole[start + len(attrs):]
+            return whole[:start] + _lead_attrs(attrs, stack) + whole[start + len(attrs):]
         return match.group(0)
 
     return _TOKEN.sub(token, html_text)

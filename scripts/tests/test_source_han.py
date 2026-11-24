@@ -1,0 +1,33 @@
+"""Simplified Chinese serif switch: data-serif="source-han" leads stacks with Source Han Serif SC."""
+from __future__ import annotations
+
+from support import check
+
+from hans import HANS_STACK, is_source_han, use_source_han_fonts
+
+FACE = '@font-face { font-family: "TsangerJinKai02"; src: url("x.ttf"); }'
+STACK = '--serif: "TsangerJinKai02", "Source Han Serif SC", Georgia, serif;'
+BODY = "body { letter-spacing: 0.3pt; } .lede { letter-spacing: 0.04em; } .tag { letter-spacing: 1pt; }"
+
+
+def _doc(root: str, css: str) -> str:
+    return f"<!doctype html><html {root}><head><style>{css}</style></head><body></body></html>"
+
+
+def test_source_han_marker() -> None:
+    check("marker on zh-CN enables", is_source_han(_doc('lang="zh-CN" data-serif="source-han"', "")))
+    check("no marker keeps Kai", not is_source_han(_doc('lang="zh-CN"', "")))
+    check("zh-Hant ignores the marker", not is_source_han(_doc('lang="zh-TW" data-serif="source-han"', "")))
+    check("marker outside the root is ignored",
+          not is_source_han('<html lang="zh-CN"><body data-serif="source-han"></body></html>'))
+
+
+def test_source_han_rewrites_and_tunes() -> None:
+    plain = _doc('lang="zh-CN"', FACE + STACK + BODY)
+    check("unmarked document is byte-identical", use_source_han_fonts(plain) == plain)
+    out = use_source_han_fonts(_doc('lang="zh-CN" data-serif="source-han"', FACE + STACK + BODY))
+    check("stack led by Source Han Serif SC", f"--serif: {HANS_STACK}," in out)
+    check("@font-face untouched", FACE in out)
+    check("body tracking 0.3pt -> 0.1pt", "letter-spacing: 0.1pt" in out and "0.3pt" not in out)
+    check("lede tracking removed, label tracking kept", "0.04em" not in out and "letter-spacing: 1pt" in out)
+    check("idempotent", use_source_han_fonts(out) == out)

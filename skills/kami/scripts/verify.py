@@ -43,6 +43,9 @@ KO_PRIMARY_FONTS = {"Source-Han-Serif-K", "SourceHanSerifK"}
 # Traditional Chinese documents lead with Source Han Serif TC (hant.py); for
 # them TsangerJinKai02 is a defect, since it sets mainland punctuation.
 HANT_PRIMARY_FONTS = {"SourceHanSerifTC"}
+# Simplified Chinese commercial / public-facing documents ask for Source Han
+# Serif SC (hans.py); it is a legitimate primary beside TsangerJinKai02.
+HANS_PRIMARY_FONTS = {"SourceHanSerifSC"}
 
 # Serif families that keep a CJK page readable when the primary is unavailable.
 # Falling through to one of these is a degradation, not a defect: the page still
@@ -157,7 +160,7 @@ def _classify_cjk_font(font_name: str, traditional: bool = False) -> str:
     and the message already prints the family that drew the text.
     """
     normalized = _normalize_font_name(font_name)
-    primaries = HANT_PRIMARY_FONTS if traditional else CN_PRIMARY_FONTS | KO_PRIMARY_FONTS
+    primaries = HANT_PRIMARY_FONTS if traditional else CN_PRIMARY_FONTS | HANS_PRIMARY_FONTS | KO_PRIMARY_FONTS
     if any(_normalize_font_name(m) in normalized for m in primaries):
         return "primary"
     if traditional and any(_normalize_font_name(m) in normalized for m in CN_PRIMARY_FONTS):
@@ -223,7 +226,7 @@ MIXED_FAMILY_MIN_CHARS = 3
 # here uses them, and they are short enough to bite a real family name.
 _FONT_STYLE_SUFFIXES = (
     "extralight", "semibold", "demibold", "oblique", "regular", "medium",
-    "italic", "mediu", "light", "black", "heavy", "roman", "book", "bold",
+    "italic", "mediu", "medi", "light", "black", "heavy", "roman", "book", "bold",
     "thin", "lig",
 )
 

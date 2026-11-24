@@ -19,6 +19,7 @@ from pathlib import Path
 
 from font_compat import use_truetype_fonts
 from hangul import join_hangul_words
+from hans import use_source_han_fonts
 from hant import use_traditional_fonts
 from highlight import highlight_code_blocks
 from math_render import MathRenderError, render_latex_in_html
@@ -125,6 +126,7 @@ def render_pdf(src: Path, out: Path) -> int:
     html_text = highlight_code_blocks(html_text)
     html_text = join_hangul_words(html_text)
     html_text = use_traditional_fonts(html_text)
+    html_text = use_source_han_fonts(html_text)
     html_text = use_truetype_fonts(html_text, src.parent)
     # Build and validate beside the destination, then atomically replace it.
     # Metadata stamping and the final page read can still fail after WeasyPrint

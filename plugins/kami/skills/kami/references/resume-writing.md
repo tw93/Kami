@@ -259,7 +259,7 @@ Page 2 has more space than page 1. Do not compress it to match page 1 density.
 | `.conv-body` line-height | 1.40 |
 | Page 2 top buffer | 4mm minimum between header and first section |
 
-This configuration fits 2 pages when TsangerJinKai02 is available. Font fallback to Source Han Serif adds roughly 0.3pt per line; run `--verify` after any font environment change.
+This configuration fits 2 pages when TsangerJinKai02 is available. Font fallback to Source Han Serif adds roughly 0.3pt per line; run `--verify` after any font environment change. With `data-serif="source-han"` the render drops body tracking to 0.1pt and the resume still fits 2 pages (measured with the filled template in both faces).
 
 Do not scale page 2 font below 9pt to save space. If page 2 still overflows, cut one Convictions card or reduce Skills to 2 rows.
 

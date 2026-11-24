@@ -45,6 +45,8 @@ Use the nearest existing template and check. Do not add a template, shared CSS l
 | Korean | `*-ko.html` | `slides-weasy-ko.html` | `slides-en.py` only if PPTX is required | `slides-marp.md` |
 | Other (best-effort) | CJK or EN path by script coverage | `slides-weasy.html` or `-en` | `slides.py` / `slides-en.py` | `slides-marp.md` or `-en` |
 
+**Simplified Chinese serif (deterministic trigger).** The default face is TsangerJinKai02 (Kai). Use Source Han Serif SC (思源宋体 SC) instead when a brand profile is configured, or the request mentions a company, commercial use, or an external / public-facing document (公司、商用、对外). Do not decide by taste: if any trigger holds, set `<html lang="zh-CN" data-serif="source-han">` on the filled template, otherwise leave it as is. The render then leads every font stack with Source Han Serif SC and retunes body tracking (`references/design.md` Letter-spacing); run the usual `--deliver` and the 2-page resume check. Traditional Chinese ignores the marker. Source Han Serif SC is not bundled: `brew install --cask font-source-han-serif-sc` (macOS) or `apt-get install fonts-noto-cjk` (Linux).
+
 Japanese, Korean, and other languages need a visual pass on the page images before shipping. Reference docs are shared English specs.
 
 ### Document type
