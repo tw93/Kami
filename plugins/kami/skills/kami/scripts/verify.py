@@ -17,6 +17,7 @@ from pathlib import Path
 from urllib.parse import unquote
 
 from checks import _resume_balance_issues, scan_density
+from hans import is_source_han
 from hant import is_traditional_tag
 from lint import scan_file
 from math_render import MathRenderError
@@ -46,6 +47,9 @@ HANT_PRIMARY_FONTS = {"SourceHanSerifTC"}
 # Simplified Chinese commercial / public-facing documents ask for Source Han
 # Serif SC (hans.py); it is a legitimate primary beside TsangerJinKai02.
 HANS_PRIMARY_FONTS = {"SourceHanSerifSC"}
+# Noto Serif CJK SC is the same design under Google's name (what `fonts-noto-cjk`
+# installs on Linux), so a marked document set in it is the reference rendering.
+HANS_MARKED_PRIMARY_FONTS = HANS_PRIMARY_FONTS | {"NotoSerifCJKsc", "NotoSerifSC"}
 
 # Serif families that keep a CJK page readable when the primary is unavailable.
 # Falling through to one of these is a degradation, not a defect: the page still
@@ -148,7 +152,7 @@ def _normalize_font_name(name: str) -> str:
     return re.sub(r"[^a-z0-9]", "", name.lower())
 
 
-def _classify_cjk_font(font_name: str, traditional: bool = False) -> str:
+def _classify_cjk_font(font_name: str, traditional: bool = False, source_han: bool | None = None) -> str:
     """Return 'primary', 'serif', 'mainland' or 'other' for one font name.
 
     `traditional` comes from the PDF's /Lang: a Traditional Chinese document
@@ -158,9 +162,21 @@ def _classify_cjk_font(font_name: str, traditional: bool = False) -> str:
     recognizes. Naming which of the two it is would need a second marker table
     to maintain, and would change nothing: both fail, both take the same fix,
     and the message already prints the family that drew the text.
+
+    `source_han` is the source HTML's `data-serif` marker when the HTML sits beside
+    the PDF: True makes Source Han Serif SC the only Simplified primary (a
+    fallback to TsangerJinKai02 is then a serif fallback), False makes
+    TsangerJinKai02 the only one, and None (no source found) accepts either.
     """
     normalized = _normalize_font_name(font_name)
-    primaries = HANT_PRIMARY_FONTS if traditional else CN_PRIMARY_FONTS | HANS_PRIMARY_FONTS | KO_PRIMARY_FONTS
+    if traditional:
+        primaries = HANT_PRIMARY_FONTS
+    elif source_han is True:
+        primaries = HANS_MARKED_PRIMARY_FONTS | KO_PRIMARY_FONTS
+    elif source_han is False:
+        primaries = CN_PRIMARY_FONTS | KO_PRIMARY_FONTS
+    else:
+        primaries = CN_PRIMARY_FONTS | HANS_PRIMARY_FONTS | KO_PRIMARY_FONTS
     if any(_normalize_font_name(m) in normalized for m in primaries):
         return "primary"
     if traditional and any(_normalize_font_name(m) in normalized for m in CN_PRIMARY_FONTS):
@@ -335,7 +351,10 @@ def check_fonts(paths: list[str]) -> int:
             failures += 1
             continue
 
-        verdict = _classify_cjk_font(font, traditional)
+        source = pdf.with_suffix(".html")
+        source_han = (is_source_han(source.read_text(encoding="utf-8", errors="replace"))
+                      if source.is_file() else None)
+        verdict = _classify_cjk_font(font, traditional, source_han)
         if verdict == "primary":
             print(f"OK: {rel}: CJK body text in {font} ({count} ideographs)")
         elif verdict == "serif":

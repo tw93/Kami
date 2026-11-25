@@ -20,6 +20,20 @@ def test_source_han_marker() -> None:
     check("zh-Hant ignores the marker", not is_source_han(_doc('lang="zh-TW" data-serif="source-han"', "")))
     check("marker outside the root is ignored",
           not is_source_han('<html lang="zh-CN"><body data-serif="source-han"></body></html>'))
+    check("ja ignores the marker", not is_source_han(_doc('lang="ja" data-serif="source-han"', "")))
+    check("ko ignores the marker", not is_source_han(_doc('lang="ko" data-serif="source-han"', "")))
+    check("zh-Hans honours it", is_source_han(_doc('lang="zh-Hans" data-serif="source-han"', "")))
+    check("no lang honours it", is_source_han(_doc('data-serif="source-han"', "")))
+
+
+def test_verify_reads_the_marker() -> None:
+    from verify import _classify_cjk_font
+    check("marked: Source Han is primary", _classify_cjk_font("ABCDEF+SourceHanSerifSC-Regular", False, True) == "primary")
+    check("marked: Noto Serif CJK SC is primary", _classify_cjk_font("ABCDEF+NotoSerifCJKsc-Regular", False, True) == "primary")
+    check("marked: falling back to Kai is not primary", _classify_cjk_font("TsangerJinKai02-W04", False, True) != "primary")
+    check("unmarked: Source Han is not primary", _classify_cjk_font("SourceHanSerifSC-Regular", False, False) != "primary")
+    check("unmarked: Kai is primary", _classify_cjk_font("TsangerJinKai02-W04", False, False) == "primary")
+    check("no source: either is primary", _classify_cjk_font("SourceHanSerifSC-Regular") == "primary")
 
 
 def test_source_han_rewrites_and_tunes() -> None:

@@ -16,17 +16,19 @@ reason documented in `hant.py`.
 narrow Kai face whose 0.3pt body tracking was tuned for it; Source Han Serif SC
 fills the em box and sets full-width punctuation, so the same tracking pushes
 the resume contact row and summary onto an extra line. Body tracking drops to
-0.1pt (the dense-layout value in CHEATSHEET.md) and Chinese lede tracking in em
-units goes to 0; labels, overlines and Latin tracking stay as written. Leading
+0.1pt (the dense-layout value in CHEATSHEET.md), and so does every other 0.3pt
+in the same stylesheet (a few headings and tags share that value); Chinese lede
+tracking in em units goes to 0; other label, overline and Latin tracking stays. Leading
 is untouched: the resume's page 2 measured identical in both faces at 1.40-1.42.
-A Traditional Chinese document
-ignores the marker: `hant.py` owns it.
+Only a Simplified Chinese root honours the marker (`lang` zh, zh-CN, zh-Hans,
+zh-SG, or no `lang`): a Traditional Chinese document belongs to `hant.py`, and
+a Japanese or Korean one would otherwise get SC glyphs.
 """
 from __future__ import annotations
 
 import re
 
-from hant import _ATTR_PART, _TOKEN, is_traditional, lead_stacks, root_attrs
+from hant import _ATTR_PART, _TOKEN, is_traditional, lead_stacks, root_attrs, root_lang
 
 HANS_FAMILIES = (
     "Source Han Serif SC",
@@ -52,7 +54,10 @@ def _tune(style: str) -> str:
 def is_source_han(html_text: str) -> bool:
     attrs = root_attrs(html_text)
     value = attrs.get("data-serif")
-    return bool(value and _MARK.match(value.strip())) and not is_traditional(html_text)
+    if not (value and _MARK.match(value.strip())) or is_traditional(html_text):
+        return False
+    lang = (root_lang(html_text) or "").strip().lower().replace("_", "-")
+    return lang == "" or lang == "zh" or lang.startswith(("zh-cn", "zh-hans", "zh-sg"))
 
 
 def use_source_han_fonts(html_text: str) -> str:
